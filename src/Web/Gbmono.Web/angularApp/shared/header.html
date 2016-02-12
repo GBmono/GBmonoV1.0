@@ -1,0 +1,171 @@
+﻿<!-- *** NAVBAR ***
+_________________________________________________________ -->
+
+<div class="navbar navbar-default navbar-fixed-top yamm" role="navigation" id="navbar">
+    <div class="container">
+        <div class="navbar-header">
+
+            <a class="navbar-brand home" href="index.html">
+                GBmono Logo
+                <!--<img src="img/logo.png" alt="Minimal logo" class="hidden-xs hidden-sm">
+                <img src="img/logo-small.png" alt="Minimal logo" class="visible-xs visible-sm"><span class="sr-only">Minimal - go to homepage</span>-->
+            </a>
+            <div class="navbar-buttons">
+                <button type="button" class="navbar-toggle btn-primary" data-toggle="collapse" data-target="#navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-align-justify"></i>
+                </button>
+                <a class="btn btn-primary navbar-toggle" href="basket.html">
+                    <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">购物车</span>
+                </a>
+                <button type="button" class="navbar-toggle btn-default" data-toggle="collapse" data-target="#search">
+                    <span class="sr-only">Toggle search</span>
+                    <i class="fa fa-search"></i>
+                </button>
+                <button type="button" class="navbar-toggle btn-default" data-toggle="modal" data-target="#login-modal">
+                    <span class="sr-only">User login</span>
+                    <i class="fa fa-users"></i>
+                </button>
+
+            </div>
+        </div>
+        <!--/.navbar-header -->
+
+        <div class="navbar-collapse collapse" id="navigation">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <a href="{{ menuItems[0].url }}">{{ menuItems[0].text }}</a>
+                </li>
+                <li class="dropdown yamm-fw">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ menuItems[1].text }}<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="yamm-content">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img src="content/img/headermenu1.jpg" class="img-responsive hidden-xs" alt="">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <ul>
+                                            <li ng-repeat="item in menuItems[1].subItems1">
+                                                <a ng-href="item.url">{{ item.text }}</a>
+                                            </li>
+     
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <ul>
+                                            <li ng-repeat="item in menuItems[1].subItems2">
+                                                <a ng-href="item.url">{{ item.text }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <ul>
+                                            <li ng-repeat="item in menuItems[1].subItems3">
+                                                <a ng-href="item.url">{{ item.text }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a ng-href="menuItems[2].url">{{ menuItems[2].text }}</a>
+                </li>
+                <li>
+                    <a ng-href="menuItems[3].url">{{ menuItems[3].text }}</a>
+                </li>
+                <li>
+                    <a ng-href="menuItems[4].url">{{ menuItems[4].text }}</a>
+                </li>
+                <li>
+                    <a ng-href="menuItems[5].url">{{ menuItems[5].text }}</a>
+                </li>
+                <li>
+                    <a ng-href="menuItems[6].url">{{ menuItems[6].text }}</a>
+                </li>
+            </ul>
+            
+        </div>
+        <!--/.nav-collapse -->
+
+        <div class="navbar-collapse collapse right" id="basket-overview">
+            <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">(3) <span class="hidden-md">购物车</span></span></a>
+        </div>
+        <!--/.nav-collapse -->
+
+        <div class="navbar-collapse collapse right">
+            <button type="button" class="btn navbar-btn btn-default" data-toggle="collapse" data-target="#search">
+                <span class="sr-only">Toggle search</span>
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+
+        <div class="navbar-collapse collapse right">
+            <button type="button" class="btn navbar-btn btn-default" data-toggle="modal" data-target="#login-modal">
+                <span class="sr-only">User login</span>
+                <i class="fa fa-users"></i>
+            </button>
+        </div>
+
+        <div class="collapse clearfix" id="search">
+
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <span class="input-group-btn">
+
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+
+                    </span>
+                </div>
+            </form>
+
+        </div>
+        <!--/.nav-collapse -->
+
+    </div>
+</div>
+<!-- /#navbar -->
+<!-- *** NAVBAR END *** -->
+<!-- *** LOGIN MODAL ***
+_________________________________________________________ -->
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="Login">用户登录</h4>
+            </div>
+            <div class="modal-body">
+                <form action="customer-orders.html" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="email" placeholder="电子邮件">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" placeholder="密码">
+                    </div>
+
+                    <p class="text-center">
+                        <button class="btn btn-primary"><i class="fa fa-sign-in"></i> 登陆</button>
+                    </p>
+
+                </form>
+
+                <p class="text-center text-muted">还未注册？</p>
+                <p class="text-center text-muted"><a href="register.html"><strong>注册</strong></a>!</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- *** LOGIN MODAL END *** -->
+
+
+

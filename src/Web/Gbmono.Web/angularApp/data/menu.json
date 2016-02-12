@@ -1,0 +1,78 @@
+﻿[
+  { "text": "主页", "url": "#" },
+  {
+    "text": "药妆产品",
+    "url": "",
+    "subItems1": [
+      {
+        "text": "基础化妆品",
+        "url": "category.html"
+      },
+      {
+        "text": "打底妆",
+        "url": "category.html"
+      },
+      {
+        "text": "局部妆",
+        "url": "category.html"
+      },
+      {
+        "text": "一般化妆品",
+        "url": "category.html"
+      },
+      {
+        "text": "男性化妆品",
+        "url": "category.html"
+      }
+    ],
+    "subItems2": [
+      {
+        "text": "头发护理",
+        "url": "category.html"
+      },
+      {
+        "text": "染发",
+        "url": "category.html"
+      },
+      {
+        "text": "头发造型",
+        "url": "category.html"
+      },
+      {
+        "text": "沐浴 & 肥皂",
+        "url": "category.html"
+      },
+      {
+        "text": "口腔护理",
+        "url": "category.html"
+      }
+    ],
+    "subItems3": [
+      {
+        "text": "医药品 & 医药部外品",
+        "url": "category.html"
+      },
+      {
+        "text": "医疗用具",
+        "url": "category.html"
+      },
+      {
+        "text": "健康食品",
+        "url": "category.html"
+      },
+      {
+        "text": "女性用品",
+        "url": "category.html"
+      },
+      {
+        "text": "婴童用品",
+        "url": "category.html"
+      }
+    ]
+  },
+  { "text": "药妆店", "url": "" },
+  { "text": "促销 & 优惠券", "url": "" },
+  { "text": "品牌", "url": "" },
+  { "text": "货架", "url": "" },
+  { "text": "收藏夹", "url": "wishlist.html" }
+]

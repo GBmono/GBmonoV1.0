@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{25E50AF1-7433-42EE-A5FA-ED1F1AC8466A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gbmono.EF</RootNamespace>
+    <AssemblyName>Gbmono.EF</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataContext\GbmonoSqlContext.cs" />
+    <Compile Include="Infrastructure\RepositoryManager.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ModelConfigs\CategoryMap.cs" />
+    <Compile Include="ModelConfigs\ManufacturerMap.cs" />
+    <Compile Include="ModelConfigs\ProductMap.cs" />
+    <Compile Include="ModelConfigs\RetailerMap.cs" />
+    <Compile Include="ModelConfigs\RetailShopMap.cs" />
+    <Compile Include="Models\Banner.cs" />
+    <Compile Include="Models\BannerType.cs" />
+    <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\FollowOption.cs" />
+    <Compile Include="Models\FollowOptionType.cs" />
+    <Compile Include="Models\News.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Manufacturer.cs" />
+    <Compile Include="Models\ProductImage.cs" />
+    <Compile Include="Models\ProductImageType.cs" />
+    <Compile Include="Models\Retailer.cs" />
+    <Compile Include="Models\RetailShop.cs" />
+    <Compile Include="Models\Shelf.cs" />
+    <Compile Include="Models\ShelfDetail.cs" />
+    <Compile Include="Models\ShelfProduct.cs" />
+    <Compile Include="Models\ShelfType.cs" />
+    <Compile Include="Models\WebShop.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="SqlScripts\gbmono0113.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlScripts\brandDataCreate.sql" />
+    <Content Include="SqlScripts\categorytemp.sql" />
+    <Content Include="SqlScripts\RetailShop.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
