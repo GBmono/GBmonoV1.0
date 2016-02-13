@@ -1,10 +1,11 @@
-﻿using Gbmono.Models;
-using Gbmono.Models.Infrastructure;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gbmono.EF.Infrastructure;
+using Gbmono.EF.Models;
 
 namespace Gbmono.Search.IndexBuilder
 {
