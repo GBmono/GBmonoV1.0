@@ -100,105 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="temp\angularApp\app.js" />
-    <Content Include="temp\angularApp\consts.js" />
-    <Content Include="temp\angularApp\controllers\products\productCreateController.js" />
-    <Content Include="temp\angularApp\controllers\products\productIndexController.js" />
-    <Content Include="temp\angularApp\layout.js" />
-    <Content Include="temp\angularApp\services\dataFactory.js" />
-    <Content Include="temp\angularApp\services\jqueryPluginService.js" />
-    <Content Include="temp\angularApp\services\validator.js" />
-    <Content Include="temp\angularApp\shared\header.html" />
-    <Content Include="temp\angularApp\views\products\createProduct.html" />
-    <Content Include="temp\angularApp\views\products\createProductImage.html" />
-    <Content Include="temp\angularApp\views\products\createProductShop.html" />
-    <Content Include="temp\angularApp\views\products\index.html" />
-    <Content Include="temp\content\css\ace-fonts.css" />
-    <Content Include="temp\content\css\ace-ie.min.css" />
-    <Content Include="temp\content\css\ace-part2.min.css" />
-    <Content Include="temp\content\css\ace-rtl.min.css" />
-    <Content Include="temp\content\css\ace-skins.min.css" />
-    <Content Include="temp\content\css\ace.min.css" />
-    <Content Include="temp\content\css\ace.onpage-help.css" />
-    <Content Include="temp\content\css\bootstrap.min.css" />
-    <Content Include="temp\content\css\custom.css" />
-    <Content Include="temp\content\css\font-awesome.css" />
-    <Content Include="temp\content\css\font-awesome.min.css" />
-    <Content Include="temp\content\css\gbmono.css" />
-    <Content Include="temp\content\fonts\fontawesome-webfont.svg" />
-    <Content Include="temp\content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="temp\content\kendo\Default\editor.png" />
-    <Content Include="temp\content\kendo\Default\imagebrowser.png" />
-    <Content Include="temp\content\kendo\Default\indeterminate.gif" />
-    <Content Include="temp\content\kendo\Default\loading-image.gif" />
-    <Content Include="temp\content\kendo\Default\loading.gif" />
-    <Content Include="temp\content\kendo\Default\loading_2x.gif" />
-    <Content Include="temp\content\kendo\Default\markers.png" />
-    <Content Include="temp\content\kendo\Default\markers_2x.png" />
-    <Content Include="temp\content\kendo\Default\slider-h.gif" />
-    <Content Include="temp\content\kendo\Default\slider-v.gif" />
-    <Content Include="temp\content\kendo\Default\sprite.png" />
-    <Content Include="temp\content\kendo\Default\sprite_2x.png" />
-    <Content Include="temp\content\kendo\Default\sprite_kpi.png" />
-    <Content Include="temp\content\kendo\Default\sprite_kpi_2x.png" />
-    <Content Include="temp\content\kendo\Flat\editor.png" />
-    <Content Include="temp\content\kendo\Flat\imagebrowser.png" />
-    <Content Include="temp\content\kendo\Flat\indeterminate.gif" />
-    <Content Include="temp\content\kendo\Flat\loading-image.gif" />
-    <Content Include="temp\content\kendo\Flat\loading.gif" />
-    <Content Include="temp\content\kendo\Flat\loading_2x.gif" />
-    <Content Include="temp\content\kendo\Flat\markers.png" />
-    <Content Include="temp\content\kendo\Flat\markers_2x.png" />
-    <Content Include="temp\content\kendo\Flat\slider-h.gif" />
-    <Content Include="temp\content\kendo\Flat\slider-v.gif" />
-    <Content Include="temp\content\kendo\Flat\sprite.png" />
-    <Content Include="temp\content\kendo\Flat\sprite_2x.png" />
-    <Content Include="temp\content\kendo\Flat\sprite_kpi.png" />
-    <Content Include="temp\content\kendo\Flat\sprite_kpi_2x.png" />
-    <Content Include="temp\content\kendo\images\back.png" />
-    <Content Include="temp\content\kendo\images\kendoui.svg" />
-    <Content Include="temp\content\kendo\images\wp8_icons.png" />
-    <Content Include="temp\content\kendo\images\wp8_inverseicons.png" />
-    <Content Include="temp\content\kendo\kendo.common-material.min.css" />
-    <Content Include="temp\content\kendo\kendo.common.min.css" />
-    <Content Include="temp\content\kendo\kendo.dataviz.default.min.css" />
-    <Content Include="temp\content\kendo\kendo.dataviz.flat.min.css" />
-    <Content Include="temp\content\kendo\kendo.dataviz.material.min.css" />
-    <Content Include="temp\content\kendo\kendo.dataviz.min.css" />
-    <Content Include="temp\content\kendo\kendo.default.min.css" />
-    <Content Include="temp\content\kendo\kendo.flat.min.css" />
-    <Content Include="temp\content\kendo\kendo.material.min.css" />
-    <Content Include="temp\content\kendo\kendo.rtl.min.css" />
-    <Content Include="temp\content\kendo\Material\editor.png" />
-    <Content Include="temp\content\kendo\Material\imagebrowser.png" />
-    <Content Include="temp\content\kendo\Material\indeterminate.gif" />
-    <Content Include="temp\content\kendo\Material\loading-image.gif" />
-    <Content Include="temp\content\kendo\Material\loading.gif" />
-    <Content Include="temp\content\kendo\Material\loading_2x.gif" />
-    <Content Include="temp\content\kendo\Material\markers.png" />
-    <Content Include="temp\content\kendo\Material\markers_2x.png" />
-    <Content Include="temp\content\kendo\Material\slider-h.gif" />
-    <Content Include="temp\content\kendo\Material\slider-v.gif" />
-    <Content Include="temp\content\kendo\Material\sprite.png" />
-    <Content Include="temp\content\kendo\Material\sprite_2x.png" />
-    <Content Include="temp\content\kendo\Material\sprite_kpi.png" />
-    <Content Include="temp\content\kendo\Material\sprite_kpi_2x.png" />
-    <Content Include="temp\index.html" />
-    <Content Include="temp\scripts\ace-elements.min.js" />
-    <Content Include="temp\scripts\ace-extra.min.js" />
-    <Content Include="temp\scripts\ace.min.js" />
-    <Content Include="temp\scripts\angular-animate.min.js" />
-    <Content Include="temp\scripts\angular-local-storage.js" />
-    <Content Include="temp\scripts\angular-route.min.js" />
-    <Content Include="temp\scripts\angular.min.js" />
-    <Content Include="temp\scripts\bootstrap-growl.min.js" />
-    <Content Include="temp\scripts\bootstrap.min.js" />
-    <Content Include="temp\scripts\html5shiv.js" />
-    <Content Include="temp\scripts\jquery.min.js" />
-    <Content Include="temp\scripts\jquery.mobile.custom.min.js" />
-    <Content Include="temp\scripts\jszip.min.js" />
-    <Content Include="temp\scripts\kendo\kendo.all.min.js" />
-    <Content Include="temp\scripts\respond.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -220,19 +121,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ApplicationInsights.config" />
-    <Content Include="temp\content\fonts\fontawesome-webfont.eot" />
-    <Content Include="temp\content\fonts\fontawesome-webfont.ttf" />
-    <Content Include="temp\content\fonts\fontawesome-webfont.woff" />
-    <Content Include="temp\content\fonts\fontawesome-webfont.woff2" />
-    <Content Include="temp\content\fonts\FontAwesome.otf" />
-    <Content Include="temp\content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="temp\content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="temp\content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="temp\content\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
-    <Content Include="temp\content\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
-    <Content Include="temp\content\kendo\images\kendoui.ttf" />
-    <Content Include="temp\content\kendo\images\kendoui.woff" />
-    <Content Include="temp\scripts\kendo\kendo.all.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -243,9 +131,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\Products\" />
-    <Folder Include="temp\angularApp\data\" />
-    <Folder Include="temp\angularApp\filters\" />
-    <Folder Include="temp\content\css\images\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Gbmono.EF\Gbmono.EF.csproj">

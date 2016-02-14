@@ -64,11 +64,11 @@ namespace Gbmono.Api.Admin.Controllers
 
             // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
             // so this is how you can get the original file name
-            var originalFileName = GetDeserializedFileName(file);
+            // var originalFileName = GetDeserializedFileName(file);
             // var newFileName = GenerateImageFileName(productId) + Path.GetExtension(file.LocalFileName);
 
             // todo: then we can rename the file into the originalfile name
-            File.Copy(file.LocalFileName, Path.Combine(root, originalFileName), true);
+            File.Copy(file.LocalFileName, Path.Combine(root, "temp.jpg"), true);
 
             // delete the curent file
             File.Delete(file.LocalFileName);
