@@ -4,6 +4,7 @@
 (function (module) {
     // inject the controller params
     ctrl.$inject = ['$scope',
+                    '$location',
                     'categoryDataFactory',
                     'productDataFactory',
                     'brandDataFactory',
@@ -16,6 +17,7 @@
 
     // controller body
     function ctrl($scope,
+                  $location,
                   categoryDataFactory,
                   productDataFactory,
                   brandDataFactory,
@@ -65,7 +67,8 @@
             // create product
             productDataFactory.create($scope.newProduct)
                 .success(function (data) {
-                    //pluginService.notify('Product is created', 'success')
+                    // redirect into extra info page
+                    $location.path('/products/create/' + data + '/extra');
                 })
                 .error(function (error) {
                     pluginService.notify(error, 'error');
@@ -147,14 +150,14 @@
 
 
 /*
-   product image create controller
+   product extra info create controller
 */
 (function (module) {
     // inject the controller params
     ctrl.$inject = ['$scope', '$routeParams', 'productImageDataFactory', 'pluginService'];
 
     // create controller
-    module.controller('productImageCreateController', ctrl);
+    module.controller('productExtraInfoCreateController', ctrl);
 
     // controller body
     function ctrl($scope, $routeParams, productImageDataFactory, pluginService) {
@@ -162,7 +165,9 @@
         var productId = $routeParams.id ? parseInt($routeParams.id) : 0;
         
         // image upload target url
-        $scope.fileUploadUrl = gbmono.api_site_prefix.product_image_api_url + '/Upload';
+        $scope.fileUploadUrl = gbmono.api_site_prefix.product_image_api_url + '/Upload/' + productId;
+        // image url root
+        $scope.imgUrl = gbmono.img_root_path;
 
         // product images
         $scope.images = [];
@@ -182,7 +187,16 @@
         $scope.onSuccess = function () {
             // upload image succeed
             // then display the image in view
+            getImages(productId);
         };
+
+        // page init
+        init();
+
+        function init() {
+            // load saved product images
+            getImages(productId);
+        }
 
         function getImages(productId) {
             productImageDataFactory.getByProduct(productId)
@@ -193,19 +207,3 @@
     }
 })(angular.module('gbmono'));
 
-
-/*
-   product shop create controller
-*/
-(function (module) {
-    // inject the controller params
-    ctrl.$inject = [];
-
-    // create controller
-    module.controller('productShopCreateController', ctrl);
-
-    // controller body
-    function ctrl() {
-
-    }
-})(angular.module('gbmono'));

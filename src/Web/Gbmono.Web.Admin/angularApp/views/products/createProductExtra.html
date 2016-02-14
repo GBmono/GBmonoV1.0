@@ -16,7 +16,7 @@
 <div class="page-content">
     <!-- product image-->
     <div class="row">
-        <div class="col-md-8 col-xs-12">
+        <div class="col-md-6 col-xs-12">
             <div class="widget-box transparent">
                 <div class="widget-header">
                     <h4 class="widget-title lighter">添加产品图片</h4>
@@ -34,7 +34,7 @@
 
                         <form class="form-horizontal" enctype="multipart/form-data">
                             <div class="form-group">
-                                <div class="col-sm-9">
+                                <div class="col-xs-12">
                                     <input name="files"
                                            type="file"
                                            kendo-upload
@@ -53,11 +53,11 @@
 
                                 <ul class="ace-thumbnails clearfix">
 
-                                    <!--<li>
-                                        <a href="../assets/images/gallery/image-3.jpg" data-rel="colorbox">
-                                            <img alt="150x150" src="../assets/images/gallery/thumb-3.jpg" />
+                                    <li ng-repeat="img in images">
+                                        <a href="" data-rel="colorbox">
+                                            <img alt="150x150" ng-src="{{imgUrl}}/{{img.fileName}}" />
                                             <div class="text">
-                                                <div class="inner">Sample Caption on Hover</div>
+                                                <div class="inner">{{ img.name }}</div>
                                             </div>
                                         </a>
 
@@ -70,7 +70,7 @@
                                                 <i class="ace-icon fa fa-times red"></i>
                                             </a>
                                         </div>
-                                    </li>-->
+                                    </li>
 
                                 </ul>
 
@@ -80,5 +80,27 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-6 col-xs-12">
+            <div class="widget-box transparent">
+                <div class="widget-header">
+                    <h4 class="widget-title lighter">添加购入店铺</h4>
+
+                    <div class="widget-toolbar no-border">
+                        <a href="" data-action="reload">
+                            <i class="ace-icon fa fa-refresh"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="widget-body">
+                    <div class="widget-main no-padding-left no-padding-right">
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>

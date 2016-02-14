@@ -28,9 +28,9 @@ namespace Gbmono.Api.Admin.Controllers
         }
         #endregion
 
-        [Route("Upload")]
+        [Route("Upload/{productId}")]
         [HttpPost]
-        public async Task<IHttpActionResult> UploadImage()
+        public async Task<IHttpActionResult> UploadImage(int productId)
         {
             // Check if the request contains multipart/form-data.
             if (!Request.Content.IsMimeMultipartContent())
@@ -64,15 +64,25 @@ namespace Gbmono.Api.Admin.Controllers
 
             // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
             // so this is how you can get the original file name
-            // var originalFileName = GetDeserializedFileName(file);
-            // var newFileName = GenerateImageFileName(productId) + Path.GetExtension(file.LocalFileName);
+            var originalFileName = GetDeserializedFileName(file);
+            var newFileName = GenerateImageFileName(productId) + Path.GetExtension(originalFileName);
 
             // todo: then we can rename the file into the originalfile name
-            File.Copy(file.LocalFileName, Path.Combine(root, "temp.jpg"), true);
+            File.Copy(file.LocalFileName, Path.Combine(root, newFileName), true);
 
             // delete the curent file
             File.Delete(file.LocalFileName);
 
+            // create product image
+            var newProductImage = new ProductImage
+            {
+                ProductId = productId,
+                FileName = newFileName
+            };
+
+            _repositoryManager.ProductImageRepository.Create(newProductImage);
+            await _repositoryManager.ProductImageRepository.SaveAsync();
+                
             return Ok();
         }
 
@@ -96,6 +106,15 @@ namespace Gbmono.Api.Admin.Controllers
         private string GetDeserializedFileName(MultipartFileData fileData)
         {
             var fileName = fileData.Headers.ContentDisposition.FileName;
+            // IE fix
+            // when using IE to upload file, the ContentDisposition.FileName contains the full local path of the file
+            if (fileName.Contains("\\"))
+            {
+                // remove the path and only keep the file name in json format
+                var lastIndexOfPathCharacter = fileName.LastIndexOf("\\");
+                fileName = "\"" + fileName.Substring(lastIndexOfPathCharacter + 1); // json format
+            }
+
             return JsonConvert.DeserializeObject(fileName).ToString();
         }
 
@@ -123,12 +142,15 @@ namespace Gbmono.Api.Admin.Controllers
             }
 
             // extract the index from last product image
-            var index = lastProductImage.FileName.Substring(lastProductImage.FileName.IndexOf("_"));
+            var startIndex = lastProductImage.FileName.IndexOf("_") + 1;
+            var endIndex = lastProductImage.FileName.LastIndexOf(".");
 
-            int i;
-            if (!int.TryParse(index, out i))
+            var extractPart = lastProductImage.FileName.Substring(startIndex, (endIndex - startIndex));
+
+            int i = 1;
+            if (int.TryParse(extractPart, out i))
             {
-                i = 1;
+                i += 1;
             }
 
 

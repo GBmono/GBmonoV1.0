@@ -40,14 +40,9 @@
                     controller: 'productCreateController',
                     caseInsensitiveMatch: true
                 })
-                .when('/products/create/:id/images', { // 商品图片创建页
-                    templateUrl: gbmono.app_view_path + '/products/createProductImage.html',
-                    controller: 'productImageCreateController',
-                    caseInsensitiveMatch: true
-                })
-                .when('/products/create/:id/shops', { // 商品购入列表创建页
-                    templateUrl: gbmono.app_view_path + '/products/createProductShop.html',
-                    controller: 'productShopCreateController',
+                .when('/products/create/:id/extra', { // 商品图片创建页
+                    templateUrl: gbmono.app_view_path + '/products/createProductExtra.html',
+                    controller: 'productExtraInfoCreateController',
                     caseInsensitiveMatch: true
                 })
                 .otherwise({
