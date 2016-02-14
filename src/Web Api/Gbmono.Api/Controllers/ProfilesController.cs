@@ -46,81 +46,81 @@ namespace Gbmono.Api.Controllers
         }
 
 
-        [HttpGet]
-        [Route("GetFollowProducts")]
-        public async Task<IHttpActionResult> GetFollowProducts()
-        {
-            var userId = RequestContext.Principal.Identity.GetUserId();
-            var followProductIds = _repositoryManager.FollowOptionRepository.Fetch(m => m.UserId == userId && m.FollowTypeId == (int)FollowOptionType.FollowProduct).Select(m => m.OptionId);
-            var result = new List<Product>();
-            if (followProductIds.Any())
-            {
-                result = _repositoryManager.ProductRepository.Table.Include(m => m.Retailers).Where(m => followProductIds.Contains(m.ProductId)).ToList();
+        // [HttpGet]
+        // [Route("GetFollowProducts")]
+        //public async Task<IHttpActionResult> GetFollowProducts()
+        //{
+        //    var userId = RequestContext.Principal.Identity.GetUserId();
+        //    var followProductIds = _repositoryManager.FollowOptionRepository.Fetch(m => m.UserId == userId && m.FollowTypeId == (int)FollowOptionType.FollowProduct).Select(m => m.OptionId);
+        //    var result = new List<Product>();
+        //    if (followProductIds.Any())
+        //    {
+        //        result = _repositoryManager.ProductRepository.Table.Include(m => m.Retailers).Where(m => followProductIds.Contains(m.ProductId)).ToList();
 
-                //Todo Temp Add Image
-                foreach (var productCollection in result)
-                {
-                    if (productCollection.Images == null)
-                    {
-                        productCollection.Images = new List<ProductImage>();
-                        productCollection.Images.Add(new ProductImage() { IsPrimary = true, IsThumbnail = false, Name = "PicTemp", Url = "/content/images/demo/merries2_f.jpg" });
-                        productCollection.Images.Add(new ProductImage()
-                        {
-                            IsPrimary = false,
-                            IsThumbnail = false,
-                            Name = "PicTemp2",
-                            Url = "/content/images/demo/merries2_b.jpg"
-                        });
-                    }
-                }
-            }
-            return Ok(result);
-        }
+        //        //Todo Temp Add Image
+        //        foreach (var productCollection in result)
+        //        {
+        //            if (productCollection.Images == null)
+        //            {
+        //                productCollection.Images = new List<ProductImage>();
+        //                productCollection.Images.Add(new ProductImage() { IsPrimary = true, IsThumbnail = false, Name = "PicTemp", Url = "/content/images/demo/merries2_f.jpg" });
+        //                productCollection.Images.Add(new ProductImage()
+        //                {
+        //                    IsPrimary = false,
+        //                    IsThumbnail = false,
+        //                    Name = "PicTemp2",
+        //                    Url = "/content/images/demo/merries2_b.jpg"
+        //                });
+        //            }
+        //        }
+        //    }
+        //    return Ok(result);
+        //}
 
-        [HttpGet]
-        [Route("GetFavoriteProducts")]
-        public async Task<IHttpActionResult> GetFavoriteProducts()
-        {
-            var userId = RequestContext.Principal.Identity.GetUserId();
-            var favoriteProductIds = _repositoryManager.FollowOptionRepository.Fetch(m => m.UserId == userId && m.FollowTypeId == (int)FollowOptionType.FavoriteProduct).Select(m => m.OptionId);
-            var result = new List<Product>();
-            if (favoriteProductIds.Any())
-            {
-                result = _repositoryManager.ProductRepository.Table.Include(m=>m.Retailers).Where(m => favoriteProductIds.Contains(m.ProductId)).ToList();
+        //[HttpGet]
+        //[Route("GetFavoriteProducts")]
+        //public async Task<IHttpActionResult> GetFavoriteProducts()
+        //{
+        //    var userId = RequestContext.Principal.Identity.GetUserId();
+        //    var favoriteProductIds = _repositoryManager.FollowOptionRepository.Fetch(m => m.UserId == userId && m.FollowTypeId == (int)FollowOptionType.FavoriteProduct).Select(m => m.OptionId);
+        //    var result = new List<Product>();
+        //    if (favoriteProductIds.Any())
+        //    {
+        //        result = _repositoryManager.ProductRepository.Table.Include(m=>m.Retailers).Where(m => favoriteProductIds.Contains(m.ProductId)).ToList();
 
-                //Todo Temp Add Image
-                foreach (var productCollection in result)
-                {
-                    if (productCollection.Images == null)
-                    {
-                        productCollection.Images = new List<ProductImage>();
-                        productCollection.Images.Add(new ProductImage() { IsPrimary = true, IsThumbnail = false, Name = "PicTemp", Url = "/content/images/demo/merries2_f.jpg" });
-                        productCollection.Images.Add(new ProductImage()
-                        {
-                            IsPrimary = false,
-                            IsThumbnail = false,
-                            Name = "PicTemp2",
-                            Url = "/content/images/demo/merries2_b.jpg"
-                        });
-                    }
-                }
-            }
-            return Ok(result);
-        }
+        //        //Todo Temp Add Image
+        //        foreach (var productCollection in result)
+        //        {
+        //            if (productCollection.Images == null)
+        //            {
+        //                productCollection.Images = new List<ProductImage>();
+        //                productCollection.Images.Add(new ProductImage() { IsPrimary = true, IsThumbnail = false, Name = "PicTemp", Url = "/content/images/demo/merries2_f.jpg" });
+        //                productCollection.Images.Add(new ProductImage()
+        //                {
+        //                    IsPrimary = false,
+        //                    IsThumbnail = false,
+        //                    Name = "PicTemp2",
+        //                    Url = "/content/images/demo/merries2_b.jpg"
+        //                });
+        //            }
+        //        }
+        //    }
+        //    return Ok(result);
+        //}
 
-        [HttpGet]
-        [Route("GetFollowBrands")]
-        public async Task<IHttpActionResult> GetFollowBrands()
-        {
-            var userId = RequestContext.Principal.Identity.GetUserId();
-            var brandIds = _repositoryManager.FollowOptionRepository.Fetch(m => m.UserId == userId && m.FollowTypeId == (int)FollowOptionType.FollowBrand).Select(m => m.OptionId);
-            var result = new List<Brand>();
-            if (brandIds.Any())
-            {
-                result = _repositoryManager.BrandRepository.Fetch(m => brandIds.Contains(m.BrandId)).ToList();
-            }
-            return Ok(result);
-        }
+        //[HttpGet]
+        //[Route("GetFollowBrands")]
+        //public async Task<IHttpActionResult> GetFollowBrands()
+        //{
+        //    var userId = RequestContext.Principal.Identity.GetUserId();
+        //    var brandIds = _repositoryManager.FollowOptionRepository.Fetch(m => m.UserId == userId && m.FollowTypeId == (int)FollowOptionType.FollowBrand).Select(m => m.OptionId);
+        //    var result = new List<Brand>();
+        //    if (brandIds.Any())
+        //    {
+        //        result = _repositoryManager.BrandRepository.Fetch(m => brandIds.Contains(m.BrandId)).ToList();
+        //    }
+        //    return Ok(result);
+        //}
 
 
       

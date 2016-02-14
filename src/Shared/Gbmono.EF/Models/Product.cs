@@ -81,11 +81,11 @@ namespace Gbmono.EF.Models
 
         // 商品描述
         public string Description { get; set; }
-        public ICollection<ProductImage> DescriptionImages { get; set; }
+        // public ICollection<ProductImage> DescriptionImages { get; set; }
 
         // 使用说明
         public string Instruction { get; set; }
-        public ICollection<ProductImage> InstructionImages { get; set; }
+        // public ICollection<ProductImage> InstructionImages { get; set; }
 
         // 追加文案
         public string ExtraInformation { get; set; }

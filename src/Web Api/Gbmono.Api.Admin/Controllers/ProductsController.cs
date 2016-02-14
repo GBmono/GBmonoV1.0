@@ -26,7 +26,7 @@ namespace Gbmono.Api.Admin.Controllers
         #endregion
 
         [Route("Categories/{categoryId}")]
-        public  async Task<IEnumerable<ProductSimpleModel>> GetByCategory(int categoryId)
+        public async Task<IEnumerable<ProductSimpleModel>> GetByCategory(int categoryId)
         {
             return await _repositoryManager.ProductRepository
                                      .Table
@@ -69,7 +69,7 @@ namespace Gbmono.Api.Admin.Controllers
             _repositoryManager.ProductRepository.Create(product);
             _repositoryManager.ProductRepository.Save();
 
-            return Ok();
+            return Ok(product.ProductId);
         }
     }
 }

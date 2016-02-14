@@ -77,10 +77,10 @@
     function factory($http) {
         // return data factory with CRUD calls
         return {
-
+            getByProduct:getByProduct
         };
 
-        function get(productId) {
+        function getByProduct(productId) {
             return $http.get(gbmono.api_site_prefix.product_image_api_url + "/Products/" + productId);
         }
 

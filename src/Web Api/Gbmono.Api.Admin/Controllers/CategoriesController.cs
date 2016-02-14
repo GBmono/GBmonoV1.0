@@ -25,13 +25,17 @@ namespace Gbmono.Api.Admin.Controllers
         [Route("Top")]
         public IEnumerable<Category> GetTopCategories()
         {
-            return _repositoryManager.CategoryRepository.Fetch(m => m.ParentId == null).OrderBy(m => m.CategoryCode).ToList();
+            return _repositoryManager.CategoryRepository
+                                     .Table
+                                     .Where(m => m.ParentId == null).OrderBy(m => m.CategoryCode).ToList();
         }
 
         [Route("Parent/{id}")]
         public IEnumerable<Category> GetCategoriesByParent(int id)
         {
-            return _repositoryManager.CategoryRepository.Fetch(m => m.ParentId == id).OrderBy(m => m.CategoryCode).ToList();
+            return _repositoryManager.CategoryRepository
+                                     .Table
+                                     .Where(m => m.ParentId == id).OrderBy(m => m.CategoryCode).ToList();
         }
 
     }

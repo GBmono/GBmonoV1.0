@@ -49,30 +49,26 @@
             // reload second cates and third cates
             getSecondCates($scope.selectedTopCateId);
         };
+
         $scope.secondCateChanged = function () {
             // reload third cates
             getThirdCates($scope.selectedSecondCateId);
         };
+
         $scope.create = function () {
-            // console.log($scope.newProduct);
             // validation
             if (!validator.isValidProduct($scope.newProduct)) {
                 pluginService.notify('数据格式错误', 'error')
                 return;
             }
 
-            //productDataFactory.getByCategory(22)
-            //    .success(function (data) {
-            //        alert('success');
-            //    });
-
             // create product
             productDataFactory.create($scope.newProduct)
-                .success(function () {
+                .success(function (data) {
                     //pluginService.notify('Product is created', 'success')
                 })
                 .error(function (error) {
-                    //pluginService.notify(error, 'error');
+                    pluginService.notify(error, 'error');
                 })
 
         };
@@ -155,13 +151,16 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['$scope', '$routeParams'];
+    ctrl.$inject = ['$scope', '$routeParams', 'productImageDataFactory', 'pluginService'];
 
     // create controller
     module.controller('productImageCreateController', ctrl);
 
     // controller body
-    function ctrl($scope, $routeParams) {
+    function ctrl($scope, $routeParams, productImageDataFactory, pluginService) {
+        // retreive product id from routeparams
+        var productId = $routeParams.id ? parseInt($routeParams.id) : 0;
+        
         // image upload target url
         $scope.fileUploadUrl = gbmono.api_site_prefix.product_image_api_url + '/Upload';
 
@@ -185,6 +184,12 @@
             // then display the image in view
         };
 
+        function getImages(productId) {
+            productImageDataFactory.getByProduct(productId)
+                .success(function (data) {
+                    $scope.images = data;
+                });
+        }
     }
 })(angular.module('gbmono'));
 

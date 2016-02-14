@@ -73,27 +73,27 @@ namespace Gbmono.EF
             return await Entities.FindAsync(id);
         }
 
-        public T Get(Expression<Func<T, bool>> predicate)
-        {
-            // Returns the only element of a sequence, 
-            // or a default value if the sequence is empty; 
-            // this method throws an exception if there is more than one element in the sequence.
-            return Fetch(predicate).SingleOrDefault();             
-        }
+        //public T Get(Expression<Func<T, bool>> predicate)
+        //{
+        //    // Returns the only element of a sequence, 
+        //    // or a default value if the sequence is empty; 
+        //    // this method throws an exception if there is more than one element in the sequence.
+        //    return Fetch(predicate).SingleOrDefault();             
+        //}
 
-        public IEnumerable<T> Fetch(Expression<Func<T, bool>> predicate)
-        {
-            return Table.Where(predicate);
-        }
+        //public IEnumerable<T> Fetch(Expression<Func<T, bool>> predicate)
+        //{
+        //    return Table.Where(predicate);
+        //}
 
-        public int Count(Expression<Func<T, bool>> predicate)
-        {
-            return Fetch(predicate).Count();
-        }
+        //public int Count(Expression<Func<T, bool>> predicate)
+        //{
+        //    return Fetch(predicate).Count();
+        //}
 
-        public bool Any(Expression<Func<T, bool>> predicate)
-        {
-            return Fetch(predicate).Any();
-        }
+        //public bool Any(Expression<Func<T, bool>> predicate)
+        //{
+        //    return Fetch(predicate).Any();
+        //}
     }
 }

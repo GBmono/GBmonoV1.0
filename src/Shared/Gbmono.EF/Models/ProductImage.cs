@@ -8,7 +8,7 @@ namespace Gbmono.EF.Models
         public int ProductImageId { get; set; }
 
         public int ProductId { set; get; }
-        public Product Product { set; get; }
+        // public Product Product { set; get; }
 
         public string Name { get; set; }
 

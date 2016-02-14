@@ -30,7 +30,7 @@ namespace Gbmono.Api.Admin.Controllers
 
         [Route("Upload")]
         [HttpPost]
-        public async Task<IHttpActionResult> UploadImage(int productId)
+        public async Task<IHttpActionResult> UploadImage()
         {
             // Check if the request contains multipart/form-data.
             if (!Request.Content.IsMimeMultipartContent())
@@ -64,17 +64,29 @@ namespace Gbmono.Api.Admin.Controllers
 
             // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
             // so this is how you can get the original file name
-            // var originalFileName = GetDeserializedFileName(file);
-            var newFileName = GenerateImageFileName(productId) + Path.GetExtension(file.LocalFileName);
+            var originalFileName = GetDeserializedFileName(file);
+            // var newFileName = GenerateImageFileName(productId) + Path.GetExtension(file.LocalFileName);
 
             // todo: then we can rename the file into the originalfile name
-            File.Copy(file.LocalFileName, Path.Combine(root, newFileName), true);
+            File.Copy(file.LocalFileName, Path.Combine(root, originalFileName), true);
 
             // delete the curent file
             File.Delete(file.LocalFileName);
 
             return Ok();
         }
+
+        [Route("Products/{productId}")]
+        public IEnumerable<ProductImage> Get(int productId)
+        {
+            return  _repositoryManager.ProductImageRepository
+                                           .Table
+                                           .Where(m => m.ProductId == productId)
+                                           .OrderBy(m => m.FileName)
+                                           .ToList();
+
+        }
+
 
         /// <summary>
         /// get the deserialized file name (oringinal file name) from the upload file data

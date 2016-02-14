@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Data.Entity;
 
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
@@ -56,10 +57,15 @@ namespace Gbmono.Api.Controllers
         [Route("GetFilterCategories/{categoryId}")]
         public async Task<IEnumerable<Category>> GetFilterCategories(int categoryId)
         {
-            return await Task.Run(() =>
-            {
-                return _repositoryManager.CategoryRepository.Fetch(f => f.ParentId == categoryId).ToList();
-            });
+            return await _repositoryManager.CategoryRepository
+                                           .Table
+                                           .Where(m => m.ParentId == categoryId)
+                                           .ToListAsync();
+
+            //return await Task.Run(() =>
+            //{
+            //    return _repositoryManager.CategoryRepository.Fetch(f => f.ParentId == categoryId).ToList();
+            //});
         }
     }
 }
