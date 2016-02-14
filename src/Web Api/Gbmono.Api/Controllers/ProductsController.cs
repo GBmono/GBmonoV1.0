@@ -49,19 +49,36 @@ namespace Gbmono.Api.Controllers
 
         public async Task<IEnumerable<ProductSimpleModel>> GetAll()
         {
-            return await Task.Run(() =>
+            var productList  = await _repositoryManager.ProductRepository.Table
+                                                       .Include(m => m.Brand)
+                                                       .Include(m => m.Retailers)
+                                                       .Take(20)
+                                                       .ToListAsync();
+
+            if (productList != null && productList.Count > 0)
             {
-                var productList = _repositoryManager.ProductRepository.Table
-                                                                .Include(m => m.Brand)
-                                                                .Include(m => m.Retailers)
-                                                                .Take(20).ToList();
-                if (productList != null && productList.Count > 0)
-                {
-                    var models = productList.Select(m => m.ToSimpleModel()).ToList();
-                    return models;
-                }
-                return null;
-            });
+                var models = productList.Select(m => m.ToSimpleModel()).ToList();
+                return models;
+            }
+
+            return null;
+
+            // pls remove Task.Run method
+            // use .ToListAsync() or GetAsync() method instead
+
+            //return await Task.Run(() =>
+            //{
+            //    var productList = _repositoryManager.ProductRepository.Table
+            //                                                    .Include(m => m.Brand)
+            //                                                    .Include(m => m.Retailers)
+            //                                                    .Take(20).ToList();
+            //    if (productList != null && productList.Count > 0)
+            //    {
+            //        var models = productList.Select(m => m.ToSimpleModel()).ToList();
+            //        return models;
+            //    }
+            //    return null;
+            //});
         }
 
         [Route("Categories/{categoryId}")]

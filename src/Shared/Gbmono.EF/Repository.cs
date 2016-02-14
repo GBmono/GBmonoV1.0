@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Gbmono.EF
 {
@@ -52,14 +53,24 @@ namespace Gbmono.EF
             }
         }
 
-        public void Save()
+        public int Save()
         {
-            _context.SaveChanges();
+            return _context.SaveChanges();
+        }
+
+        public async Task<int> SaveAsync()
+        {
+            return await _context.SaveChangesAsync();
         }
 
         public T Get(int id)
         {
-            return Entities.Find(id);
+            return Entities.Find(id); 
+        }
+
+        public async Task<T> GetAsync(int id)
+        {
+            return await Entities.FindAsync(id);
         }
 
         public T Get(Expression<Func<T, bool>> predicate)

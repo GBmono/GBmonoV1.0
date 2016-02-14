@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Gbmono.EF
 {
@@ -16,16 +17,18 @@ namespace Gbmono.EF
 
         void Delete(int id);
 
-        void Save();
+        int Save();
+        Task<int> SaveAsync();
 
         T Get(int id);
+        Task<T> GetAsync(int id);
 
         T Get(Expression<Func<T, bool>> predicate);
 
         IQueryable<T> Table { get; }
 
         IEnumerable<T> Fetch(Expression<Func<T, bool>> predicate);
-
+       
         int Count(Expression<Func<T, bool>> predicate);
 
         bool Any(Expression<Func<T, bool>> predicate);
