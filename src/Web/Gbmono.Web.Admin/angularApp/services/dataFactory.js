@@ -40,11 +40,11 @@
 
     // factory implement
     function factory($http) {
-
         // return data factory with CRUD calls
         return {
             getById: getById,
-            getByCategory: getByCategory
+            getByCategory: getByCategory,
+            create: create
         };
 
         function getById(id) {
@@ -53,6 +53,35 @@
 
         function getByCategory(categoryId) {
             return $http.get(gbmono.api_site_prefix.product_api_url + '/Categories/' + categoryId);
+        }
+
+        function create(product) {
+            return $http.post(gbmono.api_site_prefix.product_api_url, product);
+        }
+    }
+
+})(angular.module('gbmono'));
+
+
+/*
+    product image factory
+*/
+(function (module) {
+    // inject params
+    factory.$inject = ['$http'];
+
+    // create instance
+    module.factory('productImageDataFactory', factory);
+
+    // factory implement
+    function factory($http) {
+        // return data factory with CRUD calls
+        return {
+
+        };
+
+        function get(productId) {
+            return $http.get(gbmono.api_site_prefix.product_image_api_url + "/Products/" + productId);
         }
 
 

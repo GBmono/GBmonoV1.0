@@ -54,6 +54,7 @@
     <Compile Include="ModelConfigs\CategoryMap.cs" />
     <Compile Include="ModelConfigs\CountryMap.cs" />
     <Compile Include="ModelConfigs\ManufacturerMap.cs" />
+    <Compile Include="ModelConfigs\ProductImageMap.cs" />
     <Compile Include="ModelConfigs\ProductMap.cs" />
     <Compile Include="ModelConfigs\RetailerMap.cs" />
     <Compile Include="ModelConfigs\RetailShopMap.cs" />

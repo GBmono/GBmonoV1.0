@@ -70,7 +70,8 @@
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 商品名称1 </label>
 
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" />
+                                            <input type="text" class="form-control"
+                                                   ng-model="newProduct.primaryName" />
                                         </div>
                                     </div>
 
@@ -78,7 +79,8 @@
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 商品名称2 </label>
 
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" />
+                                            <input type="text" class="form-control" 
+                                                   ng-model="newProduct.secondaryName"/>
                                         </div>
                                     </div>
 
@@ -86,7 +88,17 @@
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 二维码 </label>
 
                                         <div class="col-sm-9">
-                                            <input class="col-xs-10 col-sm-5" type="text" />
+                                            <input class="col-xs-10 col-sm-5" type="text" 
+                                                   ng-model="newProduct.barCode"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 商品代码 </label>
+
+                                        <div class="col-sm-9">
+                                            <input class="col-xs-10 col-sm-5" type="text"
+                                                   ng-model="newProduct.productCode" />
                                         </div>
                                     </div>
 
@@ -94,7 +106,8 @@
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 商品排列码 </label>
 
                                         <div class="col-sm-9">
-                                            <input class="col-xs-10 col-sm-5" type="text" />
+                                            <input class="col-xs-10 col-sm-5" type="text" 
+                                                   ng-model="newProduct.displayCode"/>
                                         </div>
                                     </div>
 
@@ -123,7 +136,8 @@
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 容量 </label>
 
                                         <div class="col-sm-9">
-                                            <input class="col-xs-10 col-sm-5" type="text" />
+                                            <input class="col-xs-10 col-sm-5" type="text" 
+                                                   ng-model="newProduct.content"/>
                                         </div>
                                     </div>
                                     
@@ -131,15 +145,8 @@
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 重量 </label>
 
                                         <div class="col-sm-9">
-                                            <input class="col-xs-10 col-sm-5" type="text" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 净重 </label>
-
-                                        <div class="col-sm-9">
-                                            <input class="col-xs-10 col-sm-5" type="text" />
+                                            <input class="col-xs-10 col-sm-5" type="text" 
+                                                   ng-model="newProduct.weight"/>
                                         </div>
                                     </div>
 
@@ -147,23 +154,31 @@
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 价格 | 折扣 </label>
 
                                         <div class="col-sm-3">
-                                            <input class="col-xs-12" type="text" />
+                                            <input class="col-xs-12" type="number" 
+                                                   ng-model="newProduct.price"/>
                                             
                                         </div>
                                         <div class="col-sm-3">
-                                            <input class="col-xs-12" type="text" />
+                                            <input class="col-xs-12" type="number" 
+                                                   ng-model="newProduct.discount"/>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 活动券 | 优惠券 </label>
+                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 促销券 | 优惠券 | Topics</label>
 
                                         <div class="col-sm-3">
-                                            <input class="col-xs-12" type="text" />
+                                            <input class="col-xs-12" type="text" 
+                                                   ng-model="newProduct.promotionCode"/>
 
                                         </div>
                                         <div class="col-sm-3">
-                                            <input class="col-xs-12" type="text" />
+                                            <input class="col-xs-12" type="text" 
+                                                   ng-model="newProduct.cuponCode"/>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input class="col-xs-12" type="text"
+                                                   ng-model="newProduct.topicCode" />
                                         </div>
                                     </div>
 
@@ -171,7 +186,8 @@
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 商品介绍 </label>
 
                                         <div class="col-sm-9">
-                                            <textarea class="col-xs-10 col-sm-8" />
+                                            <textarea class="col-xs-10 col-sm-8" 
+                                                      ng-model="newProduct.description"/>
                                         </div>
                                     </div>
 
@@ -179,7 +195,8 @@
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 使用说明 </label>
 
                                         <div class="col-sm-9">
-                                            <textarea class="col-xs-10 col-sm-8" />
+                                            <textarea class="col-xs-10 col-sm-8" 
+                                                      ng-model="newProduct.instruction"/>
                                         </div>
                                     </div>
 
@@ -187,7 +204,8 @@
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 追加文案 </label>
 
                                         <div class="col-sm-9">
-                                            <textarea class="col-xs-10 col-sm-8" />
+                                            <textarea class="col-xs-10 col-sm-8" 
+                                                      ng-model="newProduct.extraInformation"/>
                                         </div>
                                     </div>
 
@@ -209,10 +227,12 @@
                                         <div class="col-sm-9">
                                             <input kendo-date-picker
                                                    k-format="'yyyy-MM-dd'"
-                                                   style="width: 40%;" />
+                                                   style="width: 40%;" 
+                                                   ng-model="newProduct.activationDate"/>
                                             <input kendo-date-picker
                                                    k-format="'yyyy-MM-dd'"
-                                                   style="width: 40%;" />
+                                                   style="width: 40%;" 
+                                                   ng-model="newProduct.expiryDate"/>
                                         </div>
                                     </div>
 
@@ -220,7 +240,8 @@
 
                                     <div class="clearfix form-actions">
                                         <div class="col-md-offset-3 col-md-9">
-                                            <button class="btn btn-info" type="button">
+                                            <button class="btn btn-info" type="button"
+                                                    ng-click="create()">
                                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                                 提交
                                             </button>

@@ -44,6 +44,6 @@ namespace Gbmono.Api.Admin.Models
         public DateTime ActivationDate { get; set; }
 
         // 商品下货架日期
-        public DateTime ExpiryDate { get; set; }
+        public DateTime? ExpiryDate { get; set; }
     }
 }

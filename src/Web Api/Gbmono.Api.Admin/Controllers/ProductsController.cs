@@ -58,12 +58,16 @@ namespace Gbmono.Api.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IHttpActionResult> Create([FromBody]Product product)
+        public IHttpActionResult Create([FromBody]Product product)
         {
             // todo: validation
 
+            // update create datetime and update datetime
+            product.CreatedDate = DateTime.Now;
+            product.UpdatedDate = DateTime.Now;
+
             _repositoryManager.ProductRepository.Create(product);
-           await _repositoryManager.ProductRepository.SaveAsync();
+            _repositoryManager.ProductRepository.Save();
 
             return Ok();
         }

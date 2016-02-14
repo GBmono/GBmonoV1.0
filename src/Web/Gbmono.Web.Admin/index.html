@@ -283,12 +283,14 @@
         if ('ontouchstart' in document.documentElement) document.write("<script src='scripts/jquery.mobile.custom.min.js'>" + "<" + "/script>");
     </script>
 
-
     <!-- scripts -->
     <script src="scripts/bootstrap.min.js"></script>   
     <script src="scripts/ace-elements.min.js"></script>
     <script src="scripts/ace.min.js"></script>
     <script type="text/javascript"> ace.vars['base'] = '..'; </script>
+
+    <!-- plugins -->
+    <script src="scripts/bootstrap-growl.min.js"></script> <!-- notifications -->
 
     <!-- angularJs -->
     <script src="scripts/angular.min.js"></script>
@@ -302,7 +304,8 @@
     
     <!-- services -->
     <script src="angularApp/services/dataFactory.js"></script>
-
+    <script src="angularApp/services/jqueryPluginService.js"></script>
+    <script src="angularApp/services/validator.js"></script>
     <!-- layout (master) page controller-->
     <script src="angularApp/layout.js"></script>
     <!-- controllers -->

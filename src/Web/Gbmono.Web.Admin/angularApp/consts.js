@@ -24,6 +24,8 @@
         category_api_url: gbmono.web_api_app_name + '/Categories',
         // product api url
         product_api_url: gbmono.web_api_app_name + '/Products',
+        // product image api url
+        product_image_api_url:gbmono.web_api_app_name + '/ProductImages',
         // country
         country_api_url: gbmono.web_api_app_name + '/Countries',
         // brand api url
