@@ -40,7 +40,7 @@ namespace Gbmono.Api.Controllers
             {
                 var userId = RequestContext.Principal.Identity.GetUserId();
                 option.UserId = userId;
-                var optionPO = _repositoryManager.FollowOptionRepository.Get(m => m.FollowTypeId == option.FollowTypeId && m.OptionId == option.OptionId && m.UserId == option.UserId);
+                var optionPO = _repositoryManager.FollowOptionRepository.Table.SingleOrDefault(m => m.FollowTypeId == option.FollowTypeId && m.OptionId == option.OptionId && m.UserId == option.UserId);
                 if (optionPO == null)
                 {
                     option.CreatedDate = DateTime.Now;

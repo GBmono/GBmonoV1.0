@@ -26,7 +26,7 @@ namespace Gbmono.Api.Controllers
         }
         
         // get product by id
-        public async Task<ProductDetailModel> GetById(int id)
+        public async Task<ProductSimpleModel> GetById(int id)
         {
             return await Task.Run(() =>
             {
@@ -38,7 +38,7 @@ namespace Gbmono.Api.Controllers
                                                                   .SingleOrDefault(f => f.ProductId == id);
                 if (product != null)
                 {
-                    var model = product.ToModel();
+                    var model = product.ToSimpleModel();
                     // model.Categories = _categoryService.GetProductCategoryList(product.CategoryId);
                     return model;
                 }
@@ -86,7 +86,7 @@ namespace Gbmono.Api.Controllers
         {
             return await Task.Run(() =>
             {
-                var subCategories = _repositoryManager.CategoryRepository.Fetch(f => f.ParentId == categoryId).Select(s => s.CategoryId).ToList();
+                var subCategories = _repositoryManager.CategoryRepository.Table.Where(f => f.ParentId == categoryId).Select(s => s.CategoryId).ToList();
                 var productList = _repositoryManager.ProductRepository.Table
                                     .Include(m => m.Brand)
                                     .Include(m => m.Retailers)
