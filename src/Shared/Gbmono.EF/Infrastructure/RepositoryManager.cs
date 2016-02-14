@@ -39,6 +39,7 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<Product> _productRepository;
         private IRepository<Manufacturer> _manufacturerRepository;
         private IRepository<Brand> _brandRepository;
+        private IRepository<Country> _countryRepository;
         private IRepository<Retailer> _retailerRepository;
         private IRepository<FollowOption> _followOptionRepository;
         private IRepository<Banner> _bannerRepository;
@@ -62,6 +63,11 @@ namespace Gbmono.EF.Infrastructure
         public IRepository<Brand> BrandRepository
         {
             get { return _brandRepository ?? (_brandRepository = new Repository<Brand>(Context)); }
+        }
+
+        public IRepository<Country> CountryRepository
+        {
+            get { return _countryRepository ?? (_countryRepository = new Repository<Country>(Context)); }
         }
 
         public IRepository<Retailer> RetailerRepository

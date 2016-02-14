@@ -10,21 +10,21 @@ using Gbmono.EF.Infrastructure;
 
 namespace Gbmono.Api.Admin.Controllers
 {
-    [RoutePrefix("api/Brands")]
-    public class BrandsController : ApiController
+    [RoutePrefix("api/Countries")]
+    public class CountriesController : ApiController
     {
         private readonly RepositoryManager _repositoryManager;
 
         #region ctor
-        public BrandsController()
+        public CountriesController()
         {
             _repositoryManager = new RepositoryManager();
         }
         #endregion
 
-        public IEnumerable<Brand> GetAll()
+        public IEnumerable<Country> GetAll()
         {
-            return _repositoryManager.BrandRepository.Table.OrderBy(m => m.Name).ToList();
+            return _repositoryManager.CountryRepository.Table.OrderBy(m => m.Name).ToList();
         }
     }
 }

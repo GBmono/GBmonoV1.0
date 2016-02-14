@@ -19,15 +19,13 @@ namespace Gbmono.EF.DataContext
             // remove default table name convention
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            // add category map
+            // add entity mappings
             modelBuilder.Configurations.Add(new CategoryMap());
-
-            modelBuilder.Configurations.Add(new ManufacturerMap());
-
             modelBuilder.Configurations.Add(new ProductMap());
-
+            modelBuilder.Configurations.Add(new ManufacturerMap());
+            modelBuilder.Configurations.Add(new BrandMap());
+            modelBuilder.Configurations.Add(new CountryMap());
             modelBuilder.Configurations.Add(new RetailShopMap());
-
             modelBuilder.Configurations.Add(new RetailerMap());
             
             // pls move the config code into seperate config clss

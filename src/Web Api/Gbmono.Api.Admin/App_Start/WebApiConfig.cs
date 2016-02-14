@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-
 
 namespace Gbmono.Api.Admin
 {
@@ -54,6 +54,9 @@ namespace Gbmono.Api.Admin
             {
                 config.Formatters.Remove(match);    // remove
             }
+
+            // enable cross domain access
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
         }
     }
 }
