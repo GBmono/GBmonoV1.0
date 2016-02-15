@@ -4,13 +4,14 @@
 (function (module) {
     // inject the controller params
     ctrl.$inject = ['$scope',
-                    'categoryDataFactory'];
+                    'categoryDataFactory',
+                    'productDataFactory'];
 
     // create controller
     module.controller('productIndexController', ctrl);
 
     // controller body
-    function ctrl($scope, categoryDataFactory) {
+    function ctrl($scope, categoryDataFactory, productDataFactory) {
         // top level categories
         $scope.topCates = [];
         $scope.selectedTopCateId = 0;
@@ -22,6 +23,9 @@
         // third level categories
         $scope.thirdCates = [];
         $scope.selectedThirdCateId = 0;
+
+        // kendo ui grid binding options
+        $scope.mainGridOptions = {}
 
         init();
 
@@ -36,10 +40,62 @@
             getThirdCates($scope.selectedSecondCateId);
         };
 
+        // reload data
+        $scope.reload = function () {
+            // parent grid
+            $scope.grid.dataSource.read();
+        }
 
         function init() {
             // get top categories and auto load second, third level categories
             getTopCategories();
+
+            // bind data
+            bindProductGrid();
+        }
+
+        // retreive product data and binding it into kendo grid
+        function bindProductGrid() {
+            // init kendo ui grid with location data
+            $scope.mainGridOptions = {
+                dataSource: {
+                    transport: {
+                        read: function (e) {
+                            productDataFactory.getByCategory($scope.selectedThirdCateId)
+                                .success(function (data) {
+                                    // kendo grid callback
+                                    e.success(data);
+                                });
+                        }
+                    }
+                },
+                sortable: true,
+                height: 580,
+                filterable: false,
+                //toolbar: [
+                //            { template: kendo.template('<a class="k-button" ng-click="showCreateWin();"><i class="zmdi zmdi-edit"></i> </a>') },
+                //            "pdf",
+                //            "excel"
+                //],
+                columns: [
+                    { field: "primaryName", title: "名称1" },
+                    { field: "secondaryName", title: "名称2" },
+                    { field: "brandName", title: "品牌" },
+                    { field: "productCode", title: "产品代码" },
+                    { field: "barCode", title: "二维码" },
+                    { field: "price", title: "价格" },
+                    {
+                        field: "activationDate", title: "上架日期",
+                        template: "#= kendo.toString(kendo.parseDate(activationDate), 'yyyy-MM-dd') #"
+                    },
+                    {
+                        field: "expiryDate", title: "结束日期",
+                        template: "#= expiryDate == null ? '' : kendo.toString(kendo.parseDate(expiryDate), 'yyyy-MM-dd') #"
+                    },
+                    { template: '<a class="btn btn-xs btn-info" ng-href="\\#/products/edit/#=productId#"><i class="ace-icon fa fa-pencil bigger-120"></i></a>', width: 80 },
+                    { template: '<button class="btn btn-xs btn-danger" ng-click=""><i class="ace-icon fa fa-trash-o bigger-120"></i></button>', width: 80 }
+                ]
+            };
         }
 
         function getTopCategories() {

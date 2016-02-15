@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html id="ng-app" ng-app="gbmono">
+<head>
+    <title>GBmono</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Merriweather:400,400italic' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap and Font Awesome css -->
+    <link href="content/css/font-awesome.css" rel="stylesheet">
+    <link href="content/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme stylesheet -->
+    <link href="content/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
+
+    <!-- Custom stylesheet - for your changes -->
+    <link href="content/css/custom.css" rel="stylesheet">
+
+    <!-- Responsivity for older IE -->
+    <script src="js/respond.min.js"></script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.png">
+    <!-- owl carousel css -->
+
+    <link href="content/css/owl.carousel.css" rel="stylesheet">
+</head>
+<body ng-controller="layoutController">
+ 
+    <!-- included header -->
+    <div ng-include="'angularApp/shared/header.html'"
+         ng-controller="headerController">
+    </div>
+
+    <!-- *** SLIDER *** -->
+    <div id="slider" class="owl-carousel owl-theme">
+
+        <div class="item">
+            <a href="#">
+                <img src="content/img/slider-cover-2.jpg" alt="" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="item">
+            <a href="#">
+                <img src="content/img/slider-cover-3.jpg" alt="" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="item">
+            <a href="#">
+                <img src="content/img/slider-cover-4.jpg" alt="" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="item">
+            <a href="#">
+                <img src="content/img/slider-cover-6.jpg" alt="" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="item">
+            <a href="#">
+                <img src="content/img/slider-cover-4.jpg" alt="" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="item">
+            <a href="#">
+                <img src="content/img/slider-cover-2.jpg" alt="" class="img-responsive">
+            </a>
+        </div>
+
+
+    </div>
+    <!-- /#slider -->
+    <!-- *** SLIDER END *** -->
+
+    <div id="all">
+        <!-- content area -->
+        <div id="content">
+            <div class="container">
+                <div ng-view class="slide" style="min-height:720px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- included footer -->
+    <div ng-include="'angularApp/shared/footer.html'"
+         ng-controller="footerController">
+    </div>
+
+    <!-- scripts -->
+    <script src="scripts/jquery-1.11.0.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/jquery.cookie.js"></script>
+    <script src="scripts/front.js"></script>
+    <!-- plugins -->  
+    <script src="scripts/owl.carousel.min.js"></script>
+
+    <!-- angularJs -->
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.min.js"></script>
+    <script src="scripts/angular-animate.min.js"></script>
+    <script src="scripts/angular-local-storage.js"></script>
+
+    <!-- app module -->
+    <script src="angularApp/consts.js"></script>
+    <script src="angularApp/app.js"></script>
+
+    <!-- services -->
+    <script src="angularApp/services/pageDataFactory.js"></script>
+    <!--<script src="angularApp/services/dataFactory.js"></script>
+    <script src="angularApp/services/uiService.js"></script>-->
+
+    <!-- layout (master) page controller-->
+    <script src="angularApp/layout.js"></script>
+    <script src="angularApp/controllers/homeController.js"></script>
+</body>
+</html>

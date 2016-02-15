@@ -6,7 +6,7 @@
         </li>
 
         <li>
-            <a href="#">产品管理</a>
+            <a ng-href="#/products">产品管理</a>
         </li>
         <li class="active">添加产品</li>
     </ul><!-- /.breadcrumb -->
@@ -21,8 +21,8 @@
                     <h4 class="widget-title lighter">添加新产品</h4>
 
                     <div class="widget-toolbar no-border">
-                        <a href="" data-action="reload">
-                            <i class="ace-icon fa fa-refresh"></i>
+                        <a href="" data-action="collapse">
+                            <i class="ace-icon fa fa-chevron-up"></i>
                         </a>
 
                     </div>
@@ -35,7 +35,7 @@
                                 <form class="form-horizontal">
                                     <!-- #section:elements.form -->
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 大分类</label>
+                                        <label class="col-sm-3 control-label no-padding-right"> 大分类</label>
 
                                         <div class="col-sm-9">
                                             <select class="form-control"
@@ -46,7 +46,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 中分类</label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 中分类</label>
 
                                         <div class="col-sm-9">
                                             <select class="form-control"
@@ -57,7 +57,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 小分类</label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 小分类</label>
 
                                         <div class="col-sm-9">
                                             <select class="form-control"
@@ -85,7 +85,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 二维码 </label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 二维码 </label>
 
                                         <div class="col-sm-9">
                                             <input class="col-xs-10 col-sm-5" type="text" 
@@ -94,7 +94,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 商品代码 </label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 商品代码 </label>
 
                                         <div class="col-sm-9">
                                             <input class="col-xs-10 col-sm-5" type="text"
@@ -103,16 +103,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 商品排列码 </label>
-
-                                        <div class="col-sm-9">
-                                            <input class="col-xs-10 col-sm-5" type="text" 
-                                                   ng-model="newProduct.displayCode"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 品牌 </label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 品牌 </label>
 
                                         <div class="col-sm-9">
                                             <select class="col-xs-10 col-sm-5"
@@ -123,7 +114,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 产地 </label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 产地 </label>
 
                                         <div class="col-sm-9">
                                             <select class="col-xs-10 col-sm-5"
@@ -133,7 +124,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 容量 </label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 容量 </label>
 
                                         <div class="col-sm-9">
                                             <input class="col-xs-10 col-sm-5" type="text" 
@@ -142,7 +133,7 @@
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 重量 </label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 重量 </label>
 
                                         <div class="col-sm-9">
                                             <input class="col-xs-10 col-sm-5" type="text" 
@@ -151,7 +142,16 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 价格 | 折扣 </label>
+                                        <label class="col-sm-3 control-label no-padding-right"> 气味 </label>
+
+                                        <div class="col-sm-9">
+                                            <input class="col-xs-10 col-sm-5" type="text"
+                                                   ng-model="newProduct.flavor" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" > 价格 | 折扣 </label>
 
                                         <div class="col-sm-3">
                                             <input class="col-xs-12" type="number" 
@@ -165,7 +165,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 促销券 | 优惠券 | Topics</label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 促销券 | 优惠券 </label>
 
                                         <div class="col-sm-3">
                                             <input class="col-xs-12" type="text" 
@@ -176,14 +176,24 @@
                                             <input class="col-xs-12" type="text" 
                                                    ng-model="newProduct.cuponCode"/>
                                         </div>
+                                        
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" > Topics | Ranking </label>
+
                                         <div class="col-sm-3">
                                             <input class="col-xs-12" type="text"
                                                    ng-model="newProduct.topicCode" />
                                         </div>
+                                        <div class="col-sm-3">
+                                            <input class="col-xs-12" type="text"
+                                                   ng-model="newProduct.rankingCode" />
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 商品介绍 </label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 商品介绍 </label>
 
                                         <div class="col-sm-9">
                                             <textarea class="col-xs-10 col-sm-8" 
@@ -192,7 +202,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 使用说明 </label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 使用说明 </label>
 
                                         <div class="col-sm-9">
                                             <textarea class="col-xs-10 col-sm-8" 
@@ -201,7 +211,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 追加文案 </label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 追加文案 </label>
 
                                         <div class="col-sm-9">
                                             <textarea class="col-xs-10 col-sm-8" 
@@ -210,7 +220,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 四季 </label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 四季 </label>
 
                                         <div class="col-sm-9">
                                             <input type="checkbox" style="margin-top:10px" /> SP &nbsp;&nbsp;
@@ -222,7 +232,7 @@
 
                                     <div class="form-group">
 
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 登陆日期 / 终止日期</label>
+                                        <label class="col-sm-3 control-label no-padding-right" > 登陆日期 / 终止日期</label>
 
                                         <div class="col-sm-9">
                                             <input kendo-date-picker
@@ -262,71 +272,6 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-    <!-- product image-->
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="widget-box transparent">
-                <div class="widget-header">
-                    <h4 class="widget-title lighter">添加产品图片</h4>
-
-                    <div class="widget-toolbar no-border">
-                        <a href="" data-action="reload">
-                            <i class="ace-icon fa fa-refresh"></i>
-                        </a>
-
-                    </div>
-                </div>
-
-                <div class="widget-body">
-                    <div class="widget-main no-padding-left no-padding-right">
-
-                        <form class="form-horizontal">
-                            <div class="form-group">                              
-                                <div class="col-sm-9">                                   
-                                    <input name="files"
-                                           type="file"
-                                           kendo-upload
-                                           k-async="{ saveUrl: fileUploadUrl, autoUpload: true,withCredentials:false }"
-                                           k-select="onSelect"
-                                           k-error="onError"
-                                           k-success="onSuccess"
-                                           k-multiple="true" />
-                                </div>
-                            </div>
-
-                            <!-- image preview -->
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- product shoplist-->
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="widget-box transparent">
-                <div class="widget-header">
-                    <h4 class="widget-title lighter">商店列表</h4>
-
-                    <div class="widget-toolbar no-border">
-                        <a href="" data-action="reload">
-                            <i class="ace-icon fa fa-refresh"></i>
-                        </a>
-
-                    </div>
-                </div>
-
-                <div class="widget-body">
-                    <div class="widget-main padding-18 no-padding-left no-padding-right">
-
-
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

@@ -8,6 +8,8 @@ namespace Gbmono.EF.Models
 
         Description = 2,
 
-        Instruction = 3
+        Instruction = 3,
+
+        ExtraInfo = 4
     }
 }

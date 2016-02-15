@@ -33,8 +33,6 @@ namespace Gbmono.Api.Controllers
                 var product = _repositoryManager.ProductRepository.Table
                                                                   .Include(m => m.Country)
                                                                   .Include(m => m.Brand.Manufacturer)
-                                                                  .Include(m => m.Retailers)
-                                                                  .Include(m => m.WebShops)
                                                                   .SingleOrDefault(f => f.ProductId == id);
                 if (product != null)
                 {
@@ -51,7 +49,6 @@ namespace Gbmono.Api.Controllers
         {
             var productList  = await _repositoryManager.ProductRepository.Table
                                                        .Include(m => m.Brand)
-                                                       .Include(m => m.Retailers)
                                                        .Take(20)
                                                        .ToListAsync();
 
@@ -89,7 +86,6 @@ namespace Gbmono.Api.Controllers
                 var subCategories = _repositoryManager.CategoryRepository.Table.Where(f => f.ParentId == categoryId).Select(s => s.CategoryId).ToList();
                 var productList = _repositoryManager.ProductRepository.Table
                                     .Include(m => m.Brand)
-                                    .Include(m => m.Retailers)
                                     .Where(m => subCategories.Contains(m.CategoryId))
                                     .OrderBy(m => m.PrimaryName)
                                     .Take(20)

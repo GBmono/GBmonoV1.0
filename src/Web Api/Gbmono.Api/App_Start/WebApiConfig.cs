@@ -61,7 +61,7 @@ namespace Gbmono.Api
                 config.Formatters.Remove(match);    // remove
             }
 
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<GbmonoSqlContext, Gbmono.EF.Migrations.Configuration>());
+            // Database.SetInitializer(new MigrateDatabaseToLatestVersion<GbmonoSqlContext, Gbmono.EF.Migrations.Configuration>());
 
             log4net.Config.XmlConfigurator.Configure();
             config.EnableCors(new EnableCorsAttribute("*", "*", "*"));

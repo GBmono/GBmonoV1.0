@@ -45,6 +45,11 @@
                     controller: 'productExtraInfoCreateController',
                     caseInsensitiveMatch: true
                 })
+                .when('/products/edit/:id', { // 商品编辑页
+                    templateUrl: gbmono.app_view_path + '/products/edit.html',
+                    controller: 'productEditController',
+                    caseInsensitiveMatch: true
+                })
                 .otherwise({
                    
                     caseInsensitiveMatch: true

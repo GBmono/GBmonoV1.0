@@ -54,7 +54,10 @@ namespace Gbmono.Api.Admin.Controllers
 
         public async Task<Product> GetById(int id)
         {
-            return await _repositoryManager.ProductRepository.GetAsync(id);
+            return await _repositoryManager.ProductRepository
+                                           .Table
+                                           .Include(m => m.Category.ParentCategory)
+                                           .SingleOrDefaultAsync(m => m.ProductId == id);
         }
 
         [HttpPost]
@@ -67,6 +70,17 @@ namespace Gbmono.Api.Admin.Controllers
             product.UpdatedDate = DateTime.Now;
 
             _repositoryManager.ProductRepository.Create(product);
+            _repositoryManager.ProductRepository.Save();
+
+            return Ok(product.ProductId);
+        }
+
+        [HttpPut]
+        public IHttpActionResult Update(int id, [FromBody]Product product)
+        {
+            product.UpdatedDate = DateTime.Now;
+
+            _repositoryManager.ProductRepository.Update(product);
             _repositoryManager.ProductRepository.Save();
 
             return Ok(product.ProductId);

@@ -13,12 +13,13 @@ namespace Gbmono.EF.Models
         // 商品代码
         public string ProductCode { get; set; }
 
-        //商品排列Code
-        public int? DisplayCode { get; set; }
+        // 商品排列Code
+        // public int? DisplayCode { get; set; }
 
         // category 商品目录 根据当前目录id可获得上级目录
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+
         // 品牌，根据品牌可以取得上级的制造商(品牌商)
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
@@ -32,31 +33,6 @@ namespace Gbmono.EF.Models
         // 次要名称
         public string SecondaryName { get; set; }
 
-        // 商品气味 比如有些商品 含薄荷味
-        public string Flavor { get; set; }
-
-        // 容量
-        // 以字符表示: 10g X 3 
-        public string Content { get; set; }
-
-        // 重量
-        public string Weight { get; set; }
-
-        //// 重量单位
-        //public string WeightUnit { get; set; }
-
-        // 体积 15x18x100mm
-        public string Shape { get; set; }
-        
-        // 材质 / 成分
-        public string Texture { get; set; }
-
-        // 常规价格
-        public double Price { get; set; }
-
-        // discount??
-        public double? Discount { get; set; }
-
         // 促销 code
         public string PromotionCode { get; set; }
 
@@ -65,6 +41,35 @@ namespace Gbmono.EF.Models
 
         // topic code
         public string TopicCode { get; set; }
+
+        // ranking code
+        public string RankingCode { get; set; }
+
+        // 容量
+        // 以字符表示: 10g X 3 
+        public string Capacity { get; set; }
+
+        // 重量
+        public string Weight { get; set; }
+
+        // 商品气味 比如有些商品 含薄荷味
+        public string Flavor { get; set; }
+
+        //// 重量单位
+        //public string WeightUnit { get; set; }
+
+        // 体积 15x18x100mm
+        // public string Shape { get; set; }
+
+        // 材质 / 成分
+        // public string Texture { get; set; }
+
+        // 常规价格
+        public double Price { get; set; }
+
+        // discount??
+        public double? Discount { get; set; }
+
 
         // 入库日期
         public DateTime CreatedDate { get; set; }
@@ -78,26 +83,23 @@ namespace Gbmono.EF.Models
         // 商品下货架日期
         public DateTime? ExpiryDate { get; set; }
 
-
         // 商品描述
         public string Description { get; set; }
-        // public ICollection<ProductImage> DescriptionImages { get; set; }
 
         // 使用说明
         public string Instruction { get; set; }
-        // public ICollection<ProductImage> InstructionImages { get; set; }
 
         // 追加文案
         public string ExtraInformation { get; set; }
 
-        // 商品图片
-        public ICollection<ProductImage> Images { get; set; }
+        //// 商品图片
+        //public ICollection<ProductImage> Images { get; set; }
 
-        // 零售商
-        public ICollection<Retailer> Retailers { get; set; }
+        //// 零售商
+        //public ICollection<Retailer> Retailers { get; set; }
 
-        // 网店列表
-        public ICollection<WebShop> WebShops { get; set; }
+        //// 网店列表
+        //public ICollection<WebShop> WebShops { get; set; }
 
         // todo:
         // 季节推荐

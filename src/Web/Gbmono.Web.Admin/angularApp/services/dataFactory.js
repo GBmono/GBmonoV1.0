@@ -44,7 +44,8 @@
         return {
             getById: getById,
             getByCategory: getByCategory,
-            create: create
+            create: create,
+            update: update
         };
 
         function getById(id) {
@@ -57,6 +58,10 @@
 
         function create(product) {
             return $http.post(gbmono.api_site_prefix.product_api_url, product);
+        }
+
+        function update(product) {
+            return $http.put(gbmono.api_site_prefix.product_api_url + "/" + product.productId, product)
         }
     }
 

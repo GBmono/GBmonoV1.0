@@ -77,7 +77,8 @@ namespace Gbmono.Api.Admin.Controllers
             var newProductImage = new ProductImage
             {
                 ProductId = productId,
-                FileName = newFileName
+                FileName = newFileName,
+                ProductImageTypeId = (int)ProductImageType.Product // todo:                
             };
 
             _repositoryManager.ProductImageRepository.Create(newProductImage);

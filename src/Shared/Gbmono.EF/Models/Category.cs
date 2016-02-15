@@ -12,7 +12,8 @@ namespace Gbmono.EF.Models
         public string Name { get; set; }
 
         public int? ParentId { get; set; }
-        
+        public Category ParentCategory { get; set; }
+
         public IEnumerable<Category> SubCategories { get; set; }
     }
 }
