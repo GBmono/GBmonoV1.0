@@ -37,3 +37,30 @@
         -ms-opacity: 0;
         opacity: 0;
     }
+
+
+/* override the chart nav size to fit the treeview */
+#rightSidebar {
+    position: fixed;
+    background: #fff;
+    padding: 20px 0;
+    width: 380px; /* updated by justin */
+    box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
+    height: calc(100% - 50px);
+    right: -500px; /* updated by justin */
+    top: 50px;
+    -webkit-transition: all;
+    -o-transition: all;
+    transition: all;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+    z-index: 100;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+    #rightSidebar.toggled {
+        right: 0;
+        opacity: 1;
+        filter: alpha(opacity=100);
+    }

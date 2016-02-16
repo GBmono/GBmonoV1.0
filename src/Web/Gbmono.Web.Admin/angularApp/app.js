@@ -27,7 +27,8 @@
 
         // configure routes
         $routeProvider
-                .when('/', { // home page
+                .when('/dashboard', { // home page
+                    templateUrl: gbmono.app_view_path + '/dashboard/dashboard.html',
                     caseInsensitiveMatch: true
                 })
                 .when('/products', { // 商品页
