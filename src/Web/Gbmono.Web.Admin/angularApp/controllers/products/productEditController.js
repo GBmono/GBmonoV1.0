@@ -80,7 +80,7 @@
         $scope.onSuccess = function () {
             // upload image succeed
             // then display the image in view
-            getImages(productId);
+            getImages($scope.editProduct.productId);
         };
 
         // product update 
