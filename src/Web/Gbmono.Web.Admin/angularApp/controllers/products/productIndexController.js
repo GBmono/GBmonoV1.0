@@ -80,20 +80,20 @@
                 columns: [
                     { field: "primaryName", title: "名称1" },
                     { field: "secondaryName", title: "名称2" },
-                    { field: "brandName", title: "品牌" },
-                    { field: "productCode", title: "产品代码" },
-                    { field: "barCode", title: "二维码" },
-                    { field: "price", title: "价格" },
+                    { field: "brandName", title: "品牌", width: 160 },
+                    { field: "productCode", title: "产品代码", width: 100 },
+                    { field: "barCode", title: "二维码", width: 160 },
+                    { field: "price", title: "价格", width: 100 },
                     {
-                        field: "activationDate", title: "上架日期",
+                        field: "activationDate", title: "上架日期", width: 120,
                         template: "#= kendo.toString(kendo.parseDate(activationDate), 'yyyy-MM-dd') #"
                     },
                     {
-                        field: "expiryDate", title: "结束日期",
+                        field: "expiryDate", title: "结束日期", width: 120,
                         template: "#= expiryDate == null ? '' : kendo.toString(kendo.parseDate(expiryDate), 'yyyy-MM-dd') #"
                     },
-                    { template: '<a class="btn btn-xs btn-info" ng-href="\\#/products/edit/#=productId#"><i class="ace-icon fa fa-pencil bigger-120"></i></a>', width: 80 },
-                    { template: '<button class="btn btn-xs btn-danger" ng-click=""><i class="ace-icon fa fa-trash-o bigger-120"></i></button>', width: 80 }
+                    { template: '<a class="btn btn-xs btn-info" ng-href="\\#/products/edit/#=productId#"><i class="ace-icon fa fa-pencil bigger-120"></i></a>', width: 60 },
+                    { template: '<button class="btn btn-xs btn-danger" ng-click=""><i class="ace-icon fa fa-trash-o bigger-120"></i></button>', width: 60 }
                 ]
             };
         }
