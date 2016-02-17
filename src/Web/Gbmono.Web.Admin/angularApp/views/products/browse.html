@@ -1,0 +1,55 @@
+﻿<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">主页</a>
+        </li>
+
+        <li>
+            <a href="#">产品管理</a>
+        </li>
+        <li class="active">产品浏览</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+
+<!-- view -->
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="widget-box transparent">
+                <div class="widget-header">
+                    <h4 class="widget-title lighter"> {{ category.parentCategory.parentCategory.name}} > {{ category.parentCategory.name}} > {{ category.name}}</h4>
+
+                    <div class="widget-toolbar no-border">
+                        <a href="" data-action="reload">
+                            <i class="ace-icon fa fa-refresh"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="widget-body">
+                    <div class="widget-main padding-18 no-padding-left no-padding-right">
+                    
+                        <p>
+                            <a class="btn btn-primary btn-lg" ng-href="#/products/create">
+                                <i class="ace-icon fa fa-pencil align-top bigger-125"></i>
+                                添加新产品
+                            </a>
+
+                        </p>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div kendo-grid="grid"
+                                     k-options="mainGridOptions">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -31,9 +31,14 @@
                     templateUrl: gbmono.app_view_path + '/dashboard/dashboard.html',
                     caseInsensitiveMatch: true
                 })
-                .when('/products', { // 商品页
+                .when('/products', { // 默认商品页
                     templateUrl: gbmono.app_view_path + '/products/index.html',
                     controller: 'productIndexController',
+                    caseInsensitiveMatch: true
+                })
+                .when('/categories/:id/products', { // 分类商品页
+                    templateUrl: gbmono.app_view_path + '/products/browse.html',
+                    controller: 'productBrowseController',
                     caseInsensitiveMatch: true
                 })
                 .when('/products/create', { // 商品创建页

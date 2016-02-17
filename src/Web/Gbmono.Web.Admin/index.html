@@ -46,12 +46,18 @@
 
 </head>
 <body class="no-skin"
-      ng-controller="layoutController">
+      ng-controller="layoutController"
+      ng-click="hideRightSidebar($event)">
 
-    <!-- included header -->
+    <!-- include header -->
     <div ng-include="'angularApp/shared/header.html'"
          ng-controller="headerController">
     </div>
+
+    <!-- include right side bar with treeview -->
+    <div ng-include="'angularApp/shared/categoryTree.html'"
+         ng-controller="categoryTreeController"
+         onload="loadTree()"></div> <!-- use onload event to make dom is ready when controll is init-->
 
     <div class="main-container" id="main-container">
         <script type="text/javascript">
@@ -99,7 +105,7 @@
 
             <ul class="nav nav-list">
                 <li class="">
-                    <a href="index.html">
+                    <a ng-href="#">
                         <i class="menu-icon fa fa-tachometer"></i>
                         <span class="menu-text"> 面板 </span>
                     </a>

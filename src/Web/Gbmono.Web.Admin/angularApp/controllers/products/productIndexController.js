@@ -131,5 +131,103 @@
     }
 })(angular.module('gbmono'));
 
+/*
+    product browse by category page controller
+*/
+(function (module) {
+    // inject the controller params
+    ctrl.$inject = ['$scope',
+                    '$routeParams',
+                    'categoryDataFactory',
+                    'productDataFactory'];
+
+    // create controller
+    module.controller('productBrowseController', ctrl);
+
+    // controller body
+    function ctrl($scope, $routeParams, categoryDataFactory, productDataFactory) {
+        // current category model
+        $scope.category = {};
+
+        // kendo ui grid binding options
+        $scope.mainGridOptions = {}
+
+        // retreive category from route
+        $scope.categoryId = $routeParams.id ? parseInt($routeParams.id) : 0;
+
+        // page init
+        init();
+
+        // reload data
+        $scope.reload = function () {
+            // parent grid
+            $scope.grid.dataSource.read();
+        }
+
+        function init() {
+            getCategory($scope.categoryId);
+
+            // bind data
+            bindProductGrid();
+        }
+
+        // retreive product data and binding it into kendo grid
+        function bindProductGrid() {
+            // init kendo ui grid with location data
+            $scope.mainGridOptions = {
+                dataSource: {
+                    transport: {
+                        read: function (e) {
+                            productDataFactory.getByCategory($scope.categoryId)
+                                .success(function (data) {
+                                    // kendo grid callback
+                                    e.success(data);
+                                });
+                        }
+                    }
+                },
+                pageable: {
+                    numeric: false,
+                    previousNext: false,
+                    messages: {
+                        display: "产品总计: {2}"
+                    }
+                },
+                sortable: true,
+                height: 620,
+                filterable: false,
+                columns: [
+                    {
+                        field: "primaryName", title: "名称1",
+                        template: '<a class="c-black" ng-href="\\#/products/edit/#=productId#">#= primaryName #</a>'
+                    },
+                    { field: "secondaryName", title: "名称2" },
+                    { field: "brandName", title: "品牌", width: 160 },
+                    { field: "productCode", title: "产品代码", width: 100 },
+                    { field: "barCode", title: "二维码", width: 160 },
+                    { field: "price", title: "价格", width: 100 },
+                    {
+                        field: "activationDate", title: "上架日期", width: 120,
+                        template: "#= kendo.toString(kendo.parseDate(activationDate), 'yyyy-MM-dd') #"
+                    },
+                    {
+                        field: "expiryDate", title: "结束日期", width: 120,
+                        template: "#= expiryDate == null ? '' : kendo.toString(kendo.parseDate(expiryDate), 'yyyy-MM-dd') #"
+                    },
+                    { template: '<a class="btn btn-xs btn-info" ng-href="\\#/products/edit/#=productId#"><i class="ace-icon fa fa-pencil bigger-120"></i></a>', width: 60 },
+                    { template: '<button class="btn btn-xs btn-danger" ng-click=""><i class="ace-icon fa fa-trash-o bigger-120"></i></button>', width: 60 }
+                ]
+            };
+        }
+
+        function getCategory(id) {
+            categoryDataFactory.getById(id)
+                .success(function (data) {
+                    $scope.category = data; console.log(data);
+                });
+        }
+    }
+})(angular.module('gbmono'));
+
 
 

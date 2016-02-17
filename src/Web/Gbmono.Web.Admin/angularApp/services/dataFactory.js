@@ -12,8 +12,14 @@
     function factory($http) {
         // return data factory with CRUD calls
         return {
+            getById:getById,
             getTopCategories: getTopCategories,
-            getByParent: getByParent
+            getByParent: getByParent,
+            getTreeviewItems: getTreeviewItems
+        }
+
+        function getById(id) {
+            return $http.get(gbmono.api_site_prefix.category_api_url + "/" + id);
         }
 
         function getTopCategories() {
@@ -22,6 +28,10 @@
 
         function getByParent(parentId) {
             return $http.get(gbmono.api_site_prefix.category_api_url + "/Parent/" + parentId);
+        }
+
+        function getTreeviewItems(parentId) {
+            return $http.get(gbmono.api_site_prefix.category_api_url + "/Treeview/" + parentId);
         }
     }
 
