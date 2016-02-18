@@ -197,25 +197,36 @@
                 height: 620,
                 filterable: false,
                 columns: [
+                    //{
+                    //    field: "primaryName", title: "名称1",
+                    //    template: '<a class="c-black" ng-href="\\#/products/edit/#=productId#">#= primaryName #</a>'
+                    //},
+                    // { field: "secondaryName", title: "名称2" },
                     {
-                        field: "primaryName", title: "名称1",
-                        template: '<a class="c-black" ng-href="\\#/products/edit/#=productId#">#= primaryName #</a>'
+                        field: "primaryName", title: "名称",
+                        template: "<div class='product-grid-img'" +
+                                        "style='background-image: url(#:gbmono.img_root_path + '/' + data.imgUrl#);'></div>" +
+                                    "<div class='product-grid-name'>#: primaryName #</div>"
                     },
-                    { field: "secondaryName", title: "名称2" },
-                    { field: "brandName", title: "品牌", width: 160 },
-                    { field: "productCode", title: "产品代码", width: 100 },
-                    { field: "barCode", title: "二维码", width: 160 },
-                    { field: "price", title: "价格", width: 100 },
+                    { field: "brandName", title: "品牌 (制造商)" },
+                    { field: "productCode", title: "产品代码", width: 80 },
+                    { field: "barCode", title: "条形码", width: 150 },
                     {
-                        field: "activationDate", title: "上架日期", width: 120,
+                        field: "price", title: "价格", width: 100,
+                        template: "#= '￥' + kendo.toString(kendo.toString(price), 'n0') #"
+                    },
+                    {
+                        field: "activationDate", title: "上架日期", width: 100,
                         template: "#= kendo.toString(kendo.parseDate(activationDate), 'yyyy-MM-dd') #"
                     },
                     {
-                        field: "expiryDate", title: "结束日期", width: 120,
+                        field: "expiryDate", title: "结束日期", width: 100,
                         template: "#= expiryDate == null ? '' : kendo.toString(kendo.parseDate(expiryDate), 'yyyy-MM-dd') #"
                     },
-                    { template: '<a class="btn btn-xs btn-info" ng-href="\\#/products/edit/#=productId#"><i class="ace-icon fa fa-pencil bigger-120"></i></a>', width: 60 },
-                    { template: '<button class="btn btn-xs btn-danger" ng-click=""><i class="ace-icon fa fa-trash-o bigger-120"></i></button>', width: 60 }
+                    {
+                        template: '<a class="btn btn-xs btn-info" ng-href="\\#/products/edit/#=productId#"><i class="ace-icon fa fa-pencil bigger-120"></i></a>&nbsp;&nbsp;' +
+                                  '<button class="btn btn-xs btn-danger" ng-click=""><i class="ace-icon fa fa-trash-o bigger-120"></i></button>', width: 100
+                    }
                 ]
             };
         }
@@ -223,11 +234,48 @@
         function getCategory(id) {
             categoryDataFactory.getById(id)
                 .success(function (data) {
-                    $scope.category = data; console.log(data);
+                    $scope.category = data; 
                 });
         }
     }
 })(angular.module('gbmono'));
 
 
+/*
+    product search page controller
+*/
+(function (module) {
+    // inject the controller params
+    ctrl.$inject = ['$scope',
+                    '$routeParams',
+                    'categoryDataFactory',
+                    'productDataFactory'];
 
+    // create controller
+    module.controller('productSearchController', ctrl);
+
+    // controller body
+    function ctrl($scope, $routeParams, categoryDataFactory, productDataFactory) {
+        // page init
+        init();
+
+        // reload data
+        $scope.reload = function () {
+            // parent grid
+            // $scope.grid.dataSource.read();
+        }
+
+        function init() {
+
+        }
+
+        // retreive product data and binding it into kendo grid
+        function bindProductGrid() {
+       
+        }
+
+        function getCategory(id) {
+
+        }
+    }
+})(angular.module('gbmono'));

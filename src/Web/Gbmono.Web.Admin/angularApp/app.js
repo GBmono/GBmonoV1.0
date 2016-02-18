@@ -31,9 +31,9 @@
                     templateUrl: gbmono.app_view_path + '/dashboard/dashboard.html',
                     caseInsensitiveMatch: true
                 })
-                .when('/products', { // 默认商品页
-                    templateUrl: gbmono.app_view_path + '/products/index.html',
-                    controller: 'productIndexController',
+                .when('/products', { // 默认商品搜索页
+                    templateUrl: gbmono.app_view_path + '/products/search.html',
+                    controller: 'productSearchController',
                     caseInsensitiveMatch: true
                 })
                 .when('/categories/:id/products', { // 分类商品页

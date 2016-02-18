@@ -13,14 +13,11 @@ namespace Gbmono.EF.Models
         // 商品代码
         public string ProductCode { get; set; }
 
-        // 商品排列Code
-        // public int? DisplayCode { get; set; }
-
         // category 商品目录 根据当前目录id可获得上级目录
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        // 品牌，根据品牌可以取得上级的制造商(品牌商)
+        // 品牌 (制造商)
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
 
@@ -28,9 +25,10 @@ namespace Gbmono.EF.Models
         public int CountryId { get; set; }
         public Country Country { get; set; }
 
-        // 名称
+        // 名称 (系列名称)
         public string PrimaryName { get; set; }
-        // 次要名称
+        
+        // 补充名称
         public string SecondaryName { get; set; }
 
         // 促销 code
@@ -49,17 +47,11 @@ namespace Gbmono.EF.Models
         // 以字符表示: 10g X 3 
         public string Capacity { get; set; }
 
-        // 重量
+        // 重量 (包括单位)
         public string Weight { get; set; }
 
         // 商品气味 比如有些商品 含薄荷味
         public string Flavor { get; set; }
-
-        //// 重量单位
-        //public string WeightUnit { get; set; }
-
-        // 体积 15x18x100mm
-        // public string Shape { get; set; }
 
         // 材质 / 成分
         // public string Texture { get; set; }
@@ -70,7 +62,21 @@ namespace Gbmono.EF.Models
         // discount??
         public double? Discount { get; set; }
 
+        public double? Width { get; set; }
 
+        public double? Height { get; set; }
+
+        public double? Depth { get; set; }
+
+        // four seasons
+        public bool? Spring { get; set; }
+
+        public bool? Summer { get; set; }
+
+        public bool? Autumn { get; set; }
+
+        public bool? Winter { get; set; }
+        
         // 入库日期
         public DateTime CreatedDate { get; set; }
 
@@ -92,8 +98,8 @@ namespace Gbmono.EF.Models
         // 追加文案
         public string ExtraInformation { get; set; }
 
-        //// 商品图片
-        //public ICollection<ProductImage> Images { get; set; }
+        // 商品图片 (包括使用说明图片)
+        public ICollection<ProductImage> Images { get; set; }
 
         //// 零售商
         //public ICollection<Retailer> Retailers { get; set; }

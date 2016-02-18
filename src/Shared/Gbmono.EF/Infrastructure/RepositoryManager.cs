@@ -39,7 +39,6 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<Product> _productRepository;
         private IRepository<ProductImage> _productImageRepository;
 
-        private IRepository<Manufacturer> _manufacturerRepository;
         private IRepository<Brand> _brandRepository;
         private IRepository<Country> _countryRepository;
         private IRepository<Retailer> _retailerRepository;
@@ -63,11 +62,6 @@ namespace Gbmono.EF.Infrastructure
             get { return _productImageRepository ?? (_productImageRepository = new Repository<ProductImage>(Context)); }
         }
         #endregion
-
-        public IRepository<Manufacturer> ManufacturerRepository
-        {
-            get { return _manufacturerRepository ?? (_manufacturerRepository = new Repository<Manufacturer>(Context)); }
-        }
 
         public IRepository<Brand> BrandRepository
         {

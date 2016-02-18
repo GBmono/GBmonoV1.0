@@ -70,12 +70,10 @@
     <Compile Include="Models\Manufacturer.cs" />
     <Compile Include="Models\ProductImage.cs" />
     <Compile Include="Models\ProductImageType.cs" />
+    <Compile Include="Models\ProductStats.cs" />
+    <Compile Include="Models\ProductStatsType.cs" />
     <Compile Include="Models\Retailer.cs" />
     <Compile Include="Models\RetailShop.cs" />
-    <Compile Include="Models\Shelf.cs" />
-    <Compile Include="Models\ShelfDetail.cs" />
-    <Compile Include="Models\ShelfProduct.cs" />
-    <Compile Include="Models\ShelfType.cs" />
     <Compile Include="Models\WebShop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />

@@ -37,7 +37,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label no-padding-right"> 大分类</label>
 
-                                        <div class="col-sm-9">
+                                        <div class="col-md-6 col-sm-9">
                                             <select class="form-control"
                                                     ng-options="cate.categoryId as cate.name for cate in topCates"
                                                     ng-model="selectedTopCateId"
@@ -48,7 +48,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label no-padding-right" > 陈列货架 </label>
 
-                                        <div class="col-sm-9">
+                                        <div class="col-md-6 col-sm-9">
                                             <select class="form-control"
                                                     ng-options="cate.categoryId as cate.name for cate in secondCates"
                                                     ng-model="selectedSecondCateId"
@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label no-padding-right" > 中分类</label>
 
-                                        <div class="col-sm-9">
+                                        <div class="col-md-6 col-sm-9">
                                             <select class="form-control"
                                                     ng-options="cate.categoryId as cate.name for cate in thirdCates"
                                                     ng-model="newProduct.categoryId"></select>
@@ -67,110 +67,31 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 商品名称1 </label>
+                                        <label class="col-sm-3 control-label no-padding-right"> 商品代码 </label>
 
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control"
-                                                   ng-model="newProduct.primaryName" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 商品名称2 </label>
-
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" 
-                                                   ng-model="newProduct.secondaryName"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" > 二维码 </label>
-
-                                        <div class="col-sm-9">
-                                            <input class="col-xs-10 col-sm-5" type="text" 
-                                                   ng-model="newProduct.barCode"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" > 商品代码 </label>
-
-                                        <div class="col-sm-9">
-                                            <input class="col-xs-10 col-sm-5" type="text"
+                                        <div class="col-md-6 col-sm-9">
+                                            <input class="col-xs-12" type="text"
                                                    ng-model="newProduct.productCode" />
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" > 品牌 </label>
-
-                                        <div class="col-sm-9">
-                                            <select class="col-xs-10 col-sm-5"
-                                                    ng-options="brand.brandId as brand.name for brand in brands"
-                                                    ng-model="newProduct.brandId"></select>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" > 产地 </label>
-
-                                        <div class="col-sm-9">
-                                            <select class="col-xs-10 col-sm-5"
-                                                    ng-options="country.countryId as country.name for country in countries"
-                                                    ng-model="newProduct.countryId"></select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" > 容量 | 重量 | 气味 </label>
+                                        <label class="col-sm-3 control-label no-padding-right"> 促销券 | 优惠券 </label>
 
                                         <div class="col-sm-3">
-                                            <input class="col-xs-12" type="text" 
-                                                   ng-model="newProduct.content"/>
+                                            <input class="col-xs-12" type="text"
+                                                   ng-model="newProduct.promotionCode" />
+
                                         </div>
                                         <div class="col-sm-3">
                                             <input class="col-xs-12" type="text"
-                                                   ng-model="newProduct.weight" />
+                                                   ng-model="newProduct.cuponCode" />
                                         </div>
-                                        <div class="col-sm-3">
-                                            <input class="col-xs-12" type="text"
-                                                   ng-model="newProduct.flavor" />
-                                        </div>
-                                    </div>                                   
 
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" > 价格 | 折扣 </label>
-
-                                        <div class="col-sm-3">
-                                            <input class="col-xs-12" type="number" 
-                                                   ng-model="newProduct.price"/>
-                                            
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <input class="col-xs-12" type="number" 
-                                                   ng-model="newProduct.discount"/>
-                                        </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" > 促销券 | 优惠券 </label>
-
-                                        <div class="col-sm-3">
-                                            <input class="col-xs-12" type="text" 
-                                                   ng-model="newProduct.promotionCode"/>
-
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <input class="col-xs-12" type="text" 
-                                                   ng-model="newProduct.cuponCode"/>
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" > Topics | Ranking </label>
+                                        <label class="col-sm-3 control-label no-padding-right"> Topics | Ranking </label>
 
                                         <div class="col-sm-3">
                                             <input class="col-xs-12" type="text"
@@ -182,6 +103,101 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right"> 品牌 </label>
+
+                                        <div class="col-md-6 col-sm-9">
+                                            <select class="col-xs-12"
+                                                    ng-options="brand.brandId as brand.name for brand in brands"
+                                                    ng-model="newProduct.brandId"></select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 商品名称1 </label>
+
+                                        <div class="col-md-6 col-sm-9">
+                                            <input type="text" class="form-control"
+                                                   ng-model="newProduct.primaryName" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 商品名称2 </label>
+
+                                        <div class="col-md-6 col-sm-9">
+                                            <input type="text" class="form-control" 
+                                                   ng-model="newProduct.secondaryName"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right"> 容量 | 重量 | 气味 </label>
+
+                                        <div class="col-sm-3">
+                                            <input class="col-xs-12" type="text"
+                                                   ng-model="newProduct.content" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input class="col-xs-12" type="text"
+                                                   ng-model="newProduct.weight" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input class="col-xs-12" type="text"
+                                                   ng-model="newProduct.flavor" />
+                                        </div>
+                                    </div>     
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right"> 宽度 | 高度 | 厚度</label>
+
+                                        <div class="col-sm-3">
+                                            <input class="col-xs-12" type="text"
+                                                   ng-model="newProduct.width" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input class="col-xs-12" type="text"
+                                                   ng-model="newProduct.height" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input class="col-xs-12" type="text"
+                                                   ng-model="newProduct.depth" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" > 条形码 </label>
+
+                                        <div class="col-md-6 col-sm-9">
+                                            <input class="col-xs-12" type="text" 
+                                                   ng-model="newProduct.barCode"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right"> 价格 | 折扣 </label>
+
+                                        <div class="col-sm-3">
+                                            <input class="col-xs-12" type="number"
+                                                   ng-model="newProduct.price" />
+
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input class="col-xs-12" type="number"
+                                                   ng-model="newProduct.discount" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" > 产地 </label>
+
+                                        <div class="col-md-6 col-sm-9">
+                                            <select class="col-xs-12"
+                                                    ng-options="country.countryId as country.name for country in countries"
+                                                    ng-model="newProduct.countryId"></select>
+                                        </div>
+                                    </div>
+                             
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label no-padding-right" > 商品介绍 </label>
 
@@ -213,10 +229,10 @@
                                         <label class="col-sm-3 control-label no-padding-right" > 四季 </label>
 
                                         <div class="col-sm-9">
-                                            <input type="checkbox" style="margin-top:10px" /> SP &nbsp;&nbsp;
-                                            <input type="checkbox" /> SW &nbsp;&nbsp;
-                                            <input type="checkbox" /> A &nbsp;&nbsp;
-                                            <input type="checkbox" /> W &nbsp;&nbsp;
+                                            <input type="checkbox" style="margin-top:10px" ng-model="newProduct.spring" /> SP &nbsp;&nbsp;
+                                            <input type="checkbox" ng-model="newProduct.summer" /> SW &nbsp;&nbsp;
+                                            <input type="checkbox" ng-model="newProduct.autumn" /> A &nbsp;&nbsp;
+                                            <input type="checkbox" ng-model="newProduct.winter" /> W &nbsp;&nbsp;
                                         </div>
                                     </div>
 

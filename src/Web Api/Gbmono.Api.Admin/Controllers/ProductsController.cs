@@ -32,21 +32,25 @@ namespace Gbmono.Api.Admin.Controllers
                                      .Table
                                      .Include(m => m.Brand)
                                      .Include(m => m.Country)
+                                     .Include(m => m.Images)
                                      .Where(m => m.CategoryId == categoryId)                                     
                                      .Select(m => new ProductSimpleModel
                                      {
                                          ProductId = m.ProductId,
                                          ProductCode = m.ProductCode,
-                                         CategoryId = m.CategoryId,
+                                         // CategoryId = m.CategoryId,
                                          BrandId = m.BrandId,
                                          BrandName = m.Brand.Name,
-                                         CountryId = m.CountryId,
-                                         CountryName = m.Country.Name,
+                                         // CountryId = m.CountryId,
+                                         // CountryName = m.Country.Name,
                                          PrimaryName = m.PrimaryName,
-                                         SecondaryName = m.SecondaryName,
+                                         // SecondaryName = m.SecondaryName,
                                          BarCode = m.BarCode,
                                          Price = m.Price,
                                          Discount = m.Discount,
+                                         ImgUrl = m.Images.FirstOrDefault(s => s.ProductImageTypeId == (short) ProductImageType.Product) == null
+                                                  ? ""
+                                                  : m.Images.FirstOrDefault(s => s.ProductImageTypeId == (short)ProductImageType.Product).FileName,
                                          ActivationDate = m.ActivationDate,
                                          ExpiryDate = m.ExpiryDate
                                      }).ToListAsync();

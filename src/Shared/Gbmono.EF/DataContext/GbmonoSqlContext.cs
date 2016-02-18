@@ -24,7 +24,6 @@ namespace Gbmono.EF.DataContext
             modelBuilder.Configurations.Add(new ProductMap());
             modelBuilder.Configurations.Add(new ProductImageMap());
 
-            modelBuilder.Configurations.Add(new ManufacturerMap());
             modelBuilder.Configurations.Add(new BrandMap());
             modelBuilder.Configurations.Add(new CountryMap());
             modelBuilder.Configurations.Add(new RetailShopMap());
