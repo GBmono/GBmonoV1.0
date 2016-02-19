@@ -206,7 +206,7 @@
                         field: "primaryName", title: "名称",
                         template: "<div class='product-grid-img'" +
                                         "style='background-image: url(#:gbmono.img_root_path + '/' + data.imgUrl#);'></div>" +
-                                    "<div class='product-grid-name'>#: primaryName #</div>"
+                                    "<div class='product-grid-name'><a ng-href='\\#/products/edit/#=productId#'>#: primaryName #</a></div>"
                     },
                     { field: "brandName", title: "品牌 (制造商)" },
                     { field: "productCode", title: "产品代码", width: 80 },
@@ -304,14 +304,14 @@
                     }
                 },
                 sortable: true,
-                height: 620,
+                height: 580,
                 filterable: false,
                 columns: [
                     {
                         field: "primaryName", title: "名称",
                         template: "<div class='product-grid-img'" +
                                         "style='background-image: url(#:gbmono.img_root_path + '/' + data.imgUrl#);'></div>" +
-                                    "<div class='product-grid-name'>#: primaryName #</div>"
+                                    "<div class='product-grid-name'><a ng-href='\\#/products/edit/#=productId#'>#: primaryName #</a></div>"
                     },
                     { field: "brandName", title: "品牌 (制造商)" },
                     { field: "productCode", title: "产品代码", width: 80 },
