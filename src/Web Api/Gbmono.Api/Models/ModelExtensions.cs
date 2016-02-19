@@ -17,8 +17,8 @@ namespace Gbmono.Api.Models
                 BrandId = po.BrandId,
                 BrandName = po.Brand.Name,
                 Price = po.Price,
-                PrimaryImageUrl = "content/images/demo/product_1.jpg",
-                Retailers = po.Retailers.ToList()
+                PrimaryImageUrl = "content/images/demo/product_1.jpg"
+                //Retailers = po.Retailers.ToList()
             };
 
             return model;           

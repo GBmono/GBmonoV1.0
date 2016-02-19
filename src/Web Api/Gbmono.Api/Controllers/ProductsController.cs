@@ -32,7 +32,7 @@ namespace Gbmono.Api.Controllers
             {
                 var product = _repositoryManager.ProductRepository.Table
                                                                   .Include(m => m.Country)
-                                                                  .Include(m => m.Brand.Manufacturer)
+                                                                  .Include(m => m.Brand)
                                                                   .SingleOrDefault(f => f.ProductId == id);
                 if (product != null)
                 {
@@ -114,7 +114,7 @@ namespace Gbmono.Api.Controllers
         {
             return _repositoryManager.ProductRepository
                                      .Table
-                                     .Include(m => m.Brand.Manufacturer) // 读取对应品牌和品牌商
+                                     .Include(m => m.Brand) // 读取对应品牌和品牌商
                                      .OrderBy(m => m.ProductCode)
                                      .ToList();
                                      
