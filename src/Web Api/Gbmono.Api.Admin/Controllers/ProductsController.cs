@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Admin.Models;
+using Gbmono.Common;
 
 namespace Gbmono.Api.Admin.Controllers
 {
@@ -31,7 +32,7 @@ namespace Gbmono.Api.Admin.Controllers
             return await _repositoryManager.ProductRepository
                                      .Table
                                      .Include(m => m.Brand)
-                                     .Include(m => m.Country)
+                                     // .Include(m => m.Country)
                                      .Include(m => m.Images)
                                      .Where(m => m.CategoryId == categoryId)                                     
                                      .Select(m => new ProductSimpleModel
@@ -54,6 +55,76 @@ namespace Gbmono.Api.Admin.Controllers
                                          ActivationDate = m.ActivationDate,
                                          ExpiryDate = m.ExpiryDate
                                      }).ToListAsync();
+        }
+
+        [Route("Search")]
+        public async Task<IEnumerable<ProductSimpleModel>> Search([FromBody] ProductSearchModel model)
+        {
+            // barcode 
+            if (!string.IsNullOrEmpty(model.BarCode))
+            {
+                return await _repositoryManager.ProductRepository
+                         .Table
+                         .Include(m => m.Brand)
+                         .Include(m => m.Images)
+                         .Where(m => m.BarCode == model.BarCode)
+                         .Select(m => new ProductSimpleModel
+                         {
+                             ProductId = m.ProductId,
+                             ProductCode = m.ProductCode,
+                                         BrandId = m.BrandId,
+                             BrandName = m.Brand.Name,
+                                         PrimaryName = m.PrimaryName,
+                                         BarCode = m.BarCode,
+                             Price = m.Price,
+                             Discount = m.Discount,
+                             ImgUrl = m.Images.FirstOrDefault(s => s.ProductImageTypeId == (short)ProductImageType.Product) == null
+                                      ? ""
+                                      : m.Images.FirstOrDefault(s => s.ProductImageTypeId == (short)ProductImageType.Product).FileName,
+                             ActivationDate = m.ActivationDate,
+                             ExpiryDate = m.ExpiryDate
+                         }).ToListAsync();
+            }
+
+            // invalid product code
+            if (!Validator.IsValidFullProductCode(model.FullProductCode))
+            {
+                // return emty colleciton
+                return new List<ProductSimpleModel>();
+            }
+
+            // full product code
+            // extract category code from full product code
+            var topCateCode = model.FullProductCode.Substring(0, 2);
+            var secondCateCode = model.FullProductCode.Substring(2, 2);
+            var thirdCateCode = model.FullProductCode.Substring(4, 2);
+            var productCode = model.FullProductCode.Substring(6, 4);
+
+            return await _repositoryManager.ProductRepository
+                                            .Table
+                                            .Include(m => m.Brand)
+                                            .Include(m => m.Images)
+                                            .Include(m => m.Category.ParentCategory.ParentCategory) // include all three level categories
+                                            .Where(m => m.ProductCode == productCode &&
+                                                        m.Category.CategoryCode == thirdCateCode &&
+                                                        m.Category.ParentCategory.CategoryCode == secondCateCode &&
+                                                        m.Category.ParentCategory.ParentCategory.CategoryCode == topCateCode)
+                                            .Select(m => new ProductSimpleModel
+                                            {
+                                                ProductId = m.ProductId,
+                                                ProductCode = m.ProductCode,
+                                                BrandId = m.BrandId,
+                                                BrandName = m.Brand.Name,
+                                                PrimaryName = m.PrimaryName,
+                                                BarCode = m.BarCode,
+                                                Price = m.Price,
+                                                Discount = m.Discount,
+                                                ImgUrl = m.Images.FirstOrDefault(s => s.ProductImageTypeId == (short)ProductImageType.Product) == null
+                                                        ? ""
+                                                        : m.Images.FirstOrDefault(s => s.ProductImageTypeId == (short)ProductImageType.Product).FileName,
+                                                ActivationDate = m.ActivationDate,
+                                                ExpiryDate = m.ExpiryDate
+                                            }).ToListAsync();
         }
 
         public async Task<Product> GetById(int id)

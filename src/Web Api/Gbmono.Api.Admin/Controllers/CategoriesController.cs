@@ -28,7 +28,7 @@ namespace Gbmono.Api.Admin.Controllers
         {
             return _repositoryManager.CategoryRepository
                                      .Table
-                                     .Include(m => m.ParentCategory.ParentCategory.ParentCategory)
+                                     .Include(m => m.ParentCategory.ParentCategory)
                                      .SingleOrDefault(m => m.CategoryId == id);
         }
 

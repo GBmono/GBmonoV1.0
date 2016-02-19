@@ -13,9 +13,6 @@ namespace Gbmono.Api.Admin.Models
         public int BrandId { get; set; }
         public string BrandName { get; set; }
 
-        //public int CountryId { get; set; }
-        //public string CountryName { get; set; }
-
         // 名称
         public string PrimaryName { get; set; }
         
@@ -38,5 +35,12 @@ namespace Gbmono.Api.Admin.Models
 
         // 商品下货架日期
         public DateTime? ExpiryDate { get; set; }
+    }
+
+    public class ProductSearchModel
+    {
+        public string BarCode { get; set; }
+
+        public string FullProductCode { get; set; }
     }
 }

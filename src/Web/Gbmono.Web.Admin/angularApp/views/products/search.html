@@ -32,13 +32,13 @@
                     <div class="widget-main padding-18 no-padding-left no-padding-right">
                         <div class="row">
                             <div class="col-md-3 col-xs-12">
-                                <select class="form-control">
-                                    <option>条形码</option>
-                                    <option>商品代码(10位)</option>
+                                <select class="form-control" ng-model="search.type">
+                                    <option value="1">条形码</option>
+                                    <option value="2">商品代码(10位)</option>
                                 </select>
                             </div>
                             <div class="col-md-3 col-xs-12">
-                                <input type="text" class="form-control"/>
+                                <input type="text" class="form-control" ng-model="search.value"/>
                             </div>
 
                             <div class="col-md-3 col-xs-12">

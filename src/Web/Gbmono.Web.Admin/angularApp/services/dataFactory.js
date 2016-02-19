@@ -54,6 +54,7 @@
         return {
             getById: getById,
             getByCategory: getByCategory,
+            search: search,
             create: create,
             update: update
         };
@@ -64,6 +65,10 @@
 
         function getByCategory(categoryId) {
             return $http.get(gbmono.api_site_prefix.product_api_url + '/Categories/' + categoryId);
+        }
+
+        function search(model) {
+            return $http.post(gbmono.api_site_prefix.product_api_url + '/Search', model);
         }
 
         function create(product) {
