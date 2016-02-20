@@ -307,7 +307,7 @@
                                 <div class="col-sm-9">
                                     <select class="form-control" 
                                             ng-model="selectedImgTypeId"
-                                            ng-change="imageTypeChanged()">
+                                            ng-change="imgTypeChanged()">
                                         <option value="1">商品图片</option>
                                         <option value="2">介绍图片</option>
                                         <option value="3">使用说明图片</option>
@@ -319,13 +319,14 @@
                                 <label class="col-sm-3 control-label no-padding-right"> 上传图片</label>
 
                                 <div class="col-md-9">
-                                    <input name="files"
+                                    <input name="files" id="files"
                                            type="file"
                                            kendo-upload
                                            k-async="{ saveUrl: fileUploadUrl, autoUpload: true,withCredentials:false }"
                                            k-select="onSelect"
                                            k-error="onError"
-                                           k-success="onSuccess" 
+                                           k-success="onSuccess"
+                                           
                                            k-multiple="false" />
                                 </div>
                             </div>

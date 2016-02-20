@@ -176,9 +176,8 @@
 
         // event handlers
         // image type changed
-        $scope.imageTypeChanged = function () {
-            // rebuild the file upload url when img type changed
-            $scope.fileUploadUrl = gbmono.api_site_prefix.product_image_api_url + '/Upload/' + productId + "/" + $scope.selectedImgTypeId;
+        $scope.imgTypeChanged = function () {
+            $("#files").data("kendoUpload").options.async.saveUrl = gbmono.api_site_prefix.product_image_api_url + '/Upload/' + productId + "/" + $scope.selectedImgTypeId;
         };
 
         // check file extension. only jpg, png allowed

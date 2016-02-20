@@ -73,6 +73,11 @@
             getThirdCates($scope.selectedSecondCateId);
         };
 
+        // update the saveUrl when img type is changed
+        $scope.imgTypeChanged = function () {
+            $("#files").data("kendoUpload").options.async.saveUrl = gbmono.api_site_prefix.product_image_api_url + '/Upload/' + productId + "/" + $scope.selectedImgTypeId;
+        };
+
         // file upload on select, check file extension. only jpg, png allowed
         $scope.onSelect = function (e) {
             $.each(e.files, function (index, value) {
