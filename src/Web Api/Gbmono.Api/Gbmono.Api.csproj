@@ -153,19 +153,17 @@
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
-    <Compile Include="Controllers\FollowOptionsController.cs" />
-    <Compile Include="Controllers\ManufacturersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\RetailersController.cs" />
     <Compile Include="ExceptionHandling\GenericExceptionHandler.cs" />
     <Compile Include="ExceptionHandling\GenericExceptionLogger.cs" />
+    <Compile Include="Extensions\ProductExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HttpResults\DataInvalidResult.cs" />
     <Compile Include="HttpResults\InternalServerErrorPlainTextResult.cs" />
-    <Compile Include="Models\ModelExtensions.cs" />
-    <Compile Include="Models\ProductModels.cs" />
+    <Compile Include="Models\Products.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\ApplicationOAuthProvider.cs" />

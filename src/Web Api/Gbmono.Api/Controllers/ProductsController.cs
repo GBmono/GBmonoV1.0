@@ -10,6 +10,7 @@ using System.Web.Http;
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Models;
+using Gbmono.Api.Extensions;
 
 namespace Gbmono.Api.Controllers
 {
@@ -18,86 +19,62 @@ namespace Gbmono.Api.Controllers
     {
         private readonly RepositoryManager _repositoryManager;
 
-
+        // ctor
         public ProductsController() 
         {
             _repositoryManager = new RepositoryManager();
 
         }
-        
-        // get product by id
-        public async Task<ProductSimpleModel> GetById(int id)
-        {
-            return await Task.Run(() =>
-            {
-                var product = _repositoryManager.ProductRepository.Table
-                                                                  .Include(m => m.Country)
-                                                                  .Include(m => m.Brand)
-                                                                  .SingleOrDefault(f => f.ProductId == id);
-                if (product != null)
-                {
-                    var model = product.ToSimpleModel();
-                    // model.Categories = _categoryService.GetProductCategoryList(product.CategoryId);
-                    return model;
-                }
-
-                return null;
-            });
-        }
-
-        public async Task<IEnumerable<ProductSimpleModel>> GetAll()
-        {
-            var productList  = await _repositoryManager.ProductRepository.Table
-                                                       .Include(m => m.Brand)
-                                                       .Take(20)
-                                                       .ToListAsync();
-
-            if (productList != null && productList.Count > 0)
-            {
-                var models = productList.Select(m => m.ToSimpleModel()).ToList();
-                return models;
-            }
-
-            return null;
-
-            // pls remove Task.Run method
-            // use .ToListAsync() or GetAsync() method instead
-
-            //return await Task.Run(() =>
-            //{
-            //    var productList = _repositoryManager.ProductRepository.Table
-            //                                                    .Include(m => m.Brand)
-            //                                                    .Include(m => m.Retailers)
-            //                                                    .Take(20).ToList();
-            //    if (productList != null && productList.Count > 0)
-            //    {
-            //        var models = productList.Select(m => m.ToSimpleModel()).ToList();
-            //        return models;
-            //    }
-            //    return null;
-            //});
-        }
 
         [Route("Categories/{categoryId}")]
         public async Task<IEnumerable<ProductSimpleModel>> GetByCategory(int categoryId)
         {
-            return await Task.Run(() =>
-            {
-                var subCategories = _repositoryManager.CategoryRepository.Table.Where(f => f.ParentId == categoryId).Select(s => s.CategoryId).ToList();
-                var productList = _repositoryManager.ProductRepository.Table
-                                    .Include(m => m.Brand)
-                                    .Where(m => subCategories.Contains(m.CategoryId))
-                                    .OrderBy(m => m.PrimaryName)
-                                    .Take(20)
-                                    .ToList();
-                if (productList != null && productList.Count > 0)
-                {
-                    var models = productList.Select(m => m.ToSimpleModel()).ToList();
-                    return models;
-                }
-                return new List<ProductSimpleModel>();
+            // as we have 3 defined categories in gbmono
+            // determine category level before retreiving products
+            var category = _repositoryManager.CategoryRepository.Get(categoryId);
 
-            });
+            if (category == null)
+            {
+                // todo: return empty product list
+            }
+            IList<Product> products = null;
+
+            // top level
+            if (category.ParentId == null)
+            {
+                products =  await _repositoryManager.ProductRepository
+                                                    .Table
+                                                    .Include(m => m.Brand)
+                                                    .Include(m => m.Category.ParentCategory)
+                                                    .Where(m => m.Category.ParentCategory.ParentId == categoryId)
+                                                    .ToListAsync();
+                // return simplified models
+                return products.Select(m => m.ToSimpleModel());
+                                               
+            }
+
+            // third level
+            // when the current category id is a non-parent id
+            if (!_repositoryManager.CategoryRepository.Table.Any(m => m.ParentId == categoryId))
+            {
+                products = await _repositoryManager.ProductRepository
+                                                    .Table
+                                                    .Include(m => m.Brand)
+                                                    .Where(m => m.CategoryId == categoryId)                                               
+                                                    .ToListAsync();
+
+                return products.Select(m => m.ToSimpleModel());
+            }
+
+            // second level
+            products = await _repositoryManager.ProductRepository
+                                                .Table
+                                                .Include(m => m.Brand)
+                                                .Include(m => m.Category)
+                                                .Where(m => m.Category.ParentId == categoryId)
+                                                .ToListAsync();
+
+            return products.Select(m => m.ToSimpleModel());
         }
 
 
@@ -107,17 +84,6 @@ namespace Gbmono.Api.Controllers
             return _repositoryManager.ProductRepository
                                      .Table
                                      .SingleOrDefault(m => m.BarCode == code);
-        }
-
-        [Route("Recommends")]
-        public IEnumerable<Product> GetRecommendedProducts()
-        {
-            return _repositoryManager.ProductRepository
-                                     .Table
-                                     .Include(m => m.Brand) // 读取对应品牌和品牌商
-                                     .OrderBy(m => m.ProductCode)
-                                     .ToList();
-                                     
         }
 
     }
