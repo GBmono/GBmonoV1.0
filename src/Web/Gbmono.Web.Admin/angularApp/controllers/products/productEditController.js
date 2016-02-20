@@ -52,15 +52,22 @@
         $scope.imgUrl = gbmono.img_root_path;
         // product images
         $scope.images = [];
+        // image type
+        $scope.selectedImgTypeId = "1";
+
+        // retreive product id from routeparams
+        var productId = $routeParams.id ? parseInt($routeParams.id) : 0;
 
         init();
 
         /* event handlers from view */
+        // top cate changed
         $scope.topCateChanged = function () {
             // reload second cates and third cates
             getSecondCates($scope.selectedTopCateId);
         };
 
+        // second cate changed
         $scope.secondCateChanged = function () {
             // reload third cates
             getThirdCates($scope.selectedSecondCateId);
@@ -83,19 +90,12 @@
             getImages($scope.editProduct.productId);
         };
 
-        // product update 
-        $scope.update = function () {
-            update($scope.editProduct);
-        };
-
         // page init
         init();
 
         function init() {
-            // retreive product id from routeparams
-            var productId = $routeParams.id ? parseInt($routeParams.id) : 0;
             // image upload target url
-            $scope.fileUploadUrl = gbmono.api_site_prefix.product_image_api_url + '/Upload/' + productId;
+            $scope.fileUploadUrl = gbmono.api_site_prefix.product_image_api_url + '/Upload/' + productId + "/" + $scope.selectedImgTypeId;
             
             // get product
             getProduct(productId);

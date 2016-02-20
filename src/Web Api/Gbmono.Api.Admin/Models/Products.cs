@@ -2,6 +2,9 @@
 
 namespace Gbmono.Api.Admin.Models
 {
+    /// <summary>
+    ///  product grid binding model
+    /// </summary>
     public class ProductSimpleModel
     {
         public int ProductId { get; set; }
@@ -37,10 +40,25 @@ namespace Gbmono.Api.Admin.Models
         public DateTime? ExpiryDate { get; set; }
     }
 
+    /// <summary>
+    /// product search model
+    /// </summary>
     public class ProductSearchModel
     {
         public string BarCode { get; set; }
 
         public string FullProductCode { get; set; }
+    }
+
+    /// <summary>
+    /// product image upload model
+    /// </summary>
+    public class ProductImageUploadModel
+    {
+        public int ProductId { get; set; }
+
+        public short ProductImageTypeId { get; set; }
+
+        public string ImageName { get; set; }
     }
 }

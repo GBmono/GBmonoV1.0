@@ -159,8 +159,8 @@ namespace Gbmono.Utils.ProductDataImporter
 
             //下架时间
             var expiryDateText = GetCellPathValue(wbPart, wsPart, "AL62").RemoveEmptyOrWrapCharacters().ToDBC();
-            //DateTime? expiryDate;
-            //if (!DateTime.TryParse(activationDateText, out expiryDate))
+            DateTime expiryDate;
+            //if (!DateTime.TryParse(expiryDateText, out expiryDate))
             //{
             //    expiryDate = null;
             //}
@@ -286,8 +286,6 @@ namespace Gbmono.Utils.ProductDataImporter
                 imageIndex++;
             }
         }
-
-
 
         static int GetBrandId(string brandName)
         {

@@ -171,8 +171,16 @@
 
         // product images
         $scope.images = [];
+        // image type
+        $scope.selectedImgTypeId = "1";
 
         // event handlers
+        // image type changed
+        $scope.imageTypeChanged = function () {
+            // rebuild the file upload url when img type changed
+            $scope.fileUploadUrl = gbmono.api_site_prefix.product_image_api_url + '/Upload/' + productId + "/" + $scope.selectedImgTypeId;
+        };
+
         // check file extension. only jpg, png allowed
         $scope.onSelect = function (e) {
             $.each(e.files, function (index, value) {

@@ -305,7 +305,9 @@
                                 <label class="col-sm-3 control-label no-padding-right"> 图片类型</label>
 
                                 <div class="col-sm-9">
-                                    <select class="form-control">
+                                    <select class="form-control" 
+                                            ng-model="selectedImgTypeId"
+                                            ng-change="imageTypeChanged()">
                                         <option value="1">商品图片</option>
                                         <option value="2">介绍图片</option>
                                         <option value="3">使用说明图片</option>
@@ -323,7 +325,7 @@
                                            k-async="{ saveUrl: fileUploadUrl, autoUpload: true,withCredentials:false }"
                                            k-select="onSelect"
                                            k-error="onError"
-                                           k-success="onSuccess"
+                                           k-success="onSuccess" 
                                            k-multiple="false" />
                                 </div>
                             </div>
@@ -335,7 +337,7 @@
 
                                     <li ng-repeat="img in images">
                                         <a href="" data-rel="colorbox">
-                                            <img style="height:150px;" ng-src="{{imgUrl}}/{{img.fileName}}" />
+                                            <img style="height:150px; width:150px;" ng-src="{{imgUrl}}/{{img.fileName}}" />
                                             <div class="text">
                                                 <div class="inner">{{ img.name }}</div>
                                             </div>

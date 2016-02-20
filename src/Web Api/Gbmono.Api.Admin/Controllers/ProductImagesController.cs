@@ -28,9 +28,9 @@ namespace Gbmono.Api.Admin.Controllers
         }
         #endregion
 
-        [Route("Upload/{productId}")]
+        [Route("Upload/{productId}/{imageTypeId}")]
         [HttpPost]
-        public async Task<IHttpActionResult> UploadImage(int productId)
+        public async Task<IHttpActionResult> UploadImage(int productId, short imageTypeId)
         {
             // Check if the request contains multipart/form-data.
             if (!Request.Content.IsMimeMultipartContent())
@@ -78,7 +78,7 @@ namespace Gbmono.Api.Admin.Controllers
             {
                 ProductId = productId,
                 FileName = newFileName,
-                ProductImageTypeId = (int)ProductImageType.Product // todo:                
+                ProductImageTypeId = imageTypeId // todo:                
             };
 
             _repositoryManager.ProductImageRepository.Create(newProductImage);
