@@ -61,6 +61,10 @@ namespace Gbmono.Utils.ProductDataImporter
 
         }
 
+        /// <summary>
+        /// load excel file
+        /// </summary>
+        /// <param name="file"></param>
         static void Load(FileInfo file)
         {
             using (SpreadsheetDocument document = SpreadsheetDocument.Open(file.FullName, false))
