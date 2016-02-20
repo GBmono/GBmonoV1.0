@@ -24,21 +24,21 @@ namespace Gbmono.Api.Controllers
         }
         #endregion
 
-        public IEnumerable<Manufacturer> GetAll()
-        {
-            return _repositoryManager.ManufacturerRepository.Table.OrderBy(m => m.Name).ToList();
-        }
+        //public IEnumerable<Manufacturer> GetAll()
+        //{
+        //    return _repositoryManager.ManufacturerRepository.Table.OrderBy(m => m.Name).ToList();
+        //}
 
-        public Manufacturer GetById(int id)
-        {
-            // return _repositoryManager.ManufacturerRepository.Get(id);
+        //public Manufacturer GetById(int id)
+        //{
+        //    // return _repositoryManager.ManufacturerRepository.Get(id);
 
-            // load manufacturer entity with all the related brands data
-            return _repositoryManager.ManufacturerRepository
-                                     .Table
-                                     .Include(m => m.Brands)
-                                     .SingleOrDefault(m => m.ManufacturerId == id);
-        }
+        //    // load manufacturer entity with all the related brands data
+        //    return _repositoryManager.ManufacturerRepository
+        //                             .Table
+        //                             .Include(m => m.Brands)
+        //                             .SingleOrDefault(m => m.ManufacturerId == id);
+        //}
 
     }
 }
