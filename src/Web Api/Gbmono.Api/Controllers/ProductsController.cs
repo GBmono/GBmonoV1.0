@@ -37,6 +37,7 @@ namespace Gbmono.Api.Controllers
                 // return first pagesize of products
                 products = await _repositoryManager.ProductRepository
                                                    .Table
+                                                   .Include(m => m.Brand) // include brand table
                                                    .Where(m => (m.ActivationDate <= DateTime.Today &&
                                                                (m.ExpiryDate >= DateTime.Today || m.ExpiryDate == null)))
                                                    .OrderByDescending(m => m.ActivationDate)
@@ -48,10 +49,11 @@ namespace Gbmono.Api.Controllers
             }
 
             // if page index is lager than 1
-            var startIndex = (pageSize.Value - 1) * pageSize.Value;
+            var startIndex = (pageIndex.Value - 1) * pageSize.Value;
 
             products = await _repositoryManager.ProductRepository
                                                 .Table
+                                                .Include(m => m.Brand) // include brand table
                                                 .Where(m => (m.ActivationDate <= DateTime.Today &&
                                                             (m.ExpiryDate >= DateTime.Today || m.ExpiryDate == null)))
                                                 .OrderByDescending(m => m.ActivationDate)

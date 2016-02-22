@@ -45,69 +45,6 @@
     }
 })(angular.module('gbmono'));
 
-/*
- user action factory
-*/
-(function (module) {
-    factory.$inject = ['$http'];
-    module.factory('userActionFactory', factory);
-    function factory($http) {
-        return {
-            follow: follow,
-        }
-
-        function follow(model) {
-            return $http.post(gbmono.api_site_prefix.follow_options_url + '/follow', model);
-        }
-    }
-})(angular.module('gbmono'));
-
-
-/*
- profile data factory
-*/
-(function (module) {
-    // inject params
-    factory.$inject = ['$http'];
-
-    // create instance
-    module.factory('profileDataFactory', factory);
-
-    // factory implement
-    function factory($http) {
-        // return data factory with CRUD calls
-        return {
-            get: get,
-            update: update,
-            getFollowProducts: getFollowProducts,
-            getFavoriteProducts: getFavoriteProducts,
-            getFollowBrands: getFollowBrands
-        }
-
-        //Get my profile 
-        function get() {
-            return $http.get(gbmono.api_site_prefix.profile_api_url);
-        }
-        //Update my profile 
-        function update(model) {
-            return $http.put(gbmono.api_site_prefix.profile_api_url, model);
-        }
-
-        function getFollowProducts() {
-            return $http.get(gbmono.api_site_prefix.profile_api_url + "/GetFollowProducts");
-        }
-
-        function getFavoriteProducts() {
-            return $http.get(gbmono.api_site_prefix.profile_api_url + "/GetFavoriteProducts");
-        }
-
-        function getFollowBrands() {
-            return $http.get(gbmono.api_site_prefix.profile_api_url + "/GetFollowBrands");
-        }
-
-    }
-})(angular.module('gbmono'));
-
 
 /*
     category data factory
@@ -137,9 +74,6 @@
     }
 
 })(angular.module('gbmono'));
-
-
-
 
 
 /*
@@ -178,7 +112,6 @@
 
 })(angular.module('gbmono'));
 
-
 /*
     brand data factory
 */
@@ -195,10 +128,7 @@
         // return data factory with CRUD calls
         return {
             getAll: getAll,
-            getById: getById,
-            create: create,
-            update: update,
-            del: del
+            getById: getById
         };
 
         function getAll() {
@@ -209,72 +139,9 @@
             return $http.get(gbmono.api_site_prefix.brand_api_url + '/' + id);
         }
 
-        function create(brand) {
-            return $http.post(gbmono.api_site_prefix.brand_api_url, brand);
-        }
-
-        function update(brand) {
-            return $http.put(gbmono.api_site_prefix.brand_api_url + '/' + brand.brandId, brand);
-        }
-
-        function del(id) {
-            return $http.delete(gbmono.api_site_prefix.brand_api_url + '/' + id);
-        }
     }
 
 })(angular.module('gbmono'));
 
-/*
-    banner data factory
-*/
-(function (module) {
-    // inject params
-    factory.$inject = ['$http'];
-
-    // create instance
-    module.factory('bannerDataFactory', factory);
-
-    // factory implement
-    function factory($http) {
-
-        // return data factory with CRUD calls
-        return {
-            getByProductId: getByProductId,
-        };
-
-        function getByProductId(productId) {
-            return $http.get(gbmono.api_site_prefix.banner_api_url + '/Products/' + productId);
-        }
-
-    }
-
-})(angular.module('gbmono'));
-
-
-
-/*
-    retail data factory
-*/
-(function (module) {
-    // inject params
-    factory.$inject = ['$http'];
-
-    // create instance
-    module.factory('retailerDataFactory', factory);
-
-    // factory implement
-    function factory($http) {
-
-        // return data factory with CRUD calls
-        return {
-            getAll: getAll
-        };
-
-        function getAll() {
-            return $http.get(gbmono.api_site_prefix.retail_api_url);
-        }
-    }
-
-})(angular.module('gbmono'));
 
 
