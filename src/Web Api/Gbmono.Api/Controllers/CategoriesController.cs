@@ -25,33 +25,14 @@ namespace Gbmono.Api.Controllers
         }
         #endregion
 
-        public IEnumerable<Category> GetAll()
+        [Route("Top")]
+        public async Task<IEnumerable<Category>> GetTopCategories()
         {
-            var categories = _repositoryManager.CategoryRepository.Table.ToList();
-
-            // level 1 categories
-            var topCategories = categories.Where(m => m.ParentId == null);
-            // level 2 categories
-            foreach (var topCate in topCategories)
-            {
-                // level 2
-                var subcategories = categories.Where(m => m.ParentId == topCate.CategoryId);
-
-                // attach level 2 categories into top categories
-                topCate.SubCategories = subcategories;
-
-                // level 3 categories
-                foreach (var subCate in subcategories)
-                {
-                    // level 3
-                    var cates = categories.Where(m => m.ParentId == subCate.CategoryId);
-
-                    // attch
-                    subCate.SubCategories = cates;
-                }
-            }
-
-            return topCategories;
+            return await _repositoryManager.CategoryRepository
+                                           .Table
+                                           .Where(m => m.ParentId == null)
+                                           .OrderBy(m => m.CategoryCode)
+                                           .ToListAsync();
         }
 
     }

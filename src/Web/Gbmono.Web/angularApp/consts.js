@@ -32,18 +32,10 @@
         brand_api_url: gbmono.web_api_app_name + '/Brands',
         // profile url
         profile_api_url: gbmono.web_api_app_name + '/Profiles',
-        // follow options url
-        follow_options_url: gbmono.web_api_app_name + '/FollowOptions',
         // banner url
         banner_api_url: gbmono.web_api_app_name + '/Banners',
         // retail url
         retail_api_url: gbmono.web_api_app_name + '/Retailers'
     };
-
-    gbmono.follow_type= {
-        followProduct : 1, //关注的商品
-        followBrand : 2,   //关注的品牌
-        favoriteProduct : 3  //收藏夹商品
-    }
 
 })(window.gbmono = window.gbmono || {});
