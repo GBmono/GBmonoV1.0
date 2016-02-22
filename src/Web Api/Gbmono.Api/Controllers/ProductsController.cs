@@ -26,6 +26,43 @@ namespace Gbmono.Api.Controllers
 
         }
 
+
+        [Route("{pageIndex:int?}/{pageSize:int?}")] 
+        public async Task<IEnumerable<ProductSimpleModel>> Get(int? pageIndex = 1, int? pageSize = 10)
+        {
+            IList<Product> products;
+            // first page
+            if(pageIndex == 1)
+            {
+                // return first pagesize of products
+                products = await _repositoryManager.ProductRepository
+                                                   .Table
+                                                   .Where(m => (m.ActivationDate <= DateTime.Today &&
+                                                               (m.ExpiryDate >= DateTime.Today || m.ExpiryDate == null)))
+                                                   .OrderByDescending(m => m.ActivationDate)
+                                                   .Take(pageSize.Value)
+                                                   .ToListAsync();
+
+                // convert into simplified model
+                return products.Select(m => m.ToSimpleModel());
+            }
+
+            // if page index is lager than 1
+            var startIndex = (pageSize.Value - 1) * pageSize.Value;
+
+            products = await _repositoryManager.ProductRepository
+                                                .Table
+                                                .Where(m => (m.ActivationDate <= DateTime.Today &&
+                                                            (m.ExpiryDate >= DateTime.Today || m.ExpiryDate == null)))
+                                                .OrderByDescending(m => m.ActivationDate)
+                                                .Skip(startIndex)
+                                                .Take(pageSize.Value)
+                                                .ToListAsync();
+
+            // convert into simplified model
+            return products.Select(m => m.ToSimpleModel());                                    
+        }
+
         [Route("Categories/{categoryId}")]
         public async Task<IEnumerable<ProductSimpleModel>> GetByCategory(int categoryId)
         {
