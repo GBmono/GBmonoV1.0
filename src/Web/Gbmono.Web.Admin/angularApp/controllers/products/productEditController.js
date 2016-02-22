@@ -95,6 +95,11 @@
             getImages($scope.editProduct.productId);
         };
 
+        // remove product image
+        $scope.delete = function (id) {
+            removeImage(id);
+        };
+
         // page init
         init();
 
@@ -189,6 +194,20 @@
                     pluginService.notify(error, 'error')
                 });
         }
-  
+        
+        function removeImage(id) {
+            // warning text
+            var r = confirm(gbmono.notification.delText);
+            if (r) {
+                productImageDataFactory.remove(id)
+                    .success(function () {
+                        // reload images
+                        getImages($scope.editProduct.productId);
+                    })
+                    .error(function (error) {
+                        pluginService.notify(error, 'error')
+                    });
+            }
+        }
     }
 })(angular.module('gbmono'));

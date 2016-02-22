@@ -32,4 +32,10 @@
         brand_api_url: gbmono.web_api_app_name + '/Brands',
     };
 
+    // notification plain text
+    gbmono.notification = {
+        delText: "Are you sure to delete ?",
+        saveText : "Are you sure to save the changes ?"
+    };
+
 })(window.gbmono = window.gbmono || {});

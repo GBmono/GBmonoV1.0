@@ -20,14 +20,29 @@ namespace Gbmono.Api.Admin.Controllers
     public class ProductImagesController : ApiController
     {
         private readonly RepositoryManager _repositoryManager;
+        private readonly string _productImageSaveFolder;
 
         #region ctor
         public ProductImagesController()
         {
             _repositoryManager = new RepositoryManager();
+            _productImageSaveFolder = AppDomain.CurrentDomain.BaseDirectory + "\\Files\\Products";
         }
         #endregion
 
+        // get product images by product id
+        [Route("Products/{productId}")]
+        public IEnumerable<ProductImage> Get(int productId)
+        {
+            return _repositoryManager.ProductImageRepository
+                                           .Table
+                                           .Where(m => m.ProductId == productId)
+                                           .OrderBy(m => m.FileName)
+                                           .ToList();
+
+        }
+
+        // upload image and create new ProductImage record
         [Route("Upload/{productId}/{imageTypeId}")]
         [HttpPost]
         public async Task<IHttpActionResult> UploadImage(int productId, short imageTypeId)
@@ -43,8 +58,8 @@ namespace Gbmono.Api.Admin.Controllers
             }
 
             // upload file root path
-            var root = AppDomain.CurrentDomain.BaseDirectory +  "\\Files\\Products";
-            var provider = new MultipartFormDataStreamProvider(root);
+            // var root = AppDomain.CurrentDomain.BaseDirectory +  "\\Files\\Products";
+            var provider = new MultipartFormDataStreamProvider(_productImageSaveFolder);
 
             // Read the form data
             await Request.Content.ReadAsMultipartAsync(provider);
@@ -68,7 +83,7 @@ namespace Gbmono.Api.Admin.Controllers
             var newFileName = GenerateImageFileName(productId) + Path.GetExtension(originalFileName);
 
             // todo: then we can rename the file into the originalfile name
-            File.Copy(file.LocalFileName, Path.Combine(root, newFileName), true);
+            File.Copy(file.LocalFileName, Path.Combine(_productImageSaveFolder, newFileName), true);
 
             // delete the curent file
             File.Delete(file.LocalFileName);
@@ -87,17 +102,21 @@ namespace Gbmono.Api.Admin.Controllers
             return Ok();
         }
 
-        [Route("Products/{productId}")]
-        public IEnumerable<ProductImage> Get(int productId)
+        // remove product image and delete record from db
+        [HttpDelete]
+        public async Task<IHttpActionResult> Delete(int id)
         {
-            return  _repositoryManager.ProductImageRepository
-                                           .Table
-                                           .Where(m => m.ProductId == productId)
-                                           .OrderBy(m => m.FileName)
-                                           .ToList();
+            var entityToDelete = await _repositoryManager.ProductImageRepository.GetAsync(id);
 
+            // delete file
+            File.Delete(Path.Combine(_productImageSaveFolder, entityToDelete.FileName));
+
+            // delete recornd form db
+            _repositoryManager.ProductImageRepository.Delete(entityToDelete);
+            _repositoryManager.ProductImageRepository.Save();
+
+            return Ok();
         }
-
 
         /// <summary>
         /// get the deserialized file name (oringinal file name) from the upload file data

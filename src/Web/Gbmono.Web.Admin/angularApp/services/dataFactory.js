@@ -97,16 +97,19 @@
     function factory($http) {
         // return data factory with CRUD calls
         return {
-            getByProduct:getByProduct
+            getByProduct: getByProduct,
+            remove : remove
         };
 
         function getByProduct(productId) {
             return $http.get(gbmono.api_site_prefix.product_image_api_url + "/Products/" + productId);
         }
 
-
+        function remove(id) {
+            return $http.delete(gbmono.api_site_prefix.product_image_api_url + '/' + id);
+        }
     }
-
+            
 })(angular.module('gbmono'));
 
 
