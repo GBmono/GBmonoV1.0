@@ -48,7 +48,6 @@ namespace Gbmono.Api.Admin.Controllers
                                      .Where(m => m.ParentId == id).OrderBy(m => m.CategoryCode).ToList();
         }
 
-
         #region category tree
         [Route("Treeview/{id:int?}")]
         public IEnumerable<KendoTreeViewItem> GetCategories(int? id = null)
@@ -70,5 +69,6 @@ namespace Gbmono.Api.Admin.Controllers
                                      .ToList();
         }
         #endregion
+
     }
 }

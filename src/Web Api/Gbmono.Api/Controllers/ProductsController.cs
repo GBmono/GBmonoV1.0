@@ -84,7 +84,8 @@ namespace Gbmono.Api.Controllers
                 products =  await _repositoryManager.ProductRepository
                                                     .Table
                                                     .Include(m => m.Brand)
-                                                    .Include(m => m.Category.ParentCategory)
+                                                    .Include(m => m.Category.ParentCategory) // three level categories
+                                                    .Include(m => m.Images) // include product images
                                                     .Where(m => m.Category.ParentCategory.ParentId == categoryId)
                                                     .ToListAsync();
                 // return simplified models

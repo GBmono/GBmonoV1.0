@@ -32,11 +32,6 @@
                     controller: 'homeController',
                     caseInsensitiveMatch: true
                 })
-                .when('/products', { // 商品列表页
-                    templateUrl: gbmono.app_view_path + '/products/list.html',
-                    controller: 'productListController',
-                    caseInsensitiveMatch: true
-                })
                 .when('/products/:id', { // 商品详细页
                     templateUrl: gbmono.app_view_path + '/products/detail.html',
                     controller: 'productDetailController',

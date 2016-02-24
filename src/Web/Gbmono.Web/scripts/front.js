@@ -4,7 +4,7 @@ if ($.cookie("theme_csspath")) {
 
 $(function () {
 
-    sliderHomepage();
+    // sliderHomepage();
     fullScreenContainer();
     productDetailGallery(4000);
     productQuickViewGallery();

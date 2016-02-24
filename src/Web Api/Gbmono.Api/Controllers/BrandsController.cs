@@ -34,37 +34,6 @@ namespace Gbmono.Api.Controllers
             return _repositoryManager.BrandRepository.Get(id);
         }
 
-        [HttpPost]
-        public IHttpActionResult Create([FromBody] Brand brand)
-        {
-            // todo: validation
 
-            _repositoryManager.BrandRepository.Create(brand);
-            _repositoryManager.BrandRepository.Save();
-
-            return Ok();
-        }
-
-        [HttpPut]
-        public IHttpActionResult Update(int id, [FromBody] Brand brand)
-        {
-            _repositoryManager.BrandRepository.Update(brand);
-            _repositoryManager.BrandRepository.Save();
-
-            return Ok();
-        }
-
-        [HttpDelete]
-        public IHttpActionResult Delete(int id)
-        {
-            // todo delete related records
-
-            var entityToDel = _repositoryManager.BrandRepository.Get(id);
-
-            _repositoryManager.BrandRepository.Delete(entityToDel);
-            _repositoryManager.BrandRepository.Save();
-
-            return Ok();
-        }
     }
 }

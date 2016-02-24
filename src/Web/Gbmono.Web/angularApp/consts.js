@@ -10,8 +10,8 @@
     /* angularJs app view root path */
     gbmono.app_view_path = '/angularApp/views';
 
-    /* img root path */
-    // gbmono.img_root_path = gbmono.APP_NAME + '/Content/img';
+    /* product image root path */
+    gbmono.img_root_path = 'http://localhost:2232/Files/Products/'
 
     /* gbmono bearer token key name */
     gbmono.LOCAL_STORAGE_TOKEN_KEY = 'gbmono_BEARER_TOKEN'; // localstorage token key name

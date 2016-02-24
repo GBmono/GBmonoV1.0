@@ -1,0 +1,209 @@
+﻿<div id="all">
+    <!-- content area -->
+    <div id="content">
+        <div class="container">
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+                    <li>
+                        <a ng-href="#">主页</a>
+                    </li>
+                    <li>产品目录</li>
+                </ul>
+                <div class="row">
+                    <div class="box text-center">
+                        <div class="row">
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <h1>{{ currentCategory.name }}</h1>
+                                <p class="text-muted">关于这个产品目录的一些基本介绍和描述 | 或者可以显示这个品类的品牌商广告</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <!-- *** LEFT COLUMN ***
+        _________________________________________________________ -->
+
+                <div class="col-sm-9">
+                   <!-- <div class="row" style="margin-bottom:10px;">
+                        <div class="col-md-2 col-xs-4">
+                            <a href="#">分类</a>
+                        </div>
+                        <div class="col-md-10 col-xs-8">
+                            <a href="#" style="margin-right:25px;color:black;">美容</a>
+                            <a href="#" style="margin-right:25px;color:black;">皮肤护理</a>
+                            <a href="#" style="margin-right:25px;color:black;">打的</a>
+                            <a href="#" style="margin-right:25px;color:black;">防嗮</a>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom:10px;">
+                        <div class="col-md-2 col-xs-4">
+                            <a href="#">品牌</a>
+                        </div>
+                        <div class="col-md-10 col-xs-8">
+                            <a href="#" style="margin-right:25px;color:black;">资生堂</a>
+                            <a href="#" style="margin-right:25px;color:black;">碧柔</a>
+                            <a href="#" style="margin-right:25px;color:black;">花王</a>
+                            <a href="#" style="margin-right:25px;color:black;">小林制药</a>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom:10px;">
+                        <div class="col-md-2 col-xs-4">
+                            <a href="#">购入渠道</a>
+                        </div>
+                        <div class="col-md-10 col-xs-8">
+                            <a href="#" style="margin-right:25px; color:black;">日本境内实体店</a>
+                            <a href="#" style="margin-right:25px; color:black;">日本境内网店</a>
+                            <a href="#" style="margin-right:25px; color:black;">跨境通网店</a>
+                        </div>
+                    </div>-->
+                    <div class="box info-bar no-border">
+                        <!--<div class="row">
+                            <div class="col-sm-12 col-md-4 products-showing">
+                              
+                            </div>
+
+                            <div class="col-sm-12 col-md-8  products-number-sort">
+                                <div class="row">
+                                    <form class="form-inline">
+                                        <div class="col-md-6 col-sm-6">
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="products-sort-by">
+                                                <strong>排序</strong>
+                                                <select name="sort-by" class="form-control">
+                                                    <option>价格</option>
+                                                    <option>名称</option>
+                                                    <option>销量</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+
+                    <div class="row products">
+                        <div class="col-md-4 col-sm-6" 
+                             ng-repeat="product in products">
+                            <div class="product">
+                                <div class="image">
+                                    <a ng-href="#/products/{{product.productId}}">
+                                        <img ng-src="{{imgRoot + product.imgUrl}}" alt="" class="img-responsive image1">
+                                    </a>
+                                    <div class="quick-view-button">
+                                        <a href="detail.html" class="btn btn-default btn-sm">详细信息</a>
+                                    </div>
+                                </div>
+                                <!-- /.image -->
+                                <div class="text">
+                                    <h3><a ng-href="#/products/{{product.productId}}">{{ product.brandName }}</a></h3>
+                                    <a ng-href="#/products/{{product.productId}}" title="{{ product.fullName }}">{{ product.shortName }}</a>
+                                    <p class="price">{{ product.price | currency:"¥"}}</p>
+                                </div>
+                                <!--<div class="">                                    
+                                    <p>
+                                        <a href="#" style="color:orange; font-size:13pt;"><i class="bigger-120 fa fa-star"></i></a>
+                                        <a href="#" style="color:deeppink;font-size:13pt;"><i class="fa fa-heart"></i></a>
+                                        <a href="#" style="color:green;font-size:13pt;"><i class="fa fa-share"></i></a>
+                                    </p>
+                                </div>-->
+                                <!-- /.text -->
+                                <!-- randon display labels -->
+                                <div class="ribbon new" ng-show="{{ product.productId % 3 == 0}}">
+                                    <div class="theribbon">促销</div>
+                                    <div class="ribbon-background"></div>
+                                </div>
+                                <!-- /.ribbon -->
+
+                                <!--<div class="ribbon sale">
+                                    <div class="theribbon">推荐</div>
+                                    <div class="ribbon-background"></div>
+                                </div>-->
+                            </div>
+                            <!-- /.product -->
+                        </div>                 
+                    </div>
+
+                    <div class="pages">
+                        <p class="loadMore">
+                            <a href="#" class="btn btn-primary"><i class="fa fa-chevron-down"></i> Load more</a>
+                        </p>             
+                    </div>
+                </div>
+                <!-- /.col-md-9 -->
+                <!-- *** LEFT COLUMN END *** -->
+                <!-- *** RIGHT COLUMN ***
+        _________________________________________________________ -->
+
+                <div class="col-sm-3">
+                    <!-- *** MENUS AND FILTERS ***
+            _________________________________________________________ -->
+                    <div class="panel panel-default sidebar-menu">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">产品类别</h3>
+                        </div>
+
+                        <div class="panel-body" style="max-height: 520px;overflow-y: scroll;">
+                            <ul class="nav nav-pills nav-stacked category-menu">
+                                <li ng-class="{'active' : cate.subCategories.length > 0 }" 
+                                    ng-repeat="cate in categories">
+                                    <a ng-href="#/categories/{{ cate.categoryId }}/products">{{ cate.name}} <!--<span class="badge pull-right">42</span>--></a>
+                                    <ul>
+                                        <li ng-repeat="sub in cate.subCategories">
+                                            <a href="category.html">{{ sub.name }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                品牌 
+                                <a class="btn btn-xs btn-danger pull-right" href="">
+                                    <i class="fa fa-times-circle"></i> <span class="hidden-sm">清除</span>
+                                </a>
+                            </h3>
+                        </div>
+
+                        <div class="panel-body">                         
+                            <div class="form-group">
+                                    <div class="checkbox" ng-repeat="brand in categoryBrands">
+                                        <label>
+                                            <input type="checkbox">{{ brand.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                            <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> 过滤</button>
+                        </div>
+                    </div>
+
+                    <!-- *** MENUS AND FILTERS END *** -->
+
+                    <div class="banner">
+                        <h4>此处可显示广告</h4>
+                        <!--<a href="category.html">
+                    <img src="img/banner.jpg" alt="sales 2014" class="img-responsive">
+                </a>-->
+                    </div>
+                    <!-- /.banner -->
+
+                </div>
+                <!-- /.col-md-3 -->
+                <!-- *** RIGHT COLUMN END *** -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

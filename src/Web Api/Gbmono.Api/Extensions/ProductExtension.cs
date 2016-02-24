@@ -16,10 +16,14 @@ namespace Gbmono.Api.Extensions
             {
                 ProductId = model.ProductId,
                 PrimaryName = model.PrimaryName,
+                SecondaryName = model.SecondaryName,
                 BrandId = model.BrandId,
                 BrandName = model.Brand.Name,
                 Price = model.Price,
-                Discount = model.Discount
+                Discount = model.Discount,
+                ImgUrl = model.Images.FirstOrDefault(s => s.ProductImageTypeId == (short)ProductImageType.Product) == null
+                         ? ""
+                         : model.Images.FirstOrDefault(s => s.ProductImageTypeId == (short)ProductImageType.Product).FileName
             };
         }
     }

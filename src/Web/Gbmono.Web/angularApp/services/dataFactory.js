@@ -60,11 +60,21 @@
     function factory($http) {
         // return data factory with CRUD calls
         return {
-            getTopCates: getTopCates
+            getAll: getAll,
+            getTopCates: getTopCates,
+            getBrands: getBrands
+        }
+
+        function getAll() {
+            return $http.get(gbmono.api_site_prefix.category_api_url);
         }
 
         function getTopCates() {
             return $http.get(gbmono.api_site_prefix.category_api_url + '/Top');
+        }
+
+        function getBrands(id) {
+            return $http.get(gbmono.api_site_prefix.category_api_url + '/' + id + '/Brands');
         }
     }
 
