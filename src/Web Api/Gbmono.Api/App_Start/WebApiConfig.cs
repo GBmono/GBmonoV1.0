@@ -34,7 +34,7 @@ namespace Gbmono.Api
             // There must be exactly one exception handler. (There is a default one that may be replaced.)
             // To make this sample easier to run in a browser, replace the default exception handler with one that sends
             // back text/plain content for all errors.
-            // config.Services.Replace(typeof(IExceptionHandler), new GenericExceptionHandler());
+            config.Services.Replace(typeof(IExceptionHandler), new GenericExceptionHandler());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

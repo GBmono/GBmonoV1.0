@@ -27,7 +27,7 @@ namespace Gbmono.Api.Controllers
         }
 
 
-        [Route("{pageIndex:int?}/{pageSize:int?}")] 
+        [Route("New/{pageIndex:int?}/{pageSize:int?}")] 
         public async Task<IEnumerable<ProductSimpleModel>> Get(int? pageIndex = 1, int? pageSize = 10)
         {
             IList<Product> products;
@@ -38,6 +38,7 @@ namespace Gbmono.Api.Controllers
                 products = await _repositoryManager.ProductRepository
                                                    .Table
                                                    .Include(m => m.Brand) // include brand table
+                                                   .Include(m => m.Images)
                                                    .Where(m => (m.ActivationDate <= DateTime.Today &&
                                                                (m.ExpiryDate >= DateTime.Today || m.ExpiryDate == null)))
                                                    .OrderByDescending(m => m.ActivationDate)
@@ -54,6 +55,7 @@ namespace Gbmono.Api.Controllers
             products = await _repositoryManager.ProductRepository
                                                 .Table
                                                 .Include(m => m.Brand) // include brand table
+                                                .Include(m => m.Images)
                                                 .Where(m => (m.ActivationDate <= DateTime.Today &&
                                                             (m.ExpiryDate >= DateTime.Today || m.ExpiryDate == null)))
                                                 .OrderByDescending(m => m.ActivationDate)

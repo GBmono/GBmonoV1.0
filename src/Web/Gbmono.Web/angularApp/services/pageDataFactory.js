@@ -12,12 +12,17 @@
 
         // return factory class
         return {
-            getMenuData: getMenuData,
+            getSilders: getSilders,
+            getNews: getNews,
             getFooterData: getFooterData
         }
 
-        function getMenuData() {
-            return $http.get(pageDataPath + '/menu.json');
+        function getSilders() {
+            return $http.get(pageDataPath + '/slider.json');
+        }
+
+        function getNews() {
+            return $http.get(pageDataPath + '/news.json');
         }
 
         function getFooterData() {

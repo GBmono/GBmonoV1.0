@@ -275,15 +275,15 @@ $(window).load(function () {
 });
 $(window).resize(function () {
 
-    newWindowWidth = $(window).width();
+    //newWindowWidth = $(window).width();
 
-    if (windowWidth !== newWindowWidth) {
-	setTimeout(function () {
-	    $(this).alignElementsSameHeight();
-	    fullScreenContainer();
-	    pictureZoom();
-	}, 100);
-	windowWidth = newWindowWidth;
-    }
+    //if (windowWidth !== newWindowWidth) {
+	//setTimeout(function () {
+	//    $(this).alignElementsSameHeight();
+	//    fullScreenContainer();
+	//    pictureZoom();
+	//}, 100);
+	//windowWidth = newWindowWidth;
+    //}
 
 });

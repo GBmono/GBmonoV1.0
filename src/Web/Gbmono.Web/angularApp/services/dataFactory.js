@@ -96,16 +96,17 @@
 
         // return data factory with CRUD calls
         return {
-            getAll: getAll,
+            getNewProducts: getNewProducts,
             getById: getById,
             getByCategory: getByCategory
         };
 
-        function getAll() {
-            return $http.get(gbmono.api_site_prefix.product_api_url);
+        function getNewProducts(pageIndex, pageSize) {
+            return $http.get(gbmono.api_site_prefix.product_api_url + '/New/' + pageIndex + '/' + pageSize);
         }
+
         function getById(id) {
-            return $http.get(gbmono.api_site_prefix.product_api_url + "/" + id);
+            return $http.get(gbmono.api_site_prefix.product_api_url + '/' + id);
         }
 
         function getByCategory(categoryId) {
