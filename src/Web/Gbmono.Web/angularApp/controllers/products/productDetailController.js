@@ -1,49 +1,43 @@
 ﻿/*
-    product list controller
+    product detail controller
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['$scope', '$routeParams', 'productDataFactory', 'categoryDataFactory'];
+    ctrl.$inject = ['$scope', '$routeParams', 'pluginService', 'productDataFactory', 'categoryDataFactory'];
 
     // create controller
-    module.controller('productListController', ctrl);
+    module.controller('productDetailController', ctrl);
 
     // controller body
-    function ctrl($scope, $routeParams, productDataFactory, categoryDataFactory) {
-        // products
-        $scope.products = [];
-        // categories
+    function ctrl($scope, $routeParams, pluginService, productDataFactory, categoryDataFactory) {
+        // current product
+        $scope.product = {};
+        // category list with expanded current category
         $scope.categories = [];
-        // current category
-        $scope.currentCategory = {};
-        // category brands
-        $scope.categoryBrands = [];
 
         // product image root path
         $scope.imgRoot = gbmono.img_root_path;
         // retreive category id from route params
-        var categoryId = $routeParams.id ? parseInt($routeParams.id) : 0;
-        
+        var productId = $routeParams.id ? parseInt($routeParams.id) : 0;
+
         init();
 
         function init() {
-            if (categoryId != 0) {
-                // load products
-                getProducts(categoryId);
-
-                // show up categories menu with expanded category
-                getCategories(categoryId);
-
-                // get category brands
-                getCategoryBrands(categoryId);
-            }
+            if (productId !== 0) {
+                // get product by id
+                getProduct(productId);
+            }            
         }
 
-        // get products by category
-        function getProducts(categoryId) {
-            productDataFactory.getByCategory(categoryId)
+        function getProduct(productId) {
+            productDataFactory.getById(productId)
                 .success(function (data) {
-                    $scope.products = data;
+                    // get current product
+                    $scope.product = data;
+                    // load categories with expanded category id (top level category)
+                    getCategories($scope.product.category.parentCategory.parentId)
+                    // init img thumb gallery
+                    pluginService.productDetailGallery(4000);
                 });
         }
 
@@ -70,11 +64,5 @@
                 });
         }
 
-        function getCategoryBrands(categoryId) {
-            categoryDataFactory.getBrands(categoryId)
-                .success(function (data) {
-                    $scope.categoryBrands = data;
-                });
-        }
     }
 })(angular.module('gbmono'));

@@ -10,7 +10,7 @@
 // define angularJs module
 (function () {
     // inject the parameters
-    config.$inject = ['$routeProvider', '$httpProvider', '$sceDelegateProvider'];
+    config.$inject = ['$routeProvider', '$httpProvider'];
 
 
     // config
@@ -19,7 +19,7 @@
 
     // module config
     // config route & http
-    function config($routeProvider, $httpProvider, $sceDelegateProvider) {
+    function config($routeProvider, $httpProvider) {
         // inject authentication interceptor
         // bearer token authentication
         // $httpProvider
@@ -52,13 +52,6 @@
                     controller: 'homeController',
                     caseInsensitiveMatch: true
                 });
-
-        $sceDelegateProvider.resourceUrlWhitelist([
-       // Allow same origin resource loads.
-       'self',
-       // Allow loading from our assets domain.  Notice the difference between * and **.
-       'http://player.youku.com/**']);
-
 
     }
 

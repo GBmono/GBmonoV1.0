@@ -21,9 +21,9 @@ namespace Gbmono.EF.Models
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
 
-        // 产地, map to country
+        // todo: delete -- 产地, map to country
         public int CountryId { get; set; }
-        public Country Country { get; set; }
+        // public Country Country { get; set; }
 
         // 名称 (系列名称)
         public string PrimaryName { get; set; }

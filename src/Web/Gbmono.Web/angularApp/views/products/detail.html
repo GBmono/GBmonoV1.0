@@ -1,0 +1,176 @@
+﻿<div id="all">
+    <!-- content area -->
+    <div id="content">
+        <div class="container">
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+                    <li>
+                        <a ng-href="#/">主页</a>
+                    </li>
+                    <li><a ng-href="#/categories/{{ product.category.parentCategory.categoryId }}/products">{{ product.category.parentCategory.parentCategory.name }}</a></li>
+                    <li>{{ product.category.parentCategory.name }}</li>
+                </ul>
+                <div class="row">
+                    <div class="box text-center">
+                        <div class="row">
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <h1>{{ product.primaryName }}</h1>
+                                <p class="text-muted"> {{ product.secondaryName }} </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row" id="productMain">
+                        <div class="col-sm-6">
+                            <div id="mainImage">
+                                <img ng-src="{{ imgRoot + product.images[0].fileName }}" alt="" class="img-responsive img-center">
+                            </div>
+
+                            <div class="ribbon sale">
+                                <div class="theribbon">促销</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            <!-- /.ribbon -->
+
+                            <div class="ribbon new">
+                                <div class="theribbon">当季产品</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            <!-- /.ribbon -->
+
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="box">
+                                <div class="sizes">
+                                    <h3> {{ product.brand.name }} </h3>
+                                </div>
+                                
+                                <p class="price">{{ product.price | currency:"¥" }}</p>
+
+                                <p class="text-center">
+                                    <button type="button" class="btn btn-success"><i class="fa fa-shopping-bag"></i> 可购入店铺</button>
+                                    <button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 放入购物清单</button>
+                                    <button type="button" class="btn btn-default" title="关注">
+                                        <i class="fa fa-heart-o"></i>
+                                    </button>
+                                    <!--<button type="button" class="btn btn-default" title="收藏">
+                                        <i class="fa fa-star-o"></i>
+                                    </button>-->
+                                    <!--<button type="button" class="btn btn-default" title="转发">
+                                        <i class="fa fa-share"></i>
+                                    </button>-->
+                                </p>
+                            </div>
+
+                            <div class="row" id="thumbs">
+                                <div class="col-xs-4"
+                                     ng-repeat="img in product.images">
+                                    <a ng-href="{{ imgRoot + img.fileName }}" class="thumb">
+                                        <img ng-src="{{ imgRoot + img.fileName }}" alt="" class="img-responsive img-center" style="height:128px;">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="box" id="details">
+                        <h4>商品详细</h4>
+                        <ul>
+                            <li>功能(用途): {{ product.category.name }}</li>
+                            <li>重量： {{ product.weight }} </li>
+                            <li>容量: {{ product.capacity }}</li>
+                            <li>质地: {{ }}</li>
+                            <li>气味: {{ product.flavor}}</li>
+                        </ul>
+                        <h4>商品介绍</h4>
+                        <blockquote>
+                            <p>
+                                <pre>{{ product.description }}</pre>
+                            </p>
+                        </blockquote>
+
+                        <h4>使用说明</h4>
+                        <blockquote>
+                            <p>
+                                <pre>{{ product.instruction }}</pre>
+                            </p>
+                        </blockquote>
+                    </div>
+
+                    <div class="box social" id="product-social">
+                        <h4>转发 (国内用户主要是微信)</h4>
+                        <p>
+                            <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                        </p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="box">
+                                <h5>可能感兴趣的产品</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="box">
+                                <h5>浏览过的产品</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.col-md-9 -->
+          
+                <!-- *** RIGHT COLUMN *** -->
+                <div class="col-sm-3">
+                    <!-- *** MENUS AND FILTERS ***-->
+                    <div class="panel panel-default sidebar-menu">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">产品类别</h3>
+                        </div>
+
+                        <div class="panel-body" style="max-height: 520px;overflow-y: scroll;">
+                            <ul class="nav nav-pills nav-stacked category-menu">
+                                <li ng-class="{'active' : cate.subCategories.length > 0 }"
+                                    ng-repeat="cate in categories">
+                                    <a ng-href="#/categories/{{ cate.categoryId }}/products">{{ cate.name}} <!--<span class="badge pull-right">42</span>--></a>
+                                    <ul>
+                                        <li ng-repeat="sub in cate.subCategories">
+                                            <a href="category.html">{{ sub.name }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- *** MENUS AND FILTERS END *** -->
+                    <div class="banner">
+                        <h4>此处可显示广告</h4>
+                        <!--<a href="category.html">
+                            <img src="img/banner.jpg" alt="sales 2014" class="img-responsive">
+                        </a>-->
+                    </div>
+                    <!-- /.banner -->
+
+                </div>
+                <!-- /.col-md-3 -->
+                <!-- *** RIGHT COLUMN END *** -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

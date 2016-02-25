@@ -8,7 +8,8 @@
 
     function svr($timeout) {
         return {
-            slider: slider
+            slider: slider,
+            productDetailGallery: productDetailGallery
         };
 
         function slider() {
@@ -25,6 +26,41 @@
                         itemsTablet: [600, 3], //2 items between 600 and 0
                         itemsMobile: [500, 2] // itemsMobile disabled - inherit from itemsTablet option
                     });
+                }
+            });
+        }
+
+        function productDetailGallery(confDetailSwitch) {
+            $timeout(function () {
+                $('#productMain .thumb:first').addClass('active');
+                timer = setInterval(autoSwitch, confDetailSwitch);
+                $("#productMain .thumb").click(function (e) {
+
+                    switchImage($(this));
+                    clearInterval(timer);
+                    timer = setInterval(autoSwitch, confDetailSwitch);
+                    e.preventDefault();
+                }
+                );
+                $('#productMain #mainImage').hover(function () {
+                    clearInterval(timer);
+                }, function () {
+                    timer = setInterval(autoSwitch, confDetailSwitch);
+                });
+                function autoSwitch() {
+                    var nextThumb = $('#productMain .thumb.active').closest('div').next('div').find('.thumb');
+                    if (nextThumb.length == 0) {
+                        nextThumb = $('#productMain .thumb:first');
+                    }
+                    switchImage(nextThumb);
+                }
+
+                function switchImage(thumb) {
+
+                    $('#productMain .thumb').removeClass('active');
+                    var bigUrl = thumb.attr('href');
+                    thumb.addClass('active');
+                    $('#productMain #mainImage img').attr('src', bigUrl);
                 }
             });
         }

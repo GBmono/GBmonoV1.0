@@ -6,12 +6,12 @@ $(function () {
 
     // sliderHomepage();
     fullScreenContainer();
-    productDetailGallery(4000);
-    productQuickViewGallery();
-    menuSliding();
-    productDetailSizes();
+    // productDetailGallery(4000);
+    // productQuickViewGallery();
+    // menuSliding();
+    // productDetailSizes();
     utils();
-    demo();
+    // demo();
 
 });
 
@@ -273,17 +273,18 @@ $(window).load(function () {
     $(this).alignElementsSameHeight();
     pictureZoom();
 });
+
 $(window).resize(function () {
 
-    //newWindowWidth = $(window).width();
+    newWindowWidth = $(window).width();
 
-    //if (windowWidth !== newWindowWidth) {
-	//setTimeout(function () {
-	//    $(this).alignElementsSameHeight();
-	//    fullScreenContainer();
-	//    pictureZoom();
-	//}, 100);
-	//windowWidth = newWindowWidth;
-    //}
+    if (windowWidth !== newWindowWidth) {
+	setTimeout(function () {
+	    $(this).alignElementsSameHeight();
+	    fullScreenContainer();
+	    pictureZoom();
+	}, 100);
+	windowWidth = newWindowWidth;
+    }
 
 });

@@ -119,6 +119,15 @@ namespace Gbmono.Api.Controllers
             return products.Select(m => m.ToSimpleModel());
         }
 
+        public async Task<Product> GetById(int id)
+        {
+            return await _repositoryManager.ProductRepository
+                                           .Table
+                                           .Include(m => m.Brand)
+                                           .Include(m => m.Images)
+                                           .Include(m => m.Category.ParentCategory.ParentCategory)
+                                           .SingleOrDefaultAsync(m => m.ProductId == id);
+        }
 
         [Route("BarCodes/{code}")]
         public Product GetByBarCode(string code)
