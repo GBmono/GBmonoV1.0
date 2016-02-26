@@ -54,7 +54,10 @@
         $scope.images = [];
         // image type
         $scope.selectedImgTypeId = "1";
-
+        // editing image
+        $scope.editImage = {};
+        // img types
+        $scope.imgTypes = [{ name: '商品图片', value: 1 }, { name: '介绍图片', value: 2 }, { name: "使用说明图片", value: 3 }, { name: "追加文案图片", value: 4 }];
         // retreive product id from routeparams
         var productId = $routeParams.id ? parseInt($routeParams.id) : 0;
 
@@ -95,11 +98,39 @@
             getImages($scope.editProduct.productId);
         };
 
+        // open edit product image window
+        $scope.openEditImgWin = function (image) {
+            $scope.editImage = image;
+            // open kendo window
+            $scope.winEdit.open();
+
+        };
+
+        // update product img info
+        $scope.updateImg = function () {
+            updateImageInfo($scope.editImage);
+        };
+
         // remove product image
         $scope.delete = function (id) {
             removeImage(id);
         };
 
+        // helper: convert img type id into text
+        $scope.showTypeName = function (typeId) {
+            if (typeId === 1) {
+                return '商品图片';
+            }
+            else if (typeId === 2) {
+                return '介绍图片';
+            }
+            else if (typeId === 3) {
+                return '使用说明图片';
+            }
+            else {
+                return '追加文案图片';
+            }
+        }
         // page init
         init();
 
@@ -195,6 +226,20 @@
                 });
         }
         
+        function updateImageInfo(image) {
+            productImageDataFactory.update(image)
+                .success(function () {
+                    // reload images
+                    getImages($scope.editProduct.productId);
+
+                    // close window
+                    $scope.winEdit.close();
+                })
+                .error(function (error) {
+                    pluginService.notify(error, 'error')
+                });
+        }
+
         function removeImage(id) {
             // warning text
             var r = confirm(gbmono.notification.delText);

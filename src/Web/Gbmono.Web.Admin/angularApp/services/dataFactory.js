@@ -98,11 +98,16 @@
         // return data factory with CRUD calls
         return {
             getByProduct: getByProduct,
-            remove : remove
+            update: update,
+            remove: remove
         };
 
         function getByProduct(productId) {
             return $http.get(gbmono.api_site_prefix.product_image_api_url + "/Products/" + productId);
+        }
+
+        function update(image) {
+            return $http.put(gbmono.api_site_prefix.product_image_api_url + '/' + image.productImageId, image);
         }
 
         function remove(id) {

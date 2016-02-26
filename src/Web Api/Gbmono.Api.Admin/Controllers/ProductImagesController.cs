@@ -37,7 +37,7 @@ namespace Gbmono.Api.Admin.Controllers
             return _repositoryManager.ProductImageRepository
                                            .Table
                                            .Where(m => m.ProductId == productId)
-                                           .OrderBy(m => m.FileName)
+                                           .OrderBy(m => m.ProductImageTypeId)
                                            .ToList();
 
         }
@@ -99,6 +99,23 @@ namespace Gbmono.Api.Admin.Controllers
             _repositoryManager.ProductImageRepository.Create(newProductImage);
             await _repositoryManager.ProductImageRepository.SaveAsync();
                 
+            return Ok();
+        }
+
+        // update product image name, type
+        [HttpPut]
+        public async Task<IHttpActionResult> Update(int id, [FromBody] ProductImage image)
+        {
+            var imageToUpdate = await _repositoryManager.ProductImageRepository.GetAsync(id);
+
+            // only update the name, type
+            imageToUpdate.ProductImageTypeId = image.ProductImageTypeId;
+            // imageToUpdate.Name = image.Name;
+
+            // update
+            _repositoryManager.ProductImageRepository.Update(imageToUpdate);
+            await _repositoryManager.ProductImageRepository.SaveAsync();
+
             return Ok();
         }
 

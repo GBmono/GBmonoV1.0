@@ -333,9 +333,7 @@
                         </form>
                         <div class="row">
                             <div class="col-xs-12">
-
                                 <ul class="ace-thumbnails clearfix">
-
                                     <li ng-repeat="img in images">
                                         <a href="" data-rel="colorbox">
                                             <img style="height:150px; width:150px;" ng-src="{{imgUrl}}/{{img.fileName}}" />
@@ -343,12 +341,16 @@
                                                 <div class="inner">{{ img.name }}</div>
                                             </div>
                                         </a>
-
+                                        <div class="tags">
+                                            <span class="label-holder">
+                                                <span class="label label-success">{{ showTypeName(img.productImageTypeId) }}</span>
+                                            </span>
+                                        </div>
                                         <div class="tools tools-bottom">
-                                            <a href="">
+                                            <a href=""
+                                               ng-click="openEditImgWin(img)">
                                                 <i class="ace-icon fa fa-pencil"></i>
                                             </a>
-
                                             <a href=""
                                                ng-click="delete(img.productImageId)">
                                                 <i class="ace-icon fa fa-times red"></i>
@@ -426,6 +428,49 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- edit image window -->
+<div kendo-window="winEdit" k-title="'修改图片类型'" k-position="{ top: 120, left: '40%' }"
+     k-width="550" k-visible="false" k-modal="true">
+    <div class="form-horizontal">
+        <!--<div class="form-group">
+            <label class="col-md-2 control-label"> 名称 </label>
+            <div class="col-md-8">
+                <div class="fg-line">
+                    <input type="text" class="form-control"
+                           ng-model="editImage.name" />
+                </div>
+            </div>
+        </div>-->
+
+        <div class="form-group">
+            <label class="col-md-2 control-label"> 图片类型 </label>
+            <div class="col-md-8">
+                <div class="fg-line">
+                    <select class="form-control" 
+                            ng-options="type.value as type.name for type in imgTypes"
+                            ng-model="editImage.productImageTypeId">
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label"></label>
+            <div class="col-md-8">
+                <button type="button" class="btn btn-primary btn-lg"
+                        ng-click="updateImg();">
+                    Update
+                </button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-default btn-lg"
+                        ng-click="winEdit.close();">
+                    Close
+                </button>
+            </div>
+
         </div>
     </div>
 </div>

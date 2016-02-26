@@ -67,5 +67,46 @@ namespace Gbmono.IO
             File.Copy(from, to);
         }
 
+        /// <summary>
+        /// create directory
+        /// </summary>
+        /// <param name="topCateCode"></param>
+        /// <param name="secondCateCode"></param>
+        /// <param name="thirdCateCode"></param>
+        /// <param name="productCode"></param>
+        public static string CreateDirectory(string root, string topCateCode, string secondCateCode, string thirdCateCode, string productCode)
+        {
+            // check if top category folder exists
+            var topDirectory = Path.Combine(root, topCateCode);
+            if (!Directory.Exists(topDirectory))
+            {
+                // create directory
+                Directory.CreateDirectory(topDirectory);
+            }
+
+            // check if second category folder exists
+            var secondDirectory = Path.Combine(topDirectory, secondCateCode);
+            if (!Directory.Exists(secondDirectory))
+            {
+                Directory.CreateDirectory(secondDirectory);
+            }
+
+            // third category folder
+            var thirdDirectory = Path.Combine(secondDirectory, thirdCateCode);
+            if (!Directory.Exists(thirdDirectory))
+            {
+                Directory.CreateDirectory(thirdDirectory);
+            }
+
+            // product folder
+            var productDirectory = Path.Combine(thirdDirectory, productCode);
+            if (!Directory.Exists(productDirectory))
+            {
+                Directory.CreateDirectory(productDirectory);
+            }
+
+            return productDirectory;
+        }
+
     }
 }
