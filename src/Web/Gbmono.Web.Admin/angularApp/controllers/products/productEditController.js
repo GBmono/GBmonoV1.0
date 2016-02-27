@@ -98,6 +98,11 @@
             getImages($scope.editProduct.productId);
         };
 
+        // update product 
+        $scope.update = function () {
+            update($scope.editProduct);
+        };
+
         // open edit product image window
         $scope.openEditImgWin = function (image) {
             $scope.editImage = image;
@@ -131,6 +136,7 @@
                 return '追加文案图片';
             }
         }
+
         // page init
         init();
 
