@@ -102,6 +102,7 @@ namespace Gbmono.Api.Controllers
                 products = await _repositoryManager.ProductRepository
                                                     .Table
                                                     .Include(m => m.Brand)
+                                                    .Include(m => m.Images) // include product images
                                                     .Where(m => m.CategoryId == categoryId)                                               
                                                     .ToListAsync();
 
@@ -113,6 +114,7 @@ namespace Gbmono.Api.Controllers
                                                 .Table
                                                 .Include(m => m.Brand)
                                                 .Include(m => m.Category)
+                                                .Include(m => m.Images) // include product images
                                                 .Where(m => m.Category.ParentId == categoryId)
                                                 .ToListAsync();
 

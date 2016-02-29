@@ -147,7 +147,7 @@
   <ItemGroup>
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Attributes\UserDataAnalyticsAttribute.cs" />
+    <Compile Include="Attributes\PageEventTrackAttribute.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BannersController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
@@ -169,6 +169,7 @@
     <Compile Include="Security\ApplicationOAuthProvider.cs" />
     <Compile Include="Security\Identities\Config.cs" />
     <Compile Include="Security\Identities\Model.cs" />
+    <Compile Include="Service\IDataCollector.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Logger.cs" />
   </ItemGroup>

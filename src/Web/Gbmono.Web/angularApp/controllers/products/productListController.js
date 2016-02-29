@@ -3,39 +3,50 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['$scope', '$routeParams', 'productDataFactory', 'categoryDataFactory'];
+    ctrl.$inject = ['$scope', '$routeParams', '$location', 'productDataFactory', 'categoryDataFactory'];
 
     // create controller
     module.controller('productListController', ctrl);
 
     // controller body
-    function ctrl($scope, $routeParams, productDataFactory, categoryDataFactory) {
+    function ctrl($scope, $routeParams, $location, productDataFactory, categoryDataFactory) {
         // products
         $scope.products = [];
         // categories
         $scope.categories = [];
+        //  third cateogories (tags in filter)
+        $scope.thirdCategories = [];
         // current category
         $scope.currentCategory = {};
+        // current second category (optional)
+        $scope.currentSubCategory = {};
+
         // category brands
         $scope.categoryBrands = [];
 
         // product image root path
         $scope.imgRoot = gbmono.img_root_path;
-        // retreive category id from route params
-        var categoryId = $routeParams.id ? parseInt($routeParams.id) : 0;
-        
+        // retreive top category id from route params
+        var topCategoryId = $routeParams.id ? parseInt($routeParams.id) : 0;
+        // sub category id (optional)
+        var subCateId = $location.search().subcateid ? parseInt($location.search().subcateid) : 0;
+    
         init();
 
         function init() {
-            if (categoryId != 0) {
-                // load products
-                getProducts(categoryId);
+            $scope.subCateId = subCateId;
+            if (topCategoryId != 0) {
+                // load products by top category or sub category
+                getProducts(subCateId == 0 ? topCategoryId : subCateId);
 
-                // show up categories menu with expanded category
-                getCategories(categoryId);
+                // category menu list with expanded top category
+                getCategories(topCategoryId);
+
+                // third categories in filter tag
+                getThirdCategories(subCateId == 0 ? topCategoryId : subCateId);
 
                 // get category brands
-                getCategoryBrands(categoryId);
+                getCategoryBrands(subCateId == 0 ? topCategoryId : subCateId);
             }
         }
 
@@ -65,8 +76,24 @@
                             $scope.categories.unshift(data[i]);
                             // current category
                             $scope.currentCategory = data[i];
+
+                            // subcategory selected (optional)
+                            if (subCateId !== 0) {                                
+                                for (var j = 0; j < $scope.currentCategory.subCategories.length; j++) {
+                                    if ($scope.currentCategory.subCategories[j].categoryId == subCateId) {
+                                        $scope.currentSubCategory = $scope.currentCategory.subCategories[j];
+                                    }
+                                }
+                            }
                         }
                     }
+                });
+        }
+
+        function getThirdCategories(categoryId) {
+            categoryDataFactory.getThirdCates(categoryId)
+                .success(function (data) {
+                    $scope.thirdCategories = data;
                 });
         }
 

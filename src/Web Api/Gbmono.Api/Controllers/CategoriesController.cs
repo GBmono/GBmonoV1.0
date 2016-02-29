@@ -72,6 +72,30 @@ namespace Gbmono.Api.Controllers
                                            .ToListAsync();
         }
 
+        // return third level categories by second or top category id
+        [Route("Third/{id}")]
+        public async Task<IEnumerable<Category>> GetThirdCategories(int id)
+        {
+            // if it's top category
+            var category = await _repositoryManager.CategoryRepository.GetAsync(id);
+            if (category.ParentId == null)
+            {
+                return await _repositoryManager.CategoryRepository
+                                               .Table
+                                               .Include(m => m.ParentCategory)
+                                               .Where(m => m.ParentCategory.ParentId == id)
+                                               .OrderBy(m => m.CategoryCode)                                               
+                                               .ToListAsync();
+            }
+
+            // if it's second category
+            return await _repositoryManager.CategoryRepository
+                                               .Table
+                                               .Where(m => m.ParentId == id)
+                                               .OrderBy(m => m.CategoryCode)
+                                               .ToListAsync();
+        }
+
         // get brands by top category id
         [Route("{id}/Brands")]
         public async Task<IEnumerable<Brand>> GetBrands(int id)

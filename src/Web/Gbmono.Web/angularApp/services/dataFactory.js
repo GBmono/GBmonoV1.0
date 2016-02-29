@@ -62,6 +62,7 @@
         return {
             getAll: getAll,
             getTopCates: getTopCates,
+            getThirdCates:getThirdCates,
             getBrands: getBrands
         }
 
@@ -71,6 +72,10 @@
 
         function getTopCates() {
             return $http.get(gbmono.api_site_prefix.category_api_url + '/Top');
+        }
+
+        function getThirdCates(id) {
+            return $http.get(gbmono.api_site_prefix.category_api_url + '/Third/' + id);
         }
 
         function getBrands(id) {

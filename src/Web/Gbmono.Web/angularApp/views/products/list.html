@@ -12,10 +12,18 @@
                 <div class="row">
                     <div class="box text-center">
                         <div class="row">
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <h1>{{ currentCategory.name }}</h1>
-                                <p class="text-muted">关于这个产品目录的一些基本介绍和描述 | 或者可以显示这个品类的品牌商广告</p>
+                            <div class="col-sm-10">
+                                <a href="" data-toggle="modal" data-target="#huojia-quick-view-modal" title="显示货架">
+                                    <h1>{{ currentCategory.name }}</h1>
+                                </a>
+                                <h4 class="text-muted">{{ currentSubCategory.name }}</h4>
                             </div>
+                            <div class="col-sm-2">
+                                <a href="" data-toggle="modal" data-target="#huojia-quick-view-modal">                                
+                                    <img src="../../../content/img/huojia.PNG" style="height:100px;" />
+                                </a>
+                            </div>
+
                         </div>
                     </div>
 
@@ -26,58 +34,32 @@
             <div class="row">
                 <!-- *** LEFT COLUMN *** -->
                 <div class="col-sm-9">                   
-                    <div class="box info-bar no-border">
-                        <div class="row">
-                            <div class="col-md-2 col-xs-4">
-                                <a href="#" style="color:darkgray;">搜索热词</a>
-                            </div>
-                            <div class="col-md-10 col-xs-8">
-                                <a class="btn btn-primary btn-sm"><i class="fa fa-tag"></i> 热词1</a>
-                                <a class="btn btn-primary btn-sm"><i class="fa fa-tag"></i> 热词2</a>
-                                <a class="btn btn-primary btn-sm"><i class="fa fa-tag"></i> 热词3</a>
-                                <a class="btn btn-primary btn-sm"><i class="fa fa-tag"></i> 热词4</a>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-1 col-sm-2">
+                            功能： 
                         </div>
-                        <div class="row" style="margin-top:15px;">
-                            <div class="col-md-2 col-xs-4">
-                                <a href="#" style="color:darkgray;">价格区间</a>
-                            </div>
-                            <div class="col-md-10 col-xs-8">
-                                <a class="btn btn-primary btn-sm"><i class="fa fa-tag"></i> 区间1</a>
-                                <a class="btn btn-primary btn-sm"><i class="fa fa-tag"></i> 区间2</a>
-                                <a class="btn btn-primary btn-sm"><i class="fa fa-tag"></i> 区间3</a>
-                                <a class="btn btn-primary btn-sm"><i class="fa fa-tag"></i> 区间4</a>
-                            </div>
+                        <div class="col-md-11 col-sm-10">                            
+                            <a class="btn btn-primary btn-sm" style="margin-right:10px; margin-bottom:5px;"
+                               ng-repeat="cate in thirdCategories">
+                               {{ cate.name }}
+                            </a>
                         </div>
-                        <hr />
-                        <!--<div class="row">
-                            <div class="col-sm-12 col-md-4 products-showing">
-                              
-                            </div>
-
-                            <div class="col-sm-12 col-md-8  products-number-sort">
-                                <div class="row">
-                                    <form class="form-inline">
-                                        <div class="col-md-4 col-sm-6">
-                                         
-                                        </div>
-                                        <div class="col-md-8 col-sm-6">
-                                            <div class="products-sort-by">
-                                                <strong>排序</strong>
-                                                <select name="sort-by" class="form-control">
-                                                    <option>价格</option>
-                                                    <option>名称</option>
-                                                    <option>销量</option>
-                                                    <option>热度</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>-->
                     </div>
-
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-12 products-number-sort">
+                            <div class="products-sort-by pull-right">
+                                
+                                <select name="sort-by" class="form-control">
+                                    <option>根据价格排序</option>
+                                    <option>根据名称排序</option>
+                                    <option>根据销量排</option>
+                                    <option>根据热度排序</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br /><br />
                     <div class="row products">
                         <div class="col-md-4 col-sm-6" 
                              ng-repeat="product in products">
@@ -143,8 +125,10 @@
                                     ng-repeat="cate in categories">
                                     <a ng-href="#/categories/{{ cate.categoryId }}/products">{{ cate.name}} <!--<span class="badge pull-right">42</span>--></a>
                                     <ul>
-                                        <li ng-repeat="sub in cate.subCategories">
-                                            <a href="">{{ sub.name }}</a>
+                                        <li ng-repeat="sub in cate.subCategories">                                            
+                                            <a ng-href="#/categories/{{ cate.categoryId }}/products?subcateid={{ sub.categoryId }}">
+                                                {{ sub.name }} <i class="fa fa-check" style="color:#c27baa" ng-show="sub.categoryId == subCateId"></i>
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -190,6 +174,32 @@
                 <!-- *** RIGHT COLUMN END *** -->
 
             </div>
+
+            <!-- 货架 -->
+
+            <div class="modal fade" id="huojia-quick-view-modal" tabindex="-1" role="dialog" aria-hidden="false">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-body">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                            <div class="row quick-view product-main">
+                                <div class="col-sm-12">
+                                    <h2>品类货架展示</h2>
+                                    <div class="quick-view-main-image">
+                                        <img src="../../../content/img/huojia2.PNG" class="img-responsive" />
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/.modal-dialog-->
+            </div>
+            <!-- /.modal -->
         </div>
     </div>
 </div>
