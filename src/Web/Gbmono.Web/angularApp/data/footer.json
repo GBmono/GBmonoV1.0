@@ -4,12 +4,12 @@
     "items": [
       {
         "text": "登陆",
-        "url": ""
+        "url": "#/login"
       },
 
       {
         "text": "注册",
-        "url": ""
+        "url": "#/login"
       }
 
     ]
