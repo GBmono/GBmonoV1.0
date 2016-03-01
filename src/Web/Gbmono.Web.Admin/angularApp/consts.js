@@ -3,13 +3,13 @@
 */
 (function (gbmono) {
     /* web api application name */
-    gbmono.web_api_app_name = 'http://localhost:2232/api';
+    gbmono.web_api_app_name = 'http://119.9.104.196:2232/api';
     
     /* angularJs app view root path */
     gbmono.app_view_path = '/angularApp/views';
 
     /* product image root path */
-    gbmono.img_root_path = 'http://localhost:2232/Files/Products';
+    gbmono.img_root_path = 'http://119.9.104.196:2232/Files/Products';
 
     /* gbmono bearer token key name */
     gbmono.LOCAL_STORAGE_TOKEN_KEY = 'gbmono_BEARER_TOKEN'; // localstorage token key name
