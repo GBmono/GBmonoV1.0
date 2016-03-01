@@ -121,8 +121,11 @@ namespace Gbmono.Api.Controllers
             return products.Select(m => m.ToSimpleModel());
         }
 
+        // get by product id, return detailed product model
         public async Task<Product> GetById(int id)
         {
+            // todo: check if the request is from browser or mobile app
+
             return await _repositoryManager.ProductRepository
                                            .Table
                                            .Include(m => m.Brand)
