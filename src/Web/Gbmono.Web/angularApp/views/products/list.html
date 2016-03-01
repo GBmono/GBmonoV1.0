@@ -14,9 +14,9 @@
                         <div class="row">
                             <div class="col-sm-10">
                                 <a href="" data-toggle="modal" data-target="#huojia-quick-view-modal" title="显示货架">
-                                    <h1>{{ currentCategory.name }}</h1>
+                                    <h1>{{ vm.menu.expandedItem.name }}</h1>
                                 </a>
-                                <h4 class="text-muted">{{ currentSubCategory.name }}</h4>
+                                <h4 class="text-muted">{{ vm.subCate.name }}</h4>
                             </div>
                             <div class="col-sm-2">
                                 <a href="" data-toggle="modal" data-target="#huojia-quick-view-modal">                                
@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-md-11 col-sm-10">                            
                             <a class="btn btn-primary btn-sm" style="margin-right:10px; margin-bottom:5px;"
-                               ng-repeat="cate in thirdCategories">
+                               ng-repeat="cate in vm.thirdCategories">
                                {{ cate.name }}
                             </a>
                         </div>
@@ -62,11 +62,11 @@
                     <br /><br />
                     <div class="row products">
                         <div class="col-md-4 col-sm-6" 
-                             ng-repeat="product in products">
+                             ng-repeat="product in vm.products">
                             <div class="product">
                                 <div class="image">
                                     <a ng-href="#/products/{{product.productId}}">
-                                        <img ng-src="{{imgRoot + product.imgUrl}}" alt="" class="img-responsive image1">
+                                        <img ng-src="{{ vm.imgRoot + product.imgUrl}}" alt="" class="img-responsive produt-list-img">
                                     </a>
                                     <div class="quick-view-button">
                                         <a ng-href="#/products/{{product.productId}}" class="btn btn-default btn-sm">详细信息</a>
@@ -121,16 +121,21 @@
 
                         <div class="panel-body" style="max-height: 520px;overflow-y: scroll;">
                             <ul class="nav nav-pills nav-stacked category-menu">
-                                <li ng-class="{'active' : cate.subCategories.length > 0 }" 
-                                    ng-repeat="cate in categories">
-                                    <a ng-href="#/categories/{{ cate.categoryId }}/products">{{ cate.name}} <!--<span class="badge pull-right">42</span>--></a>
+                                <!-- current top category -->
+                                <li class="active">
+                                    <a ng-href="#/categories/{{ vm.menu.expandedItem.categoryId }}/products">{{ vm.menu.expandedItem.name}} <!--<span class="badge pull-right">42</span>--></a>
                                     <ul>
-                                        <li ng-repeat="sub in cate.subCategories">                                            
-                                            <a ng-href="#/categories/{{ cate.categoryId }}/products?subcateid={{ sub.categoryId }}">
-                                                {{ sub.name }} <i class="fa fa-check" style="color:#c27baa" ng-show="sub.categoryId == subCateId"></i>
+                                        <li ng-repeat="sub in vm.menu.expandedItem.subItems">
+                                            <a ng-href="#/categories/{{ vm.menu.expandedItem.categoryId }}/products?subcateid={{ sub.categoryId }}">
+                                                {{ sub.name }}&nbsp;
+                                                <i class="fa fa-check main-color" ng-show="sub.categoryId == vm.subCate.categoryId"></i>
                                             </a>
                                         </li>
                                     </ul>
+                                </li>
+                                <!-- collapsed menu items -->
+                                <li ng-repeat="item in vm.menu.collapsedItems">
+                                    <a ng-href="#/categories/{{ item.categoryId }}/products">{{ item.name}} <!--<span class="badge pull-right">42</span>--></a>
                                 </li>
                             </ul>
                         </div>
@@ -149,7 +154,7 @@
 
                         <div class="panel-body">                         
                             <div class="form-group">
-                                    <div class="checkbox" ng-repeat="brand in categoryBrands">
+                                    <div class="checkbox" ng-repeat="brand in vm.categoryBrands">
                                         <label>
                                             <input type="checkbox">{{ brand.name }}
                                         </label>

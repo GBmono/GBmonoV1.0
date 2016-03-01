@@ -20,31 +20,36 @@
     // module config
     // config route & http
     function config($routeProvider, $httpProvider) {
-        // inject authentication interceptor
-        // bearer token authentication
-        // $httpProvider
-        // $httpProvider.interceptors.push('authInterceptor');
-
         // configure routes
         $routeProvider
                 .when('/', { // home page
                     templateUrl: gbmono.app_view_path + '/home/home.html',
                     controller: 'homeController',
+                    controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
                 .when('/products/:id', { // 商品详细页
                     templateUrl: gbmono.app_view_path + '/products/detail.html',
                     controller: 'productDetailController',
+                    controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
                 .when('/categories/:id/products/', { // 商品列表页
                     templateUrl: gbmono.app_view_path + '/products/list.html',
                     controller: 'productListController',
+                    controllerAs: 'vm',
                     caseInsensitiveMatch: true
-                })                
-                .when('/categories', { // 所有品类
-                    templateUrl: gbmono.app_view_path + '/categories/allcategories.html',
-                    controller: 'categoriesController',
+                })
+                .when('/login', { // 登陆注册页面
+                    templateUrl: gbmono.app_view_path + '/accounts/login.html',
+                    controller: 'loginController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
+                .when('/profile', { // 用户中心
+                    templateUrl: gbmono.app_view_path + '/accounts/profile.html',
+                    controller: 'profileController',
+                    controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
                 .otherwise({
@@ -52,9 +57,6 @@
                     controller: 'homeController',
                     caseInsensitiveMatch: true
                 });
-
     }
-
-
 })();
 

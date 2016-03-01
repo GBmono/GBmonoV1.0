@@ -38,16 +38,27 @@
         opacity: 0;
     }
 
-    /* center an image */
-    .image1{
-        height:160px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto
-    }
+/* ngCloak  */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
 
-    .img-center{
-        display: block;
-        margin-left: auto;
-        margin-right: auto
-    }
+/* ---------------------- web site css ---------------------- */
+
+/* center an image */
+.produt-list-img{
+    height:160px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.img-center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.main-color{
+    color:#c27baa; 
+}

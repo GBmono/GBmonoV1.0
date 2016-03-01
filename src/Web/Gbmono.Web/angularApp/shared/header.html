@@ -81,28 +81,25 @@ _________________________________________________________ -->
                     </ul>
                 </li>
                 <li>
-                    <a ng-href="#">药妆店</a>
+                    <a ng-href="#/">药妆店</a>
                 </li>
                 <li>
-                    <a ng-href="#">促销&优惠券</a>
+                    <a ng-href="#/">促销&优惠券</a>
                 </li>
                 <li>
-                    <a ng-href="#">品牌</a>
+                    <a ng-href="#/">品牌</a>
                 </li>
                 <li>
-                    <a ng-href="#">货架</a>
-                </li>
-                <li>
-                    <a ng-href="#">我的收藏夹</a>
+                    <a ng-href="#/">动态</a>
                 </li>
             </ul>
             
         </div>
         <!--/.nav-collapse -->
 
-        <div class="navbar-collapse collapse right" id="basket-overview">
+        <!--<div class="navbar-collapse collapse right" id="basket-overview">
             <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">(3) <span class="hidden-md">购物清单</span></span></a>
-        </div>
+        </div>-->
         <!--/.nav-collapse -->
 
         <div class="navbar-collapse collapse right">
@@ -113,10 +110,14 @@ _________________________________________________________ -->
         </div>
 
         <div class="navbar-collapse collapse right">
-            <button type="button" class="btn navbar-btn btn-default" data-toggle="modal" data-target="#login-modal">
+            <!--<button type="button" class="btn navbar-btn btn-default" data-toggle="modal" data-target="#login-modal">
                 <span class="sr-only">用户登录</span>
-                <i class="fa fa-users"></i>
-            </button>
+                <i class="fa fa-user"></i>
+            </button>-->
+            <a class="btn navbar-btn btn-default" ng-href="#/profile">
+                <span class="sr-only">个人中心</span>
+                <i class="fa fa-user"></i>
+            </a>
         </div>
 
         <div class="collapse clearfix" id="search">
@@ -166,7 +167,7 @@ _________________________________________________________ -->
                 </form>
 
                 <p class="text-center text-muted">还未注册？</p>
-                <p class="text-center text-muted"><a href="register.html"><strong>注册</strong></a>!</p>
+                <p class="text-center text-muted"><a ng-href="#/login"><strong>注册</strong></a>!</p>
 
             </div>
         </div>

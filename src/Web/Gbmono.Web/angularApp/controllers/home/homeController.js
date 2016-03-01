@@ -3,21 +3,22 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['$scope', 'pluginService', 'pageDataFactory', 'productDataFactory'];
+    ctrl.$inject = ['pluginService', 'pageDataFactory', 'productDataFactory'];
 
     // create controller
     module.controller('homeController', ctrl);
 
     // controller body
-    function ctrl($scope, pluginService, pageDataFactory, productDataFactory) {
+    function ctrl(pluginService, pageDataFactory, productDataFactory) {
+        var vm = this;
         // sliders
-        $scope.sliders = [];
+        vm.sliders = [];
         // products
-        $scope.products = [];
+        vm.products = [];
         // news
-        $scope.news = [];
+        vm.news = [];
         // product image root path
-        $scope.imgRoot = gbmono.img_root_path;
+        vm.imgRoot = gbmono.img_root_path;
 
         // page init
         init();
@@ -38,7 +39,7 @@
             pageDataFactory.getSilders()
                 .success(function (data) {
                     // once data is ready
-                    $scope.sliders = data;
+                    vm.sliders = data;
                     // call jquery initialization
                     pluginService.slider();
                 });
@@ -49,14 +50,14 @@
             // load first 12 new products 
             productDataFactory.getNewProducts(1, 12)
                 .success(function (data) {
-                    $scope.products = data;
+                    vm.products = data;
                 });
         }
 
         function getNews() {
             pageDataFactory.getNews()
                 .success(function (data) {
-                    $scope.news = data;
+                    vm.news = data;
                 });
         }
     }

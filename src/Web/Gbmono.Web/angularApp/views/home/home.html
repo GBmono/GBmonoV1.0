@@ -1,7 +1,7 @@
 ﻿<!-- *** SLIDER *** -->
 <div id="slider" class="owl-carousel owl-theme">
     <div class="item"
-         ng-repeat="slider in sliders">
+         ng-repeat="slider in vm.sliders">
         <a ng-href="{{ slider.link }}">
             <img ng-src="{{ slider.imgUrl }}" alt="{{ slider.name }}" class="img-responsive">
         </a>
@@ -74,11 +74,11 @@
 
                 <div class="row products">
                     <div class="col-md-3 col-sm-2"
-                         ng-repeat="product in products">
+                         ng-repeat="product in vm.products">
                         <div class="product">
                             <div class="image">
                                 <a ng-href="#/products/{{product.productId}}">
-                                    <img ng-src="{{imgRoot + product.imgUrl}}" alt="" class="img-responsive image1">
+                                    <img ng-src="{{ vm.imgRoot + product.imgUrl}}" alt="" class="img-responsive produt-list-img">
                                 </a>
                             </div>
                             <!-- /.image -->
@@ -117,7 +117,7 @@
 
                 <div id="blog-homepage" class="row">
                     <div class="col-md-4 col-sm-6"
-                         ng-repeat="item in news">
+                         ng-repeat="item in vm.news">
                         <div class="post">
                             <h4><a ng-href="{{ item.link }}">{{ item.title }}</a></h4>
                             <p class="author-category">

@@ -29,8 +29,6 @@ namespace Gbmono.EF.DataContext
             modelBuilder.Configurations.Add(new RetailShopMap());
             modelBuilder.Configurations.Add(new RetailerMap());
             
-            // pls move the config code into seperate config clss
-            modelBuilder.Entity<FollowOption>().ToTable("FollowOption");
             modelBuilder.Entity<Banner>().ToTable("Banner");
 
             base.OnModelCreating(modelBuilder);

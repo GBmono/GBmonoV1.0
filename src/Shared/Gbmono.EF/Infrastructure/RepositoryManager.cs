@@ -42,7 +42,6 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<Brand> _brandRepository;
         private IRepository<Country> _countryRepository;
         private IRepository<Retailer> _retailerRepository;
-        private IRepository<FollowOption> _followOptionRepository;
         private IRepository<Banner> _bannerRepository;
 
         // public accessors
@@ -76,11 +75,6 @@ namespace Gbmono.EF.Infrastructure
         public IRepository<Retailer> RetailerRepository
         {
             get { return _retailerRepository ?? (_retailerRepository = new Repository<Retailer>(Context)); }
-        }
-
-        public IRepository<FollowOption> FollowOptionRepository
-        {
-            get { return _followOptionRepository ?? (_followOptionRepository = new Repository<FollowOption>(Context)); }
         }
 
         public IRepository<Banner> BannerRepository

@@ -61,13 +61,18 @@
         // return data factory with CRUD calls
         return {
             getAll: getAll,
+            getMenu: getMenu,
             getTopCates: getTopCates,
             getThirdCates:getThirdCates,
             getBrands: getBrands
         }
-
+        // todo?
         function getAll() {
             return $http.get(gbmono.api_site_prefix.category_api_url);
+        }
+
+        function getMenu (id) {
+            return $http.get(gbmono.api_site_prefix.category_api_url + '/Menu/' + id);
         }
 
         function getTopCates() {

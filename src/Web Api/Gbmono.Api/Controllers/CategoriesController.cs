@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
+using System.Collections;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Data.Entity;
 
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
-
+using Gbmono.Api.Models;
 
 namespace Gbmono.Api.Controllers
 {
@@ -59,6 +58,38 @@ namespace Gbmono.Api.Controllers
             }
 
             return topCates;
+        }
+
+        // return category menu binding models
+        [Route("Menu/{id}")]
+        public async Task<CategoryMenu> GetCategoryMenuItems(int id)
+        {
+            var selectedCategory = await _repositoryManager.CategoryRepository.GetAsync(id);
+
+            // expanded subcategories
+            var subItems = await _repositoryManager.CategoryRepository
+                                                   .Table
+                                                   .Where(m => m.ParentId == selectedCategory.CategoryId)
+                                                   .OrderBy(m => m.CategoryCode)
+                                                   .ToListAsync();
+
+            var expendedItem = new ExpandedCategoryMenuItem
+            {
+                CategoryId = selectedCategory.CategoryId,
+                Name = selectedCategory.Name,
+                SubItems = subItems.Select(m => new CategoryMenuItem { CategoryId = m.CategoryId, Name = m.Name })
+            };
+
+            var topcates = await _repositoryManager.CategoryRepository
+                                                         .Table
+                                                         .Where(m => m.ParentId == null && m.CategoryId != selectedCategory.CategoryId)
+                                                         .OrderBy(m => m.CategoryCode)
+                                                         .ToListAsync();
+
+            // covert into binding model
+            var collapsedItems = topcates.Select(m => new CategoryMenuItem { CategoryId = m.CategoryId, Name = m.Name });
+
+            return new CategoryMenu { ExpandedItem = expendedItem, CollapsedItems = collapsedItems };
         }
 
         // return top level categories

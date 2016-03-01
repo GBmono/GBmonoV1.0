@@ -16,6 +16,6 @@ namespace Gbmono.EF.Models
 
         public string UserId { get; set; }
 
-        public string CreatedDateTime { get; set; } 
+        public DateTime Created { get; set; } 
     }
 }

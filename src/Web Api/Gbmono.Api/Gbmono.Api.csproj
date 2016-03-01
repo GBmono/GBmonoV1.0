@@ -163,6 +163,7 @@
     </Compile>
     <Compile Include="HttpResults\DataInvalidResult.cs" />
     <Compile Include="HttpResults\InternalServerErrorPlainTextResult.cs" />
+    <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
