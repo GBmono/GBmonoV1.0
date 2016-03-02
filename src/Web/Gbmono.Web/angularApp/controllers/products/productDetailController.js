@@ -16,7 +16,12 @@
         vm.product = {};
         // category menu
         vm.menu = {};
-
+        // product images
+        vm.productImages = [];
+        // instruction images
+        vm.instrutionImages = [];
+        // extra info images
+        vm.extraImages = [];
         // product image root path
         vm.imgRoot = gbmono.img_root_path;
         // retreive category id from route params
@@ -31,15 +36,20 @@
             }
         }
 
+        // get product details by id
         function getProduct(productId) {
             productDataFactory.getById(productId)
                 .success(function (data) {
                     // get current product
                     vm.product = data;
-                    // init img thumb gallery
-                    pluginService.productDetailGallery(4000);
+                    // filter image by type id
+                    filterImages(data.images);
                     // get category menu by top category id
                     getCategoryMenu(vm.product.category.parentCategory.parentId);
+                    // init img thumb gallery
+                    pluginService.productDetailGallery(4000);
+                    // init bootstrap tab
+                    pluginService.tab();
                 });
         }
 
@@ -50,6 +60,27 @@
                 .success(function (data) {
                     vm.menu = data;
                 });
+        }
+
+        // filter images by image type
+        function filterImages(images) {
+            for (var i = 0; i < images.length; i++) {
+                // type id
+                var imgTypeId = images[i].productImageTypeId
+                // product img
+                if (imgTypeId == gbmono.imgType.product) {
+                    vm.productImages.push(images[i]);
+                }
+                else if (imgTypeId == gbmono.imgType.descritpion) {
+                    // todo
+                }
+                else if (imgTypeId == gbmono.imgType.instruction) {
+                    vm.instrutionImages.push(images[i]);
+                }
+                else if (imgTypeId == gbmono.imgType.extra) {
+                    vm.extraImages.push(images[i]);
+                }
+            }
         }
     }
 })(angular.module('gbmono'));

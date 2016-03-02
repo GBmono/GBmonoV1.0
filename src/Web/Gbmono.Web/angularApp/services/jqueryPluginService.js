@@ -9,9 +9,11 @@
     function svr($timeout) {
         return {
             slider: slider,
+            tab:tab,
             productDetailGallery: productDetailGallery
         };
 
+        // silder effect
         function slider() {
             // call $timeout to make sure dom is ready
             $timeout(function () {
@@ -30,6 +32,7 @@
             });
         }
 
+        // product thumbnail gallery
         function productDetailGallery(confDetailSwitch) {
             $timeout(function () {
                 $('#productMain .thumb:first').addClass('active');
@@ -62,6 +65,16 @@
                     thumb.addClass('active');
                     $('#productMain #mainImage img').attr('src', bigUrl);
                 }
+            });
+        }
+
+        // boostrap tab
+        function tab() {
+            // disable the default behavior
+            $timeout(function () {
+                $('a[data-toggle="tab"]').click(function (e) {
+                    e.preventDefault();
+                });
             });
         }
     }

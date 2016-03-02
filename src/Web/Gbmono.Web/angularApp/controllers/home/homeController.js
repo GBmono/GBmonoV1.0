@@ -15,6 +15,8 @@
         vm.sliders = [];
         // products
         vm.products = [];
+        // articles 
+        vm.articles = [];
         // news
         vm.news = [];
         // product image root path
@@ -29,6 +31,9 @@
 
             // load new products
             getNewProducts();
+
+            // load articles
+            getArticles();
 
             // load news
             getNews();
@@ -51,6 +56,13 @@
             productDataFactory.getNewProducts(1, 12)
                 .success(function (data) {
                     vm.products = data;
+                });
+        }
+
+        function getArticles() {
+            pageDataFactory.getArticles()
+                .success(function (data) {
+                    vm.articles = data;
                 });
         }
 

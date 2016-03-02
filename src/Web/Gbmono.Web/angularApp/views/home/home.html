@@ -11,52 +11,30 @@
 <!-- *** SLIDER END *** -->
 
 <div id="all">
-    <!-- advantangs -->
+    <!-- advantangs info (articles) -->
     <div id="advantages">
         <div class="container">
             <div class="col-md-12">
                 <div class="box text-center">
-                    <h3 class="text-uppercase">集匠网</h3>
-                    <div class="same-height-row row">
-                        <div class="col-sm-3">
-                            <div class="box same-height clickable no-border text-center-xs text-center-sm">
-                                <div class="icon">
-                                    <i class="fa fa-tags"></i>
-                                </div>
-                                <h4><a href="text.html">当季产品</a></h4>
+                    <h3 class="text-uppercase">药妆心得</h3>
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12"
+                             ng-repeat="article in vm.articles">
+                            <div class="post">
+                                <img ng-src="{{ article.imgUrl  }}" class="img-responsive"  />
+                                <hr>
+                                <p class="intro">
+                                    {{ article.title }}<br />
+                                    <small>2016年3月2日</small>                                 
+                                </p>
+                                
+                                <p class="read-more">
+                                    <a ng-href="{{ article.link }}" class="btn btn-primary">阅读全文</a>
+                                </p>
+                                
                             </div>
                         </div>
-
-                        <div class="col-sm-3">
-                            <div class="box same-height clickable no-border text-center-xs text-center-sm">
-                                <div class="icon">
-                                    <i class="fa fa-tags"></i>
-                                </div>
-                                <h4><a href="text.html">热销产品</a></h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="box same-height clickable no-border text-center-xs text-center-sm">
-                                <div class="icon">
-                                    <i class="fa fa-tags"></i>
-                                </div>
-                                <h4><a href="faq.html">推荐产品</a></h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="box same-height clickable no-border text-center-xs text-center-sm">
-                                <div class="icon">
-                                    <i class="fa fa-tags"></i>
-                                </div>
-                                <h4><a href="faq.html">特色货架</a></h4>
-                            </div>
-                        </div>
-
                     </div>
-                    <!-- /.row -->
-
                 </div>
             </div>
         </div>

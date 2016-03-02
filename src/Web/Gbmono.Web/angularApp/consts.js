@@ -38,4 +38,12 @@
         retail_api_url: gbmono.web_api_app_name + '/Retailers'
     };
 
+    // image type
+    gbmono.imgType = {
+        product: 1,
+        descritpion: 2,
+        instruction: 3,
+        extra: 4
+    };
+
 })(window.gbmono = window.gbmono || {});

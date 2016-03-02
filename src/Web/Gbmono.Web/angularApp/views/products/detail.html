@@ -29,7 +29,8 @@
                     <div class="row" id="productMain">
                         <div class="col-sm-6">
                             <div id="mainImage">
-                                <img ng-src="{{ vm.imgRoot + vm.product.images[0].fileName }}" alt="" class="img-responsive img-center">
+                                <img alt="产品图片" class="img-responsive img-center"
+                                     ng-src="{{ vm.imgRoot + vm.productImages[0].fileName }}">
                             </div>
 
                             <div class="ribbon sale">
@@ -54,10 +55,9 @@
                                 <p class="price">{{ vm.product.price | currency:"¥" }}</p>
 
                                 <p class="text-center">
-                                    <button type="button" class="btn btn-success"><i class="fa fa-shopping-bag"></i> 可购入店铺</button>
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 放入购物清单</button>
-                                    <button type="button" class="btn btn-default" title="关注">
-                                        <i class="fa fa-heart-o"></i>
+                                    <!--<button type="button" class="btn btn-success"><i class="fa fa-forward"></i> 转发</button>-->
+                                    <button type="button" class="btn btn-default" title="收藏">
+                                        加入收藏夹<i class="fa fa-star-o"></i>
                                     </button>
                                     <!--<button type="button" class="btn btn-default" title="收藏">
                                         <i class="fa fa-star-o"></i>
@@ -70,7 +70,7 @@
 
                             <div class="row" id="thumbs">
                                 <div class="col-xs-4"
-                                     ng-repeat="img in vm.product.images">
+                                     ng-repeat="img in vm.productImages">
                                     <a ng-href="{{ vm.imgRoot + img.fileName }}" class="thumb">
                                         <img ng-src="{{ vm.imgRoot + img.fileName }}" alt="" class="img-responsive img-center" style="height:128px;">
                                     </a>
@@ -80,29 +80,61 @@
 
                     </div>
 
-
                     <div class="box" id="details">
-                        <h4>商品详细</h4>
-                        <ul>
-                            <li>功能(用途): {{ vm.product.category.name }}</li>
-                            <li>重量： {{ vm.product.weight }} </li>
-                            <li>容量: {{ vm.product.capacity }}</li>
-                            <li>质地: {{ }}</li>
-                            <li>气味: {{ vm.product.flavor}}</li>
+                        <!-- tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#desc" role="tab" data-toggle="tab" aria-controls="desc" aria-expanded="true">商品详情</a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#instruction" role="tab" data-toggle="tab" aria-controls="instruction" aria-expanded="false">使用说明</a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#extra" role="tab" data-toggle="tab" aria-controls="extra" aria-expanded="false">追加信息</a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#shop" role="tab" data-toggle="tab" aria-controls="shop" aria-expanded="false"><i class="fa fa-shopping-bag"></i> 可购入店铺</a>
+                            </li>
                         </ul>
-                        <h4>商品介绍</h4>
-                        <blockquote>
-                            <p>
-                                <pre>{{ vm.product.description }}</pre>
-                            </p>
-                        </blockquote>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade active in" id="desc" aria-labelledby="desc-tab">
+                                <h4>商品详细</h4>
+                                <ul>
+                                    <li>功能(用途): {{ vm.product.category.name }}</li>
+                                    <li>重量： {{ vm.product.weight }} </li>
+                                    <li>容量: {{ vm.product.capacity }}</li>
+                                    <li>质地: {{ }}</li>
+                                    <li>气味: {{ vm.product.flavor}}</li>
+                                </ul>
+                                <h4>商品介绍</h4>
+                                <blockquote>
+                                    <p>
+                                        <pre>{{ vm.product.description }}</pre>
+                                    </p>
+                                </blockquote>
 
-                        <h4>使用说明</h4>
-                        <blockquote>
-                            <p>
-                                <pre>{{ vm.product.instruction }}</pre>
-                            </p>
-                        </blockquote>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="instruction" aria-labelledby="instruction-tab">
+                                <h4>使用说明</h4>
+                                <blockquote>
+                                    <p>
+                                        <pre>{{ vm.product.instruction }}</pre>
+                                    </p>
+                                </blockquote>
+                                <!-- instruction images -->
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12"
+                                         ng-repeat="img in vm.instrutionImages">
+                                        <img ng-src="{{ vm.imgRoot + img.fileName }}" alt="" class="img-responsive">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="extra" aria-labelledby="extra-tab">
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="shop" aria-labelledby="extra-tab">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="box social" id="product-social">

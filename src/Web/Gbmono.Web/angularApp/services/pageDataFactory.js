@@ -13,12 +13,17 @@
         // return factory class
         return {
             getSilders: getSilders,
+            getArticles:getArticles,
             getNews: getNews,
             getFooterData: getFooterData
         }
 
         function getSilders() {
             return $http.get(pageDataPath + '/slider.json');
+        }
+
+        function getArticles() {
+            return $http.get(pageDataPath + '/article.json');
         }
 
         function getNews() {
