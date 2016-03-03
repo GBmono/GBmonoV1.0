@@ -38,11 +38,14 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<Category> _categoryRepository;
         private IRepository<Product> _productRepository;
         private IRepository<ProductImage> _productImageRepository;
+        private IRepository<ProductEvent> _productEventRepository;
+
+        private IRepository<UserFavorite> _userFavoriteRepository;
 
         private IRepository<Brand> _brandRepository;
         private IRepository<Country> _countryRepository;
         private IRepository<Retailer> _retailerRepository;
-        private IRepository<Banner> _bannerRepository;
+        // private IRepository<Banner> _bannerRepository;
 
         // public accessors
         #region category & product
@@ -60,8 +63,18 @@ namespace Gbmono.EF.Infrastructure
         {
             get { return _productImageRepository ?? (_productImageRepository = new Repository<ProductImage>(Context)); }
         }
+
+        public IRepository<ProductEvent> ProductEventRepository
+        {
+            get { return _productEventRepository ?? (_productEventRepository = new Repository<ProductEvent>(Context)); }
+        }
         #endregion
 
+        public IRepository<UserFavorite> UserFavoriteRepository
+        {
+            get { return _userFavoriteRepository ?? (_userFavoriteRepository = new Repository<UserFavorite>(Context)); }
+
+        }
         public IRepository<Brand> BrandRepository
         {
             get { return _brandRepository ?? (_brandRepository = new Repository<Brand>(Context)); }
@@ -77,10 +90,10 @@ namespace Gbmono.EF.Infrastructure
             get { return _retailerRepository ?? (_retailerRepository = new Repository<Retailer>(Context)); }
         }
 
-        public IRepository<Banner> BannerRepository
-        {
-            get { return _bannerRepository ?? (_bannerRepository = new Repository<Banner>(Context)); }
-        }
+        //public IRepository<Banner> BannerRepository
+        //{
+        //    get { return _bannerRepository ?? (_bannerRepository = new Repository<Banner>(Context)); }
+        //}
 
     }
 }

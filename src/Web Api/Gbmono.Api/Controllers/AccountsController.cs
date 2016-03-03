@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -8,41 +9,97 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
+using Gbmono.EF.Infrastructure;
+using Gbmono.EF.Models;
 using Gbmono.Api.Models;
 using Gbmono.Api.Security.Identities;
-using Newtonsoft.Json.Linq;
 
 namespace Gbmono.Api.Controllers
 {
     [RoutePrefix("api/Accounts")]
     public class AccountsController : ApiController
-    {
-        private readonly GbmonoUserManager _userManager = null;
+    {        
+        private readonly RepositoryManager _repoManager;
+        private GbmonoUserManager _userManager;
+
+        public AccountsController()
+        {
+            _repoManager = new RepositoryManager();
+        }
 
         public GbmonoUserManager UserManager
         {
             get { return _userManager ?? Request.GetOwinContext().GetUserManager<GbmonoUserManager>(); }
         }
 
-        /// <summary>
-        /// to check if current token is valid
-        /// it returns 401 if token is expired or invalid
-        /// </summary>
-        /// <returns></returns>
-        [Route("Current")]
         [Authorize]
-        public CurrentUser GetCurrentUser()
+        [Route("Favorites")]
+        public async Task<IEnumerable<UserFavorite>> GetFavorites()
         {
-            // get the user object by current user name
-            var gbmonoUser = UserManager.FindByName(User.Identity.Name);
+            // get user id by user name
+            var user = await UserManager.FindByNameAsync(User.Identity.Name);
 
-            // reset password and other sensitive info before returning user object
-            return new CurrentUser
+            // load user favorites
+            var userFavorites = await _repoManager.UserFavoriteRepository
+                                                  .Table
+                                                  .Where(m => m.UserId == user.Id)
+                                                  .ToListAsync();
+
+            return userFavorites;
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("AddFavorite")]
+        public async Task<IHttpActionResult> AddFavorite([FromBody] Favorite favorite)
+        {
+            // get user id by user name
+            var user = await UserManager.FindByNameAsync(User.Identity.Name);
+
+            // check if it already exists
+            var userFavorite = await _repoManager.UserFavoriteRepository
+                                                 .Table
+                                                 .SingleOrDefaultAsync(m => m.ProductId == favorite.ProductId &&
+                                                                            m.UserId == user.Id);
+
+            if(userFavorite == null)
             {
-                UserName = gbmonoUser.UserName,
-                DisplayName = gbmonoUser.DisplayName,
-                Email = gbmonoUser.Email
-            };
+                // create 
+                _repoManager.UserFavoriteRepository.Create(new UserFavorite
+                {
+                    UserId = user.Id,
+                    ProductId = favorite.ProductId,
+                    Created = DateTime.Now
+                });
+
+                await _repoManager.UserFavoriteRepository.SaveAsync();
+            }
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("RemoveFavorite")]
+        public async Task<IHttpActionResult> RemoveFavorite([FromBody] Favorite favorite)
+        {
+            // get user id by user name
+            var user = await UserManager.FindByNameAsync(User.Identity.Name);
+
+            // check if it already exists
+            var model = await _repoManager.UserFavoriteRepository
+                                             .Table
+                                             .SingleOrDefaultAsync(m => m.ProductId == favorite.ProductId &&
+                                                                        m.UserId == user.Id);
+
+            if (model != null)
+            {
+                // delete 
+                _repoManager.UserFavoriteRepository.Delete(model);
+                await _repoManager.UserFavoriteRepository.SaveAsync();
+            }
+
+            return Ok();
         }
 
         [HttpPost]

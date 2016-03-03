@@ -67,8 +67,8 @@ namespace Gbmono.Api.Controllers
             return products.Select(m => m.ToSimpleModel());                                    
         }
 
-        [Route("Categories/{categoryId}")]
-        public async Task<IEnumerable<ProductSimpleModel>> GetByCategory(int categoryId)
+        [Route("Categories/{categoryId}/{pageIndex:int?}/{pageSize:int?}")]
+        public async Task<IEnumerable<ProductSimpleModel>> GetByCategory(int categoryId, int? pageIndex = 1, int? pageSize = 10)
         {
             // as we have 3 defined categories in gbmono
             // determine category level before retreiving products
@@ -78,6 +78,9 @@ namespace Gbmono.Api.Controllers
             {
                 // todo: return empty product list
             }
+            // start index 
+            var startIndex = (pageIndex.Value - 1) * pageSize.Value;
+
             IList<Product> products = null;
 
             // top level
@@ -91,7 +94,7 @@ namespace Gbmono.Api.Controllers
                                                     .Where(m => m.Category.ParentCategory.ParentId == categoryId)
                                                     .ToListAsync();
                 // return simplified models
-                return products.Select(m => m.ToSimpleModel());
+                return products.Select(m => m.ToSimpleModel()).Skip(startIndex).Take(pageSize.Value);
                                                
             }
 
@@ -106,7 +109,7 @@ namespace Gbmono.Api.Controllers
                                                     .Where(m => m.CategoryId == categoryId)                                               
                                                     .ToListAsync();
 
-                return products.Select(m => m.ToSimpleModel());
+                return products.Select(m => m.ToSimpleModel()).Skip(startIndex).Take(pageSize.Value);
             }
 
             // second level
@@ -118,7 +121,7 @@ namespace Gbmono.Api.Controllers
                                                 .Where(m => m.Category.ParentId == categoryId)
                                                 .ToListAsync();
 
-            return products.Select(m => m.ToSimpleModel());
+            return products.Select(m => m.ToSimpleModel()).Skip(startIndex).Take(pageSize.Value);
         }
 
         // get by product id, return detailed product model

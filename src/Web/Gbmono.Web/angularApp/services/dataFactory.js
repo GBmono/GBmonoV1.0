@@ -12,9 +12,11 @@
     function factory($http) {
         // return data factory with CRUD calls
         return {
-            isAuthenticated:isAuthenticated,
             register: register,
-            login: login
+            login: login,
+            getFavorites: getUserFavorites,
+            addFavorite: addUserFavorite,
+            removeFavorite: removeUserFavorite
         }
 
         // register user
@@ -35,13 +37,39 @@
             });
         }
 
-        function isAuthenticated(token) {
-            // call authorized web api to validate if current token is valid
+        function getUserFavorites(token) {
+            // it required authenticated token to access this method 
             // add token to authorization header
-            $http.defaults.headers.common.Authorization = 'Bearer ' + token;
-            // call authorized web method
-            return $http.get(gbmono.api_site_prefix.account_api_url + '/Current');
+            attachToken(token);
+            return $http.get(gbmono.api_site_prefix.account_api_url + '/Favorites');
         }
+
+        function addUserFavorite(token, favorite) {
+            // it required authenticated token to access this method 
+            // add token to authorization header
+            attachToken(token); console.log(favorite);
+            return $http.post(gbmono.api_site_prefix.account_api_url + '/AddFavorite', favorite);
+        }
+
+        function removeUserFavorite(token, favorite) {
+            // it required authenticated token to access this method 
+            // add token to authorization header
+            attachToken(token);
+            return $http.post(gbmono.api_site_prefix.account_api_url + '/RemoveFavorite', favorite);
+        }
+        
+        // private method
+        function attachToken(token) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+        }
+
+        //function isAuthenticated(token) {
+        //    // call authorized web api to validate if current token is valid
+        //    // add token to authorization header
+        //    $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+        //    // call authorized web method
+        //    return $http.get(gbmono.api_site_prefix.account_api_url + '/Current');
+        //}
     }
 })(angular.module('gbmono'));
 

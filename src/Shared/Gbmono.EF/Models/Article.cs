@@ -5,13 +5,13 @@ namespace Gbmono.EF.Models
     /// <summary>
     /// 新闻, 咨询
     /// </summary>
-    public class News
+    public class Article
     {
-        public int NewsId { get; set; }
+        public int ArticleId { get; set; }
+
+        public short ArticleTypeId { get; set; }
 
         public string Title { get; set; }
-
-        public string TilteImageUrl { get; set; }
 
         // html code
         public string Content { get; set; }
@@ -21,9 +21,5 @@ namespace Gbmono.EF.Models
         public string CreatedBy { get; set; }
 
         public DateTime IsPublished { get; set; }
-
-        public string PulishedDate { get; set; }
-
-        public DateTime PublishDate { get; set; }
     }
 }

@@ -54,16 +54,19 @@
     <Compile Include="ModelConfigs\CategoryMap.cs" />
     <Compile Include="ModelConfigs\CountryMap.cs" />
     <Compile Include="ModelConfigs\ManufacturerMap.cs" />
+    <Compile Include="ModelConfigs\ProductEventMap.cs" />
     <Compile Include="ModelConfigs\ProductImageMap.cs" />
     <Compile Include="ModelConfigs\ProductMap.cs" />
     <Compile Include="ModelConfigs\RetailerMap.cs" />
     <Compile Include="ModelConfigs\RetailShopMap.cs" />
+    <Compile Include="ModelConfigs\UserFavoriteMap.cs" />
+    <Compile Include="Models\ArticleType.cs" />
     <Compile Include="Models\Banner.cs" />
     <Compile Include="Models\BannerType.cs" />
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Country.cs" />
-    <Compile Include="Models\News.cs" />
+    <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Manufacturer.cs" />
     <Compile Include="Models\ProductEventType.cs" />
@@ -82,12 +85,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="SqlScripts\gbmono0113.zip" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="SqlScripts\brandDataCreate.sql" />
-    <Content Include="SqlScripts\categorytemp.sql" />
-    <Content Include="SqlScripts\RetailShop.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
