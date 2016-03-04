@@ -4,6 +4,7 @@
 (function (module) {
     // inject the controller params
     ctrl.$inject = ['$routeParams',
+                    '$location',
                     'pluginService',
                     'utilService',
                     'productDataFactory',
@@ -16,6 +17,7 @@
 
     // controller body
     function ctrl($routeParams,
+                  $location,
                   pluginService,
                   utilService,
                   productDataFactory,
