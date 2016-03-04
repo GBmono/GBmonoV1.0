@@ -22,20 +22,34 @@
         vm.subCate = {};
         // category brands
         vm.categoryBrands = [];
-
         // product image root path
         vm.imgRoot = gbmono.img_root_path;
+        // paging
+        vm.paging = { pageIndex: 1, pageSize: 12 };
+        // indicate if all data is loaded
+        vm.isAllDataLoaded = false;
         // retreive top category id from route params
         var topCategoryId = $routeParams.id ? parseInt($routeParams.id) : 0;
         // sub category id (optional)
         var subCateId = $location.search().subcateid ? parseInt($location.search().subcateid) : 0;
-    
+
+        // view event handlers
+        vm.loadProducts = function () {
+            // get products
+            getProducts(subCateId == 0 ? topCategoryId : subCateId,
+                            vm.paging.pageIndex, // page index
+                            vm.paging.pageSize); // page size
+        };
+
+        // page init
         init();
 
         function init() {
             if (topCategoryId != 0) {
                 // load products by top category or sub category
-                getProducts(subCateId == 0 ? topCategoryId : subCateId);
+                getProducts(subCateId == 0 ? topCategoryId : subCateId,
+                            vm.paging.pageIndex, // first page
+                            vm.paging.pageSize); // page size
 
                 // category menu list with expanded top category
                 getCategoryMenu(topCategoryId);
@@ -49,10 +63,18 @@
         }
 
         // get products by category
-        function getProducts(categoryId) {
-            productDataFactory.getByCategory(categoryId)
+        function getProducts(categoryId, pageIndex, pageSize) {
+            productDataFactory.getByCategory(categoryId, pageIndex, pageSize)
                 .success(function (data) {
-                    vm.products = data;
+                    // add products into collection
+                    vm.products = vm.products.concat(data);
+                    // add page index
+                    vm.paging.pageIndex++;
+                    // if no more products 
+                    if (data.length < vm.paging.pageSize) {
+                        // disable or hide the button
+                        vm.isAllDataLoaded = true;
+                    }
                 });
         }
 

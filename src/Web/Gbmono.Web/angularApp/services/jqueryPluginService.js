@@ -10,7 +10,10 @@
         return {
             slider: slider,
             tab:tab,
-            productDetailGallery: productDetailGallery
+            productDetailGallery: productDetailGallery,
+            notify: notify,
+            showDataLoadingIndicator: showDataLoadingIndicator,
+            closeDataLoadingIndicator: closeDataLoadingIndicator
         };
 
         // silder effect
@@ -36,30 +39,31 @@
         function productDetailGallery(confDetailSwitch) {
             $timeout(function () {
                 $('#productMain .thumb:first').addClass('active');
-                timer = setInterval(autoSwitch, confDetailSwitch);
+                // timer = setInterval(autoSwitch, confDetailSwitch);
                 $("#productMain .thumb").click(function (e) {
 
                     switchImage($(this));
-                    clearInterval(timer);
-                    timer = setInterval(autoSwitch, confDetailSwitch);
+                    // clearInterval(timer);
+                    // timer = setInterval(autoSwitch, confDetailSwitch);
                     e.preventDefault();
-                }
-                );
-                $('#productMain #mainImage').hover(function () {
-                    clearInterval(timer);
-                }, function () {
-                    timer = setInterval(autoSwitch, confDetailSwitch);
                 });
-                function autoSwitch() {
-                    var nextThumb = $('#productMain .thumb.active').closest('div').next('div').find('.thumb');
-                    if (nextThumb.length == 0) {
-                        nextThumb = $('#productMain .thumb:first');
-                    }
-                    switchImage(nextThumb);
-                }
+                
+                //$('#productMain #mainImage').hover(function () {
+                //    // clearInterval(timer);
+                //}, function () {
+                //    // timer = setInterval(autoSwitch, confDetailSwitch);
+                //});
+
+                //function autoSwitch() {
+                //    var nextThumb = $('#productMain .thumb.active').closest('div').next('div').find('.thumb');
+                //    if (nextThumb.length == 0) {
+                //        nextThumb = $('#productMain .thumb:first');
+                //    }
+                //    switchImage(nextThumb);
+                //}
 
                 function switchImage(thumb) {
-
+                    // switch thumbnail img 
                     $('#productMain .thumb').removeClass('active');
                     var bigUrl = thumb.attr('href');
                     thumb.addClass('active');
@@ -76,6 +80,86 @@
                     e.preventDefault();
                 });
             });
+        }
+
+        // $.growl notification
+        function notify(response, type) {
+            var msg = '';
+
+            // if type is error
+            // extract the acutal error message from object
+            if (type === 'error') {
+                if (response.data) {
+                    if (response.data.message) {
+                        msg = response.data.message;
+                    } else if (response.data.error_description) {
+                        msg = response.data.error_description;
+                    }
+
+                } else {
+                    // generic error message
+                    msg = 'Unexpected error has occurred. Please contact the administrator.';
+                }
+            }
+
+            $.growl(
+                {
+                    icon: type === 'success' ? 'fa fa-check' : 'fa fa-exclamation-triangle',
+                    title: type === 'success' ? ' Success!  ' : ' Error!  ',
+                    message: msg,
+                    url: ''
+                },
+                {
+                    element: 'body',
+                    type: type === 'error' ? 'danger' : 'success',
+                    allow_dismiss: true,
+                    //position: 'relative',
+                    placement: {
+                        from: 'top',
+                        align: 'center'
+                    },
+                    offset: {
+                        x: 20,
+                        y: 85
+                    },
+                    spacing: 10,
+                    z_index: 1031,
+                    delay: 2500,
+                    timer: 2000,
+                    url_target: '_blank',
+                    mouse_over: false,
+                    animate: {
+                        enter: 'animated fadeIn',
+                        exit: 'animated fadeOut'
+                    },
+                    icon_type: 'class',
+                    template: '<div data-growl="container" class="alert" role="alert">' +
+                                    '<button type="button" class="close" data-growl="dismiss">' +
+                                        '<span aria-hidden="true">&times;</span>' +
+                                        '<span class="sr-only">Close</span>' +
+                                    '</button>' +
+                                    '<span data-growl="icon"></span>&nbsp;&nbsp;' +
+                                    // '<span data-growl="title"></span>' +
+                                    '<span data-growl="message"></span>' +
+                                    '<a href="#" data-growl="url"></a>' +
+                                '</div>'
+                });
+        }
+
+        // data loading indicator
+        function showDataLoadingIndicator(selector) {
+            // add div with progress indicator on the top of the current widget
+            $(selector).append('<div class="widget-box-overlay">' +
+                                '<div class="loading-icon">' +
+                                '<img src="/content/img/loading_3.gif" alt="loading"/>' +
+                                '</div>' +
+                            '</div>');
+        }
+
+        // close progess indicator
+        function closeDataLoadingIndicator(selector) {
+            // remove the indicator div
+            $(selector).find('.widget-box-overlay').remove();
         }
     }
 })(angular.module('gbmono'));

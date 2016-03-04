@@ -13,10 +13,7 @@
         // return data factory with CRUD calls
         return {
             register: register,
-            login: login,
-            getFavorites: getUserFavorites,
-            addFavorite: addUserFavorite,
-            removeFavorite: removeUserFavorite
+            login: login
         }
 
         // register user
@@ -37,39 +34,6 @@
             });
         }
 
-        function getUserFavorites(token) {
-            // it required authenticated token to access this method 
-            // add token to authorization header
-            attachToken(token);
-            return $http.get(gbmono.api_site_prefix.account_api_url + '/Favorites');
-        }
-
-        function addUserFavorite(token, favorite) {
-            // it required authenticated token to access this method 
-            // add token to authorization header
-            attachToken(token); console.log(favorite);
-            return $http.post(gbmono.api_site_prefix.account_api_url + '/AddFavorite', favorite);
-        }
-
-        function removeUserFavorite(token, favorite) {
-            // it required authenticated token to access this method 
-            // add token to authorization header
-            attachToken(token);
-            return $http.post(gbmono.api_site_prefix.account_api_url + '/RemoveFavorite', favorite);
-        }
-        
-        // private method
-        function attachToken(token) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + token;
-        }
-
-        //function isAuthenticated(token) {
-        //    // call authorized web api to validate if current token is valid
-        //    // add token to authorization header
-        //    $http.defaults.headers.common.Authorization = 'Bearer ' + token;
-        //    // call authorized web method
-        //    return $http.get(gbmono.api_site_prefix.account_api_url + '/Current');
-        //}
     }
 })(angular.module('gbmono'));
 
@@ -118,7 +82,6 @@
 
 })(angular.module('gbmono'));
 
-
 /*
     product data factory
 */
@@ -147,10 +110,65 @@
             return $http.get(gbmono.api_site_prefix.product_api_url + '/' + id);
         }
 
-        function getByCategory(categoryId) {
-            return $http.get(gbmono.api_site_prefix.product_api_url + '/Categories/' + categoryId);
+        function getByCategory(categoryId, pageIndex, pageSize) {
+            return $http.get(gbmono.api_site_prefix.product_api_url + '/Categories/' + categoryId + '/' + pageIndex + '/' + pageSize);
         }
 
+    }
+
+})(angular.module('gbmono'));
+
+/*
+    user favorite data factory
+*/
+(function (module) {
+    // inject params
+    factory.$inject = ['$http'];
+
+    // create instance
+    module.factory('userFavoriteDataFactory', factory);
+
+    // factory implement
+    function factory($http) {
+
+        // return data factory with CRUD calls
+        return {
+            getFavoriteProducts: getFavoriteProducts,
+            isFavoriteProduct: isFavoriteProduct,
+            add: add,
+            remove:remove
+        };
+
+        function getFavoriteProducts(token, pageIndex, pageSize) {
+            // it required authenticated token to access this method 
+            // add token to authorization header
+            attachToken(token);
+            return $http.get(gbmono.api_site_prefix.userfavorite_api_url + '/Products/' + pageIndex + '/' + pageSize);
+        }
+
+        function isFavoriteProduct(token, productId) {
+            attachToken(token);
+            return $http.get(gbmono.api_site_prefix.userfavorite_api_url + '/IsFavorited/' + productId);
+        }
+
+        function add(token, favorite) {
+            // it required authenticated token to access this method 
+            // add token to authorization header
+            attachToken(token); 
+            return $http.post(gbmono.api_site_prefix.userfavorite_api_url, favorite);
+        }
+
+        function remove(token, id) {
+            // it required authenticated token to access this method 
+            // add token to authorization header
+            attachToken(token);
+            return $http.delete(gbmono.api_site_prefix.userfavorite_api_url + '/' + id);
+        }
+
+        // private method
+        function attachToken(token) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+        }
 
     }
 

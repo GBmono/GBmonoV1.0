@@ -42,7 +42,7 @@ namespace Gbmono.Api.Security
 
             if (user == null)
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                context.SetError("invalid_grant", "用户名或密码不正确。");
                 return;
             }
 

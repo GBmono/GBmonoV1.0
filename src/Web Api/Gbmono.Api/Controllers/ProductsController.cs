@@ -6,11 +6,14 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.AspNet.Identity.Owin;
 
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Models;
 using Gbmono.Api.Extensions;
+using Gbmono.Api.Security.Identities;
+
 
 namespace Gbmono.Api.Controllers
 {
@@ -31,25 +34,25 @@ namespace Gbmono.Api.Controllers
         public async Task<IEnumerable<ProductSimpleModel>> Get(int? pageIndex = 1, int? pageSize = 10)
         {
             IList<Product> products;
-            // first page
-            if(pageIndex == 1)
-            {
-                // return first pagesize of products
-                products = await _repositoryManager.ProductRepository
-                                                   .Table
-                                                   .Include(m => m.Brand) // include brand table
-                                                   .Include(m => m.Images)
-                                                   .Where(m => (m.ActivationDate <= DateTime.Today &&
-                                                               (m.ExpiryDate >= DateTime.Today || m.ExpiryDate == null)))
-                                                   .OrderByDescending(m => m.ActivationDate)
-                                                   .Take(pageSize.Value)
-                                                   .ToListAsync();
+            //// first page
+            //if(pageIndex == 1)
+            //{
+            //    // return first pagesize of products
+            //    products = await _repositoryManager.ProductRepository
+            //                                       .Table
+            //                                       .Include(m => m.Brand) // include brand table
+            //                                       .Include(m => m.Images)
+            //                                       .Where(m => (m.ActivationDate <= DateTime.Today &&
+            //                                                   (m.ExpiryDate >= DateTime.Today || m.ExpiryDate == null)))
+            //                                       .OrderByDescending(m => m.ActivationDate)
+            //                                       .Take(pageSize.Value)
+            //                                       .ToListAsync();
 
-                // convert into simplified model
-                return products.Select(m => m.ToSimpleModel());
-            }
+            //    // convert into simplified model
+            //    return products.Select(m => m.ToSimpleModel());
+            //}
 
-            // if page index is lager than 1
+            // get start index 
             var startIndex = (pageIndex.Value - 1) * pageSize.Value;
 
             products = await _repositoryManager.ProductRepository
@@ -123,7 +126,7 @@ namespace Gbmono.Api.Controllers
 
             return products.Select(m => m.ToSimpleModel()).Skip(startIndex).Take(pageSize.Value);
         }
-
+        
         // get by product id, return detailed product model
         public async Task<Product> GetById(int id)
         {
@@ -136,6 +139,7 @@ namespace Gbmono.Api.Controllers
                                            .Include(m => m.Category.ParentCategory.ParentCategory)
                                            .SingleOrDefaultAsync(m => m.ProductId == id);
         }
+
 
         [Route("BarCodes/{code}")]
         public Product GetByBarCode(string code)

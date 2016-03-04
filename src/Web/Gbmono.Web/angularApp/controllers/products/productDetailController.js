@@ -3,13 +3,25 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['$routeParams', 'pluginService', 'productDataFactory', 'categoryDataFactory', 'accountDataFactory'];
+    ctrl.$inject = ['$routeParams',
+                    'pluginService',
+                    'utilService',
+                    'productDataFactory',
+                    'categoryDataFactory',
+                    'accountDataFactory',
+                    'userFavoriteDataFactory'];
 
     // create controller
     module.controller('productDetailController', ctrl);
 
     // controller body
-    function ctrl($routeParams, pluginService, productDataFactory, categoryDataFactory, accountDataFactory) {
+    function ctrl($routeParams,
+                  pluginService,
+                  utilService,
+                  productDataFactory,
+                  categoryDataFactory,
+                  accountDataFactory,
+                  userFavoriteDataFactory) {
         //  use vm to represent the binding scope. This gets rid of the $scope variable from most of controllers
         var vm = this;
         // current product
@@ -26,25 +38,40 @@
         vm.imgRoot = gbmono.img_root_path;
         // if product is favorited
         vm.isFavorited = false;
+        // loading image
+        // this staging loading img would be replaced by actual product img once the data is loaded
+        vm.primaryImg = 'loading_2.gif';
         // retreive category id from route params
         var productId = $routeParams.id ? parseInt($routeParams.id) : 0;
-        // token
-        // todo: change to angularJs local storage or cookie if browser doesn't suport local storage
-        var token = window.localStorage.getItem(gbmono.LOCAL_STORAGE_TOKEN_KEY);
+        // get token from local storage
+        var token = utilService.getToken();
 
         // page init
         init();
         // event handlers
-        vm.addFavorite = function () {
-            var favorite = { productId: productId };
-            
-            addFavorite(token, favorite);
+        vm.toggleFavorite = function () {
+            if (vm.isFavorited) {
+                // remove
+                removeFavorite(token, productId);
+            }
+            else {
+                // add 
+                var favorite = { productId: productId };
+                // add into user favorite
+                addFavorite(token, favorite);
+            }
+
         };
 
         function init() {
             if (productId !== 0) {
+                pluginService.showDataLoadingIndicator('#productMain');
                 // get product by id
                 getProduct(productId);
+                // check if product is favorid when user is logged in
+                if (token && token !== '') {
+                    isFavoritedProduct(token, productId);
+                }
             }
         }
 
@@ -56,12 +83,16 @@
                     vm.product = data;
                     // filter image by type id
                     filterImages(data.images);
+                    // replace the loading img by actual product image
+                    vm.primaryImg = vm.productImages[0].fileName
                     // get category menu by top category id
                     getCategoryMenu(vm.product.category.parentCategory.parentId);
                     // init img thumb gallery
                     pluginService.productDetailGallery(4000);
                     // init bootstrap tab
                     pluginService.tab();
+                    // close data loading
+                    pluginService.closeDataLoadingIndicator('#productMain');
                 });
         }
 
@@ -95,14 +126,26 @@
             }
         }
 
+        // check if product is favorited
+        function isFavoritedProduct(userToken, productId) {
+            userFavoriteDataFactory.isFavoriteProduct(userToken, productId)
+                .success(function (status) {
+                    if (status) {
+                        vm.isFavorited = true;
+                    }
+                })
+                .error(function (error) {
+                    // ignore the 401 error
+                });
+        }
+
         // add favorite
-        function addFavorite(token, productId) {
-            accountDataFactory.addFavorite(token, productId)
+        function addFavorite(token, favorite) {
+            userFavoriteDataFactory.add(token, favorite)
                 .then(function successCallback(response) {
                     vm.isFavorited = true;
                     
-                }, function errorCallback(response) {
-                    console.log(response);
+                }, function errorCallback(response) {                    
                     // if user is not authencited
                     if (response.status === 401) {
                         // direct into login page
@@ -114,9 +157,9 @@
 
         // remove favorite
         function removeFavorite(token, productId) {
-            accountDataFactory.removeFavorite(token, productId)
+            userFavoriteDataFactory.remove(token, productId)
                 .then(function successCallback(response) {
-
+                    vm.isFavorited = false;
 
                 }, function errorCallback(response) {
                     // if user is not authencited
@@ -127,5 +170,6 @@
                     }
                 });
         }
+
     }
 })(angular.module('gbmono'));

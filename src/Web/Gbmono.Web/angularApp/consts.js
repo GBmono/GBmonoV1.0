@@ -13,9 +13,6 @@
     /* product image root path */
     gbmono.img_root_path = 'http://localhost:2232/Files/Products/'
 
-    /* gbmono bearer token key name */
-    gbmono.LOCAL_STORAGE_TOKEN_KEY = 'gbmono_BEARER_TOKEN'; // localstorage token key name
-    gbmono.LOCAL_STORAGE_USERNAME_KEY = 'gbmono_USER_NAME';
 
     /* web api controller route prefix */
     /* bearer token entry point*/
@@ -29,14 +26,16 @@
         category_api_url: gbmono.web_api_app_name + '/Categories',
         // product detail url
         product_api_url: gbmono.web_api_app_name + '/Products',
+        // user favorite url
+        userfavorite_api_url: gbmono.web_api_app_name + '/UserFavorites',
         // brand url
         brand_api_url: gbmono.web_api_app_name + '/Brands',
         // profile url
-        profile_api_url: gbmono.web_api_app_name + '/Profiles',
-        // banner url
-        banner_api_url: gbmono.web_api_app_name + '/Banners',
-        // retail url
-        retail_api_url: gbmono.web_api_app_name + '/Retailers'
+        profile_api_url: gbmono.web_api_app_name + '/Profiles'
+        //// banner url
+        //banner_api_url: gbmono.web_api_app_name + '/Banners',
+        //// retail url
+        //retail_api_url: gbmono.web_api_app_name + '/Retailers'
     };
 
     // image type

@@ -12,19 +12,75 @@
                     <li>个人中心</li>
                 </ul>
 
-
                 <div class="box text-center">
 
                     <div class="row">
                         <div class="col-sm-10 col-sm-offset-1">
-                            <h1></h1>
+                            <h1>个人收藏夹</h1>
 
-                            <p class="lead"></p>
+                            <p class="lead">产品列表</p>
                         </div>
                     </div>
                 </div>
 
-            </div>
+                <div class="col-md-9 clearfix">
+                    <div class="row products">
+                        <div class="col-md-4 col-sm-6"
+                             ng-repeat="product in vm.products">
+                            <div class="product">
+                                <div class="image">
+                                    <a ng-href="#/products/{{product.productId}}">
+                                        <img ng-src="{{ vm.imgRoot + product.imgUrl}}" alt="" class="img-responsive produt-list-img">
+                                    </a>
+                                    <!--<div class="quick-view-button">
+                                        <a ng-href="#/products/{{product.productId}}" class="btn btn-default btn-sm">详细信息</a>
+                                    </div>-->
+                                </div>
+                                <!-- /.image -->
+                                <div class="text">
+                                    <h3><a ng-href="#/products/{{product.productId}}">{{ product.brandName }}</a></h3>
+                                    <a ng-href="#/products/{{product.productId}}" title="{{ product.fullName }}">{{ product.shortName }}</a>
+                                    <p class="price">{{ product.price | currency:"¥"}}</p>
+                                </div>
+
+                            </div>
+                            <!-- /.product -->
+                        </div>    
+                    </div>
+                    <!-- /.products -->
+
+                </div>
+                <!-- /.col-md-9 -->
+                <!-- *** LEFT COLUMN END *** -->
+                <!-- *** RIGHT COLUMN ***
+    _________________________________________________________ -->
+
+                <div class="col-md-3">
+                    <!-- *** CUSTOMER MENU ***
+        _________________________________________________________ -->
+                    <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Customer section</h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="active">
+                                    <a ng-href=""><i class="fa fa-heart"></i> 收藏夹</a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="fa fa-user"></i> 个人账号</a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="fa fa-sign-out"></i> 退出</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
         </div>
     </div>
 </div>

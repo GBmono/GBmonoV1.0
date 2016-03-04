@@ -30,7 +30,7 @@
                         <div class="col-sm-6">
                             <div id="mainImage">
                                 <img alt="产品图片" class="img-responsive img-center"
-                                     ng-src="{{ vm.imgRoot + vm.productImages[0].fileName }}">
+                                     ng-src="{{ vm.imgRoot + vm.primaryImg }}">
                             </div>
 
                             <div class="ribbon sale">
@@ -54,11 +54,10 @@
 
                                 <p class="price">{{ vm.product.price | currency:"¥" }}</p>
 
-                                <p class="text-center">
-                                    <!--<button type="button" class="btn btn-success"><i class="fa fa-forward"></i> 转发</button>-->
-                                    <button type="button" class="btn btn-default" title="收藏"
-                                            ng-click="vm.addFavorite()">
-                                        加入收藏夹<i ng-class="(vm.isFavorited) ? 'fa fa-star main-color' : 'fa fa-star-o'"></i>
+                                <p class="text-center">                                    
+                                    <button type="button" class="btn btn-default btn-lg" title="收藏"
+                                            ng-click="vm.toggleFavorite()">
+                                        <i ng-class="(vm.isFavorited) ? 'fa fa-star orange' : 'fa fa-star-o'"></i>
                                     </button>
                                     <!--<button type="button" class="btn btn-default" title="收藏">
                                         <i class="fa fa-star-o"></i>
