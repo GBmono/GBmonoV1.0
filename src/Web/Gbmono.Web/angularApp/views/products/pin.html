@@ -1,0 +1,30 @@
+﻿<div class="row">
+    <div id="wrapper">
+        <ul class="breadcrumb">
+
+            <li>
+                <a ng-href="#/">主页</a>
+            </li>
+            <li>Ranking</li>
+        </ul>
+        <hr />
+
+
+        <div id="columns">
+            <div class="pin"
+                 ng-repeat="product in vm.products">
+                <div class="image">
+                    <a ng-href="#/products/{{product.productId}}">
+                        <img ng-src="{{ vm.imgRoot + product.imgUrl}}" alt="" 
+                             class="img-responsive" style="max-height:380px;">
+                    </a>
+                </div> 
+                <h4><a ng-href="#/products/{{product.productId}}">{{ product.brandName }}</a></h4>
+                <a ng-href="#/products/{{product.productId}}" title="{{ product.fullName }}">{{ product.fullName }}</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

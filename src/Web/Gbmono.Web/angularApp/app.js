@@ -40,6 +40,12 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
+                .when('/pin', { // products pin
+                    templateUrl: gbmono.app_view_path + '/products/pin.html',
+                    controller: 'productPinController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
                 .when('/login', { // 登陆注册页面
                     templateUrl: gbmono.app_view_path + '/accounts/login.html',
                     controller: 'loginController',
