@@ -95,8 +95,6 @@ namespace Gbmono.Utils.ProductDataImporter
                     return;
                 }
 
-                // todo: import product images 
-                ImportImage(wsPart, (int)newProductId);
             };
         }
 
@@ -119,7 +117,7 @@ namespace Gbmono.Utils.ProductDataImporter
 
             // 大分类CD
             var categoryCodeLevel1 = GetCellPathValue(wbPart, wsPart, "P9").RemoveEmptyOrWrapCharacters().ToDBC();
-            var categoryCodeLevel1Name= GetCellPathValue(wbPart, wsPart, "T9").RemoveEmptyOrWrapCharacters().ToDBC();
+            var categoryCodeLevel1Name = GetCellPathValue(wbPart, wsPart, "T9").RemoveEmptyOrWrapCharacters().ToDBC();
             // 陈列标准CD
             var categoryCodeLevel2 = GetCellPathValue(wbPart, wsPart, "Z9").RemoveEmptyOrWrapCharacters().ToDBC();
             var categoryCodeLevel2Name = GetCellPathValue(wbPart, wsPart, "AD9").RemoveEmptyOrWrapCharacters().ToDBC();
@@ -196,14 +194,14 @@ namespace Gbmono.Utils.ProductDataImporter
 
             //春
             var springData = GetCellPathValue(wbPart, wsPart, "V59").Trim();
-            bool? spring= GetSeason(springData);
-          
+            bool? spring = GetSeason(springData);
+
             //夏
             var summerData = GetCellPathValue(wbPart, wsPart, "W59").Trim();
-            bool? summer= GetSeason(summerData);
-          
+            bool? summer = GetSeason(summerData);
+
             //秋
-            var autumnData= GetCellPathValue(wbPart, wsPart, "X59").Trim();
+            var autumnData = GetCellPathValue(wbPart, wsPart, "X59").Trim();
             bool? autumn = GetSeason(autumnData);
 
             //冬
@@ -248,12 +246,19 @@ namespace Gbmono.Utils.ProductDataImporter
             _repositoryManager.ProductRepository.Create(newProduct);
             _repositoryManager.ProductRepository.Save();
 
+
+
+            //ImportImage
+            ImportImage(wsPart, newProduct.ProductId, categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3);
+
+
             return newProduct.ProductId;
         }
 
-        static void ImportImage(WorksheetPart wsPart, int productId)
+        static void ImportImage(WorksheetPart wsPart, int productId, string categoryCodeLevel1,string categoryCodeLevel2,string categoryCodeLevel3)
         {
-            var imageFileFolder = ConfigurationManager.AppSettings["imageFolder"];
+            var imageFileFolder = GetImageFolderByCategory(categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3);
+            var imageCatePath = $@"{categoryCodeLevel1}\{categoryCodeLevel2}\{categoryCodeLevel3}";
             int imageIndex = 1;
             var success = 0;
             var fail = 0;
@@ -273,10 +278,11 @@ namespace Gbmono.Utils.ProductDataImporter
                     File.WriteAllBytes(filePath, byteStream);
 
                     //Todo ProductImageTypeId is temp
-                    var newProductImage =new ProductImage()
+                    var newProductImage = new ProductImage()
                     {
                         ProductId = productId,
-                        FileName = filename,
+                        //FileName = filePath,
+                        FileName = $@"{imageCatePath}\{filename}",
                         ProductImageTypeId = 1
                     };
                     _repositoryManager.ProductImageRepository.Create(newProductImage);
@@ -284,11 +290,30 @@ namespace Gbmono.Utils.ProductDataImporter
                 }
                 catch (Exception ex)
                 {
-                     Logger.Log(LogLevel.Error,string.Format("Save Image Error:productId {0},ex:", productId));
+                    Logger.Log(LogLevel.Error, string.Format("Save Image Error:productId {0},ex:", productId));
                     fail++;
                 }
                 imageIndex++;
             }
+        }
+
+        private static string GetImageFolderByCategory(string categoryCodeLevel1, string categoryCodeLevel2,
+            string categoryCodeLevel3)
+        {
+            var imageFileFolder = ConfigurationManager.AppSettings["imageFolder"];
+
+            var level1Folder = $@"{imageFileFolder}\{categoryCodeLevel1}";
+            if (!Directory.Exists(level1Folder))
+                Directory.CreateDirectory(level1Folder);
+
+            var level2Folder = $@"{level1Folder}\{categoryCodeLevel2}";
+            if (!Directory.Exists(level2Folder))
+                Directory.CreateDirectory(level2Folder);
+
+            var level3Folder = $@"{level2Folder}\{categoryCodeLevel3}";
+            if (!Directory.Exists(level3Folder))
+                Directory.CreateDirectory(level3Folder);
+            return level3Folder;
         }
 
         static int GetBrandId(string brandName)
@@ -312,7 +337,7 @@ namespace Gbmono.Utils.ProductDataImporter
             return brand.BrandId;
         }
 
-        static int? GetCategoryId(string topCateCode, string secondCateCode, string thirdCateCode,string level1Name,string level2Name,string level3Name)
+        static int? GetCategoryId(string topCateCode, string secondCateCode, string thirdCateCode, string level1Name, string level2Name, string level3Name)
         {
             var category = _repositoryManager.CategoryRepository
                                              .Table
@@ -343,7 +368,7 @@ namespace Gbmono.Utils.ProductDataImporter
                     Logger.Log(LogLevel.Error, string.Format("Create Category l1:{0},l2:{1},l3:{2},ex:", topCateCode, secondCateCode, thirdCateCode));
                     return null;
                 }
-             
+
             }
 
             return category.CategoryId;
