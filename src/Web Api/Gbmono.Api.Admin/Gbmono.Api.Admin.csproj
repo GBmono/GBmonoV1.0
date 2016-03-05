@@ -16,7 +16,7 @@
     <RootNamespace>Gbmono.Api.Admin</RootNamespace>
     <AssemblyName>Gbmono.Api.Admin</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -159,7 +159,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2232</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2232/</IISUrl>
+          <IISUrl>http://localhost/AdminApi</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

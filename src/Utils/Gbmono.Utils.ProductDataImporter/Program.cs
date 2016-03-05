@@ -225,7 +225,7 @@ namespace Gbmono.Utils.ProductDataImporter
                 Description = description,
                 Instruction = instruction,
                 ExtraInformation = extraInformation,
-                CountryId = 1, // hard code for japan
+                // CountryId = 1, // take out contry id from product table
                 CreatedDate = DateTime.Now,
                 UpdatedDate = DateTime.Now,
                 ActivationDate = activationDate,

@@ -8,7 +8,7 @@
 
     function factory($http) {
         // json data directory
-        var pageDataPath = '/angularApp/data/';
+        var pageDataPath = '/gbmono/angularApp/data/';
 
         // return factory class
         return {

@@ -2,16 +2,16 @@
  global variables & consts
 */
 (function (gbmono) {
-    /* web api application name */
-    //gbmono.web_api_app_name = 'http://localhost/name';
-    gbmono.domain = 'http://localhost:28975';
+    /* web api dimain */
+    gbmono.domain = 'http://localhost/gbmonoapi';
+    /* web api root name */
     gbmono.web_api_app_name = gbmono.domain + '/api';
     
-    /* angularJs app view root path */
-    gbmono.app_view_path = '/angularApp/views';
+    /* web page view root path */
+    gbmono.app_view_path = '/gbmono/angularApp/views';
 
-    /* product image root path */
-    gbmono.img_root_path = 'http://localhost:2232/Files/Products/'
+    /* product image root path (web api admin) */
+    gbmono.img_root_path = 'http://localhost/adminapi/Files/Products/'
 
 
     /* web api controller route prefix */

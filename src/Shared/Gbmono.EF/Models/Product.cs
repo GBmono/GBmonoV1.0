@@ -22,7 +22,7 @@ namespace Gbmono.EF.Models
         public Brand Brand { get; set; }
 
         // todo: delete -- 产地, map to country
-        public int CountryId { get; set; }
+        // public int CountryId { get; set; }
         // public Country Country { get; set; }
 
         // 名称 (系列名称)
