@@ -13,7 +13,9 @@
 
         return {
             getToken: getToken,
-            saveToken: saveToken
+            saveToken: saveToken,
+            getUserName: getUserName,
+            saveUserName: saveUserName
         };
         
         // return user token stored in local storage or cookie (if local storage is not supported)
@@ -22,7 +24,16 @@
         }
 
         function saveToken(token) {
+            // save bearer token
             localStorageService.set(BEARER_TOKEN_KEY, token);
+        }
+
+        function getUserName() {
+            return localStorageService.get(USERNAME_KEY);
+        }
+
+        function saveUserName(name) {
+            localStorageService.set(USERNAME_KEY, name);
         }
     }
 

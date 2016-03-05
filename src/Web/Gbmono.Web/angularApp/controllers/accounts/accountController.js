@@ -49,7 +49,8 @@
                 .then(function successCallback(response) {
                     // save the bearer token into local storage                    
                     utilService.saveToken(response.data.access_token);
-                    
+                    // save user name
+                    utilService.saveUserName(response.data.userName); 
                     // direct into profile page
                     // todo: check return url??
                     $location.path('/profile');

@@ -13,16 +13,18 @@
         var vm = this;
         // user favorite products
         vm.products = [];
+        // user name
+        vm.name = '';
         // product image root path
         vm.imgRoot = gbmono.img_root_path;
         // paging
         vm.paging = { pageIndex: 1, pageSize: 12 };
         // indicate if all data is loaded
         vm.isAllDataLoaded = false;
-
+        
         // get token from local storage
         var token = utilService.getToken();
-   
+        
         init(); // page init 
 
         function init() {
@@ -31,7 +33,8 @@
                 // redirect into login page
                 $location.path('/login');
             }
-            
+            // get current user name
+            vm.name = utilService.getUserName();
             // get user favorites
             getFavoriteProducts(token, vm.paging.pageIndex, vm.paging.pageSize);
         }
