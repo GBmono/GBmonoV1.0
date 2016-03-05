@@ -26,7 +26,8 @@ namespace Gbmono.Utils.ProductDataImporter
         static readonly RepositoryManager _repositoryManager = new RepositoryManager();
 
         // working directory
-        static readonly string WorkingDirectory = Path.GetFullPath(@"..\..") + "\\files\\";
+        //static readonly string WorkingDirectory = Path.GetFullPath(@"..\..") + "\\files\\";
+        private static readonly string WorkingDirectory = ConfigurationSettings.AppSettings["sourceFilesFolder"];
 
         static void Main(string[] args)
         {
@@ -258,7 +259,7 @@ namespace Gbmono.Utils.ProductDataImporter
         static void ImportImage(WorksheetPart wsPart, int productId, string categoryCodeLevel1,string categoryCodeLevel2,string categoryCodeLevel3)
         {
             var imageFileFolder = GetImageFolderByCategory(categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3);
-            var imageCatePath = $@"{categoryCodeLevel1}\{categoryCodeLevel2}\{categoryCodeLevel3}";
+            var imageCatePath = $@"{categoryCodeLevel1}/{categoryCodeLevel2}/{categoryCodeLevel3}";
             int imageIndex = 1;
             var success = 0;
             var fail = 0;
@@ -281,7 +282,7 @@ namespace Gbmono.Utils.ProductDataImporter
                     {
                         ProductId = productId,
                         //FileName = filePath,
-                        FileName = $@"{imageCatePath}\{filename}",
+                        FileName = $@"{imageCatePath}/{filename}",
                         ProductImageTypeId = 1
                     };
                     _repositoryManager.ProductImageRepository.Create(newProductImage);
