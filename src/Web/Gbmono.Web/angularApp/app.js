@@ -46,6 +46,12 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
+                .when('/articles', { // 信息，文章，新闻
+                    templateUrl: gbmono.app_view_path + '/articles/index.html',
+                    controller: 'articleIndexController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
                 .when('/login', { // 登陆注册页面
                     templateUrl: gbmono.app_view_path + '/accounts/login.html',
                     controller: 'loginController',

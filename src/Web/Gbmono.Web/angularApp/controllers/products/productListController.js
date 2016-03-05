@@ -67,7 +67,7 @@
             productDataFactory.getByCategory(categoryId, pageIndex, pageSize)
                 .success(function (data) {
                     // add products into collection
-                    vm.products = vm.products.concat(data);
+                    vm.products = vm.products.concat(data); 
                     // add page index
                     vm.paging.pageIndex++;
                     // if no more products 

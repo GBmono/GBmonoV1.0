@@ -38,6 +38,7 @@ namespace Gbmono.Api.Controllers
         public async Task<IHttpActionResult> Create([FromBody]UserBindingModel model)
         {
             var displayName = model.UserName.Split('@')[0];
+            // we use email as username in gbmoni user db 
             var user = new GbmonoUser() { UserName = model.UserName, Email = model.Email, CreateTime = DateTime.Now, DisplayName = displayName };
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
