@@ -273,8 +273,7 @@ namespace Gbmono.Utils.ProductDataImporter
                     var imageExtension = Path.GetExtension(i.Uri.ToString());
 
                     string filename = string.Format(@"{0}_{1}{2}", productId, imageIndex, imageExtension);
-                    string filePath = string.Format(@"{0}\{1}", imageFileFolder, filename);
-
+                    string filePath = string.Format(@"{0}/{1}", imageFileFolder, filename);
                     File.WriteAllBytes(filePath, byteStream);
 
                     //Todo ProductImageTypeId is temp
@@ -302,18 +301,10 @@ namespace Gbmono.Utils.ProductDataImporter
         {
             var imageFileFolder = ConfigurationManager.AppSettings["imageFolder"];
 
-            var level1Folder = $@"{imageFileFolder}\{categoryCodeLevel1}";
-            if (!Directory.Exists(level1Folder))
-                Directory.CreateDirectory(level1Folder);
+            var finalPath = FileHelper.CreateDirectory(imageFileFolder, categoryCodeLevel1, categoryCodeLevel2,
+                categoryCodeLevel3);
 
-            var level2Folder = $@"{level1Folder}\{categoryCodeLevel2}";
-            if (!Directory.Exists(level2Folder))
-                Directory.CreateDirectory(level2Folder);
-
-            var level3Folder = $@"{level2Folder}\{categoryCodeLevel3}";
-            if (!Directory.Exists(level3Folder))
-                Directory.CreateDirectory(level3Folder);
-            return level3Folder;
+            return finalPath;
         }
 
         static int GetBrandId(string brandName)
