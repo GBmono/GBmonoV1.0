@@ -73,40 +73,24 @@ namespace Gbmono.IO
         /// <param name="topCateCode"></param>
         /// <param name="secondCateCode"></param>
         /// <param name="thirdCateCode"></param>
-        /// <param name="productCode"></param>
-        public static string CreateDirectory(string root, string topCateCode, string secondCateCode, string thirdCateCode, string productCode)
+        public static string CreateDirectory(string root, string topCateCode, string secondCateCode, string thirdCateCode)
         {
-            // check if top category folder exists
-            var topDirectory = Path.Combine(root, topCateCode);
-            if (!Directory.Exists(topDirectory))
-            {
-                // create directory
-                Directory.CreateDirectory(topDirectory);
-            }
+            var imageFileFolder = root;
 
-            // check if second category folder exists
-            var secondDirectory = Path.Combine(topDirectory, secondCateCode);
-            if (!Directory.Exists(secondDirectory))
-            {
-                Directory.CreateDirectory(secondDirectory);
-            }
+            var level1Folder = $@"{imageFileFolder}/{topCateCode}";
+            if (!Directory.Exists(level1Folder))
+                Directory.CreateDirectory(level1Folder);
 
-            // third category folder
-            var thirdDirectory = Path.Combine(secondDirectory, thirdCateCode);
-            if (!Directory.Exists(thirdDirectory))
-            {
-                Directory.CreateDirectory(thirdDirectory);
-            }
+            var level2Folder = $@"{level1Folder}/{secondCateCode}";
+            if (!Directory.Exists(level2Folder))
+                Directory.CreateDirectory(level2Folder);
 
-            // product folder
-            var productDirectory = Path.Combine(thirdDirectory, productCode);
-            if (!Directory.Exists(productDirectory))
-            {
-                Directory.CreateDirectory(productDirectory);
-            }
-
-            return productDirectory;
+            var level3Folder = $@"{level2Folder}/{thirdCateCode}";
+            if (!Directory.Exists(level3Folder))
+                Directory.CreateDirectory(level3Folder);
+            return level3Folder;
         }
+
 
     }
 }
