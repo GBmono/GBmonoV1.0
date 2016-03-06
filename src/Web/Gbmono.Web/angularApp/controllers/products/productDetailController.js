@@ -43,6 +43,8 @@
         // loading image
         // this staging loading img would be replaced by actual product img once the data is loaded
         vm.primaryImg = 'loading_2.gif';
+        // no image
+        vm.noImage = 'No_Image.png';
         // retreive category id from route params
         var productId = $routeParams.id ? parseInt($routeParams.id) : 0;
         // get token from local storage
@@ -86,7 +88,8 @@
                     // filter image by type id
                     filterImages(data.images);
                     // replace the loading img by actual product image
-                    vm.primaryImg = vm.productImages[0].fileName
+                    // handle no images returned
+                    vm.primaryImg = vm.productImages.length > 0 ? vm.productImages[0].fileName : vm.noImage;
                     // get category menu by top category id
                     getCategoryMenu(vm.product.category.parentCategory.parentId);
                     // init img thumb gallery

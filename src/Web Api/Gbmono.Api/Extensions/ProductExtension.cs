@@ -10,6 +10,8 @@ namespace Gbmono.Api.Extensions
 {
     public static class ProductExtension
     {
+        private static readonly string _noImage = "No_Image.png";
+
         public static ProductSimpleModel ToSimpleModel(this Product model)
         {
             return new ProductSimpleModel
@@ -21,10 +23,28 @@ namespace Gbmono.Api.Extensions
                 BrandName = model.Brand.Name,
                 Price = model.Price,
                 Discount = model.Discount,
-                ImgUrl = model.Images.FirstOrDefault(s => s.ProductImageTypeId == (short)ProductImageType.Product) == null
-                         ? ""
-                         : model.Images.FirstOrDefault(s => s.ProductImageTypeId == (short)ProductImageType.Product).FileName
+                ImgUrl = GetPrimaryImgUrl(model.Images) // get the default product image
             };
+        }
+
+        private static string GetPrimaryImgUrl(IEnumerable<ProductImage> images)
+        {
+            // no images
+            if(images == null)
+            {
+                // return no-pic image
+                return _noImage;
+            }
+
+            // no product images
+            var productImg = images.FirstOrDefault(s => s.ProductImageTypeId == (short)ProductImageType.Product);
+            if (productImg == null)
+            {
+                return _noImage;
+            }
+
+            // return product img url
+            return productImg.FileName;
         }
     }
 }
