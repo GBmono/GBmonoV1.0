@@ -34,13 +34,7 @@
                             </div>
 
                             <div class="ribbon sale">
-                                <div class="theribbon">促销</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                            <!-- /.ribbon -->
-
-                            <div class="ribbon new">
-                                <div class="theribbon">当季产品</div>
+                                <div class="theribbon">醒目</div>
                                 <div class="ribbon-background"></div>
                             </div>
                             <!-- /.ribbon -->
@@ -52,12 +46,12 @@
                                     <h3> {{ vm.product.brand.name }} </h3>
                                 </div>
 
-                                <p class="price">{{ vm.product.price | currency:"¥" }}</p>
+                                <!--<p class="price">{{ vm.product.price | currency:"¥" }}</p>-->
 
                                 <p class="text-center">                                    
                                     <button type="button" class="btn btn-default btn-lg" title="收藏"
                                             ng-click="vm.toggleFavorite()">
-                                        <i ng-class="(vm.isFavorited) ? 'fa fa-star orange' : 'fa fa-star-o'"></i>
+                                        收藏 <i ng-class="(vm.isFavorited) ? 'fa fa-star orange' : 'fa fa-star-o'"></i>
                                     </button>
                                     <!--<button type="button" class="btn btn-default" title="收藏">
                                         <i class="fa fa-star-o"></i>
@@ -100,6 +94,7 @@
                             <div role="tabpanel" class="tab-pane fade active in" id="desc" aria-labelledby="desc-tab">
                                 <h4>商品详细</h4>
                                 <ul>
+                                    <li>市场参考价： {{ vm.product.price | currency:"¥" }}</li>
                                     <li>功能(用途): {{ vm.product.category.name }}</li>
                                     <li>重量： {{ vm.product.weight }} </li>
                                     <li>容量: {{ vm.product.capacity }}</li>
@@ -133,6 +128,11 @@
                             <div role="tabpanel" class="tab-pane fade" id="extra" aria-labelledby="extra-tab">
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="shop" aria-labelledby="extra-tab">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-6">
+                                        <img src="content/img/shop1.jpg" class="img-responsive" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -68,6 +68,10 @@
         };
 
         function init() {
+            // move into the top of the screen to focus on the product detail area
+            utilService.scrollToTop();
+
+            // load product detailed info when product is provided
             if (productId !== 0) {
                 pluginService.showDataLoadingIndicator('#productMain');
                 // get product by id

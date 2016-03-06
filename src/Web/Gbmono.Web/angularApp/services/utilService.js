@@ -15,7 +15,8 @@
             getToken: getToken,
             saveToken: saveToken,
             getUserName: getUserName,
-            saveUserName: saveUserName
+            saveUserName: saveUserName,
+            scrollToTop: scrollToTop
         };
         
         // return user token stored in local storage or cookie (if local storage is not supported)
@@ -34,6 +35,11 @@
 
         function saveUserName(name) {
             localStorageService.set(USERNAME_KEY, name);
+        }
+
+        // move to top
+        function scrollToTop() {
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
         }
     }
 
