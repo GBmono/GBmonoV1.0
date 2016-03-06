@@ -9,7 +9,7 @@
     <hr />
 
 
-    <div id="columns">
+    <div id="columns" style="min-height:200px;">
         <div class="pin"
              ng-repeat="product in vm.products">
             <div class="image">
@@ -25,10 +25,11 @@
     </div>
 </div>
 
+
 <!-- override the position of the data loadint indicator -->
 <style>
 .widget-box-overlay > .loading-icon {
-        left:30% !important;
+        left:25% !important;
     }
 </style>
 
