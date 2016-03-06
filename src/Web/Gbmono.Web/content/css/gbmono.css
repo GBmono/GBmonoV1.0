@@ -134,6 +134,7 @@
 	column-count: 4;
 	column-gap: 15px;
 	column-fill: auto;
+    min-height:200px;
 }
 
 .pin {

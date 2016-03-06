@@ -102,6 +102,8 @@
                     pluginService.tab();
                     // close data loading
                     pluginService.closeDataLoadingIndicator('#productMain');
+
+
                 });
         }
 
