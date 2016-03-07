@@ -3,13 +3,23 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['$routeParams', '$location', 'productDataFactory', 'categoryDataFactory'];
+    ctrl.$inject = ['$routeParams',
+                    '$location',
+                    'pluginService',
+                    'utilService',
+                    'productDataFactory',
+                    'categoryDataFactory'];
 
     // create controller
     module.controller('productListController', ctrl);
 
     // controller body
-    function ctrl($routeParams, $location, productDataFactory, categoryDataFactory) {
+    function ctrl($routeParams,
+                  $location,
+                  pluginService,
+                  utilService,
+                  productDataFactory,
+                  categoryDataFactory) {
         //  use vm to represent the binding scope. This gets rid of the $scope variable from most of controllers
         var vm = this;
         // products
@@ -45,6 +55,9 @@
         init();
 
         function init() {
+            // auto-move into the top of the screen to focus on the begininig of product list
+            utilService.scrollToTop();
+
             if (topCategoryId != 0) {
                 // load products by top category or sub category
                 getProducts(subCateId == 0 ? topCategoryId : subCateId,
@@ -64,6 +77,9 @@
 
         // get products by category
         function getProducts(categoryId, pageIndex, pageSize) {
+            // data loading indicator
+            pluginService.showDataLoadingIndicator('#products');
+            // get product data
             productDataFactory.getByCategory(categoryId, pageIndex, pageSize)
                 .success(function (data) {
                     // add products into collection
@@ -75,6 +91,9 @@
                         // disable or hide the button
                         vm.isAllDataLoaded = true;
                     }
+                   
+                    // close data loading
+                    pluginService.closeDataLoadingIndicator('#products');
                 });
         }
 

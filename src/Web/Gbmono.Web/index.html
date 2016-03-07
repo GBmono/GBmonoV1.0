@@ -34,7 +34,7 @@
  
     <!-- included header -->
     <div ng-include="'angularApp/shared/header.html'"
-         ng-controller="headerController">
+         ng-controller="headerController as vm">
     </div>
 
     <!-- angular view container -->
@@ -42,7 +42,7 @@
 
     <!-- included footer -->
     <div ng-include="'angularApp/shared/footer.html'"
-         ng-controller="footerController">
+         ng-controller="footerController as vm">
     </div>
 
     <!-- scripts -->

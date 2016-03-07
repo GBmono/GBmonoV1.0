@@ -51,11 +51,16 @@
         }
 
         function getNewProducts() {
+            // data loading indicator
+            pluginService.showDataLoadingIndicator('#productsContainer');
             // get new arrived products
             // load first 12 new products 
             productDataFactory.getNewProducts(1, 12)
                 .success(function (data) {
+                    // retreive data
                     vm.products = data;
+                    // close data loading
+                    pluginService.closeDataLoadingIndicator('#productsContainer');
                 });
         }
 

@@ -5,7 +5,7 @@ _________________________________________________________ -->
     <div class="container">
         <div class="navbar-header">
 
-            <a class="navbar-brand home" href="index.html">
+            <a class="navbar-brand home" ng-href="#/">
                 GBmono Logo
                 <!--<img src="img/logo.png" alt="Minimal logo" class="hidden-xs hidden-sm">
                 <img src="img/logo-small.png" alt="Minimal logo" class="visible-xs visible-sm"><span class="sr-only">Minimal - go to homepage</span>-->
@@ -48,28 +48,28 @@ _________________________________________________________ -->
                                     <div class="col-sm-9">
                                         <div class="col-sm-3">
                                             <ul>
-                                                <li ng-repeat="item in topCatesCol1" style="margin:12px;">
+                                                <li ng-repeat="item in vm.topCatesCol1" style="margin:12px;">
                                                     <a ng-href="#/categories/{{ item.categoryId }}/products/">{{ item.name }}</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3">
                                             <ul>
-                                                <li ng-repeat="item in topCatesCol2" style="margin:12px;">
+                                                <li ng-repeat="item in vm.topCatesCol2" style="margin:12px;">
                                                     <a ng-href="#/categories/{{ item.categoryId }}/products/">{{ item.name }}</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3">
                                             <ul>
-                                                <li ng-repeat="item in topCatesCol3" style="margin:12px;">
+                                                <li ng-repeat="item in vm.topCatesCol3" style="margin:12px;">
                                                     <a ng-href="#/categories/{{ item.categoryId }}/products/">{{ item.name }}</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3">
                                             <ul>
-                                                <li ng-repeat="item in topCatesCol4" style="margin:12px;">
+                                                <li ng-repeat="item in vm.topCatesCol4" style="margin:12px;">
                                                     <a ng-href="#/categories/{{ item.categoryId }}/products/">{{ item.name }}</a>
                                                 </li>
                                             </ul>

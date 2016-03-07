@@ -101,9 +101,7 @@
                     // init bootstrap tab
                     pluginService.tab();
                     // close data loading
-                    pluginService.closeDataLoadingIndicator('#productMain');
-
-
+                    pluginService.closeDataLoadingIndicator('#productMain');    
                 });
         }
 
