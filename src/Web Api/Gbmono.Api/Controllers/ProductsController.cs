@@ -23,14 +23,14 @@ namespace Gbmono.Api.Controllers
         private readonly RepositoryManager _repositoryManager;
 
         // ctor
-        public ProductsController() 
+        public ProductsController()
         {
             _repositoryManager = new RepositoryManager();
 
         }
 
 
-        [Route("New/{pageIndex:int?}/{pageSize:int?}")] 
+        [Route("New/{pageIndex:int?}/{pageSize:int?}")]
         public async Task<IEnumerable<ProductSimpleModel>> Get(int? pageIndex = 1, int? pageSize = 10)
         {
             IList<Product> products;
@@ -67,7 +67,7 @@ namespace Gbmono.Api.Controllers
                                                 .ToListAsync();
 
             // convert into simplified model
-            return products.Select(m => m.ToSimpleModel());                                    
+            return products.Select(m => m.ToSimpleModel());
         }
 
         [Route("Categories/{categoryId}/{pageIndex:int?}/{pageSize:int?}")]
@@ -89,7 +89,7 @@ namespace Gbmono.Api.Controllers
             // top level
             if (category.ParentId == null)
             {
-                products =  await _repositoryManager.ProductRepository
+                products = await _repositoryManager.ProductRepository
                                                     .Table
                                                     .Include(m => m.Brand)
                                                     .Include(m => m.Category.ParentCategory) // three level categories
@@ -98,7 +98,7 @@ namespace Gbmono.Api.Controllers
                                                     .ToListAsync();
                 // return simplified models
                 return products.Select(m => m.ToSimpleModel()).Skip(startIndex).Take(pageSize.Value);
-                                               
+
             }
 
             // third level
@@ -109,7 +109,7 @@ namespace Gbmono.Api.Controllers
                                                     .Table
                                                     .Include(m => m.Brand)
                                                     .Include(m => m.Images) // include product images
-                                                    .Where(m => m.CategoryId == categoryId)                                               
+                                                    .Where(m => m.CategoryId == categoryId)
                                                     .ToListAsync();
 
                 return products.Select(m => m.ToSimpleModel()).Skip(startIndex).Take(pageSize.Value);
@@ -126,7 +126,7 @@ namespace Gbmono.Api.Controllers
 
             return products.Select(m => m.ToSimpleModel()).Skip(startIndex).Take(pageSize.Value);
         }
-        
+
         // get by product id, return detailed product model
         public async Task<Product> GetById(int id)
         {
@@ -146,6 +146,9 @@ namespace Gbmono.Api.Controllers
         {
             return _repositoryManager.ProductRepository
                                      .Table
+                                     .Include(m => m.Brand)
+                                     .Include(m => m.Images)
+                                     .Include(m => m.Category.ParentCategory.ParentCategory)
                                      .SingleOrDefault(m => m.BarCode == code);
         }
 
