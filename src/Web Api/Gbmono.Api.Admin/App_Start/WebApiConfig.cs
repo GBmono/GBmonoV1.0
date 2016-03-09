@@ -6,6 +6,7 @@ using System.Web.Http.Cors;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Microsoft.Owin.Security.OAuth;
 
 namespace Gbmono.Api.Admin
 {
@@ -15,9 +16,9 @@ namespace Gbmono.Api.Admin
         {
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
-            // config.SuppressDefaultHostAuthentication();
+            config.SuppressDefaultHostAuthentication();
             // Bearer token authentication
-            // config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
             // Global error handling
             // exception logger

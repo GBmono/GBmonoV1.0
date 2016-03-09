@@ -119,4 +119,40 @@
 })(angular.module('gbmono'));
 
 
+/*
+   login controller
+*/
+(function (module) {
+    // inject the controller params
+    ctrl.$inject = ['pluginService', 'accountDataFactory'];
+
+    // create controller
+    module.controller('loginController', ctrl);
+
+    // controller body
+    function ctrl(pluginService, accountDataFactory) {
+        var vm = this;
+        // login model
+        vm.identity = {};
+
+        // page init
+        init();
+
+        function init() {
+
+        }
+
+        function login(userName, password) {
+            accountDataFactory.login(userName, password)
+                .success(function () {
+
+                })
+                .error(function (error) {
+                    // login failed
+
+                });
+        }
+
+    }
+})(angular.module('gbmono'));
 

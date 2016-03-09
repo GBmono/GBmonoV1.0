@@ -71,7 +71,7 @@
                 getThirdCategories(subCateId == 0 ? topCategoryId : subCateId);
 
                 // get category brands
-                getCategoryBrands(subCateId == 0 ? topCategoryId : subCateId);
+                getCategoryBrands(topCategoryId);
             }
         }
 

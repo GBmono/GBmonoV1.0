@@ -26,8 +26,6 @@
         product_api_url: gbmono.web_api_app_name + '/Products',
         // product image api url
         product_image_api_url:gbmono.web_api_app_name + '/ProductImages',
-        // country
-        country_api_url: gbmono.web_api_app_name + '/Countries',
         // brand api url
         brand_api_url: gbmono.web_api_app_name + '/Brands',
     };

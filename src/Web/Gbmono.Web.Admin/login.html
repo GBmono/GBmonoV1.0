@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html id="ng-app" ng-app="gbmono">
+<head>
+    <title>GBmono Admin Management</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="content/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="content/css/font-awesome.min.css" />
+
+    <!-- page specific plugin styles -->
+    <!-- text fonts -->
+    <link rel="stylesheet" href="content/css/ace-fonts.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="content/css/ace.min.css" />
+    <link rel="stylesheet" href="content/css/gbmono.css" />
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="content/css/ace-part2.min.css" />
+    <![endif]-->
+    <link rel="stylesheet" href="content/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="content/css/ace-rtl.min.css" />
+
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
+    <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <script src="scripts/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="scripts/html5shiv.js"></script>
+    <script src="scripts/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='scripts/jquery.min.js'>" + "<" + "/script>");
+    </script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script type="text/javascript">
+     window.jQuery || document.write("<script src='scripts/jquery1x.min.js'>"+"<"+"/script>");
+    </script>
+    <![endif]-->
+    <!-- scripts -->
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/ace.min.js"></script>
+    <script src="scripts/ace-elements.min.js"></script>
+    
+
+    <!-- plugins -->
+    <script src="scripts/bootstrap-growl.min.js"></script> <!-- notifications -->
+    <!-- angularJs -->
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.min.js"></script>
+    <script src="scripts/angular-animate.min.js"></script>
+    <script src="scripts/angular-local-storage.js"></script>
+    <!-- app module -->
+    <script src="angularApp/consts.js"></script>
+    <script src="angularApp/app.js"></script>
+    <script src="angularApp/services/dataFactory.js"></script>
+    <script src="angularApp/services/jqueryPluginService.js"></script>
+
+    <!-- login cont-->
+    <script src="angularApp/layout.js"></script>
+
+    <!-- kendo ui -->
+    <script src="scripts/kendo/kendo.all.min.js"></script>
+
+</head>
+<body class="login-layout light-login">
+    <div class="main-container">
+        <div class="main-content" ng-controller="loginController as vm">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="login-container">
+                        <div class="center">
+                            <h2>
+                                <span class="red">集匠网管理后台</span>
+                         
+                            </h2>
+                            <small class="blue">&copy; Gbmono </small>
+                        </div>
+
+                        <div class="space-6"></div>
+
+                        <div class="position-relative">
+                            <div id="login-box" class="login-box visible widget-box no-border">
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <h4 class="header blue lighter bigger">
+                                            用户登录
+                                        </h4>
+
+                                        <div class="space-6"></div>
+
+                                        <form>
+                                            <fieldset>
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="text" class="form-control" placeholder="用户名"
+                                                               ng-model="vm.identity.username" />
+                                                        <i class="icon-user"></i>
+                                                    </span>
+                                                </label>
+
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="password" class="form-control" placeholder="密码"
+                                                               ng-model="vm.identity.password" />
+                                                        <i class="icon-lock"></i>
+                                                    </span>
+                                                </label>
+
+                                                <div class="space"></div>
+
+                                                <div class="clearfix">
+      
+
+                                                    <button id="btn-login" type="button" autofocus
+                                                            class="width-50 pull-right btn btn-primary"
+                                                            ng-click="authenticate()">
+                                                        登陆
+                                                    </button>
+                                                </div>
+
+                                                <div class="space-4"></div>
+                                            </fieldset>
+                                        </form>
+                                    </div><!-- /widget-main -->
+
+                                </div><!-- /widget-body -->
+                            </div><!-- /login-box -->
+
+
+                        </div><!-- /position-relative -->
+                    </div>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div>
+    </div><!-- /.main-container -->
+
+</body>
+</html>
