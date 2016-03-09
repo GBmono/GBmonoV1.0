@@ -134,16 +134,19 @@
   <ItemGroup>
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attributes\RoleBasedAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\ProductImagesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="ExceptionHandling\GenericExceptionHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HttpResults\DataInvalidResult.cs" />
+    <Compile Include="HttpResults\InternalServerErrorPlainTextResult.cs" />
     <Compile Include="Models\KendoUI.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\Users.cs" />

@@ -7,6 +7,7 @@ using System.Web.Http.Cors;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Owin.Security.OAuth;
+using Gbmono.Api.Admin.Attributes;
 
 namespace Gbmono.Api.Admin
 {
@@ -19,6 +20,9 @@ namespace Gbmono.Api.Admin
             config.SuppressDefaultHostAuthentication();
             // Bearer token authentication
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+
+            // Add global Role Authorized filter (Attribute)
+            // config.Filters.Add(new RoleBasedAuthorizeAttribute());
 
             // Global error handling
             // exception logger
