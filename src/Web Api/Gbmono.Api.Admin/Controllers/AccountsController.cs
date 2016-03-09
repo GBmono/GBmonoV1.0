@@ -26,16 +26,16 @@ namespace Gbmono.Api.Admin.Controllers
         }
 
         #region user manager & role manager
-        private ApplicationUserManager _userManager;
+        private ApplicationUserManager _userManager = null;
         public ApplicationUserManager UserManager
         {
-            get { return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            get { return _userManager ?? (_userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>() ); }
         }
 
-        private readonly ApplicationRoleManager _roleManager = null;
+        private ApplicationRoleManager _roleManager = null;
         public ApplicationRoleManager RoleManager
         {
-            get { return _roleManager ?? Request.GetOwinContext().Get<ApplicationRoleManager>(); }
+            get { return _roleManager ?? (_roleManager = Request.GetOwinContext().Get<ApplicationRoleManager>()); }
         }
         #endregion
 
