@@ -52,7 +52,7 @@
 
         function getNewProducts() {
             // data loading indicator
-            pluginService.showDataLoadingIndicator('#productsContainer');
+            pluginService.showDataLoadingIndicator('#productsContainer', {left: "42%", top: "90px;"});
             // get new arrived products
             // load first 12 new products 
             productDataFactory.getNewProducts(1, 12)

@@ -73,7 +73,7 @@
 
             // load product detailed info when product is provided
             if (productId !== 0) {
-                pluginService.showDataLoadingIndicator('#productMain');
+                pluginService.showDataLoadingIndicator('#productMain', { left: "60%", top: "60px" });
                 // get product by id
                 getProduct(productId);
                 // check if product is favorid when user is logged in

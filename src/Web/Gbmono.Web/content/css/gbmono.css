@@ -78,12 +78,6 @@
 .light-blue {
   color: #93cbf9 !important;
 }
-.green {
-  color: #69aa46 !important;
-}
-.light-green {
-  color: #b0d877 !important;
-}
 .orange {
   color: #ff892a !important;
 }
@@ -93,7 +87,8 @@
 .light-orange {
   color: #fcac6f !important;
 }
-
+.grey{color:#777!important}
+.light-grey{color:#bbb!important}
 
 /* data loading indicator */
 .widget-box-overlay {
@@ -111,7 +106,7 @@
 
     .widget-box-overlay > .loading-icon {
         position: absolute;        
-        left:5%;     
+           
         margin: auto;
         text-align: center;
     }

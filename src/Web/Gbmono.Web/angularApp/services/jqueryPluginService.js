@@ -147,11 +147,23 @@
         }
 
         // data loading indicator
-        function showDataLoadingIndicator(selector) {
+        function showDataLoadingIndicator(selector, position) {
+            //if (!position) {
+            //    position = { left: "10%", top: "0px" };
+            //}
+
+            //if (!position.left) {
+            //    position.left = "10%";
+            //}
+
+            //if (!position.top) {
+            //    position.top = "0px";
+            //}
+
             // add div with progress indicator on the top of the current widget
             $(selector).append('<div class="widget-box-overlay">' +
-                                '<div class="loading-icon">' +
-                                '<img src="/gbmono/content/img/loading_3.gif" alt="loading"/>' +
+                                '<div class="loading-icon" style="left:' + position.left + '; top:' + position.top + '">' +
+                                '<img src="/gbmono/content/img/loading_1.gif" alt="loading"/>' +
                                 '</div>' +
                             '</div>');
         }

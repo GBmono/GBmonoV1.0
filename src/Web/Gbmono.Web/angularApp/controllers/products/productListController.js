@@ -78,7 +78,7 @@
         // get products by category
         function getProducts(categoryId, pageIndex, pageSize) {
             // data loading indicator
-            pluginService.showDataLoadingIndicator('#products');
+            pluginService.showDataLoadingIndicator('#products', { left: "50%", top: "60px;" });
             // get product data
             productDataFactory.getByCategory(categoryId, pageIndex, pageSize)
                 .success(function (data) {

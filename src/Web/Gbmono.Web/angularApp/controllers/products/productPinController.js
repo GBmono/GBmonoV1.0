@@ -26,7 +26,7 @@
 
         function getNewProducts() {
             // show 'data loading' indicator
-            pluginService.showDataLoadingIndicator('#wrapper');
+            pluginService.showDataLoadingIndicator('#columns', { left: "50%", top: "75px" });
             // get new arrived products
             // load first 12 new products 
             productDataFactory.getNewProducts(1, 72)
@@ -34,7 +34,7 @@
                     // retreive the data
                     vm.products = data;
                     // close data loading
-                    pluginService.closeDataLoadingIndicator('#wrapper');
+                    pluginService.closeDataLoadingIndicator('#columns');
                 });
         }
     }
