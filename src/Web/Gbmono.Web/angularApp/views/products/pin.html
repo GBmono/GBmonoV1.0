@@ -1,32 +1,35 @@
-﻿<div id="content">
-    <div class="container">
-        <div class="col-sm-12" style="margin-bottom:10px;">
-            <img src="content/img/horizontal_adv_1.jpg" />
-        </div>
-        <div class="col-sm-12">
-            <img src="content/img/horizontal_adv_2.png" />
-        </div>
-    </div>
-</div>
-<hr />
-<div id="wrapper">
-    <div id="columns" style="min-height:200px; position:relative;">
-        <div class="pin"
-             ng-repeat="product in vm.products">
-            <div class="image">
-                <a ng-href="#/products/{{product.productId}}">
-                    <img ng-src="{{ vm.imgRoot + product.imgUrl}}" alt=""
-                         class="img-responsive" style="max-height:380px;">
-                </a>
+﻿<div id="all">
+    <div id="content">
+        <div class="container">
+            <div class="col-sm-12" style="margin-bottom:10px;">
+                <img src="content/img/horizontal_adv_1.jpg" />
             </div>
-            <h4><a ng-href="#/products/{{product.productId}}">{{ product.brandName }}</a></h4>
-            <p><a ng-href="#/products/{{product.productId}}" class="grey">{{ product.primaryName }}</a></p>
-            <small>
-                <a ng-href="#/products/{{product.productId}}" class="grey">{{ product.secondaryName }}</a>
-            </small>
+            <div class="col-sm-12">
+                <img src="content/img/horizontal_adv_2.png" />
+            </div>
         </div>
-
     </div>
+    <hr />
+    <div id="wrapper">
+        <div id="columns" style="position:relative;">
+            <div class="pin"
+                 ng-repeat="product in vm.products">
+                <div class="image">
+                    <a ng-href="#/products/{{product.productId}}">
+                        <img ng-src="{{ vm.imgRoot + product.imgUrl}}" alt=""
+                             class="img-responsive" style="max-height:380px;">
+                    </a>
+                </div>
+                <h4><a ng-href="#/products/{{product.productId}}">{{ product.brandName }}</a></h4>
+                <p><a ng-href="#/products/{{product.productId}}" class="grey">{{ product.primaryName }}</a></p>
+                <small>
+                    <a ng-href="#/products/{{product.productId}}" class="grey">{{ product.secondaryName }}</a>
+                </small>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
 
