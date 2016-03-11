@@ -167,7 +167,7 @@
                     getBrands();
 
                     // get countries
-                    getCountries();
+                    // getCountries();
                 });
         }
 

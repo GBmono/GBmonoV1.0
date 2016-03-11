@@ -15,6 +15,7 @@
             getSilders: getSilders,
             getArticles:getArticles,
             getNews: getNews,
+            getTopicItems:getTopicItems,
             getFooterData: getFooterData
         }
 
@@ -32,6 +33,11 @@
 
         function getFooterData() {
             return $http.get(pageDataPath + '/footer.json');
+        }
+
+        // return topic data
+        function getTopicItems() {
+            return $http.get(pageDataPath + '/topic_premium.json');
         }
     }
 })(angular.module('gbmono'));

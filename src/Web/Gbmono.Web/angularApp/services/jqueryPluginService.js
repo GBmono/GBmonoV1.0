@@ -13,7 +13,8 @@
             productDetailGallery: productDetailGallery,
             notify: notify,
             showDataLoadingIndicator: showDataLoadingIndicator,
-            closeDataLoadingIndicator: closeDataLoadingIndicator
+            closeDataLoadingIndicator: closeDataLoadingIndicator,
+            modal: modal
         };
 
         // silder effect
@@ -172,6 +173,10 @@
         function closeDataLoadingIndicator(selector) {
             // remove the indicator div
             $(selector).find('.widget-box-overlay').remove();
+        }
+
+        function modal(selector) {
+            $(selector).modal();
         }
     }
 })(angular.module('gbmono'));

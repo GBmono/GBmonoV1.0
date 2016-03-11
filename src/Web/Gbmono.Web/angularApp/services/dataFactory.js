@@ -37,7 +37,6 @@
     }
 })(angular.module('gbmono'));
 
-
 /*
     category data factory
 */

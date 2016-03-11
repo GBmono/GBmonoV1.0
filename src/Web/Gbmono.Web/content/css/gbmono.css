@@ -59,6 +59,39 @@
     margin-right: auto
 }
 
+/* brand */
+.brand{
+    color:black;
+    text-decoration:underline;    
+}
+
+.brand:hover{
+    color:grey;
+    text-decoration:none;
+}
+
+.brand-alphabet{
+    font-size: 20px;
+    border-left-style:solid;
+    border-left-width:1px;
+    border-left-color: black;
+}
+
+.brand-alphabet:hover{
+    background-color:lightgray;
+}
+
+.brand-alphabet a{
+    color:black;
+    padding-left:20px;
+    padding-right:20px;
+}
+
+.brand-alphabet a:hover{
+    text-decoration:none;
+}
+
+
 /* color */
 .main-color{
     color:#c27baa; 
@@ -179,9 +212,9 @@
 
 @media (min-width: 1100px) {
 	#columns {
-		-webkit-column-count: 8;
-		-moz-column-count: 8;
-		column-count: 8;
+		-webkit-column-count: 7;
+		-moz-column-count: 7;
+		column-count: 7;
 	}
 }
 

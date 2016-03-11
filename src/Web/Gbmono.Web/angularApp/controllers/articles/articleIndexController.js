@@ -1,5 +1,5 @@
 ﻿/*
-    profile controller
+    article list controller
 */
 (function (module) {
     // inject the controller params

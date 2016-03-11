@@ -46,6 +46,18 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
+                .when('/topics', { // 推荐， 专题
+                    templateUrl: gbmono.app_view_path + '/products/topic.html',
+                    controller: 'topicController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
+                .when('/brands', { // 品牌商列表页
+                    templateUrl: gbmono.app_view_path + '/brands/list.html',
+                    controller: 'brandListController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
                 .when('/articles', { // 信息，文章，新闻
                     templateUrl: gbmono.app_view_path + '/articles/index.html',
                     controller: 'articleIndexController',
@@ -67,6 +79,7 @@
                 .otherwise({
                     templateUrl: gbmono.app_view_path + '/home/home.html',
                     controller: 'homeController',
+                    controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 });
     }

@@ -42,6 +42,5 @@
             $('html, body').animate({ scrollTop: 0 }, 'fast');
         }
     }
-
-    
+   
 })(angular.module('gbmono'));

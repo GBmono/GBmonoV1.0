@@ -1,0 +1,78 @@
+﻿<div id="all">
+    <div id="content">
+        <div class="container">
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+
+                    <li>
+                        <a ng-href="#/">首页</a>
+                    </li>
+                    <li>品牌商列表</li>
+                </ul>
+
+
+                <div class="box text-center">
+
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1">                            
+                            <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="搜索">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="list-inline">
+                        <li ng-repeat="alphabet in vm.alphabets" class="brand-alphabet">
+                            <a ng-href="#/" >{{ alphabet }}</a> 
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr />
+
+            <div class="row">
+                <div class="col-md-3 col-sm-6" style="margin-bottom:15px;"
+                     ng-repeat="brand in vm.brands">
+                    <p>
+                        <a href="" class="brand" ng-click="vm.showBrandDetail()">{{ brand.name }}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- brand detail modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="brand">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="Login">品牌商介绍</h4>
+            </div>
+            <div class="modal-body">
+                <h3>品牌商名称</h3>
+
+                <ul>
+                    <li>英文名或者中文名</li>
+                    <li>品牌商公司主页</li>
+                </ul>
+
+                <blockquote>
+                    <p>
+                        关于品牌商的介绍....
+                    </p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>
