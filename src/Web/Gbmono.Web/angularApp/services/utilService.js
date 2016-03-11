@@ -16,6 +16,7 @@
             saveToken: saveToken,
             getUserName: getUserName,
             saveUserName: saveUserName,
+            clearToken: clearToken,
             scrollToTop: scrollToTop
         };
         
@@ -35,6 +36,13 @@
 
         function saveUserName(name) {
             localStorageService.set(USERNAME_KEY, name);
+        }
+        
+        function clearToken() {
+            // clear token
+            localStorageService.set(BEARER_TOKEN_KEY, '');
+            // clear user name
+            localStorageService.set(USERNAME_KEY, '');
         }
 
         // move to top

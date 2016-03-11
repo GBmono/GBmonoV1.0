@@ -25,6 +25,14 @@
         // get token from local storage
         var token = utilService.getToken();
         
+        // view event handler
+        vm.logout = function () {
+            // clear token
+            utilService.clearToken();
+            // redirect into login page or home page??
+            $location.path('/login');
+        };
+
         init(); // page init 
 
         function init() {
@@ -41,15 +49,22 @@
 
         function getFavoriteProducts(userToken, pageIndex, pageSize) {
             userFavoriteDataFactory.getFavoriteProducts(userToken, pageIndex, pageSize)
-                .success(function (data) {
+                .then(function successCallback(response) {
                     // add products into collection
-                    vm.products = vm.products.concat(data);
+                    vm.products = vm.products.concat(response.data);
                     // add page index
                     vm.paging.pageIndex++;
                     // if no more products 
-                    if (data.length < vm.paging.pageSize) {
+                    if (response.data.length < vm.paging.pageSize) {
                         // disable or hide the button
                         vm.isAllDataLoaded = true;
+                    }
+                }, function errorCallback(response) {
+                    // if user is not authorized
+                    if (response.status === 401) {
+                        // direct into login page
+                        // todo: returnUrl
+                        $location.path('/login');
                     }
                 });
         }
