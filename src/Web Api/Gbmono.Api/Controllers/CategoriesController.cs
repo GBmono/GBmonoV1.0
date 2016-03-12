@@ -5,10 +5,11 @@ using System.Collections;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Data.Entity;
-
+using System.IO;
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Models;
+using Newtonsoft.Json;
 
 namespace Gbmono.Api.Controllers
 {
@@ -34,7 +35,7 @@ namespace Gbmono.Api.Controllers
                                            .OrderBy(m => m.CategoryCode)
                                            .ToListAsync();
             // add second level categories
-            foreach(var topCate in topCates)
+            foreach (var topCate in topCates)
             {
                 var secondCates = await _repositoryManager.CategoryRepository
                                                           .Table
@@ -43,7 +44,7 @@ namespace Gbmono.Api.Controllers
                                                           .ToListAsync();
 
                 // add third level cates
-                foreach(var secondCate in secondCates)
+                foreach (var secondCate in secondCates)
                 {
                     var thirdCates = await _repositoryManager.CategoryRepository
                                                           .Table
@@ -56,6 +57,11 @@ namespace Gbmono.Api.Controllers
 
                 topCate.SubCategories = secondCates;
             }
+
+            //Out put category Json for App
+            //var output = JsonConvert.SerializeObject(topCates, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            //File.WriteAllText(@"C:\Gbmono\category.txt", output);
+
 
             return topCates;
         }
@@ -115,7 +121,7 @@ namespace Gbmono.Api.Controllers
                                                .Table
                                                .Include(m => m.ParentCategory)
                                                .Where(m => m.ParentCategory.ParentId == id)
-                                               .OrderBy(m => m.CategoryCode)                                               
+                                               .OrderBy(m => m.CategoryCode)
                                                .ToListAsync();
             }
 
