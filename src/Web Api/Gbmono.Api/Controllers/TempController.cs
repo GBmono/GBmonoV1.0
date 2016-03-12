@@ -24,7 +24,7 @@ namespace Gbmono.Api.Controllers
         [Route("Shelf/{shelfId}/{pageIndex:int?}/{pageSize:int?}")]
         public List<ProductSimpleModel> GetProductByShelf(int shelfId, int? pageIndex = 1, int? pageSize = 10)
         {
-            var brandId = 15;
+            var brandId = shelfId;
             var startIndex = (pageIndex.Value - 1) * pageSize.Value;
             var products = _repositoryManager.ProductRepository
                                                     .Table
