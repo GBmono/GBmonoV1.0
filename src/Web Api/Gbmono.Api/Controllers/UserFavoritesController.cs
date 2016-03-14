@@ -64,9 +64,16 @@ namespace Gbmono.Api.Controllers
         }
 
         // get user favorite
+        [AllowAnonymous]
         [Route("IsFavorited/{productId}")]
         public async Task<bool> GetByProduct(int productId)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                // user is not authenticated
+                return false;
+            }
+
             // get user id by user name
             var user = await UserManager.FindByNameAsync(User.Identity.Name);
 
