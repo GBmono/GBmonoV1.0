@@ -257,7 +257,7 @@ namespace Gbmono.Utils.ProductDataImporter
             return newProduct.ProductId;
         }
 
-        static void ImportImage(WorksheetPart wsPart, int productId, string categoryCodeLevel1,string categoryCodeLevel2,string categoryCodeLevel3)
+        static void ImportImage(WorksheetPart wsPart, int productId, string categoryCodeLevel1, string categoryCodeLevel2, string categoryCodeLevel3)
         {
             var imageFileFolder = GetImageFolderByCategory(categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3);
             var imageCatePath = $@"{categoryCodeLevel1}/{categoryCodeLevel2}/{categoryCodeLevel3}";
@@ -342,13 +342,26 @@ namespace Gbmono.Utils.ProductDataImporter
             {
                 try
                 {
-                    var categoryLevel1 = new Category() { CategoryCode = topCateCode, Name = level1Name, ParentId = null };
-                    _repositoryManager.CategoryRepository.Create(categoryLevel1);
-                    _repositoryManager.CategoryRepository.Save();
+                    var categoryLevel1 =
+                        _repositoryManager.CategoryRepository.Table.FirstOrDefault(
+                            m => m.CategoryCode == topCateCode && m.ParentId == null);
+                    if (categoryLevel1 == null)
+                    {
+                        categoryLevel1 = new Category() { CategoryCode = topCateCode, Name = level1Name, ParentId = null };
+                        _repositoryManager.CategoryRepository.Create(categoryLevel1);
+                        _repositoryManager.CategoryRepository.Save();
+                    }
 
-                    var categoryLevel2 = new Category() { CategoryCode = secondCateCode, Name = level2Name, ParentId = categoryLevel1.CategoryId };
-                    _repositoryManager.CategoryRepository.Create(categoryLevel2);
-                    _repositoryManager.CategoryRepository.Save();
+                    var categoryLevel2 =
+                           _repositoryManager.CategoryRepository.Table.FirstOrDefault(
+                               m => m.CategoryCode == secondCateCode && m.ParentId == categoryLevel1.CategoryId);
+                    if (categoryLevel2 == null)
+                    {
+                        categoryLevel2 = new Category() { CategoryCode = secondCateCode, Name = level2Name, ParentId = categoryLevel1.CategoryId };
+                        _repositoryManager.CategoryRepository.Create(categoryLevel2);
+                        _repositoryManager.CategoryRepository.Save();
+                    }
+
 
                     var categoryLevel3 = new Category() { CategoryCode = thirdCateCode, Name = level3Name, ParentId = categoryLevel2.CategoryId };
                     _repositoryManager.CategoryRepository.Create(categoryLevel3);
