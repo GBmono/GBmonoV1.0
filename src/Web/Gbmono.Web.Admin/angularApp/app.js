@@ -23,12 +23,13 @@
         // inject authentication interceptor
         // bearer token authentication
         // $httpProvider
-        // $httpProvider.interceptors.push('authInterceptor');
+        $httpProvider.interceptors.push('authInterceptor');
 
         // configure routes
         $routeProvider
                 .when('/dashboard', { // home page
                     templateUrl: gbmono.app_view_path + '/dashboard/dashboard.html',
+                    controller: 'dashboardController',
                     caseInsensitiveMatch: true
                 })
                 .when('/products', { // 默认商品搜索页
@@ -57,7 +58,8 @@
                     caseInsensitiveMatch: true
                 })
                 .otherwise({
-                   
+                    templateUrl: gbmono.app_view_path + '/dashboard/dashboard.html',
+                    controller: 'dashboardController',
                     caseInsensitiveMatch: true
                 });
     }

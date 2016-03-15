@@ -4,12 +4,12 @@
 
 (function(module) {
     // inject the params
-    intercepter.$inject = ['$q'];
+    intercepter.$inject = ['$q', 'utilService'];
 
     // create instance
     module.factory('authInterceptor', intercepter);
 
-    function intercepter($q) {
+    function intercepter($q, utilService) {
         // return intercepter
         return {
             request: beforeRequestSend, // attach bearer token before each http request
@@ -20,11 +20,12 @@
         function beforeRequestSend(config) {
             config.headers = config.headers || {};
             // retreive token value from local storage
-            if (window.localStorage.getItem(gbmono.LOCAL_STORAGE_TOKEN_KEY) &&
-                window.localStorage.getItem(gbmono.LOCAL_STORAGE_TOKEN_KEY) !== '') {
+            var token = utilService.getToken();
+
+            // check if token exists
+            if (token && token !== '') {
                 // set the token value into the authorization header
-                config.headers.Authorization = 'Bearer ' +
-                                                window.localStorage.getItem(gbmono.LOCAL_STORAGE_TOKEN_KEY);
+                config.headers.Authorization = 'Bearer ' + token;
             }
             // return config object
             return config;
@@ -40,29 +41,29 @@
                 // if current url contains any angularJs route
                 if (url.indexOf('#') === -1) {
                     // login page
-                    // window.location = metsys.APP_NAME + '/login.html';
+                    //window.location = gbmono.html_app + '/login.html';
                 } else {
                     // extract the route if exists
                     var index = url.indexOf('#') + 2;
                     // failed to extract the route
                     if (index >= url.length) {
                         // login page
-                        // window.location = metsys.APP_NAME + '/login.html';
+                        // window.location = gbmono.html_app + '/login.html';
                     } else {
                         var returnUrl = url.substring(index);
                         // login page with returl url
-                        // window.location = metsys.APP_NAME + '/login.html?returnUrl=' + returnUrl;
+                        // window.location = gbmono.html_app + '/login.html?returnUrl=' + returnUrl;
                     }
                 }                
             }
             else if (rejection.status === '403') {
                 // user is authenticated but don't have permission to access the resource
                 // return to unauthorized page
-                // window.location = metsys.APP_NAME + '/401.html';
+
             }
             // return error object
             return $q.reject(rejection);
         }
 
     }
-})(angular.module('metsys'));
+})(angular.module('gbmono'));

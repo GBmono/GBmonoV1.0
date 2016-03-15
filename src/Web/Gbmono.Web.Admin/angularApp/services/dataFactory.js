@@ -87,6 +87,7 @@
         return {
             getById: getById,
             getByCategory: getByCategory,
+            getCountByCategory: getCountByCategory,
             search: search,
             create: create,
             update: update
@@ -102,6 +103,10 @@
 
         function search(model) {
             return $http.post(gbmono.api_site_prefix.product_api_url + '/Search', model);
+        }
+
+        function getCountByCategory() {
+            return $http.get(gbmono.api_site_prefix.product_api_url + '/CountByTopCategory');
         }
 
         function create(product) {

@@ -23,6 +23,7 @@ namespace Gbmono.Api.Admin
 
             // Add global Role Authorized filter (Attribute)
             // config.Filters.Add(new RoleBasedAuthorizeAttribute());
+            config.Filters.Add(new AuthorizeAttribute());
 
             // Global error handling
             // exception logger

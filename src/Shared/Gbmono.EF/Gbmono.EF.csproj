@@ -79,6 +79,7 @@
     <Compile Include="Models\WebShop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="Sql\SqlService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
