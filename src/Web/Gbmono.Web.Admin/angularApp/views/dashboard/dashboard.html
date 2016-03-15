@@ -1,12 +1,48 @@
-﻿<!--<div>
-    <button class="btn btn-primary" onclick="toggleSidebar()">Show Right Sidebar</button>
-    <div id="rightSidebar" style="background: gray">
-        <h2>This is right side bar</h2>
-    </div>
+﻿<div class="page-header">
+    <h1>
+        后台管理面板
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            统计概览
+        </small>
+    </h1>
 </div>
 
-<script>
-    function toggleSidebar() {
-        $('#rightSidebar').toggleClass('toggled');
-    }
-</script>-->
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-7 col-xs-12">
+            <div class="widget-box transparent">
+                <div class="widget-header widget-header-flat">
+                    <h4 class="widget-title lighter">
+                        <i class="ace-icon fa fa-signal orange"></i>
+                        商品数量分类统计报表
+                    </h4>
+
+                    <div class="widget-toolbar">
+                        <a href="" data-action="collapse">
+                            <i class="ace-icon fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="widget-body">
+                    <div class="widget-main padding-4">
+                        <div kendo-chart
+                             k-legend="{ position: 'bottom' }"
+                             k-series-defaults="{ type: 'bar' }"
+                             k-series="[
+                                 { field: 'productCount', name: '商品数量' }
+                             ]"
+                             k-category-axis="{ field: 'category', majorGridLines: {visible: false }, labels: {rotation: 0 } }"
+                             k-tooltip="{visible: true, format: '商品总计: {0:n0}'}"
+                             k-data-source="productCountItems"
+                             class="chart"
+                             k-theme="'material'"
+                             style="height: 580px;"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

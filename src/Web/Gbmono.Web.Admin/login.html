@@ -63,9 +63,11 @@
     <script src="angularApp/consts.js"></script>
     <script src="angularApp/app.js"></script>
     <script src="angularApp/services/dataFactory.js"></script>
+    <script src="angularApp/services/utilService.js"></script>
     <script src="angularApp/services/jqueryPluginService.js"></script>
-
-    <!-- login cont-->
+    <script src="angularApp/services/authInterceptor.js"></script>
+    
+    <!-- login controller-->
     <script src="angularApp/layout.js"></script>
 
     <!-- kendo ui -->
@@ -103,7 +105,7 @@
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
                                                         <input type="text" class="form-control" placeholder="用户名"
-                                                               ng-model="vm.identity.username" />
+                                                               ng-model="vm.identity.userName" />
                                                         <i class="icon-user"></i>
                                                     </span>
                                                 </label>
@@ -123,7 +125,8 @@
 
                                                     <button id="btn-login" type="button" autofocus
                                                             class="width-50 pull-right btn btn-primary"
-                                                            ng-click="authenticate()">
+                                                            ng-click="vm.login()"
+                                                            ng-disabled="vm.isDataLoading">
                                                         登陆
                                                     </button>
                                                 </div>

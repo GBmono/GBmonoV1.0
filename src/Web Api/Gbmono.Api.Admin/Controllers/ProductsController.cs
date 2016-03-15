@@ -12,6 +12,7 @@ using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Admin.Models;
 using Gbmono.Common;
 
+
 namespace Gbmono.Api.Admin.Controllers
 {
     [RoutePrefix("api/Products")]
@@ -133,6 +134,34 @@ namespace Gbmono.Api.Admin.Controllers
                                            .Table
                                            .Include(m => m.Category.ParentCategory)
                                            .SingleOrDefaultAsync(m => m.ProductId == id);
+        }
+
+        [Route("CountByTopCategory")]
+        // return product count by top category
+        public async Task<IEnumerable<KendoBarChartItem>> GetProductCount()
+        {
+            // get top categories
+            var categories = await _repositoryManager.CategoryRepository
+                                                     .Table
+                                                     .Where(m => m.ParentId == null)
+                                                     .OrderBy(m => m.CategoryCode)
+                                                     .ToListAsync();
+
+            // return model
+            var resultset = new List<KendoBarChartItem>();
+
+            // count the product by each top category
+            foreach(var cate in categories)
+            {
+                var productCount = _repositoryManager.ProductRepository
+                                                     .Table
+                                                     .Count(m => m.Category.ParentCategory.ParentId == cate.CategoryId);
+
+                resultset.Add(new KendoBarChartItem { Category = cate.Name, ProductCount = productCount });
+            }
+
+            // return
+            return resultset.OrderByDescending(m => m.ProductCount);
         }
 
         [HttpPost]
