@@ -31,6 +31,8 @@ namespace Gbmono.Utils.ProductDataImporter
 
         static void Main(string[] args)
         {
+            ImageHelper.RemoveWrongImage(_repositoryManager);
+
             // load all excel files from the folder
             var dataFiles = FileHelper.GetFiles(WorkingDirectory, new string[] { "xlsx" });
 
@@ -268,31 +270,36 @@ namespace Gbmono.Utils.ProductDataImporter
             {
                 try
                 {
-                    Stream stream = i.GetStream();
-                    var imageValidated = ImageHelper.ValidateImageQualityByPixel(stream);
-                    long length = stream.Length;
-                    byte[] byteStream = new byte[length];
-                    stream.Read(byteStream, 0, (int)length);
-                    var imageExtension = Path.GetExtension(i.Uri.ToString());
-                    string filename = string.Format(@"{0}_{1}{2}", productId, imageIndex, imageExtension);
-                    string filePath = string.Format(@"{0}/{1}", imageFileFolder, filename);
-                    if (imageValidated)
+                    using (Stream stream = i.GetStream())
                     {
-                        File.WriteAllBytes(filePath, byteStream);
-                        //Todo ProductImageTypeId is temp
-                        var newProductImage = new ProductImage()
+                        long length = stream.Length;
+                        byte[] byteStream = new byte[length];
+                        stream.Read(byteStream, 0, (int)length);
+
+                        var imageValidated = ImageHelper.ValidateImageQualityByPixel(stream);
+                        if (imageValidated)
                         {
-                            ProductId = productId,
-                            //FileName = filePath,
-                            FileName = $@"{imageCatePath}/{filename}",
-                            ProductImageTypeId = 1
-                        };
-                        _repositoryManager.ProductImageRepository.Create(newProductImage);
-                        _repositoryManager.ProductImageRepository.Save();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Pass Image:productId:"+ productId);
+
+                            var imageExtension = Path.GetExtension(i.Uri.ToString());
+                            string filename = string.Format(@"{0}_{1}{2}", productId, imageIndex, imageExtension);
+                            string filePath = string.Format(@"{0}/{1}", imageFileFolder, filename);
+
+                            File.WriteAllBytes(filePath, byteStream);
+                            //Todo ProductImageTypeId is temp
+                            var newProductImage = new ProductImage()
+                            {
+                                ProductId = productId,
+                                //FileName = filePath,
+                                FileName = $@"{imageCatePath}/{filename}",
+                                ProductImageTypeId = 1
+                            };
+                            _repositoryManager.ProductImageRepository.Create(newProductImage);
+                            _repositoryManager.ProductImageRepository.Save();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Pass Image:productId:" + productId);
+                        }
                     }
                 }
                 catch (Exception ex)
