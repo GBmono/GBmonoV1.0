@@ -42,8 +42,10 @@ namespace Gbmono.Utils.ProductDataImporter
             var images = _repositoryManager.ProductImageRepository.Table.ToList();
             var imageFileFolder = ConfigurationManager.AppSettings["imageFolder"];
 
+            Console.WriteLine("all images:" + images.Count());
             foreach (var productImage in images)
             {
+                Console.WriteLine("strat image:" + productImage.ProductImageId);
                 var imagePath = $@"{imageFileFolder}/{productImage.FileName}";
 
                 bool imageValidated = true;

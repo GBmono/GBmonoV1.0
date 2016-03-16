@@ -31,7 +31,7 @@ namespace Gbmono.Utils.ProductDataImporter
 
         static void Main(string[] args)
         {
-            ImageHelper.RemoveWrongImage(_repositoryManager);
+            //ImageHelper.RemoveWrongImage(_repositoryManager);
 
             // load all excel files from the folder
             var dataFiles = FileHelper.GetFiles(WorkingDirectory, new string[] { "xlsx" });
