@@ -10,7 +10,7 @@
 
 <div class="page-content">
     <div class="row">
-        <div class="col-md-7 col-xs-12">
+        <div class="col-md-6 col-xs-12">
             <div class="widget-box transparent">
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
@@ -31,14 +31,14 @@
                              k-legend="{ position: 'bottom' }"
                              k-series-defaults="{ type: 'bar' }"
                              k-series="[
-                                 { field: 'productCount', name: '商品数量' }
+                                 { field: 'productCount', name: '商品数量', gap: 0.2 }
                              ]"
                              k-category-axis="{ field: 'category', majorGridLines: {visible: false }, labels: {rotation: 0 } }"
                              k-tooltip="{visible: true, format: '商品总计: {0:n0}'}"
                              k-data-source="productCountItems"
                              class="chart"
                              k-theme="'material'"
-                             style="height: 580px;"></div>
+                             style="height: 520px;"></div>
                     </div>
                 </div>
             </div>

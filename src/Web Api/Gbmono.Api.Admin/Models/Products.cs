@@ -29,9 +29,11 @@ namespace Gbmono.Api.Admin.Models
         public double Price { get; set; }
 
         // discount??
-        public double? Discount { get; set; }
+        // public double? Discount { get; set; }
 
         public string ImgUrl { get; set; }
+
+        public DateTime CreatedDateTime { get; set; }
 
         // 商品激活 (上货架日期)
         public DateTime ActivationDate { get; set; }

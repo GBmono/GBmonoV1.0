@@ -12,8 +12,6 @@ using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Models;
 using Gbmono.Api.Extensions;
-using Gbmono.Api.Security.Identities;
-
 
 namespace Gbmono.Api.Controllers
 {
@@ -34,23 +32,6 @@ namespace Gbmono.Api.Controllers
         public async Task<IEnumerable<ProductSimpleModel>> Get(int? pageIndex = 1, int? pageSize = 10)
         {
             IList<Product> products;
-            //// first page
-            //if(pageIndex == 1)
-            //{
-            //    // return first pagesize of products
-            //    products = await _repositoryManager.ProductRepository
-            //                                       .Table
-            //                                       .Include(m => m.Brand) // include brand table
-            //                                       .Include(m => m.Images)
-            //                                       .Where(m => (m.ActivationDate <= DateTime.Today &&
-            //                                                   (m.ExpiryDate >= DateTime.Today || m.ExpiryDate == null)))
-            //                                       .OrderByDescending(m => m.ActivationDate)
-            //                                       .Take(pageSize.Value)
-            //                                       .ToListAsync();
-
-            //    // convert into simplified model
-            //    return products.Select(m => m.ToSimpleModel());
-            //}
 
             // get start index 
             var startIndex = (pageIndex.Value - 1) * pageSize.Value;
@@ -130,8 +111,12 @@ namespace Gbmono.Api.Controllers
         // get by product id, return detailed product model
         public async Task<Product> GetById(int id)
         {
-            // todo: check if the request is from browser or mobile app
+            // todo: check if the request is from browser or mobile app?
 
+            // record product view event
+            await Task.Run(() => CreateProductEvent(id, (short)ProductEventType.View));
+
+            // return detailed product model
             return await _repositoryManager.ProductRepository
                                            .Table
                                            .Include(m => m.Brand)
@@ -142,15 +127,57 @@ namespace Gbmono.Api.Controllers
 
 
         [Route("BarCodes/{code}")]
-        public Product GetByBarCode(string code)
+        public async Task<Product> GetByBarCode(string code)
         {
-            return _repositoryManager.ProductRepository
-                                     .Table
-                                     .Include(m => m.Brand)
-                                     .Include(m => m.Images)
-                                     .Include(m => m.Category.ParentCategory.ParentCategory)
-                                     .SingleOrDefault(m => m.BarCode == code);
+            // get product by barcode
+            var product = await _repositoryManager.ProductRepository
+                                           .Table
+                                           .Include(m => m.Brand)
+                                           .Include(m => m.Images)
+                                           .Include(m => m.Category.ParentCategory.ParentCategory)
+                                           .FirstOrDefaultAsync(m => m.BarCode == code);
+
+            // record barcode scan event
+            await Task.Run(() => CreateProductEvent(product.ProductId, (short)ProductEventType.Scan));
+
+            // return detailed product
+            return product;
         }
 
+        /// <summary>
+        /// create product event record when product is accessed
+        /// </summary>
+        /// <param name="produtId"></param>
+        /// <param name="eventTypeId"></param>
+        private void CreateProductEvent(int produtId, short eventTypeId)
+        {
+            // get user name if user is authenticated
+            var userName = User.Identity.IsAuthenticated ? User.Identity.Name : Const.UnAuthorizedUserId;
+
+            var newProductEvent = new ProductEvent
+            {
+                ProductId = produtId,
+                EventTypeId = eventTypeId,
+                UserName = userName,
+                Created = DateTime.Now
+            };
+
+            try
+            {
+                // create
+                _repositoryManager.ProductEventRepository.Create(newProductEvent);
+                _repositoryManager.ProductEventRepository.Save();
+
+            }
+            catch(Exception exp)
+            {
+                // get base excetpion
+                var baseException = exp.GetBaseException();
+
+                // logging
+                Utils.Logger.log.Error("RequestUri:" + Request.RequestUri + " Error:" + baseException.Message + " /n Stack Trace:" + baseException.StackTrace);
+            }
+
+        }
     }
 }

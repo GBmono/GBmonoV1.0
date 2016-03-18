@@ -57,6 +57,11 @@
                     controller: 'productEditController',
                     caseInsensitiveMatch: true
                 })
+                .when('/brands', { // 品牌(商)
+                    templateUrl: gbmono.app_view_path + '/brands/list.html',
+                    controller: 'brandListController',
+                    caseInsensitiveMatch: true
+                })
                 .otherwise({
                     templateUrl: gbmono.app_view_path + '/dashboard/dashboard.html',
                     controller: 'dashboardController',

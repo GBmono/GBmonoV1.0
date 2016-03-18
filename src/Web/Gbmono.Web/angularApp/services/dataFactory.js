@@ -105,12 +105,22 @@
             return $http.get(gbmono.api_site_prefix.product_api_url + '/New/' + pageIndex + '/' + pageSize);
         }
 
-        function getById(id) {
+        function getById(id, token) {
+            // attach token if it exits so api could capture user action
+            if (token && token != '') {
+                attachToken(token);
+            }
+
             return $http.get(gbmono.api_site_prefix.product_api_url + '/' + id);
         }
 
         function getByCategory(categoryId, pageIndex, pageSize) {
             return $http.get(gbmono.api_site_prefix.product_api_url + '/Categories/' + categoryId + '/' + pageIndex + '/' + pageSize);
+        }
+
+        // private method
+        function attachToken(token) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + token;
         }
 
     }

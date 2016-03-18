@@ -75,7 +75,7 @@
             if (productId !== 0) {
                 pluginService.showDataLoadingIndicator('#productMain', { left: "60%", top: "60px" });
                 // get product by id
-                getProduct(productId);
+                getProduct(productId, token);
                 // check if product is favorid when user is logged in
                 if (token && token !== '') {
                     isFavoritedProduct(token, productId);
@@ -84,8 +84,8 @@
         }
 
         // get product details by id
-        function getProduct(productId) {
-            productDataFactory.getById(productId)
+        function getProduct(productId, authToken) {
+            productDataFactory.getById(productId, authToken)
                 .success(function (data) {
                     // get current product
                     vm.product = data;
@@ -96,6 +96,8 @@
                     vm.primaryImg = vm.productImages.length > 0 ? vm.productImages[0].fileName : vm.noImage;
                     // get category menu by top category id
                     getCategoryMenu(vm.product.category.parentCategory.parentId);
+
+                    // ui effects
                     // init img thumb gallery
                     pluginService.productDetailGallery(4000);
                     // init bootstrap tab

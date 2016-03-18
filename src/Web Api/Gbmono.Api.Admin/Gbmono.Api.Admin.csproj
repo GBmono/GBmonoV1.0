@@ -142,6 +142,7 @@
     <Compile Include="Controllers\ProductImagesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="ExceptionHandling\GenericExceptionHandler.cs" />
+    <Compile Include="Extensions\ProductExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

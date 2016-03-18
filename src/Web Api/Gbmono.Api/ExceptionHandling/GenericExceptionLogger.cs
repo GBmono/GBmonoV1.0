@@ -25,7 +25,7 @@ namespace Gbmono.Api.ExceptionHandling
             // todo: Raphel
             // create logger instance here
             // log the error message and stack trace
-            Utils.Logger.log.Error("RequestUri:" + context.Request.RequestUri + " Content:" + context.Request.Content.ReadAsStringAsync().Result + " /n Exception:" + context.ExceptionContext.Exception.ToString());
+            Utils.Logger.log.Error("RequestUri:" + context.Request.RequestUri + " Error:" + baseException.Message + " /n Stack Trace:" + baseException.StackTrace);
         }
 
         // extract the HttpContext from request
