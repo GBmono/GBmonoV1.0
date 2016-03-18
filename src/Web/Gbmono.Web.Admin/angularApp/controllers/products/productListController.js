@@ -163,13 +163,13 @@
                         }
                     }
                 },
-                pageable: {
-                    numeric: false,
-                    previousNext: false,
-                    messages: {
-                        display: "产品总计: {2}"
-                    }
-                },
+                //pageable: {
+                //    numeric: false,
+                //    previousNext: false,
+                //    messages: {
+                //        display: "产品总计: {2}"
+                //    }
+                //},
                 sortable: true,
                 height: 580,
                 filterable: false,
