@@ -10,10 +10,12 @@
     function svr($timeout){
         // return svr class
         return {
-            notify: notify
+            notify: notify,
+            showDataLoading: showDataLoading,
+            closeDataLoading: closeDataLoading
         };
 
-        // $.growl
+        // $.growl notification
         function notify(message, type) {
             var msg = message;
 
@@ -74,6 +76,20 @@
                                     '<a href="#" data-growl="url"></a>' +
                                 '</div>'
                 });
+        }
+
+        // show progress indicator
+        function showDataLoading(selector) {
+            
+            $(selector).widget_box('reload');
+        }
+
+        // close progess indicator
+        function closeDataLoading(selector) {
+            // remove the indicator div
+            $(selector).find('.widget-box-overlay').remove();
+
+            //$(selector).widget_box('close');
         }
 
     }

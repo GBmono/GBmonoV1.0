@@ -201,48 +201,74 @@
 
 })(angular.module('gbmono'));
 
-
 /*
-    country data factory
+    stats data factory
 */
 (function (module) {
     // inject params
     factory.$inject = ['$http'];
 
     // create instance
-    module.factory('countryDataFactory', factory);
+    module.factory('statsDataFactory', factory);
 
     // factory implement
     function factory($http) {
 
         // return data factory with CRUD calls
         return {
-            getAll: getAll,
-            getById: getById,
-            create: create,
-            update: update,
-            del: del
+            getSiteStats: getSiteStats
         };
 
-        function getAll() {
-            return $http.get(gbmono.api_site_prefix.country_api_url);
+        function getSiteStats() {
+            return $http.get(gbmono.api_site_prefix.stats_api_url + '/Site');
         }
 
-        function getById(id) {
-            return $http.get(gbmono.api_site_prefix.country_api_url + '/' + id);
-        }
-
-        function create(country) {
-            return $http.post(gbmono.api_site_prefix.country_api_url, country);
-        }
-
-        function update(country) {
-            return $http.put(gbmono.api_site_prefix.country_api_url + '/' + country.countryId, country);
-        }
-
-        function del(id) {
-            return $http.delete(gbmono.api_site_prefix.country_api_url + '/' + id);
-        }
     }
 
 })(angular.module('gbmono'));
+
+
+/*
+    country data factory
+*/
+//(function (module) {
+//    // inject params
+//    factory.$inject = ['$http'];
+
+//    // create instance
+//    module.factory('countryDataFactory', factory);
+
+//    // factory implement
+//    function factory($http) {
+
+//        // return data factory with CRUD calls
+//        return {
+//            getAll: getAll,
+//            getById: getById,
+//            create: create,
+//            update: update,
+//            del: del
+//        };
+
+//        function getAll() {
+//            return $http.get(gbmono.api_site_prefix.country_api_url);
+//        }
+
+//        function getById(id) {
+//            return $http.get(gbmono.api_site_prefix.country_api_url + '/' + id);
+//        }
+
+//        function create(country) {
+//            return $http.post(gbmono.api_site_prefix.country_api_url, country);
+//        }
+
+//        function update(country) {
+//            return $http.put(gbmono.api_site_prefix.country_api_url + '/' + country.countryId, country);
+//        }
+
+//        function del(id) {
+//            return $http.delete(gbmono.api_site_prefix.country_api_url + '/' + id);
+//        }
+//    }
+
+//})(angular.module('gbmono'));

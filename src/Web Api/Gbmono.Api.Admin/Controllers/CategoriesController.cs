@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
@@ -33,42 +34,66 @@ namespace Gbmono.Api.Admin.Controllers
         }
 
         [Route("Top")]
-        public IEnumerable<Category> GetTopCategories()
+        public async Task<IEnumerable<Category>> GetTopCategories()
         {
-            return _repositoryManager.CategoryRepository
-                                     .Table
-                                     .Where(m => m.ParentId == null).OrderBy(m => m.CategoryCode).ToList();
+            return await _repositoryManager.CategoryRepository
+                                           .Table
+                                           .Where(m => m.ParentId == null)
+                                           .OrderBy(m => m.CategoryCode)
+                                           .ToListAsync();
         }
 
         [Route("Parent/{id}")]
-        public IEnumerable<Category> GetCategoriesByParent(int id)
+        public async Task<IEnumerable<Category>>  GetCategoriesByParent(int id)
         {
-            return _repositoryManager.CategoryRepository
-                                     .Table
-                                     .Where(m => m.ParentId == id).OrderBy(m => m.CategoryCode).ToList();
+            return await _repositoryManager.CategoryRepository
+                                           .Table
+                                           .Where(m => m.ParentId == id)
+                                           .OrderBy(m => m.CategoryCode)
+                                           .ToListAsync();
         }
 
         #region category tree
+        [AllowAnonymous]
         [Route("Treeview/{id:int?}")]
         public IEnumerable<KendoTreeViewItem> GetCategories(int? id = null)
         {
-            return _repositoryManager.CategoryRepository
+            // get categories
+            var categories = _repositoryManager.CategoryRepository
                                      .Table
                                      .Where(m => m.ParentId == id)
                                      .OrderBy(m => m.CategoryCode)
-                                     .Select(m => new KendoTreeViewItem
+                                     .ToList();
+            // convert into
+            var treeviewItems = categories.Select(m => new KendoTreeViewItem
                                      {
                                          Id = m.CategoryId,
                                          Name = m.Name,
                                          Expanded = false,
                                          HasChildren = _repositoryManager.CategoryRepository.Table.Any(s => s.ParentId == m.CategoryId),
-                                         LinksTo = _repositoryManager.CategoryRepository.Table.Any(s => s.ParentId == m.CategoryId) 
-                                                   ? "" 
-                                                   : "#/categories/" + m.CategoryId + "/products" // only return link when the category is leaf level
+                                         LinksTo = BuildTreeviewUrl(id, m.CategoryId)
                                      })
                                      .ToList();
+
+            return treeviewItems;
         }
         #endregion
 
+        private string BuildTreeviewUrl(int? id, int categoryId)
+        {
+            // id is top category id
+            if(id == null)
+            {
+                return "#/categories/" + categoryId + "/second";
+            }
+
+            // third
+            if (_repositoryManager.CategoryRepository.Table.Any(s => s.ParentId == id))
+            {
+                return "#/categories/" + categoryId + "/third";
+            }
+
+            return "#/categories/" + categoryId + "/products";
+        }
     }
 }

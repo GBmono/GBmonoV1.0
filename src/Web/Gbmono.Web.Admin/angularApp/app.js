@@ -62,6 +62,21 @@
                     controller: 'brandListController',
                     caseInsensitiveMatch: true
                 })
+                .when('/categories', { // top category
+                    templateUrl: gbmono.app_view_path + '/categories/top.html',
+                    controller: 'topCategoryController',
+                    caseInsensitiveMatch: true
+                })
+                .when('/categories/:parentId/second', { // second category
+                    templateUrl: gbmono.app_view_path + '/categories/second.html',
+                    controller: 'secondCategoryController',
+                    caseInsensitiveMatch: true
+                })
+                .when('/categories/:parentId/third', { // third category
+                    templateUrl: gbmono.app_view_path + '/categories/third.html',
+                    controller: 'thirdCategoryController',
+                    caseInsensitiveMatch: true
+                })
                 .otherwise({
                     templateUrl: gbmono.app_view_path + '/dashboard/dashboard.html',
                     controller: 'dashboardController',
