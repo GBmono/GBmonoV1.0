@@ -6,7 +6,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Microsoft.AspNet.Identity.Owin;
 
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
@@ -27,7 +26,7 @@ namespace Gbmono.Api.Controllers
 
         }
 
-
+        // get new products
         [Route("New/{pageIndex:int?}/{pageSize:int?}")]
         public async Task<IEnumerable<ProductSimpleModel>> Get(int? pageIndex = 1, int? pageSize = 10)
         {
@@ -51,6 +50,7 @@ namespace Gbmono.Api.Controllers
             return products.Select(m => m.ToSimpleModel());
         }
 
+        // get product list by category
         [Route("Categories/{categoryId}/{pageIndex:int?}/{pageSize:int?}")]
         public async Task<IEnumerable<ProductSimpleModel>> GetByCategory(int categoryId, int? pageIndex = 1, int? pageSize = 10)
         {
@@ -108,7 +108,25 @@ namespace Gbmono.Api.Controllers
             return products.Select(m => m.ToSimpleModel()).Skip(startIndex).Take(pageSize.Value);
         }
 
-        // get by product id, return detailed product model
+        // get ranking product list
+        [Route("Ranking")]
+        public async Task<IEnumerable<ProductSimpleModel>> GetByRanking()
+        {
+            // todo: get products by ranking (views or scans)
+            var products =  await _repositoryManager.ProductRepository
+                                                    .Table
+                                                    .Include(m => m.Brand) // include brand table
+                                                    .Include(m => m.Images)
+                                                    .Where(m => (m.ActivationDate <= DateTime.Today &&
+                                                                (m.ExpiryDate >= DateTime.Today || m.ExpiryDate == null)))
+                                                    .OrderByDescending(m => m.CreatedDate)                                                
+                                                    .Take(12)
+                                                    .ToListAsync();
+            // convert into simple product model
+            return products.Select(m => m.ToSimpleModel());
+        }
+
+        // get single product by id
         public async Task<Product> GetById(int id)
         {
             // todo: check if the request is from browser or mobile app?
@@ -125,7 +143,7 @@ namespace Gbmono.Api.Controllers
                                            .SingleOrDefaultAsync(m => m.ProductId == id);
         }
 
-
+        // get single product by barcode
         [Route("BarCodes/{code}")]
         public async Task<Product> GetByBarCode(string code)
         {

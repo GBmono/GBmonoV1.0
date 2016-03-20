@@ -97,12 +97,21 @@
         // return data factory with CRUD calls
         return {
             getNewProducts: getNewProducts,
-            getById: getById,
-            getByCategory: getByCategory
+            getByRanking: getByRanking,
+            getByCategory: getByCategory,
+            getById: getById
         };
 
         function getNewProducts(pageIndex, pageSize) {
             return $http.get(gbmono.api_site_prefix.product_api_url + '/New/' + pageIndex + '/' + pageSize);
+        }
+
+        function getByCategory(categoryId, pageIndex, pageSize) {
+            return $http.get(gbmono.api_site_prefix.product_api_url + '/Categories/' + categoryId + '/' + pageIndex + '/' + pageSize);
+        }
+        
+        function getByRanking() {
+            return $http.get(gbmono.api_site_prefix.product_api_url + '/Ranking');
         }
 
         function getById(id, token) {
@@ -112,10 +121,6 @@
             }
 
             return $http.get(gbmono.api_site_prefix.product_api_url + '/' + id);
-        }
-
-        function getByCategory(categoryId, pageIndex, pageSize) {
-            return $http.get(gbmono.api_site_prefix.product_api_url + '/Categories/' + categoryId + '/' + pageIndex + '/' + pageSize);
         }
 
         // private method

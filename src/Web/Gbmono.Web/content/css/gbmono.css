@@ -45,6 +45,24 @@
 
 /* ---------------------- web site css ---------------------- */
 
+.ribbonranking {
+    position:absolute;
+    top:0px;
+    padding-left:45px;    
+}
+
+
+.ribbonranking .theribbonranking{
+    position:relative;
+    border-radius: 5px;
+    width:30px;    
+    margin:10px 10px 10px -71px;
+    color:#fff;
+    background-color: lightgray;
+    font-family:"Montserrat",Helvetica,Arial,sans-serif
+}
+
+
 /* center an image */
 .produt-list-img{
     height:160px;

@@ -1,0 +1,116 @@
+﻿<div id="all">
+    <!-- content area -->
+    <div id="content">
+        <div class="container">
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+                    <li>
+                        <a ng-href="#/">主页</a>
+                    </li>
+                    <li>人气商品</li>
+                </ul>
+                <div class="row">
+                    <div class="box text-center">
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                <h4 class="text-muted">人气商品</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <!-- *** LEFT COLUMN *** -->
+                <div class="col-sm-9">
+                    <br /><br />
+                    <div class="row products" id="products">
+                        <div class="col-md-4 col-sm-6"
+                             ng-repeat="product in vm.products track by $index">
+                            <div class="product">
+                                <div class="image">
+                                    <a ng-href="#/products/{{product.productId}}">
+                                        <img ng-src="{{ vm.imgRoot + product.imgUrl}}" alt="" class="img-responsive produt-list-img">
+                                    </a>
+                                </div>
+                                <!-- /.image -->
+                                <div class="text">
+                                    <h3><a ng-href="#/products/{{product.productId}}">{{ product.brandName }}</a></h3>
+                                    <a ng-href="#/products/{{product.productId}}" title="{{ product.fullName }}">{{ product.shortName }}</a>
+                                    <p class="price">{{ product.price | currency:"¥"}}</p>
+                                </div>
+
+                                <!-- /.text -->
+                                <!-- ranking label -->
+                                <div ng-class="$index < 3 ? 'ribbonranking sale': 'ribbonranking new'">
+                                    <div class="theribbonranking"> {{ $index + 1 }}</div>
+                                    <div class="ribbon-background"></div>
+                                </div>
+ 
+                            </div>
+                            <!-- /.product -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-md-9 -->
+                <!-- *** LEFT COLUMN END *** -->
+                <!-- *** RIGHT COLUMN *** -->
+
+                <div class="col-sm-3">
+                    <!-- *** MENUS AND FILTERS ***-->
+                    <div class="panel panel-default sidebar-menu">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">产品类别</h3>
+                        </div>
+
+                        <div class="panel-body" style="max-height: 420px;overflow-y: scroll;">
+                            <div class="list-group">
+                                <a class="list-group-item" 
+                                   ng-repeat="cate in vm.categories"
+                                   ng-href="#/categories/{{ cate.categoryId }}/products">
+                                    <i class="fa fa-caret-right main-color"></i> {{ cate.name }}
+                                </a>   
+                            </div>
+                            <!--<ul class="list-group">
+                                <li class="list-group-item" ng-repeat="cate in vm.categories">
+                                    <a class="list-group-item"
+                                       ng-href="#/categories/{{ cate.categoryId }}/products">
+                                        <i class="fa fa-caret-right main-color"></i> {{ cate.name }}
+                                    </a>                                   
+                                </li>
+
+                            </ul>-->
+                        </div>
+                    </div>
+                    <!-- *** MENUS AND FILTERS END *** -->
+                    
+                    <div class="banner">
+                        <a href="">
+                            <img src="content/img/adv4.jpg" class="img-responsive" />
+                        </a>
+                    </div>
+                    <div class="banner">
+                        <a href="">
+                            <img src="content/img/adv1.jpg" class="img-responsive" />
+                        </a>
+                    </div>
+                    <div class="banner">
+                        <a href="">
+                            <img src="content/img/adv2.jpg" class="img-responsive" />
+                        </a>
+                    </div>
+
+
+                </div>
+                <!-- /.col-md-3 -->
+                <!-- *** RIGHT COLUMN END *** -->
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

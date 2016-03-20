@@ -10,7 +10,7 @@
 
 <div class="page-content">
     <div class="row">
-        <div class="col-md-6 col-xs-12">
+        <div class="col-md-4 col-xs-12">
             <div class="widget-box transparent">
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
@@ -51,7 +51,7 @@
             </div>
 
         </div>
-        <div class="col-md-6 col-xs-12">
+        <div class="col-md-8 col-xs-12">
             <div class="widget-box transparent">
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
@@ -70,16 +70,16 @@
                     <div class="widget-main padding-10">
                         <div kendo-chart
                              k-legend="{ position: 'bottom' }"
-                             k-series-defaults="{ type: 'bar' }"
+                             k-series-defaults="{ type: 'column' }"
                              k-series="[
                                  { field: 'productCount', name: '商品数量', gap: 0.2 }
                              ]"
-                             k-category-axis="{ field: 'category', majorGridLines: {visible: false }, labels: {rotation: 0 } }"
+                             k-category-axis="{ field: 'category', majorGridLines: {visible: false }, labels: {rotation: 30 } }"
                              k-tooltip="{visible: true, format: '商品总计: {0:n0}'}"
                              k-data-source="productCountItems"
                              class="chart"
                              k-theme="'material'"
-                             style="height: 520px;"></div>
+                             style="height: 380px;"></div>
                     </div>
                 </div>
             </div>

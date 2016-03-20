@@ -43,25 +43,20 @@ namespace Gbmono.Api.Controllers
                                                           .OrderBy(m => m.CategoryCode)
                                                           .ToListAsync();
 
-                // add third level cates
-                foreach (var secondCate in secondCates)
-                {
-                    var thirdCates = await _repositoryManager.CategoryRepository
-                                                          .Table
-                                                          .Where(m => m.ParentId == secondCate.CategoryId)
-                                                          .OrderBy(m => m.CategoryCode)
-                                                          .ToListAsync();
+                //// add third level cates
+                //foreach (var secondCate in secondCates)
+                //{
+                //    var thirdCates = await _repositoryManager.CategoryRepository
+                //                                          .Table
+                //                                          .Where(m => m.ParentId == secondCate.CategoryId)
+                //                                          .OrderBy(m => m.CategoryCode)
+                //                                          .ToListAsync();
 
-                    secondCate.SubCategories = thirdCates;
-                }
+                //    secondCate.SubCategories = thirdCates;
+                //}
 
                 topCate.SubCategories = secondCates;
             }
-
-            //Out put category Json for App
-            //var output = JsonConvert.SerializeObject(topCates, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
-            //File.WriteAllText(@"C:\Gbmono\category.txt", output);
-
 
             return topCates;
         }

@@ -28,13 +28,13 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/products/:id', { // 商品详细页
+                .when('/products/:id', { // product detail page
                     templateUrl: gbmono.app_view_path + '/products/detail.html',
                     controller: 'productDetailController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/categories/:id/products/', { // 商品列表页
+                .when('/categories/:id/products/', { // product list
                     templateUrl: gbmono.app_view_path + '/products/list.html',
                     controller: 'productListController',
                     controllerAs: 'vm',
@@ -46,31 +46,37 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/topics', { // 推荐， 专题
+                .when('/topics', { // topics
                     templateUrl: gbmono.app_view_path + '/products/topic.html',
                     controller: 'topicController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/brands', { // 品牌商列表页
+                .when('/ranking', { // ranking
+                    templateUrl: gbmono.app_view_path + '/products/ranking.html',
+                    controller: 'productRankingController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
+                .when('/brands', { // brand list page
                     templateUrl: gbmono.app_view_path + '/brands/list.html',
                     controller: 'brandListController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/articles', { // 信息，文章，新闻
+                .when('/articles', { // articles, news, information
                     templateUrl: gbmono.app_view_path + '/articles/index.html',
                     controller: 'articleIndexController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/login', { // 登陆注册页面
+                .when('/login', { // login $ registration
                     templateUrl: gbmono.app_view_path + '/accounts/login.html',
                     controller: 'loginController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/profile', { // 用户中心
+                .when('/profile', { // user profile
                     templateUrl: gbmono.app_view_path + '/accounts/profile.html',
                     controller: 'profileController',
                     controllerAs: 'vm',

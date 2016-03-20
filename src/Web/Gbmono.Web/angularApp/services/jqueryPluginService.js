@@ -9,6 +9,7 @@
     function svr($timeout) {
         return {
             slider: slider,
+            menuSliding: menuSliding,
             tab:tab,
             productDetailGallery: productDetailGallery,
             notify: notify,
@@ -33,6 +34,32 @@
                         itemsMobile: [500, 2] // itemsMobile disabled - inherit from itemsTablet option
                     });
                 }
+            });
+        }
+
+        // nav menu sliding effect
+        function menuSliding() {
+            // call $timeout to make sure dom is ready
+            $timeout(function () {
+                $('.dropdown').on('show.bs.dropdown', function (e) {
+
+                    if ($(window).width() > 750) {
+                        $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+
+                    }
+                    else {
+                        $(this).find('.dropdown-menu').first().stop(true, true).show();
+                    }
+                });
+
+                $('.dropdown').on('hide.bs.dropdown', function (e) {
+                    if ($(window).width() > 750) {
+                        $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+                    }
+                    else {
+                        $(this).find('.dropdown-menu').first().stop(true, true).hide();
+                    }
+                });
             });
         }
 

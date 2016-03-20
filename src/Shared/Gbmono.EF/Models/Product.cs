@@ -98,6 +98,9 @@ namespace Gbmono.EF.Models
         // 追加文案
         public string ExtraInformation { get; set; }
 
+        // product is unavailable until it's published
+        public bool IsPublished { get; set; }
+
         // 商品图片 (包括使用说明图片)
         public ICollection<ProductImage> Images { get; set; }
 

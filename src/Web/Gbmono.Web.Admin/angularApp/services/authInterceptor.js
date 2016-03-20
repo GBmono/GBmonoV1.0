@@ -41,18 +41,18 @@
                 // if current url contains any angularJs route
                 if (url.indexOf('#') === -1) {
                     // login page
-                    //window.location = gbmono.html_app + '/login.html';
+                    window.location = gbmono.html_app + '/login.html';
                 } else {
                     // extract the route if exists
                     var index = url.indexOf('#') + 2;
                     // failed to extract the route
                     if (index >= url.length) {
                         // login page
-                        // window.location = gbmono.html_app + '/login.html';
+                        window.location = gbmono.html_app + '/login.html';
                     } else {
                         var returnUrl = url.substring(index);
                         // login page with returl url
-                        // window.location = gbmono.html_app + '/login.html?returnUrl=' + returnUrl;
+                        window.location = gbmono.html_app + '/login.html?returnUrl=' + returnUrl;
                     }
                 }                
             }

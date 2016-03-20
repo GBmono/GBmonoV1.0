@@ -20,13 +20,13 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['categoryDataFactory'];
+    ctrl.$inject = ['categoryDataFactory', 'pluginService'];
 
     // create controller
     module.controller('headerController', ctrl);
 
     // controller body
-    function ctrl(categoryDataFactory) {
+    function ctrl(categoryDataFactory, pluginService) {
         var vm = this; // controller reference
         // for ui display purpose
         vm.topCatesCol1 = [];
@@ -38,12 +38,16 @@
         init();
 
         function init() {
+            // get top categories
             getTopCategories();
         }
 
         function getTopCategories() {
             categoryDataFactory.getTopCates()
                 .success(function (data) {
+                    // nav header menu sliding 
+                    pluginService.menuSliding();
+
                     // todo: 
                     vm.topCatesCol1 = fillCategories(0, data);
                     vm.topCatesCol2 = fillCategories(4, data);
