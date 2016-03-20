@@ -237,7 +237,8 @@ namespace Gbmono.Utils.ProductDataImporter
                 Summer = summer,
                 Autumn = autumn,
                 Winter = winter,
-                Price = price
+                Price = price,
+                IsPublished = true
             };
 
             // check if any product with same barcode exists in db
