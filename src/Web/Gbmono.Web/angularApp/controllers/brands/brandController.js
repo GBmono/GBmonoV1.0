@@ -29,9 +29,14 @@
         }
 
         function getBrands() {
+            // data loading indicator
+            pluginService.showDataLoadingIndicator('#brands', { left: "50%", top: "180px;" });
+            // call service
             brandDataFactory.getAll()
                 .success(function (data) {
                     vm.brands = data;
+                    // close data loading
+                    pluginService.closeDataLoadingIndicator('#brands');
                 });
         }
     }
