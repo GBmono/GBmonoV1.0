@@ -177,7 +177,7 @@
                                     <a ng-href="#/categories/{{ vm.menu.expandedItem.categoryId }}/products">{{ vm.menu.expandedItem.name}} <!--<span class="badge pull-right">42</span>--></a>
                                     <ul>
                                         <li ng-repeat="sub in vm.menu.expandedItem.subItems">
-                                            <a ng-href="#/categories/{{ vm.menu.expandedItem.categoryId }}/products?subcateid={{ sub.categoryId }}">
+                                            <a ng-href="#/categories/{{ vm.menu.expandedItem.categoryId }}/products?filters={{ sub.categoryId }}">
                                                 {{ sub.name }}&nbsp;
                                                 <i class="fa fa-check main-color" ng-show="sub.categoryId == vm.product.category.parentId"></i>
                                             </a>                                            

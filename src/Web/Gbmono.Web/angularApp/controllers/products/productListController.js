@@ -125,7 +125,6 @@
                         // disable or hide the button
                         vm.isAllDataLoaded = true;
                     }
-                   
                     // close data loading
                     pluginService.closeDataLoadingIndicator('#products');
                 });
