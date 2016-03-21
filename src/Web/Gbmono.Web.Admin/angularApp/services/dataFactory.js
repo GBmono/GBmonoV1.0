@@ -48,7 +48,9 @@
             getById:getById,
             getTopCategories: getTopCategories,
             getByParent: getByParent,
-            getTreeviewItems: getTreeviewItems
+            getTreeviewItems: getTreeviewItems,
+            create: create,
+            update: update
         }
 
         function getById(id) {
@@ -65,6 +67,14 @@
 
         function getTreeviewItems(parentId) {
             return $http.get(gbmono.api_site_prefix.category_api_url + "/Treeview/" + parentId);
+        }
+
+        function create(category) {
+            return $http.post(gbmono.api_site_prefix.category_api_url, category);
+        }
+
+        function update(category) {
+            return $http.put(gbmono.api_site_prefix.category_api_url + '/' + category.categoryId, category);
         }
     }
 

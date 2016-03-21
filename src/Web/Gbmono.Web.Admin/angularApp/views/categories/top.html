@@ -11,7 +11,7 @@
     </ul><!-- /.breadcrumb -->
 </div>
 
-<!-- view -->
+<!-- list -->
 <div class="page-content">
     <div class="row">
         <div class="col-md-10 col-xs-12">
@@ -45,6 +45,48 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <!-- edit window -->
+    <div kendo-window="winEdit" k-position="{ top: 120, left: '40%' }"
+         k-width="550" k-visible="false" k-modal="true">
+        <div class="form-horizontal" ng-form="formedit">
+            <div class="form-group"
+                 ng-class="{ 'has-error': formedit.codeEdit.$dirty && formedit.codeEdit.$error.required }">
+                <label class="col-md-2 control-label"> 代码 </label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="codeEdit"
+                           ng-model="editCategory.categoryCode"
+                           required />
+                </div>
+            </div>
+
+            <div class="form-group"
+                 ng-class="{ 'has-error': formedit.nameEdit.$dirty && formedit.nameEdit.$error.required }">
+                <label class="col-md-2 control-label"> 名称 </label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="nameEdit"
+                           ng-model="editCategory.name"
+                           required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-8">
+                    <button type="button" class="btn btn-primary btn-lg"
+                            ng-click="update()"
+                            ng-disabled="formedit.$invalid">
+                        <i class="zmdi zmdi-edit"></i> 更新
+                    </button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default btn-lg"
+                            ng-click="winEdit.close();">
+                        <i class="zmdi zmdi-close"></i> 关闭
+                    </button>
+                </div>
+
+            </div>
         </div>
     </div>
 

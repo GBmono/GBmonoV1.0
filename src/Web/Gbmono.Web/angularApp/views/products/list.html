@@ -18,11 +18,11 @@
                                 </a>
                                 <h4 class="text-muted">{{ vm.subCate.name }}</h4>
                             </div>
-                            <div class="col-sm-2">
+                            <!--<div class="col-sm-2">
                                 <a href="" data-toggle="modal" data-target="#huojia-quick-view-modal">                                
                                     <img src="content/img/huojia.PNG" style="height:100px;" />
                                 </a>
-                            </div>
+                            </div>-->
 
                         </div>
                     </div>
@@ -39,9 +39,11 @@
                             功能： 
                         </div>
                         <div class="col-md-11 col-sm-10">                            
-                            <a class="btn btn-primary btn-sm" style="margin-right:10px; margin-bottom:5px;"
-                               ng-repeat="cate in vm.thirdCategories">
-                               {{ cate.name }}
+                            <a class="btn btn-sm" style="margin-right:10px; margin-bottom:5px;"
+                               ng-class="vm.thirdCateId == cate.categoryId ? 'btn-primary ' : 'btn-default'"                               
+                               ng-repeat="cate in vm.thirdCategories"
+                               ng-click="vm.filter(cate.parentId, cate.categoryId)">
+                                <i class="fa fa-check main-color" ng-show="vm.thirdCateId == cate.categoryId"></i> {{ cate.name }}
                             </a>
                         </div>
                     </div>
@@ -130,7 +132,7 @@
                                     <a ng-href="#/categories/{{ vm.menu.expandedItem.categoryId }}/products">{{ vm.menu.expandedItem.name}} <!--<span class="badge pull-right">42</span>--></a>
                                     <ul>
                                         <li ng-repeat="sub in vm.menu.expandedItem.subItems">
-                                            <a ng-href="#/categories/{{ vm.menu.expandedItem.categoryId }}/products?subcateid={{ sub.categoryId }}">
+                                            <a ng-href="#/categories/{{ vm.menu.expandedItem.categoryId }}/products?filters={{ sub.categoryId }}">
                                                 {{ sub.name }}&nbsp;
                                                 <i class="fa fa-check main-color" ng-show="sub.categoryId == vm.subCate.categoryId"></i>
                                             </a>

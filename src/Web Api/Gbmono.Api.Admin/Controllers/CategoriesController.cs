@@ -10,6 +10,7 @@ using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Admin.Models;
 using System.Data.Entity;
+using Gbmono.Api.Admin.HttpResults;
 
 namespace Gbmono.Api.Admin.Controllers
 {
@@ -53,6 +54,41 @@ namespace Gbmono.Api.Admin.Controllers
                                            .ToListAsync();
         }
 
+        [HttpPost]
+        public async Task<IHttpActionResult> Create([FromBody] Category category)
+        {
+            if(_repositoryManager.CategoryRepository
+                                 .Table
+                                 .Any(m => m.CategoryCode == category.CategoryCode && m.Name == category.Name))
+            {
+                return new DataInvalidResult("Name or code already exists.", Request);
+            }
+
+            // create
+            _repositoryManager.CategoryRepository.Create(category);
+            await _repositoryManager.CategoryRepository.SaveAsync();
+
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IHttpActionResult> Update(int id, [FromBody] Category category)
+        {
+            //if (_repositoryManager.CategoryRepository
+            //         .Table
+            //         .Any(m => m.CategoryId != category.CategoryId &&
+            //                   (m.CategoryCode == category.CategoryCode || m.Name == category.Name)))
+            //{
+            //    return new DataInvalidResult("Name or code already exists.", Request);
+            //}
+
+            // update
+            _repositoryManager.CategoryRepository.Update(category);
+            await _repositoryManager.CategoryRepository.SaveAsync();
+
+            return Ok();
+        }
+
         #region category tree
         [AllowAnonymous]
         [Route("Treeview/{id:int?}")]
@@ -87,13 +123,13 @@ namespace Gbmono.Api.Admin.Controllers
                 return "#/categories/" + categoryId + "/second";
             }
 
-            // third
-            if (_repositoryManager.CategoryRepository.Table.Any(s => s.ParentId == id))
+            // check if the current category id is second level or third level
+            if (_repositoryManager.ProductRepository.Table.Any(s => s.CategoryId == categoryId))
             {
-                return "#/categories/" + categoryId + "/third";
+                return "#/categories/" + categoryId + "/products";                
             }
 
-            return "#/categories/" + categoryId + "/products";
+            return "#/categories/" + categoryId + "/third";
         }
     }
 }

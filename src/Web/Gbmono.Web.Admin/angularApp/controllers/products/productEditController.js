@@ -10,7 +10,6 @@
                     'productDataFactory',
                     'productImageDataFactory',
                     'brandDataFactory',
-                    'countryDataFactory',
                     'pluginService',
                     'validator'];
 
@@ -25,7 +24,6 @@
                   productDataFactory,
                   productImageDataFactory,
                   brandDataFactory,
-                  countryDataFactory,
                   pluginService,
                   validator) {
         // top level categories
@@ -165,9 +163,6 @@
 
                     // get brands
                     getBrands();
-
-                    // get countries
-                    // getCountries();
                 });
         }
 
@@ -212,13 +207,6 @@
             brandDataFactory.getAll()
                 .success(function (data) {
                     $scope.brands = data;
-                });
-        }
-
-        function getCountries() {
-            countryDataFactory.getAll()
-                .success(function (data) {
-                    $scope.countries = data;
                 });
         }
 

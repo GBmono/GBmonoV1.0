@@ -30,6 +30,10 @@
         vm.menu = {};
         // optional subcategory
         vm.subCate = {};
+        // second category id (optional)
+        vm.secondCateId = 0;
+        // third category id (optional)
+        vm.thirdCateId = 0;
         // category brands
         vm.categoryBrands = [];
         // product image root path
@@ -40,15 +44,33 @@
         vm.isAllDataLoaded = false;
         // retreive top category id from route params
         var topCategoryId = $routeParams.id ? parseInt($routeParams.id) : 0;
-        // sub category id (optional)
-        var subCateId = $location.search().subcateid ? parseInt($location.search().subcateid) : 0;
 
         // view event handlers
+        // load more products
         vm.loadProducts = function () {
-            // get products
-            getProducts(subCateId == 0 ? topCategoryId : subCateId,
-                            vm.paging.pageIndex, // page index
+            // get more products
+            // if third category id exists
+            if (vm.thirdCateId != 0 && !isNaN(vm.thirdCateId)) {
+                getProducts(vm.thirdCateId,
+                            vm.paging.pageIndex, // first page
                             vm.paging.pageSize); // page size
+            }
+            else {
+                // load products by top category or sub category
+                getProducts(vm.secondCateId == 0 ? topCategoryId : vm.secondCateId,
+                            vm.paging.pageIndex, // first page
+                            vm.paging.pageSize); // page size
+
+            }
+
+        };
+
+        // attach third category id into the filters
+        vm.filter = function (secondCateId, thirdCateId) {
+            var params = secondCateId + ',' + thirdCateId;
+            var filterUrl = '#/categories/' + topCategoryId + '/products/?filters=' + params;
+            // redirect into current page with new filter params
+            window.location = filterUrl;
         };
 
         // page init
@@ -58,17 +80,29 @@
             // auto-move into the top of the screen to focus on the begininig of product list
             utilService.scrollToTop();
 
-            if (topCategoryId != 0) {
-                // load products by top category or sub category
-                getProducts(subCateId == 0 ? topCategoryId : subCateId,
-                            vm.paging.pageIndex, // first page
-                            vm.paging.pageSize); // page size
+            if (topCategoryId != 0 && !isNaN(topCategoryId)) {
+                // extract sub cateid and third cate id from url filters if exists
+                retreiveUrlFilter();
+
+                // if third category id exists
+                if (vm.thirdCateId != 0 && !isNaN(vm.thirdCateId)) {
+                    getProducts(vm.thirdCateId,
+                                vm.paging.pageIndex, // first page
+                                vm.paging.pageSize); // page size
+                }
+                else {
+                    // load products by top category or sub category
+                    getProducts(vm.secondCateId == 0 ? topCategoryId : vm.secondCateId,
+                                vm.paging.pageIndex, // first page
+                                vm.paging.pageSize); // page size
+
+                }
 
                 // category menu list with expanded top category
                 getCategoryMenu(topCategoryId);
 
-                // third categories in filter tag
-                getThirdCategories(subCateId == 0 ? topCategoryId : subCateId);
+                // load third categories (filter tags) by top category or second category 
+                getThirdCategories(vm.secondCateId == 0 ? topCategoryId : vm.secondCateId);
 
                 // get category brands
                 getCategoryBrands(topCategoryId);
@@ -119,14 +153,31 @@
                     vm.menu = data;
                     // if subcategory is not null
                     // get the subcateory
-                    if (subCateId !== 0) {
+                    if (vm.secondCateId !== 0) {
                         for (var i = 0; i < vm.menu.expandedItem.subItems.length; i++) {
-                            if (vm.menu.expandedItem.subItems[i].categoryId === subCateId) {
+                            if (vm.menu.expandedItem.subItems[i].categoryId === vm.secondCateId) {
                                 vm.subCate = vm.menu.expandedItem.subItems[i];
                             }
                         }
                     }
                 });
+        }
+
+        // get filter ids from route 
+        function retreiveUrlFilter() {
+            var filters = $location.search().filters;
+            if (filters && filters != '') {
+                // split by comma
+                var arrParams = filters.split(',');
+                // only second cate id
+                if (arrParams.length > 0) {
+                    vm.secondCateId = parseInt(arrParams[0]);
+                }
+                // third cate
+                if (arrParams.length == 2) {
+                    vm.thirdCateId = parseInt(arrParams[1]);
+                }
+            }
         }
     }
 })(angular.module('gbmono'));
