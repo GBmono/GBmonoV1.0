@@ -29,7 +29,7 @@ namespace Gbmono.Api
             // exception logger
             // There can be multiple exception loggers. (By default, no exception loggers are registered.)
             // we register exception logger here
-            // config.Services.Add(typeof(IExceptionLogger), new GenericExceptionLogger());
+            config.Services.Add(typeof(IExceptionLogger), new GenericExceptionLogger());
 
             // There must be exactly one exception handler. (There is a default one that may be replaced.)
             // To make this sample easier to run in a browser, replace the default exception handler with one that sends
