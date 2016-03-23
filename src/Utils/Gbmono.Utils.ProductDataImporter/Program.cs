@@ -76,7 +76,10 @@ namespace Gbmono.Utils.ProductDataImporter
                 WorkbookPart wbPart = document.WorkbookPart;
                 List<Sheet> sheets = wbPart.Workbook.Descendants<Sheet>().ToList();
                 var sheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault(c => c.Name == ConfigurationManager.AppSettings["sheetName"]);
-                WorksheetPart wsPart = (WorksheetPart)wbPart.GetPartById(sheet.Id);
+                if (sheet == null)
+                {
+                    sheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault();
+                }
 
                 if (sheet == null)
                 {
@@ -87,6 +90,7 @@ namespace Gbmono.Utils.ProductDataImporter
 
                     return;
                 }
+                WorksheetPart wsPart = (WorksheetPart)wbPart.GetPartById(sheet.Id);
 
                 // import product data and return new product id
                 var newProductId = Import(wbPart, wsPart, file);
