@@ -67,10 +67,11 @@
 
         // attach third category id into the filters
         vm.filter = function (secondCateId, thirdCateId) {
-            var params = secondCateId + ',' + thirdCateId;
-            var filterUrl = '#/categories/' + topCategoryId + '/products/?filters=' + params;
-            // redirect into current page with new filter params
-            window.location = filterUrl;
+            $location.search('filters', secondCateId + ',' + thirdCateId);
+            //var params = secondCateId + ',' + thirdCateId;
+            //var filterUrl = '#/categories/' + topCategoryId + '/products/?filters=' + params;
+            //// redirect into current page with new filter params
+            //window.location = filterUrl;
         };
 
         // page init
