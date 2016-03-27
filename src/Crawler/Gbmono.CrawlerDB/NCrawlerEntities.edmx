@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NCrawlerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="NCrawlerModelStoreContainer">
+    <EntitySet Name="CrawlHistory" EntityType="NCrawlerModel.Store.CrawlHistory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CrawlQueue" EntityType="NCrawlerModel.Store.CrawlQueue" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CrawlDateTimes" EntityType="NCrawlerModel.Store.CrawlDateTimes" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="CrawlHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Key" Type="nvarchar" Nullable="false" MaxLength="1024" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CrawlQueue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="SerializedData" Type="varbinary(max)" Nullable="true" />
+    <Property Name="Key" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Exclusion" Type="bit" Nullable="false" DefaultValue="false" />
+  </EntityType>
+  <EntityType Name="CrawlDateTimes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CrawlHistoryId" Type="int" Nullable="false" />
+    <Property Name="CreateDateTime" Type="datetime" Nullable="true" />
+  </EntityType>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NCrawlerModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="NCrawlerEntitiesDbServices" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="CrawlHistory" EntityType="NCrawlerModel.CrawlHistory" />
+          <EntitySet Name="CrawlQueue" EntityType="NCrawlerModel.CrawlQueue" />
+          <EntitySet Name="CrawlDateTimes" EntityType="NCrawlerModel.CrawlDateTime" />
+        </EntityContainer>
+        <EntityType Name="CrawlHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ConcurrencyMode="None" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CrawlQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="SerializedData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Key" Type="String" Nullable="false" />
+          <Property Name="Exclusion" Type="Boolean" Nullable="false" DefaultValue="false" />
+        </EntityType>
+        <EntityType Name="CrawlDateTime">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="CrawlHistoryId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NCrawlerModelStoreContainer" CdmEntityContainer="NCrawlerEntitiesDbServices">
+    <EntitySetMapping Name="CrawlHistory">
+      <EntityTypeMapping TypeName="IsTypeOf(NCrawlerModel.CrawlHistory)">
+        <MappingFragment StoreEntitySet="CrawlHistory">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CrawlQueue">
+      <EntityTypeMapping TypeName="IsTypeOf(NCrawlerModel.CrawlQueue)">
+        <MappingFragment StoreEntitySet="CrawlQueue">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="SerializedData" ColumnName="SerializedData" />
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Exclusion" ColumnName="Exclusion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CrawlDateTimes">
+      <EntityTypeMapping TypeName="IsTypeOf(NCrawlerModel.CrawlDateTime)">
+        <MappingFragment StoreEntitySet="CrawlDateTimes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CrawlHistoryId" ColumnName="CrawlHistoryId" />
+          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="True" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <edmx:Diagram Name="NCrawlerEntities">
+        <edmx:EntityTypeShape EntityType="NCrawlerModel.CrawlHistory" Width="1.5" PointX="0.75" PointY="0.75" Height="1.59568359375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="NCrawlerModel.CrawlQueue" Width="1.5" PointX="2.75" PointY="0.75" Height="1.59568359375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="NCrawlerModel.CrawlDateTime" Width="2" PointX="4.75" PointY="0.75" />
+        </edmx:Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

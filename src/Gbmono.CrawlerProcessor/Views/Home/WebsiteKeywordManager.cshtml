@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "WebsiteKeyword";
+}
+<script src="~/Scripts/AngularJs/websiteKeyword.js"></script>
+<section ng-controller="websiteKeywordController">
+    <div class="row">
+        <table class="col-lg-12">
+            <tr class="row">
+                <th class="col-lg-2">Name</th>
+                <th class="col-lg-2">XPath</th>
+                <th class="col-lg-1">IsMultiple</th>
+                <th class="col-lg-1">IsAttribute</th>
+                <th class="col-lg-1">AttributeName</th>
+                <th class="col-lg-1">IsSplitString</th>
+                <th class="col-lg-2">SplitKey</th>
+                <th class="col-lg-1">NeedDownloadFile</th>
+                <th class="col-lg-1">Delete</th>
+            </tr>
+
+            <tr class="row" ng-repeat="websitekw in websiteKeywordTypes.WebsiteKeywords track by $index">
+                <td class="col-lg-2">
+                    {{websitekw.KeyWordName}}
+                </td>
+                <td class="col-lg-2">
+                    {{websitekw.XPathScript}}
+                </td>
+                <td class="col-lg-1">
+                    {{websitekw.IsMultiple}}
+                </td>
+                <td class="col-lg-1">
+                    {{websitekw.IsAttribute}}
+                </td>
+                <td class="col-lg-1">
+                    {{websitekw.AttributeName}}
+                </td>
+                <td class="col-lg-1">
+                    {{websitekw.IsSplitString}}
+                </td>
+                <td class="col-lg-2">
+                    {{websitekw.SplitKey}}
+                </td>
+                <td class="col-lg-1">
+                    {{websitekw.NeedDownloadFile}}
+                </td>
+                <td class="col-lg-1">
+                    <a href="#" ng-click="deleteWebsiteKeyword($index,websitekw.WebsiteKeywordId)">Delete</a>
+                </td>
+
+            </tr>
+
+        </table>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-lg-6">
+            KeywordName:<input type="text" ng-model="keywordName" />
+        </div>
+        <div class="col-lg-6">
+            XPath:<input type="text" ng-model="xPathScript" />
+        </div>
+        <div class="col-lg-6">
+            isMultiple:<input type="checkbox" ng-model="isMultiple" ng-init="isMultiple=false" />
+        </div>
+        <div class="col-lg-6">
+            isAttribute:<input type="checkbox" ng-model="isAttribute" ng-init="isAttribute=false" />
+        </div>
+        <div class="col-lg-6">
+            AttributeName:<input type="text" ng-model="AttributeName" />
+        </div>
+        <div class="col-lg-6">
+            isSplitString:<input type="checkbox" ng-model="isSplitString" ng-init="isSplitString=false" />
+        </div>
+        <div class="col-lg-6">
+            SplitKey:<input type="text" ng-model="SplitKey" />
+        </div>
+        <div class="col-lg-6">
+            NeedDownload:<input type="checkbox" ng-model="needDownloadFile" ng-init="needDownloadFile=false" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <button ng-click="addWebsiteKeyword()">Add Keyword</button>
+        </div>
+        <div class="col-lg-2">
+            <button ng-click="getLiveRecipesUrl()">Get 10 Live Recipes</button>
+        </div>
+        <div class="col-lg-2">
+            <button ng-click="autoFillIn()">AutoFillIn</button>
+        </div>
+        <div class="col-lg-4">
+            <button ng-click="previewData()">Preview</button>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-lg-6" ng-repeat="rUrl in liveRecipesUrl track by $index">
+            <a href="{{rUrl}}" target="_blank">{{rUrl}}</a>
+        </div>
+    </div>
+
+    
+    <hr/>
+    <div class="row">
+        <div class="col-lg-3" ng-repeat="websitekw in websiteKeywordTypes.WebsiteKeywords track by $index">
+            <input type="checkbox" ng-model="selected[websitekw.KeyWordTypeId]" />{{websitekw.KeyWordName}}
+        </div>
+    </div>
+    <br/>
+    <br/>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <button ng-click="extractDatatoDb()">ExtractDataToDb</button>
+        </div>
+        <div class="col-lg-6">
+            <div class="row" ng-repeat="data in realTimeStates track by $index">
+                <div class="col-lg-6">
+                    {{data.Name}}
+                </div>
+                <div class="col-lg-6">
+                    {{data.Count}}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <button ng-click="getRealTimeState()">GetRealTimeState</button>
+        </div>
+
+    </div>
+
+    <hr />
+    <div class="row">
+        <h3 class="col-lg-12">PreviewData Area</h3>
+    </div>
+    <div class="row" ng-repeat="data in previewDataResult track by $index" style="margin-bottom: 20px">
+        <div class="col-lg-6">
+            {{data.Key}}
+        </div>
+        <div class="col-lg-6">
+            <div class="row" ng-repeat="subV in data.Value">
+                {{subV}}
+            </div>
+        </div>
+    </div>
+
+
+</section>
