@@ -106,6 +106,8 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NCrawlerEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="CrawlerInstance\matsukiyo\Gbmono.CrawlerDB.exe.config" />
+    <None Include="CrawlerInstance\rakuten\Gbmono.CrawlerDB.exe.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +121,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CrawlerInstance\matsukiyo\OriginalWebSite.txt" />
+    <Content Include="CrawlerInstance\rakuten\OriginalWebSite.txt" />
     <Content Include="NCrawlerEntities.edmx.sql" />
   </ItemGroup>
   <ItemGroup>

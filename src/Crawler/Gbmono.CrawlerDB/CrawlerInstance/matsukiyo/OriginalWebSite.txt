@@ -1,0 +1,12 @@
+{"OriginalWebSite":"http://www.matsukiyo.co.jp/store/online",
+"ThridPartyUserId":"3624",
+"StoreRegex":[
+"http://www.matsukiyo.co.jp/store/online$",
+"http://www.matsukiyo.co.jp/store/online/c/\\d{6}$",
+"http://www.matsukiyo.co.jp/store/[^,./?#&]*/[^,./?#&]*/[^,./?#&]*/[^,./?#&]*/[^,./?#&]*/p/\\d{13}$",
+"http://www.matsukiyo.co.jp/store/online/[^.?#]*/c/\\d{6}[?]page=[^.%/?#]*layout=list$"
+],
+"RecipeRegex":[
+"http://www.matsukiyo.co.jp/store/[^,./?#&]*/[^,./?#&]*/[^,./?#&]*/[^,./?#&]*/[^,./?#&]*/p/\\d{13}$"
+],
+"BlockRegex":null}
