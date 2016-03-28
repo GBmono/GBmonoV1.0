@@ -37,8 +37,6 @@ namespace Gbmono.Api.Controllers
             return products.Select(m => m.ToSimpleModel()).Skip(startIndex).Take(pageSize.Value).ToList();
         }
 
-
-
         [Route("Shop/{shopId}")]
         public IHttpActionResult GetShop(int shopId)
         {
@@ -54,6 +52,13 @@ namespace Gbmono.Api.Controllers
             shop.Coupon = "http://119.9.104.196/adminapi/Files/Shops/4.jpg";
 
             return Ok(shop);
+        }
+
+        [Route("Debug")]
+        [HttpGet]
+        public IHttpActionResult Debug()
+        {
+            throw new NotImplementedException();
         }
     }
 

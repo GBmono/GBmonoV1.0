@@ -46,6 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrawlerModelConfigs\CrawlHistoryMap.cs" />
+    <Compile Include="CrawlerModelConfigs\CrawlQueueMap.cs" />
+    <Compile Include="CrawlerModel\CrawlHistory.cs" />
+    <Compile Include="CrawlerModel\CrawlQueue.cs" />
+    <Compile Include="CrawlerModel\KeywordType.cs" />
+    <Compile Include="CrawlerModel\ProcessFileRecord.cs" />
+    <Compile Include="CrawlerModel\ProductInfo.cs" />
+    <Compile Include="CrawlerModel\WebsiteName.cs" />
+    <Compile Include="CrawlerModel\Website_KeywordType.cs" />
+    <Compile Include="DataContext\GbmonoCrawlerContext.cs" />
     <Compile Include="DataContext\GbmonoSqlContext.cs" />
     <Compile Include="Infrastructure\RepositoryManager.cs" />
     <Compile Include="IRepository.cs" />
