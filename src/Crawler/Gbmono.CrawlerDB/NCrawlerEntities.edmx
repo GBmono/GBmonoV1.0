@@ -4,39 +4,171 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="NCrawlerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="NCrawlerModelStoreContainer">
-    <EntitySet Name="CrawlHistory" EntityType="NCrawlerModel.Store.CrawlHistory" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CrawlQueue" EntityType="NCrawlerModel.Store.CrawlQueue" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CrawlDateTimes" EntityType="NCrawlerModel.Store.CrawlDateTimes" store:Type="Tables" Schema="dbo" />
-  </EntityContainer>
-  <EntityType Name="CrawlHistory">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Key" Type="nvarchar" Nullable="false" MaxLength="1024" />
-    <Property Name="GroupId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="CrawlQueue">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="GroupId" Type="int" Nullable="false" />
-    <Property Name="SerializedData" Type="varbinary(max)" Nullable="true" />
-    <Property Name="Key" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Exclusion" Type="bit" Nullable="false" DefaultValue="false" />
-  </EntityType>
-  <EntityType Name="CrawlDateTimes">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CrawlHistoryId" Type="int" Nullable="false" />
-    <Property Name="CreateDateTime" Type="datetime" Nullable="true" />
-  </EntityType>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="NCrawlerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CrawlDateTimes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CrawlHistoryId" Type="int" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CrawlHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CrawlQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="SerializedData" Type="varbinary(max)" />
+          <Property Name="Key" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Exclusion" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KeywordType">
+          <Key>
+            <PropertyRef Name="KeywordTypeId" />
+          </Key>
+          <Property Name="KeywordTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductInfo">
+          <Key>
+            <PropertyRef Name="ProductInfoId" />
+          </Key>
+          <Property Name="ProductInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WebsiteId" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ProductInfoCrawlHistory">
+          <Key>
+            <PropertyRef Name="ProductInfoCrawlHistoryId" />
+          </Key>
+          <Property Name="ProductInfoCrawlHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductInfoId" Type="int" Nullable="false" />
+          <Property Name="CrawlHistoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Website">
+          <Key>
+            <PropertyRef Name="WebsiteId" />
+          </Key>
+          <Property Name="WebsiteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WebsiteKeywordType">
+          <Key>
+            <PropertyRef Name="WebsiteKeywordTypeId" />
+          </Key>
+          <Property Name="WebsiteKeywordTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WebsiteId" Type="int" Nullable="false" />
+          <Property Name="KeywordTypeId" Type="int" Nullable="false" />
+          <Property Name="XPathScript" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsMultiple" Type="bit" Nullable="false" />
+          <Property Name="IsAttribute" Type="bit" Nullable="false" />
+          <Property Name="AttributeName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsSplitString" Type="bit" Nullable="false" />
+          <Property Name="SplitKey" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NeedDownloadFile" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ProductInfo_Website">
+          <End Role="Website" Type="Self.Website" Multiplicity="1" />
+          <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Website">
+              <PropertyRef Name="WebsiteId" />
+            </Principal>
+            <Dependent Role="ProductInfo">
+              <PropertyRef Name="WebsiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductInfoCrawlHistory_CrawlHistory">
+          <End Role="CrawlHistory" Type="Self.CrawlHistory" Multiplicity="1" />
+          <End Role="ProductInfoCrawlHistory" Type="Self.ProductInfoCrawlHistory" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CrawlHistory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductInfoCrawlHistory">
+              <PropertyRef Name="ProductInfoCrawlHistoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductInfoCrawlHistory_ProductInfo">
+          <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="1" />
+          <End Role="ProductInfoCrawlHistory" Type="Self.ProductInfoCrawlHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductInfo">
+              <PropertyRef Name="ProductInfoId" />
+            </Principal>
+            <Dependent Role="ProductInfoCrawlHistory">
+              <PropertyRef Name="ProductInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebsiteKeywordType_KeywordType">
+          <End Role="KeywordType" Type="Self.KeywordType" Multiplicity="1" />
+          <End Role="WebsiteKeywordType" Type="Self.WebsiteKeywordType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeywordType">
+              <PropertyRef Name="KeywordTypeId" />
+            </Principal>
+            <Dependent Role="WebsiteKeywordType">
+              <PropertyRef Name="KeywordTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebsiteKeywordType_Website">
+          <End Role="Website" Type="Self.Website" Multiplicity="1" />
+          <End Role="WebsiteKeywordType" Type="Self.WebsiteKeywordType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Website">
+              <PropertyRef Name="WebsiteId" />
+            </Principal>
+            <Dependent Role="WebsiteKeywordType">
+              <PropertyRef Name="WebsiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NCrawlerModelStoreContainer">
+          <EntitySet Name="CrawlDateTimes" EntityType="Self.CrawlDateTimes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CrawlHistory" EntityType="Self.CrawlHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CrawlQueue" EntityType="Self.CrawlQueue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KeywordType" EntityType="Self.KeywordType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductInfoCrawlHistory" EntityType="Self.ProductInfoCrawlHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Website" EntityType="Self.Website" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebsiteKeywordType" EntityType="Self.WebsiteKeywordType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ProductInfo_Website" Association="Self.FK_ProductInfo_Website">
+            <End Role="Website" EntitySet="Website" />
+            <End Role="ProductInfo" EntitySet="ProductInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductInfoCrawlHistory_CrawlHistory" Association="Self.FK_ProductInfoCrawlHistory_CrawlHistory">
+            <End Role="CrawlHistory" EntitySet="CrawlHistory" />
+            <End Role="ProductInfoCrawlHistory" EntitySet="ProductInfoCrawlHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductInfoCrawlHistory_ProductInfo" Association="Self.FK_ProductInfoCrawlHistory_ProductInfo">
+            <End Role="ProductInfo" EntitySet="ProductInfo" />
+            <End Role="ProductInfoCrawlHistory" EntitySet="ProductInfoCrawlHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebsiteKeywordType_KeywordType" Association="Self.FK_WebsiteKeywordType_KeywordType">
+            <End Role="KeywordType" EntitySet="KeywordType" />
+            <End Role="WebsiteKeywordType" EntitySet="WebsiteKeywordType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebsiteKeywordType_Website" Association="Self.FK_WebsiteKeywordType_Website">
+            <End Role="Website" EntitySet="Website" />
+            <End Role="WebsiteKeywordType" EntitySet="WebsiteKeywordType" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NCrawlerModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
@@ -44,6 +176,31 @@
           <EntitySet Name="CrawlHistory" EntityType="NCrawlerModel.CrawlHistory" />
           <EntitySet Name="CrawlQueue" EntityType="NCrawlerModel.CrawlQueue" />
           <EntitySet Name="CrawlDateTimes" EntityType="NCrawlerModel.CrawlDateTime" />
+          <EntitySet Name="KeywordTypes" EntityType="NCrawlerModel.KeywordType" />
+          <EntitySet Name="ProductInfoes" EntityType="NCrawlerModel.ProductInfo" />
+          <EntitySet Name="ProductInfoCrawlHistories" EntityType="NCrawlerModel.ProductInfoCrawlHistory" />
+          <EntitySet Name="Websites" EntityType="NCrawlerModel.Website" />
+          <EntitySet Name="WebsiteKeywordTypes" EntityType="NCrawlerModel.WebsiteKeywordType" />
+          <AssociationSet Name="FK_ProductInfoCrawlHistory_CrawlHistory" Association="NCrawlerModel.FK_ProductInfoCrawlHistory_CrawlHistory">
+            <End Role="CrawlHistory" EntitySet="CrawlHistory" />
+            <End Role="ProductInfoCrawlHistory" EntitySet="ProductInfoCrawlHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebsiteKeywordType_KeywordType" Association="NCrawlerModel.FK_WebsiteKeywordType_KeywordType">
+            <End Role="KeywordType" EntitySet="KeywordTypes" />
+            <End Role="WebsiteKeywordType" EntitySet="WebsiteKeywordTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductInfo_Website" Association="NCrawlerModel.FK_ProductInfo_Website">
+            <End Role="Website" EntitySet="Websites" />
+            <End Role="ProductInfo" EntitySet="ProductInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductInfoCrawlHistory_ProductInfo" Association="NCrawlerModel.FK_ProductInfoCrawlHistory_ProductInfo">
+            <End Role="ProductInfo" EntitySet="ProductInfoes" />
+            <End Role="ProductInfoCrawlHistory" EntitySet="ProductInfoCrawlHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebsiteKeywordType_Website" Association="NCrawlerModel.FK_WebsiteKeywordType_Website">
+            <End Role="Website" EntitySet="Websites" />
+            <End Role="WebsiteKeywordType" EntitySet="WebsiteKeywordTypes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CrawlHistory">
           <Key>
@@ -52,6 +209,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ConcurrencyMode="None" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="Key" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProductInfoCrawlHistory" Relationship="NCrawlerModel.FK_ProductInfoCrawlHistory_CrawlHistory" FromRole="CrawlHistory" ToRole="ProductInfoCrawlHistory" />
         </EntityType>
         <EntityType Name="CrawlQueue">
           <Key>
@@ -60,7 +218,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
           <Property Name="SerializedData" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Key" Type="String" Nullable="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Exclusion" Type="Boolean" Nullable="false" DefaultValue="false" />
         </EntityType>
         <EntityType Name="CrawlDateTime">
@@ -69,8 +227,124 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="CrawlHistoryId" Type="Int32" Nullable="false" />
-          <Property Name="CreateDateTime" Type="DateTime" Nullable="true" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="true" Precision="3" />
         </EntityType>
+        <EntityType Name="KeywordType">
+          <Key>
+            <PropertyRef Name="KeywordTypeId" />
+          </Key>
+          <Property Name="KeywordTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WebsiteKeywordTypes" Relationship="NCrawlerModel.FK_WebsiteKeywordType_KeywordType" FromRole="KeywordType" ToRole="WebsiteKeywordType" />
+        </EntityType>
+        <EntityType Name="ProductInfo">
+          <Key>
+            <PropertyRef Name="ProductInfoId" />
+          </Key>
+          <Property Name="ProductInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebsiteId" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Website" Relationship="NCrawlerModel.FK_ProductInfo_Website" FromRole="ProductInfo" ToRole="Website" />
+          <NavigationProperty Name="ProductInfoCrawlHistories" Relationship="NCrawlerModel.FK_ProductInfoCrawlHistory_ProductInfo" FromRole="ProductInfo" ToRole="ProductInfoCrawlHistory" />
+        </EntityType>
+        <EntityType Name="ProductInfoCrawlHistory">
+          <Key>
+            <PropertyRef Name="ProductInfoCrawlHistoryId" />
+          </Key>
+          <Property Name="ProductInfoCrawlHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductInfoId" Type="Int32" Nullable="false" />
+          <Property Name="CrawlHistoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CrawlHistory" Relationship="NCrawlerModel.FK_ProductInfoCrawlHistory_CrawlHistory" FromRole="ProductInfoCrawlHistory" ToRole="CrawlHistory" />
+          <NavigationProperty Name="ProductInfo" Relationship="NCrawlerModel.FK_ProductInfoCrawlHistory_ProductInfo" FromRole="ProductInfoCrawlHistory" ToRole="ProductInfo" />
+        </EntityType>
+        <EntityType Name="Website">
+          <Key>
+            <PropertyRef Name="WebsiteId" />
+          </Key>
+          <Property Name="WebsiteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProductInfoes" Relationship="NCrawlerModel.FK_ProductInfo_Website" FromRole="Website" ToRole="ProductInfo" />
+          <NavigationProperty Name="WebsiteKeywordTypes" Relationship="NCrawlerModel.FK_WebsiteKeywordType_Website" FromRole="Website" ToRole="WebsiteKeywordType" />
+        </EntityType>
+        <EntityType Name="WebsiteKeywordType">
+          <Key>
+            <PropertyRef Name="WebsiteKeywordTypeId" />
+          </Key>
+          <Property Name="WebsiteKeywordTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebsiteId" Type="Int32" Nullable="false" />
+          <Property Name="KeywordTypeId" Type="Int32" Nullable="false" />
+          <Property Name="XPathScript" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsMultiple" Type="Boolean" Nullable="false" />
+          <Property Name="IsAttribute" Type="Boolean" Nullable="false" />
+          <Property Name="AttributeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsSplitString" Type="Boolean" Nullable="false" />
+          <Property Name="SplitKey" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NeedDownloadFile" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="KeywordType" Relationship="NCrawlerModel.FK_WebsiteKeywordType_KeywordType" FromRole="WebsiteKeywordType" ToRole="KeywordType" />
+          <NavigationProperty Name="Website" Relationship="NCrawlerModel.FK_WebsiteKeywordType_Website" FromRole="WebsiteKeywordType" ToRole="Website" />
+        </EntityType>
+        <Association Name="FK_ProductInfoCrawlHistory_CrawlHistory">
+          <End Type="NCrawlerModel.CrawlHistory" Role="CrawlHistory" Multiplicity="1" />
+          <End Type="NCrawlerModel.ProductInfoCrawlHistory" Role="ProductInfoCrawlHistory" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CrawlHistory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductInfoCrawlHistory">
+              <PropertyRef Name="ProductInfoCrawlHistoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebsiteKeywordType_KeywordType">
+          <End Type="NCrawlerModel.KeywordType" Role="KeywordType" Multiplicity="1" />
+          <End Type="NCrawlerModel.WebsiteKeywordType" Role="WebsiteKeywordType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeywordType">
+              <PropertyRef Name="KeywordTypeId" />
+            </Principal>
+            <Dependent Role="WebsiteKeywordType">
+              <PropertyRef Name="KeywordTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductInfo_Website">
+          <End Type="NCrawlerModel.Website" Role="Website" Multiplicity="1" />
+          <End Type="NCrawlerModel.ProductInfo" Role="ProductInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Website">
+              <PropertyRef Name="WebsiteId" />
+            </Principal>
+            <Dependent Role="ProductInfo">
+              <PropertyRef Name="WebsiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductInfoCrawlHistory_ProductInfo">
+          <End Type="NCrawlerModel.ProductInfo" Role="ProductInfo" Multiplicity="1" />
+          <End Type="NCrawlerModel.ProductInfoCrawlHistory" Role="ProductInfoCrawlHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductInfo">
+              <PropertyRef Name="ProductInfoId" />
+            </Principal>
+            <Dependent Role="ProductInfoCrawlHistory">
+              <PropertyRef Name="ProductInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebsiteKeywordType_Website">
+          <End Type="NCrawlerModel.Website" Role="Website" Multiplicity="1" />
+          <End Type="NCrawlerModel.WebsiteKeywordType" Role="WebsiteKeywordType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Website">
+              <PropertyRef Name="WebsiteId" />
+            </Principal>
+            <Dependent Role="WebsiteKeywordType">
+              <PropertyRef Name="WebsiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -106,6 +380,58 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="KeywordTypes">
+            <EntityTypeMapping TypeName="NCrawlerModel.KeywordType">
+              <MappingFragment StoreEntitySet="KeywordType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="KeywordTypeId" ColumnName="KeywordTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductInfoes">
+            <EntityTypeMapping TypeName="NCrawlerModel.ProductInfo">
+              <MappingFragment StoreEntitySet="ProductInfo">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="WebsiteId" ColumnName="WebsiteId" />
+                <ScalarProperty Name="ProductInfoId" ColumnName="ProductInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductInfoCrawlHistories">
+            <EntityTypeMapping TypeName="NCrawlerModel.ProductInfoCrawlHistory">
+              <MappingFragment StoreEntitySet="ProductInfoCrawlHistory">
+                <ScalarProperty Name="CrawlHistoryId" ColumnName="CrawlHistoryId" />
+                <ScalarProperty Name="ProductInfoId" ColumnName="ProductInfoId" />
+                <ScalarProperty Name="ProductInfoCrawlHistoryId" ColumnName="ProductInfoCrawlHistoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Websites">
+            <EntityTypeMapping TypeName="NCrawlerModel.Website">
+              <MappingFragment StoreEntitySet="Website">
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="WebsiteId" ColumnName="WebsiteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebsiteKeywordTypes">
+            <EntityTypeMapping TypeName="NCrawlerModel.WebsiteKeywordType">
+              <MappingFragment StoreEntitySet="WebsiteKeywordType">
+                <ScalarProperty Name="NeedDownloadFile" ColumnName="NeedDownloadFile" />
+                <ScalarProperty Name="SplitKey" ColumnName="SplitKey" />
+                <ScalarProperty Name="IsSplitString" ColumnName="IsSplitString" />
+                <ScalarProperty Name="AttributeName" ColumnName="AttributeName" />
+                <ScalarProperty Name="IsAttribute" ColumnName="IsAttribute" />
+                <ScalarProperty Name="IsMultiple" ColumnName="IsMultiple" />
+                <ScalarProperty Name="XPathScript" ColumnName="XPathScript" />
+                <ScalarProperty Name="KeywordTypeId" ColumnName="KeywordTypeId" />
+                <ScalarProperty Name="WebsiteId" ColumnName="WebsiteId" />
+                <ScalarProperty Name="WebsiteKeywordTypeId" ColumnName="WebsiteKeywordTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -130,6 +456,16 @@
         <edmx:EntityTypeShape EntityType="NCrawlerModel.CrawlHistory" Width="1.5" PointX="0.75" PointY="0.75" Height="1.59568359375" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="NCrawlerModel.CrawlQueue" Width="1.5" PointX="2.75" PointY="0.75" Height="1.59568359375" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="NCrawlerModel.CrawlDateTime" Width="2" PointX="4.75" PointY="0.75" />
+        <edmx:EntityTypeShape EntityType="NCrawlerModel.KeywordType" Width="1.5" PointX="0.75" PointY="3.5" />
+        <edmx:EntityTypeShape EntityType="NCrawlerModel.ProductInfo" Width="1.5" PointX="3" PointY="10.25" />
+        <edmx:EntityTypeShape EntityType="NCrawlerModel.ProductInfoCrawlHistory" Width="1.5" PointX="5.25" PointY="5.625" />
+        <edmx:EntityTypeShape EntityType="NCrawlerModel.Website" Width="1.5" PointX="0.75" PointY="6.25" />
+        <edmx:EntityTypeShape EntityType="NCrawlerModel.WebsiteKeywordType" Width="1.5" PointX="3" PointY="5.625" />
+        <edmx:AssociationConnector Association="NCrawlerModel.FK_ProductInfoCrawlHistory_CrawlHistory" />
+        <edmx:AssociationConnector Association="NCrawlerModel.FK_WebsiteKeywordType_KeywordType" />
+        <edmx:AssociationConnector Association="NCrawlerModel.FK_ProductInfo_Website" />
+        <edmx:AssociationConnector Association="NCrawlerModel.FK_ProductInfoCrawlHistory_ProductInfo" />
+        <edmx:AssociationConnector Association="NCrawlerModel.FK_WebsiteKeywordType_Website" />
         </edmx:Diagram></edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

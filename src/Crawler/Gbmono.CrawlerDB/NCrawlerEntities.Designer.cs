@@ -17,6 +17,16 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
+#region EDM Relationship Metadata
+
+[assembly: EdmRelationshipAttribute("NCrawlerModel", "FK_ProductInfoCrawlHistory_CrawlHistory", "CrawlHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Gbmono.CrawlerDB.CrawlHistory), "ProductInfoCrawlHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Gbmono.CrawlerDB.ProductInfoCrawlHistory), true)]
+[assembly: EdmRelationshipAttribute("NCrawlerModel", "FK_WebsiteKeywordType_KeywordType", "KeywordType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Gbmono.CrawlerDB.KeywordType), "WebsiteKeywordType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Gbmono.CrawlerDB.WebsiteKeywordType), true)]
+[assembly: EdmRelationshipAttribute("NCrawlerModel", "FK_ProductInfo_Website", "Website", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Gbmono.CrawlerDB.Website), "ProductInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Gbmono.CrawlerDB.ProductInfo), true)]
+[assembly: EdmRelationshipAttribute("NCrawlerModel", "FK_ProductInfoCrawlHistory_ProductInfo", "ProductInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Gbmono.CrawlerDB.ProductInfo), "ProductInfoCrawlHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Gbmono.CrawlerDB.ProductInfoCrawlHistory), true)]
+[assembly: EdmRelationshipAttribute("NCrawlerModel", "FK_WebsiteKeywordType_Website", "Website", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Gbmono.CrawlerDB.Website), "WebsiteKeywordType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Gbmono.CrawlerDB.WebsiteKeywordType), true)]
+
+#endregion
+
 namespace Gbmono.CrawlerDB
 {
     #region Contexts
@@ -112,6 +122,86 @@ namespace Gbmono.CrawlerDB
             }
         }
         private ObjectSet<CrawlDateTime> _CrawlDateTimes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<KeywordType> KeywordTypes
+        {
+            get
+            {
+                if ((_KeywordTypes == null))
+                {
+                    _KeywordTypes = base.CreateObjectSet<KeywordType>("KeywordTypes");
+                }
+                return _KeywordTypes;
+            }
+        }
+        private ObjectSet<KeywordType> _KeywordTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProductInfo> ProductInfoes
+        {
+            get
+            {
+                if ((_ProductInfoes == null))
+                {
+                    _ProductInfoes = base.CreateObjectSet<ProductInfo>("ProductInfoes");
+                }
+                return _ProductInfoes;
+            }
+        }
+        private ObjectSet<ProductInfo> _ProductInfoes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProductInfoCrawlHistory> ProductInfoCrawlHistories
+        {
+            get
+            {
+                if ((_ProductInfoCrawlHistories == null))
+                {
+                    _ProductInfoCrawlHistories = base.CreateObjectSet<ProductInfoCrawlHistory>("ProductInfoCrawlHistories");
+                }
+                return _ProductInfoCrawlHistories;
+            }
+        }
+        private ObjectSet<ProductInfoCrawlHistory> _ProductInfoCrawlHistories;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Website> Websites
+        {
+            get
+            {
+                if ((_Websites == null))
+                {
+                    _Websites = base.CreateObjectSet<Website>("Websites");
+                }
+                return _Websites;
+            }
+        }
+        private ObjectSet<Website> _Websites;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<WebsiteKeywordType> WebsiteKeywordTypes
+        {
+            get
+            {
+                if ((_WebsiteKeywordTypes == null))
+                {
+                    _WebsiteKeywordTypes = base.CreateObjectSet<WebsiteKeywordType>("WebsiteKeywordTypes");
+                }
+                return _WebsiteKeywordTypes;
+            }
+        }
+        private ObjectSet<WebsiteKeywordType> _WebsiteKeywordTypes;
 
         #endregion
 
@@ -139,6 +229,46 @@ namespace Gbmono.CrawlerDB
         public void AddToCrawlDateTimes(CrawlDateTime crawlDateTime)
         {
             base.AddObject("CrawlDateTimes", crawlDateTime);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the KeywordTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToKeywordTypes(KeywordType keywordType)
+        {
+            base.AddObject("KeywordTypes", keywordType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProductInfoes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProductInfoes(ProductInfo productInfo)
+        {
+            base.AddObject("ProductInfoes", productInfo);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProductInfoCrawlHistories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProductInfoCrawlHistories(ProductInfoCrawlHistory productInfoCrawlHistory)
+        {
+            base.AddObject("ProductInfoCrawlHistories", productInfoCrawlHistory);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Websites EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToWebsites(Website website)
+        {
+            base.AddObject("Websites", website);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the WebsiteKeywordTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToWebsiteKeywordTypes(WebsiteKeywordType websiteKeywordType)
+        {
+            base.AddObject("WebsiteKeywordTypes", websiteKeywordType);
         }
 
         #endregion
@@ -361,6 +491,48 @@ namespace Gbmono.CrawlerDB
 
         #endregion
 
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("NCrawlerModel", "FK_ProductInfoCrawlHistory_CrawlHistory", "ProductInfoCrawlHistory")]
+        public ProductInfoCrawlHistory ProductInfoCrawlHistory
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProductInfoCrawlHistory>("NCrawlerModel.FK_ProductInfoCrawlHistory_CrawlHistory", "ProductInfoCrawlHistory").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProductInfoCrawlHistory>("NCrawlerModel.FK_ProductInfoCrawlHistory_CrawlHistory", "ProductInfoCrawlHistory").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ProductInfoCrawlHistory> ProductInfoCrawlHistoryReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProductInfoCrawlHistory>("NCrawlerModel.FK_ProductInfoCrawlHistory_CrawlHistory", "ProductInfoCrawlHistory");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProductInfoCrawlHistory>("NCrawlerModel.FK_ProductInfoCrawlHistory_CrawlHistory", "ProductInfoCrawlHistory", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>
@@ -514,6 +686,1024 @@ namespace Gbmono.CrawlerDB
         private global::System.Boolean _Exclusion = false;
         partial void OnExclusionChanging(global::System.Boolean value);
         partial void OnExclusionChanged();
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="NCrawlerModel", Name="KeywordType")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class KeywordType : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new KeywordType object.
+        /// </summary>
+        /// <param name="keywordTypeId">Initial value of the KeywordTypeId property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        public static KeywordType CreateKeywordType(global::System.Int32 keywordTypeId, global::System.String name)
+        {
+            KeywordType keywordType = new KeywordType();
+            keywordType.KeywordTypeId = keywordTypeId;
+            keywordType.Name = name;
+            return keywordType;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 KeywordTypeId
+        {
+            get
+            {
+                return _KeywordTypeId;
+            }
+            set
+            {
+                if (_KeywordTypeId != value)
+                {
+                    OnKeywordTypeIdChanging(value);
+                    ReportPropertyChanging("KeywordTypeId");
+                    _KeywordTypeId = StructuralObject.SetValidValue(value, "KeywordTypeId");
+                    ReportPropertyChanged("KeywordTypeId");
+                    OnKeywordTypeIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _KeywordTypeId;
+        partial void OnKeywordTypeIdChanging(global::System.Int32 value);
+        partial void OnKeywordTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false, "Name");
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("NCrawlerModel", "FK_WebsiteKeywordType_KeywordType", "WebsiteKeywordType")]
+        public EntityCollection<WebsiteKeywordType> WebsiteKeywordTypes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WebsiteKeywordType>("NCrawlerModel.FK_WebsiteKeywordType_KeywordType", "WebsiteKeywordType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WebsiteKeywordType>("NCrawlerModel.FK_WebsiteKeywordType_KeywordType", "WebsiteKeywordType", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="NCrawlerModel", Name="ProductInfo")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ProductInfo : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ProductInfo object.
+        /// </summary>
+        /// <param name="productInfoId">Initial value of the ProductInfoId property.</param>
+        /// <param name="websiteId">Initial value of the WebsiteId property.</param>
+        /// <param name="url">Initial value of the Url property.</param>
+        public static ProductInfo CreateProductInfo(global::System.Int32 productInfoId, global::System.Int32 websiteId, global::System.String url)
+        {
+            ProductInfo productInfo = new ProductInfo();
+            productInfo.ProductInfoId = productInfoId;
+            productInfo.WebsiteId = websiteId;
+            productInfo.Url = url;
+            return productInfo;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProductInfoId
+        {
+            get
+            {
+                return _ProductInfoId;
+            }
+            set
+            {
+                if (_ProductInfoId != value)
+                {
+                    OnProductInfoIdChanging(value);
+                    ReportPropertyChanging("ProductInfoId");
+                    _ProductInfoId = StructuralObject.SetValidValue(value, "ProductInfoId");
+                    ReportPropertyChanged("ProductInfoId");
+                    OnProductInfoIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ProductInfoId;
+        partial void OnProductInfoIdChanging(global::System.Int32 value);
+        partial void OnProductInfoIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WebsiteId
+        {
+            get
+            {
+                return _WebsiteId;
+            }
+            set
+            {
+                OnWebsiteIdChanging(value);
+                ReportPropertyChanging("WebsiteId");
+                _WebsiteId = StructuralObject.SetValidValue(value, "WebsiteId");
+                ReportPropertyChanged("WebsiteId");
+                OnWebsiteIdChanged();
+            }
+        }
+        private global::System.Int32 _WebsiteId;
+        partial void OnWebsiteIdChanging(global::System.Int32 value);
+        partial void OnWebsiteIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Url
+        {
+            get
+            {
+                return _Url;
+            }
+            set
+            {
+                OnUrlChanging(value);
+                ReportPropertyChanging("Url");
+                _Url = StructuralObject.SetValidValue(value, false, "Url");
+                ReportPropertyChanged("Url");
+                OnUrlChanged();
+            }
+        }
+        private global::System.String _Url;
+        partial void OnUrlChanging(global::System.String value);
+        partial void OnUrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> CreateTime
+        {
+            get
+            {
+                return _CreateTime;
+            }
+            set
+            {
+                OnCreateTimeChanging(value);
+                ReportPropertyChanging("CreateTime");
+                _CreateTime = StructuralObject.SetValidValue(value, "CreateTime");
+                ReportPropertyChanged("CreateTime");
+                OnCreateTimeChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _CreateTime;
+        partial void OnCreateTimeChanging(Nullable<global::System.DateTime> value);
+        partial void OnCreateTimeChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("NCrawlerModel", "FK_ProductInfo_Website", "Website")]
+        public Website Website
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Website>("NCrawlerModel.FK_ProductInfo_Website", "Website").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Website>("NCrawlerModel.FK_ProductInfo_Website", "Website").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Website> WebsiteReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Website>("NCrawlerModel.FK_ProductInfo_Website", "Website");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Website>("NCrawlerModel.FK_ProductInfo_Website", "Website", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("NCrawlerModel", "FK_ProductInfoCrawlHistory_ProductInfo", "ProductInfoCrawlHistory")]
+        public EntityCollection<ProductInfoCrawlHistory> ProductInfoCrawlHistories
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProductInfoCrawlHistory>("NCrawlerModel.FK_ProductInfoCrawlHistory_ProductInfo", "ProductInfoCrawlHistory");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProductInfoCrawlHistory>("NCrawlerModel.FK_ProductInfoCrawlHistory_ProductInfo", "ProductInfoCrawlHistory", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="NCrawlerModel", Name="ProductInfoCrawlHistory")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ProductInfoCrawlHistory : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ProductInfoCrawlHistory object.
+        /// </summary>
+        /// <param name="productInfoCrawlHistoryId">Initial value of the ProductInfoCrawlHistoryId property.</param>
+        /// <param name="productInfoId">Initial value of the ProductInfoId property.</param>
+        /// <param name="crawlHistoryId">Initial value of the CrawlHistoryId property.</param>
+        public static ProductInfoCrawlHistory CreateProductInfoCrawlHistory(global::System.Int32 productInfoCrawlHistoryId, global::System.Int32 productInfoId, global::System.Int32 crawlHistoryId)
+        {
+            ProductInfoCrawlHistory productInfoCrawlHistory = new ProductInfoCrawlHistory();
+            productInfoCrawlHistory.ProductInfoCrawlHistoryId = productInfoCrawlHistoryId;
+            productInfoCrawlHistory.ProductInfoId = productInfoId;
+            productInfoCrawlHistory.CrawlHistoryId = crawlHistoryId;
+            return productInfoCrawlHistory;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProductInfoCrawlHistoryId
+        {
+            get
+            {
+                return _ProductInfoCrawlHistoryId;
+            }
+            set
+            {
+                if (_ProductInfoCrawlHistoryId != value)
+                {
+                    OnProductInfoCrawlHistoryIdChanging(value);
+                    ReportPropertyChanging("ProductInfoCrawlHistoryId");
+                    _ProductInfoCrawlHistoryId = StructuralObject.SetValidValue(value, "ProductInfoCrawlHistoryId");
+                    ReportPropertyChanged("ProductInfoCrawlHistoryId");
+                    OnProductInfoCrawlHistoryIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ProductInfoCrawlHistoryId;
+        partial void OnProductInfoCrawlHistoryIdChanging(global::System.Int32 value);
+        partial void OnProductInfoCrawlHistoryIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProductInfoId
+        {
+            get
+            {
+                return _ProductInfoId;
+            }
+            set
+            {
+                OnProductInfoIdChanging(value);
+                ReportPropertyChanging("ProductInfoId");
+                _ProductInfoId = StructuralObject.SetValidValue(value, "ProductInfoId");
+                ReportPropertyChanged("ProductInfoId");
+                OnProductInfoIdChanged();
+            }
+        }
+        private global::System.Int32 _ProductInfoId;
+        partial void OnProductInfoIdChanging(global::System.Int32 value);
+        partial void OnProductInfoIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CrawlHistoryId
+        {
+            get
+            {
+                return _CrawlHistoryId;
+            }
+            set
+            {
+                OnCrawlHistoryIdChanging(value);
+                ReportPropertyChanging("CrawlHistoryId");
+                _CrawlHistoryId = StructuralObject.SetValidValue(value, "CrawlHistoryId");
+                ReportPropertyChanged("CrawlHistoryId");
+                OnCrawlHistoryIdChanged();
+            }
+        }
+        private global::System.Int32 _CrawlHistoryId;
+        partial void OnCrawlHistoryIdChanging(global::System.Int32 value);
+        partial void OnCrawlHistoryIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("NCrawlerModel", "FK_ProductInfoCrawlHistory_CrawlHistory", "CrawlHistory")]
+        public CrawlHistory CrawlHistory
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CrawlHistory>("NCrawlerModel.FK_ProductInfoCrawlHistory_CrawlHistory", "CrawlHistory").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CrawlHistory>("NCrawlerModel.FK_ProductInfoCrawlHistory_CrawlHistory", "CrawlHistory").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<CrawlHistory> CrawlHistoryReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CrawlHistory>("NCrawlerModel.FK_ProductInfoCrawlHistory_CrawlHistory", "CrawlHistory");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CrawlHistory>("NCrawlerModel.FK_ProductInfoCrawlHistory_CrawlHistory", "CrawlHistory", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("NCrawlerModel", "FK_ProductInfoCrawlHistory_ProductInfo", "ProductInfo")]
+        public ProductInfo ProductInfo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProductInfo>("NCrawlerModel.FK_ProductInfoCrawlHistory_ProductInfo", "ProductInfo").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProductInfo>("NCrawlerModel.FK_ProductInfoCrawlHistory_ProductInfo", "ProductInfo").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ProductInfo> ProductInfoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProductInfo>("NCrawlerModel.FK_ProductInfoCrawlHistory_ProductInfo", "ProductInfo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProductInfo>("NCrawlerModel.FK_ProductInfoCrawlHistory_ProductInfo", "ProductInfo", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="NCrawlerModel", Name="Website")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Website : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Website object.
+        /// </summary>
+        /// <param name="websiteId">Initial value of the WebsiteId property.</param>
+        /// <param name="url">Initial value of the Url property.</param>
+        /// <param name="groupId">Initial value of the GroupId property.</param>
+        public static Website CreateWebsite(global::System.Int32 websiteId, global::System.String url, global::System.Int32 groupId)
+        {
+            Website website = new Website();
+            website.WebsiteId = websiteId;
+            website.Url = url;
+            website.GroupId = groupId;
+            return website;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WebsiteId
+        {
+            get
+            {
+                return _WebsiteId;
+            }
+            set
+            {
+                if (_WebsiteId != value)
+                {
+                    OnWebsiteIdChanging(value);
+                    ReportPropertyChanging("WebsiteId");
+                    _WebsiteId = StructuralObject.SetValidValue(value, "WebsiteId");
+                    ReportPropertyChanged("WebsiteId");
+                    OnWebsiteIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _WebsiteId;
+        partial void OnWebsiteIdChanging(global::System.Int32 value);
+        partial void OnWebsiteIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Url
+        {
+            get
+            {
+                return _Url;
+            }
+            set
+            {
+                OnUrlChanging(value);
+                ReportPropertyChanging("Url");
+                _Url = StructuralObject.SetValidValue(value, false, "Url");
+                ReportPropertyChanged("Url");
+                OnUrlChanged();
+            }
+        }
+        private global::System.String _Url;
+        partial void OnUrlChanging(global::System.String value);
+        partial void OnUrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 GroupId
+        {
+            get
+            {
+                return _GroupId;
+            }
+            set
+            {
+                OnGroupIdChanging(value);
+                ReportPropertyChanging("GroupId");
+                _GroupId = StructuralObject.SetValidValue(value, "GroupId");
+                ReportPropertyChanged("GroupId");
+                OnGroupIdChanged();
+            }
+        }
+        private global::System.Int32 _GroupId;
+        partial void OnGroupIdChanging(global::System.Int32 value);
+        partial void OnGroupIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("NCrawlerModel", "FK_ProductInfo_Website", "ProductInfo")]
+        public EntityCollection<ProductInfo> ProductInfoes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProductInfo>("NCrawlerModel.FK_ProductInfo_Website", "ProductInfo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProductInfo>("NCrawlerModel.FK_ProductInfo_Website", "ProductInfo", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("NCrawlerModel", "FK_WebsiteKeywordType_Website", "WebsiteKeywordType")]
+        public EntityCollection<WebsiteKeywordType> WebsiteKeywordTypes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WebsiteKeywordType>("NCrawlerModel.FK_WebsiteKeywordType_Website", "WebsiteKeywordType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WebsiteKeywordType>("NCrawlerModel.FK_WebsiteKeywordType_Website", "WebsiteKeywordType", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="NCrawlerModel", Name="WebsiteKeywordType")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class WebsiteKeywordType : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new WebsiteKeywordType object.
+        /// </summary>
+        /// <param name="websiteKeywordTypeId">Initial value of the WebsiteKeywordTypeId property.</param>
+        /// <param name="websiteId">Initial value of the WebsiteId property.</param>
+        /// <param name="keywordTypeId">Initial value of the KeywordTypeId property.</param>
+        /// <param name="xPathScript">Initial value of the XPathScript property.</param>
+        /// <param name="isMultiple">Initial value of the IsMultiple property.</param>
+        /// <param name="isAttribute">Initial value of the IsAttribute property.</param>
+        /// <param name="attributeName">Initial value of the AttributeName property.</param>
+        /// <param name="isSplitString">Initial value of the IsSplitString property.</param>
+        /// <param name="splitKey">Initial value of the SplitKey property.</param>
+        /// <param name="needDownloadFile">Initial value of the NeedDownloadFile property.</param>
+        public static WebsiteKeywordType CreateWebsiteKeywordType(global::System.Int32 websiteKeywordTypeId, global::System.Int32 websiteId, global::System.Int32 keywordTypeId, global::System.String xPathScript, global::System.Boolean isMultiple, global::System.Boolean isAttribute, global::System.String attributeName, global::System.Boolean isSplitString, global::System.String splitKey, global::System.Boolean needDownloadFile)
+        {
+            WebsiteKeywordType websiteKeywordType = new WebsiteKeywordType();
+            websiteKeywordType.WebsiteKeywordTypeId = websiteKeywordTypeId;
+            websiteKeywordType.WebsiteId = websiteId;
+            websiteKeywordType.KeywordTypeId = keywordTypeId;
+            websiteKeywordType.XPathScript = xPathScript;
+            websiteKeywordType.IsMultiple = isMultiple;
+            websiteKeywordType.IsAttribute = isAttribute;
+            websiteKeywordType.AttributeName = attributeName;
+            websiteKeywordType.IsSplitString = isSplitString;
+            websiteKeywordType.SplitKey = splitKey;
+            websiteKeywordType.NeedDownloadFile = needDownloadFile;
+            return websiteKeywordType;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WebsiteKeywordTypeId
+        {
+            get
+            {
+                return _WebsiteKeywordTypeId;
+            }
+            set
+            {
+                if (_WebsiteKeywordTypeId != value)
+                {
+                    OnWebsiteKeywordTypeIdChanging(value);
+                    ReportPropertyChanging("WebsiteKeywordTypeId");
+                    _WebsiteKeywordTypeId = StructuralObject.SetValidValue(value, "WebsiteKeywordTypeId");
+                    ReportPropertyChanged("WebsiteKeywordTypeId");
+                    OnWebsiteKeywordTypeIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _WebsiteKeywordTypeId;
+        partial void OnWebsiteKeywordTypeIdChanging(global::System.Int32 value);
+        partial void OnWebsiteKeywordTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WebsiteId
+        {
+            get
+            {
+                return _WebsiteId;
+            }
+            set
+            {
+                OnWebsiteIdChanging(value);
+                ReportPropertyChanging("WebsiteId");
+                _WebsiteId = StructuralObject.SetValidValue(value, "WebsiteId");
+                ReportPropertyChanged("WebsiteId");
+                OnWebsiteIdChanged();
+            }
+        }
+        private global::System.Int32 _WebsiteId;
+        partial void OnWebsiteIdChanging(global::System.Int32 value);
+        partial void OnWebsiteIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 KeywordTypeId
+        {
+            get
+            {
+                return _KeywordTypeId;
+            }
+            set
+            {
+                OnKeywordTypeIdChanging(value);
+                ReportPropertyChanging("KeywordTypeId");
+                _KeywordTypeId = StructuralObject.SetValidValue(value, "KeywordTypeId");
+                ReportPropertyChanged("KeywordTypeId");
+                OnKeywordTypeIdChanged();
+            }
+        }
+        private global::System.Int32 _KeywordTypeId;
+        partial void OnKeywordTypeIdChanging(global::System.Int32 value);
+        partial void OnKeywordTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String XPathScript
+        {
+            get
+            {
+                return _XPathScript;
+            }
+            set
+            {
+                OnXPathScriptChanging(value);
+                ReportPropertyChanging("XPathScript");
+                _XPathScript = StructuralObject.SetValidValue(value, false, "XPathScript");
+                ReportPropertyChanged("XPathScript");
+                OnXPathScriptChanged();
+            }
+        }
+        private global::System.String _XPathScript;
+        partial void OnXPathScriptChanging(global::System.String value);
+        partial void OnXPathScriptChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsMultiple
+        {
+            get
+            {
+                return _IsMultiple;
+            }
+            set
+            {
+                OnIsMultipleChanging(value);
+                ReportPropertyChanging("IsMultiple");
+                _IsMultiple = StructuralObject.SetValidValue(value, "IsMultiple");
+                ReportPropertyChanged("IsMultiple");
+                OnIsMultipleChanged();
+            }
+        }
+        private global::System.Boolean _IsMultiple;
+        partial void OnIsMultipleChanging(global::System.Boolean value);
+        partial void OnIsMultipleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsAttribute
+        {
+            get
+            {
+                return _IsAttribute;
+            }
+            set
+            {
+                OnIsAttributeChanging(value);
+                ReportPropertyChanging("IsAttribute");
+                _IsAttribute = StructuralObject.SetValidValue(value, "IsAttribute");
+                ReportPropertyChanged("IsAttribute");
+                OnIsAttributeChanged();
+            }
+        }
+        private global::System.Boolean _IsAttribute;
+        partial void OnIsAttributeChanging(global::System.Boolean value);
+        partial void OnIsAttributeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String AttributeName
+        {
+            get
+            {
+                return _AttributeName;
+            }
+            set
+            {
+                OnAttributeNameChanging(value);
+                ReportPropertyChanging("AttributeName");
+                _AttributeName = StructuralObject.SetValidValue(value, false, "AttributeName");
+                ReportPropertyChanged("AttributeName");
+                OnAttributeNameChanged();
+            }
+        }
+        private global::System.String _AttributeName;
+        partial void OnAttributeNameChanging(global::System.String value);
+        partial void OnAttributeNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsSplitString
+        {
+            get
+            {
+                return _IsSplitString;
+            }
+            set
+            {
+                OnIsSplitStringChanging(value);
+                ReportPropertyChanging("IsSplitString");
+                _IsSplitString = StructuralObject.SetValidValue(value, "IsSplitString");
+                ReportPropertyChanged("IsSplitString");
+                OnIsSplitStringChanged();
+            }
+        }
+        private global::System.Boolean _IsSplitString;
+        partial void OnIsSplitStringChanging(global::System.Boolean value);
+        partial void OnIsSplitStringChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String SplitKey
+        {
+            get
+            {
+                return _SplitKey;
+            }
+            set
+            {
+                OnSplitKeyChanging(value);
+                ReportPropertyChanging("SplitKey");
+                _SplitKey = StructuralObject.SetValidValue(value, false, "SplitKey");
+                ReportPropertyChanged("SplitKey");
+                OnSplitKeyChanged();
+            }
+        }
+        private global::System.String _SplitKey;
+        partial void OnSplitKeyChanging(global::System.String value);
+        partial void OnSplitKeyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean NeedDownloadFile
+        {
+            get
+            {
+                return _NeedDownloadFile;
+            }
+            set
+            {
+                OnNeedDownloadFileChanging(value);
+                ReportPropertyChanging("NeedDownloadFile");
+                _NeedDownloadFile = StructuralObject.SetValidValue(value, "NeedDownloadFile");
+                ReportPropertyChanged("NeedDownloadFile");
+                OnNeedDownloadFileChanged();
+            }
+        }
+        private global::System.Boolean _NeedDownloadFile;
+        partial void OnNeedDownloadFileChanging(global::System.Boolean value);
+        partial void OnNeedDownloadFileChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("NCrawlerModel", "FK_WebsiteKeywordType_KeywordType", "KeywordType")]
+        public KeywordType KeywordType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<KeywordType>("NCrawlerModel.FK_WebsiteKeywordType_KeywordType", "KeywordType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<KeywordType>("NCrawlerModel.FK_WebsiteKeywordType_KeywordType", "KeywordType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<KeywordType> KeywordTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<KeywordType>("NCrawlerModel.FK_WebsiteKeywordType_KeywordType", "KeywordType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<KeywordType>("NCrawlerModel.FK_WebsiteKeywordType_KeywordType", "KeywordType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("NCrawlerModel", "FK_WebsiteKeywordType_Website", "Website")]
+        public Website Website
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Website>("NCrawlerModel.FK_WebsiteKeywordType_Website", "Website").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Website>("NCrawlerModel.FK_WebsiteKeywordType_Website", "Website").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Website> WebsiteReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Website>("NCrawlerModel.FK_WebsiteKeywordType_Website", "Website");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Website>("NCrawlerModel.FK_WebsiteKeywordType_Website", "Website", value);
+                }
+            }
+        }
 
         #endregion
 
