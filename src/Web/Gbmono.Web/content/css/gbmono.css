@@ -110,7 +110,8 @@
 }
 
 /* category list item */
-.sub-category{
+.sub-category{   
+    padding-right:25px;
     color:grey;
     text-decoration:none;
     font-size: 120%;     
