@@ -28,6 +28,12 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
+                .when('/categories', { // all categories page
+                    templateUrl: gbmono.app_view_path + '/categories/list.html',
+                    controller: 'categoryListController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
                 .when('/products/:id', { // product detail page
                     templateUrl: gbmono.app_view_path + '/products/detail.html',
                     controller: 'productDetailController',

@@ -57,18 +57,23 @@
             getThirdCates:getThirdCates,
             getBrands: getBrands
         }
-        // todo?
+
+        // read cached data from json file
         function getAll() {
-            return $http.get(gbmono.api_site_prefix.category_api_url);
+            return $http.get('/gbmono/angularApp/data/category.json');
+            // return $http.get(gbmono.api_site_prefix.category_api_url);
+        }
+
+        function getTopCates() {
+            return $http.get('/gbmono/angularApp/data/category_top.json');
+            // return $http.get(gbmono.api_site_prefix.category_api_url + '/Top');
         }
 
         function getMenu (id) {
             return $http.get(gbmono.api_site_prefix.category_api_url + '/Menu/' + id);
         }
 
-        function getTopCates() {
-            return $http.get(gbmono.api_site_prefix.category_api_url + '/Top');
-        }
+
 
         function getThirdCates(id) {
             return $http.get(gbmono.api_site_prefix.category_api_url + '/Third/' + id);

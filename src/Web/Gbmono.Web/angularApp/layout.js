@@ -45,8 +45,8 @@
         function getTopCategories() {
             categoryDataFactory.getTopCates()
                 .success(function (data) {
-                    // nav header menu sliding 
-                    pluginService.menuSliding();
+                    //// nav header menu sliding 
+                    //pluginService.menuSliding();
 
                     // todo: 
                     vm.topCatesCol1 = fillCategories(0, data);

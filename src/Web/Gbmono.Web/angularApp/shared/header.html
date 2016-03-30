@@ -6,9 +6,8 @@ _________________________________________________________ -->
         <div class="navbar-header">
 
             <a class="navbar-brand home" ng-href="#/">
-                GBmono Logo
-                <!--<img src="img/logo.png" alt="Minimal logo" class="hidden-xs hidden-sm">
-                <img src="img/logo-small.png" alt="Minimal logo" class="visible-xs visible-sm"><span class="sr-only">Minimal - go to homepage</span>-->
+                <img src="content/img/logo.png" alt="Minimal logo" class="hidden-xs hidden-sm">
+                <img src="content/img/logo-small.png" alt="Minimal logo" class="visible-xs visible-sm"><span class="sr-only">Minimal - go to homepage</span>
             </a>
             <div class="navbar-buttons">
                 <button type="button" class="navbar-toggle btn-primary" data-toggle="collapse" data-target="#navigation">
@@ -79,13 +78,14 @@ _________________________________________________________ -->
                             </div>
                             <!-- highlight-->
                             <div class="footer clearfix hidden-xs">
-                                <!--<h4 class="pull-right">Men</h4>-->
-                                <!--<div class="buttons pull-left">
-                                    <a ng-href="#/pin" class="btn btn-default">新品上市</a>
-                                    <a ng-href="#/topics" class="btn btn-default">集匠推荐</a>
-                                    <a ng-href="#/topics" class="btn btn-default">活动促销</a>
-                                </div>-->
-                            </div>
+                                <h4 class="pull-right">
+                                    <a ng-href="#/categories" class="white">所有分类</a>
+                                </h4>
+                                    <!--<h4 class="pull-right">所有分类</h4>-->
+                                    <!--<div class="buttons pull-left">
+            <a ng-href="#/categories" class="btn btn-default">所有分类</a>
+        </div>-->
+</div>
                         </li>
                     </ul>
                 </li>
@@ -160,41 +160,6 @@ _________________________________________________________ -->
 </div>
 <!-- /#navbar -->
 <!-- *** NAVBAR END *** -->
-<!-- *** LOGIN MODAL ***
-_________________________________________________________ -->
-
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="Login">用户登录</h4>
-            </div>
-            <div class="modal-body">
-                <form action="customer-orders.html" method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="email" placeholder="电子邮件">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="password" placeholder="密码">
-                    </div>
-
-                    <p class="text-center">
-                        <button class="btn btn-primary"><i class="fa fa-sign-in"></i> 登陆</button>
-                    </p>
-
-                </form>
-
-                <p class="text-center text-muted">还未注册？</p>
-                <p class="text-center text-muted"><a ng-href="#/login"><strong>注册</strong></a>!</p>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- *** LOGIN MODAL END *** -->
 
 
 

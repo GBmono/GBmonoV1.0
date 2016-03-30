@@ -55,7 +55,7 @@
             pluginService.showDataLoadingIndicator('#productsContainer', {left: "42%", top: "90px;"});
             // get new arrived products
             // load first 12 new products 
-            productDataFactory.getNewProducts(1, 12)
+            productDataFactory.getNewProducts(1, 8)
                 .success(function (data) {
                     // retreive data
                     vm.products = data;

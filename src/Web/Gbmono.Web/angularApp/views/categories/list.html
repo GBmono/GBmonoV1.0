@@ -1,0 +1,36 @@
+﻿<div id="all">
+    <div id="content">
+        <div class="container">
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+
+                    <li>
+                        <a ng-href="#/">首页</a>
+                    </li>
+                    <li>所有分类</li>
+                </ul>
+            </div>
+
+            <div class="row" id="categories">
+                <div class="col-xs-6" ng-repeat="topCate in vm.categories">                
+                    <h3 class="text-uppercase">
+                        <a ng-href="#/categories/{{ topCate.categoryId }}/products">{{ topCate.name }}</a>
+                    </h3>                      
+                    <hr />
+                    <div class="row" style="min-height:100px;">
+                        <div class="col-md-3 col-xs-4" ng-repeat="subCate in topCate.subCategories">
+                            <p>
+                                <a class="sub-category" 
+                                   ng-href="#/categories/{{ topCate.categoryId }}/products?filters={{ subCate.categoryId }}">
+                                    {{ subCate.name }}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

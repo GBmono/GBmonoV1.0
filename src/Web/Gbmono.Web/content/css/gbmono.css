@@ -45,7 +45,7 @@
 
 /* ---------------------- web site css ---------------------- */
 
-.ribbonranking {
+/*.ribbonranking {
     position:absolute;
     top:0px;
     padding-left:45px;    
@@ -60,7 +60,7 @@
     color:#fff;
     background-color: lightgray;
     font-family:"Montserrat",Helvetica,Arial,sans-serif
-}
+}*/
 
 
 /* center an image */
@@ -109,6 +109,17 @@
     text-decoration:none;
 }
 
+/* category list item */
+.sub-category{
+    color:grey;
+    text-decoration:none;
+    font-size: 120%;     
+}
+
+.sub-category:hover{
+    color:black;
+    text-decoration:underline;
+}
 
 /* color */
 .main-color{
@@ -140,6 +151,7 @@
 }
 .grey{color:#777!important}
 .light-grey{color:#bbb!important}
+.white { color: #ffffff !important }
 
 /* data loading indicator */
 .widget-box-overlay {
