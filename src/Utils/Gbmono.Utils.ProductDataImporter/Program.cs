@@ -402,6 +402,7 @@ namespace Gbmono.Utils.ProductDataImporter
         private static string GetCellPathValue(WorkbookPart wbPart, WorksheetPart wsPart, string cellPath)
         {
             Cell theCell = wsPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == cellPath).FirstOrDefault();
+
             string type = string.Empty;
             if (theCell != null)
             {
@@ -423,8 +424,17 @@ namespace Gbmono.Utils.ProductDataImporter
                           GetPartsOfType<SharedStringTablePart>().FirstOrDefault();
                         if (stringTable != null)
                         {
-                            value = stringTable.SharedStringTable.
-                              ElementAt(int.Parse(value)).InnerText;
+                            var fieldFirstChild = stringTable.SharedStringTable.
+                                ElementAt(int.Parse(value)).FirstChild;
+                            if (fieldFirstChild != null)
+                            {
+                                value = fieldFirstChild.InnerText;
+                            }
+                            else
+                            {
+                                value = stringTable.SharedStringTable.
+                                  ElementAt(int.Parse(value)).InnerText;
+                            }
                         }
                         break;
 
