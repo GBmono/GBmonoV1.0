@@ -73,8 +73,10 @@
     <Compile Include="Models\ProductImage.cs" />
     <Compile Include="Models\ProductImageType.cs" />
     <Compile Include="Models\ProductEvent.cs" />
+    <Compile Include="Models\ProductTag.cs" />
     <Compile Include="Models\Retailer.cs" />
     <Compile Include="Models\RetailShop.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\UserFavorite.cs" />
     <Compile Include="Models\WebShop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
