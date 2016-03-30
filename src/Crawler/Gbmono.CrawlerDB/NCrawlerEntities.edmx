@@ -55,6 +55,15 @@
           <Property Name="ProductInfoId" Type="int" Nullable="false" />
           <Property Name="CrawlHistoryId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ProductKeyword">
+          <Key>
+            <PropertyRef Name="ProductKeywordId" />
+          </Key>
+          <Property Name="ProductKeywordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="KeywordTypeId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Website">
           <Key>
             <PropertyRef Name="WebsiteId" />
@@ -145,6 +154,7 @@
           <EntitySet Name="KeywordType" EntityType="Self.KeywordType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductInfoCrawlHistory" EntityType="Self.ProductInfoCrawlHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductKeyword" EntityType="Self.ProductKeyword" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Website" EntityType="Self.Website" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebsiteKeywordType" EntityType="Self.WebsiteKeywordType" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ProductInfo_Website" Association="Self.FK_ProductInfo_Website">
@@ -201,6 +211,7 @@
             <End Role="Website" EntitySet="Websites" />
             <End Role="WebsiteKeywordType" EntitySet="WebsiteKeywordTypes" />
           </AssociationSet>
+          <EntitySet Name="ProductKeywords" EntityType="NCrawlerModel.ProductKeyword" />
         </EntityContainer>
         <EntityType Name="CrawlHistory">
           <Key>
@@ -345,6 +356,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ProductKeyword">
+          <Key>
+            <PropertyRef Name="ProductKeywordId" />
+          </Key>
+          <Property Name="ProductKeywordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="KeywordTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -432,6 +452,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductKeywords">
+            <EntityTypeMapping TypeName="NCrawlerModel.ProductKeyword">
+              <MappingFragment StoreEntitySet="ProductKeyword">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="KeywordTypeId" ColumnName="KeywordTypeId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductKeywordId" ColumnName="ProductKeywordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -466,6 +496,7 @@
         <edmx:AssociationConnector Association="NCrawlerModel.FK_ProductInfo_Website" />
         <edmx:AssociationConnector Association="NCrawlerModel.FK_ProductInfoCrawlHistory_ProductInfo" />
         <edmx:AssociationConnector Association="NCrawlerModel.FK_WebsiteKeywordType_Website" />
+        <edmx:EntityTypeShape EntityType="NCrawlerModel.ProductKeyword" Width="1.5" PointX="7.375" PointY="0.75" />
         </edmx:Diagram></edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -202,6 +202,22 @@ namespace Gbmono.CrawlerDB
             }
         }
         private ObjectSet<WebsiteKeywordType> _WebsiteKeywordTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProductKeyword> ProductKeywords
+        {
+            get
+            {
+                if ((_ProductKeywords == null))
+                {
+                    _ProductKeywords = base.CreateObjectSet<ProductKeyword>("ProductKeywords");
+                }
+                return _ProductKeywords;
+            }
+        }
+        private ObjectSet<ProductKeyword> _ProductKeywords;
 
         #endregion
 
@@ -269,6 +285,14 @@ namespace Gbmono.CrawlerDB
         public void AddToWebsiteKeywordTypes(WebsiteKeywordType websiteKeywordType)
         {
             base.AddObject("WebsiteKeywordTypes", websiteKeywordType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProductKeywords EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProductKeywords(ProductKeyword productKeyword)
+        {
+            base.AddObject("ProductKeywords", productKeyword);
         }
 
         #endregion
@@ -1178,6 +1202,138 @@ namespace Gbmono.CrawlerDB
                 }
             }
         }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="NCrawlerModel", Name="ProductKeyword")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ProductKeyword : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ProductKeyword object.
+        /// </summary>
+        /// <param name="productKeywordId">Initial value of the ProductKeywordId property.</param>
+        /// <param name="productId">Initial value of the ProductId property.</param>
+        /// <param name="keywordTypeId">Initial value of the KeywordTypeId property.</param>
+        public static ProductKeyword CreateProductKeyword(global::System.Int32 productKeywordId, global::System.Int32 productId, global::System.Int32 keywordTypeId)
+        {
+            ProductKeyword productKeyword = new ProductKeyword();
+            productKeyword.ProductKeywordId = productKeywordId;
+            productKeyword.ProductId = productId;
+            productKeyword.KeywordTypeId = keywordTypeId;
+            return productKeyword;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProductKeywordId
+        {
+            get
+            {
+                return _ProductKeywordId;
+            }
+            set
+            {
+                if (_ProductKeywordId != value)
+                {
+                    OnProductKeywordIdChanging(value);
+                    ReportPropertyChanging("ProductKeywordId");
+                    _ProductKeywordId = StructuralObject.SetValidValue(value, "ProductKeywordId");
+                    ReportPropertyChanged("ProductKeywordId");
+                    OnProductKeywordIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ProductKeywordId;
+        partial void OnProductKeywordIdChanging(global::System.Int32 value);
+        partial void OnProductKeywordIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProductId
+        {
+            get
+            {
+                return _ProductId;
+            }
+            set
+            {
+                OnProductIdChanging(value);
+                ReportPropertyChanging("ProductId");
+                _ProductId = StructuralObject.SetValidValue(value, "ProductId");
+                ReportPropertyChanged("ProductId");
+                OnProductIdChanged();
+            }
+        }
+        private global::System.Int32 _ProductId;
+        partial void OnProductIdChanging(global::System.Int32 value);
+        partial void OnProductIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 KeywordTypeId
+        {
+            get
+            {
+                return _KeywordTypeId;
+            }
+            set
+            {
+                OnKeywordTypeIdChanging(value);
+                ReportPropertyChanging("KeywordTypeId");
+                _KeywordTypeId = StructuralObject.SetValidValue(value, "KeywordTypeId");
+                ReportPropertyChanged("KeywordTypeId");
+                OnKeywordTypeIdChanged();
+            }
+        }
+        private global::System.Int32 _KeywordTypeId;
+        partial void OnKeywordTypeIdChanging(global::System.Int32 value);
+        partial void OnKeywordTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Value
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+                OnValueChanging(value);
+                ReportPropertyChanging("Value");
+                _Value = StructuralObject.SetValidValue(value, true, "Value");
+                ReportPropertyChanged("Value");
+                OnValueChanged();
+            }
+        }
+        private global::System.String _Value;
+        partial void OnValueChanging(global::System.String value);
+        partial void OnValueChanged();
 
         #endregion
 
