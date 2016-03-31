@@ -176,7 +176,7 @@ namespace Gbmono.Api.Admin.Controllers
             return Ok(product.ProductId);
         }
 
-        // save tags
+        // save product tags
         [HttpPost]
         [Route("SaveTags")]
         public async Task<IHttpActionResult> Save([FromBody] ProductTagSaveModel model)
