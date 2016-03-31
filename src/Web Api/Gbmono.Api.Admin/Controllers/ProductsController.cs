@@ -105,8 +105,23 @@ namespace Gbmono.Api.Admin.Controllers
                                            .SingleOrDefaultAsync(m => m.ProductId == id);
         }
 
-        [Route("CountByTopCategory")]
+        // return tags by product
+        [Route("{id}/Tags")]
+        public async Task<IEnumerable<Tag>> GetTags(int id)
+        {
+            // get product tags
+            var tags = await _repositoryManager.ProductTagRepository
+                                               .Table
+                                               .Include(m => m.Tag)
+                                               .Where(m => m.ProductId == id)
+                                               .Select(m => m.Tag)
+                                               .ToListAsync();
+
+            return tags;
+        }
+
         // return product count by top category
+        [Route("CountByTopCategory")]        
         public async Task<IEnumerable<KendoBarChartItem>> GetProductCount()
         {
             // get top categories
@@ -133,6 +148,7 @@ namespace Gbmono.Api.Admin.Controllers
             return resultset.OrderByDescending(m => m.ProductCount);
         }
 
+        // create product
         [HttpPost]
         public IHttpActionResult Create([FromBody]Product product)
         {
@@ -148,6 +164,7 @@ namespace Gbmono.Api.Admin.Controllers
             return Ok(product.ProductId);
         }
 
+        // update product
         [HttpPut]
         public IHttpActionResult Update(int id, [FromBody]Product product)
         {
@@ -157,6 +174,44 @@ namespace Gbmono.Api.Admin.Controllers
             _repositoryManager.ProductRepository.Save();
 
             return Ok(product.ProductId);
+        }
+
+        // save tags
+        [HttpPost]
+        [Route("SaveTags")]
+        public async Task<IHttpActionResult> Save([FromBody] ProductTagSaveModel model)
+        {
+            // load existed product tags
+            var productTags = await _repositoryManager.ProductTagRepository
+                                                      .Table
+                                                      .Where(m => m.ProductId == model.ProductId)
+                                                      .ToListAsync();
+
+            // remove tags not in the save mode list
+            foreach (var productTag in productTags)
+            {
+                if (!model.TagIds.Any(m => m == productTag.TagId))
+                {
+                    _repositoryManager.ProductTagRepository.Delete(productTag);
+                }
+            }
+
+            // create tag 
+            foreach (var tagId in model.TagIds)
+            {
+                // create if desn't exist
+                if (!productTags.Any(m => m.TagId == tagId))
+                {
+                    // create
+                    _repositoryManager.ProductTagRepository
+                                      .Create(new ProductTag { ProductId = model.ProductId, TagId = tagId });
+                }
+            }
+
+            // save changes
+            await _repositoryManager.ProductTagRepository.SaveAsync();
+            return Ok();
+
         }
     }
 }

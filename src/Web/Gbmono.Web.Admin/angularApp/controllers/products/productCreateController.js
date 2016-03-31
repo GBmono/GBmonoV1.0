@@ -8,7 +8,6 @@
                     'categoryDataFactory',
                     'productDataFactory',
                     'brandDataFactory',
-                    'countryDataFactory',
                     'pluginService',
                     'validator'];
 
@@ -21,7 +20,6 @@
                   categoryDataFactory,
                   productDataFactory,
                   brandDataFactory,
-                  countryDataFactory,
                   pluginService,
                   validator) {
         // top level categories
@@ -38,8 +36,8 @@
         // brands collection
         $scope.brands = [];
 
-        // country collection
-        $scope.countries = [];
+        //// country collection
+        //$scope.countries = [];
 
         // new product model
         $scope.newProduct = {};
@@ -82,9 +80,6 @@
 
             // get brands
             getBrands();
-
-            // get countries
-            getCountries();
         }
 
         function getTopCategories() {
@@ -127,14 +122,14 @@
                 });
         }
 
-        function getCountries() {
-            countryDataFactory.getAll()
-                .success(function (data) {
-                    $scope.countries = data;
-                    // default seleciton
-                    $scope.newProduct.countryId = $scope.countries.length > 0 ? $scope.countries[0].countryId : 0;
-                });
-        }
+        //function getCountries() {
+        //    countryDataFactory.getAll()
+        //        .success(function (data) {
+        //            $scope.countries = data;
+        //            // default seleciton
+        //            $scope.newProduct.countryId = $scope.countries.length > 0 ? $scope.countries[0].countryId : 0;
+        //        });
+        //}
 
         function createProduct(product) {
             productDataFactory.create(product)

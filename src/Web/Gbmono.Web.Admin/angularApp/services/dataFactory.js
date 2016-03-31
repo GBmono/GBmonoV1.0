@@ -80,6 +80,51 @@
 
 })(angular.module('gbmono'));
 
+/*
+    tag data factory
+*/
+(function (module) {
+    // inject params
+    factory.$inject = ['$http'];
+
+    // create instance
+    module.factory('tagDataFactory', factory);
+
+    // factory implement
+    function factory($http) {
+
+        // return data factory with CRUD calls
+        return {
+            getAll: getAll,
+            getById: getById,
+            create: create,
+            update: update,
+            del: del
+        };
+
+        function getAll() {
+            return $http.get(gbmono.api_site_prefix.tag_api_url);
+        }
+
+        function getById(id) {
+            return $http.get(gbmono.api_site_prefix.tag_api_url + '/' + id);
+        }
+
+        function create(tag) {
+            return $http.post(gbmono.api_site_prefix.tag_api_url, tag);
+        }
+
+        function update(tag) {
+            return $http.put(gbmono.api_site_prefix.tag_api_url + '/' + tag.tagId, tag);
+        }
+
+        function del(id) {
+            return $http.delete(gbmono.api_site_prefix.tag_api_url + '/' + id);
+        }
+    }
+
+})(angular.module('gbmono'));
+
 
 /*
     product data factory
@@ -99,6 +144,8 @@
             getByCategory: getByCategory,
             getCountByCategory: getCountByCategory,
             search: search,
+            getTags: getTags,
+            saveTags: saveTags,
             create: create,
             update: update
         };
@@ -113,6 +160,14 @@
 
         function search(model) {
             return $http.post(gbmono.api_site_prefix.product_api_url + '/Search', model);
+        }
+        
+        function getTags(id) {
+            return $http.get(gbmono.api_site_prefix.product_api_url + "/" + id + '/Tags');
+        }
+
+        function saveTags(model) {
+            return $http.post(gbmono.api_site_prefix.product_api_url + '/SaveTags', model);
         }
 
         function getCountByCategory() {

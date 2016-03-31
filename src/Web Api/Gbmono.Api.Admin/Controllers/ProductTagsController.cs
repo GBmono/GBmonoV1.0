@@ -4,27 +4,28 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Data.Entity;
+using System.Threading.Tasks;
 
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
+using Gbmono.Api.Admin.HttpResults;
+using Gbmono.Api.Admin.Models;
 
 namespace Gbmono.Api.Admin.Controllers
 {
-    [RoutePrefix("api/Countries")]
-    public class CountriesController : ApiController
+    [RoutePrefix("api/ProductTags")]
+    public class ProductTagsController : ApiController
     {
         private readonly RepositoryManager _repositoryManager;
 
         #region ctor
-        public CountriesController()
+        public ProductTagsController()
         {
             _repositoryManager = new RepositoryManager();
         }
         #endregion
 
-        //public IEnumerable<Country> GetAll()
-        //{
-        //    return _repositoryManager.CountryRepository.Table.OrderBy(m => m.Name).ToList();
-        //}
+
     }
 }

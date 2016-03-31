@@ -21,14 +21,15 @@ namespace Gbmono.EF.DataContext
 
             // add entity mappings
             modelBuilder.Configurations.Add(new CategoryMap());
+            modelBuilder.Configurations.Add(new TagMap());
             modelBuilder.Configurations.Add(new ProductMap());
             modelBuilder.Configurations.Add(new ProductImageMap());
             modelBuilder.Configurations.Add(new ProductEventMap());
-
+            modelBuilder.Configurations.Add(new ProductTagMap());
             modelBuilder.Configurations.Add(new UserFavoriteMap());
 
             modelBuilder.Configurations.Add(new BrandMap());
-            modelBuilder.Configurations.Add(new CountryMap());
+            // modelBuilder.Configurations.Add(new CountryMap());
             modelBuilder.Configurations.Add(new RetailShopMap());
             modelBuilder.Configurations.Add(new RetailerMap());
             

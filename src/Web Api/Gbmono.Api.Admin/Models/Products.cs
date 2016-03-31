@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Gbmono.Api.Admin.Models
 {
@@ -62,5 +63,15 @@ namespace Gbmono.Api.Admin.Models
         public short ProductImageTypeId { get; set; }
 
         public string ImageName { get; set; }
+    }
+
+    /// <summary>
+    /// product tags save model
+    /// </summary>
+    public class ProductTagSaveModel
+    {
+        public int ProductId { get; set; }
+
+        public IEnumerable<int> TagIds { get; set; }
     }
 }

@@ -36,22 +36,28 @@ namespace Gbmono.EF.Infrastructure
 
         // entity repositories
         private IRepository<Category> _categoryRepository;
+        private IRepository<Tag> _tagRepository;
         private IRepository<Product> _productRepository;
         private IRepository<ProductImage> _productImageRepository;
         private IRepository<ProductEvent> _productEventRepository;
-
+        private IRepository<ProductTag> _productTagRepository;
         private IRepository<UserFavorite> _userFavoriteRepository;
 
         private IRepository<Brand> _brandRepository;
-        private IRepository<Country> _countryRepository;
+        
         private IRepository<Retailer> _retailerRepository;
-        // private IRepository<Banner> _bannerRepository;
+
 
         // public accessors
         #region category & product
         public IRepository<Category> CategoryRepository
         {
             get { return _categoryRepository ?? (_categoryRepository = new Repository<Category>(Context)); }
+        }
+
+        public IRepository<Tag> TagRepository
+        {
+            get { return _tagRepository ?? (_tagRepository = new Repository<Tag>(Context)); }
         }
 
         public IRepository<Product> ProductRepository
@@ -68,6 +74,11 @@ namespace Gbmono.EF.Infrastructure
         {
             get { return _productEventRepository ?? (_productEventRepository = new Repository<ProductEvent>(Context)); }
         }
+
+        public IRepository<ProductTag> ProductTagRepository
+        {
+            get { return _productTagRepository ?? (_productTagRepository = new Repository<ProductTag>(Context)); }
+        }
         #endregion
 
         public IRepository<UserFavorite> UserFavoriteRepository
@@ -75,14 +86,10 @@ namespace Gbmono.EF.Infrastructure
             get { return _userFavoriteRepository ?? (_userFavoriteRepository = new Repository<UserFavorite>(Context)); }
 
         }
+
         public IRepository<Brand> BrandRepository
         {
             get { return _brandRepository ?? (_brandRepository = new Repository<Brand>(Context)); }
-        }
-
-        public IRepository<Country> CountryRepository
-        {
-            get { return _countryRepository ?? (_countryRepository = new Repository<Country>(Context)); }
         }
 
         public IRepository<Retailer> RetailerRepository
@@ -90,10 +97,6 @@ namespace Gbmono.EF.Infrastructure
             get { return _retailerRepository ?? (_retailerRepository = new Repository<Retailer>(Context)); }
         }
 
-        //public IRepository<Banner> BannerRepository
-        //{
-        //    get { return _bannerRepository ?? (_bannerRepository = new Repository<Banner>(Context)); }
-        //}
 
     }
 }

@@ -57,8 +57,10 @@
     <Compile Include="ModelConfigs\ProductEventMap.cs" />
     <Compile Include="ModelConfigs\ProductImageMap.cs" />
     <Compile Include="ModelConfigs\ProductMap.cs" />
+    <Compile Include="ModelConfigs\ProductTagMap.cs" />
     <Compile Include="ModelConfigs\RetailerMap.cs" />
     <Compile Include="ModelConfigs\RetailShopMap.cs" />
+    <Compile Include="ModelConfigs\TagMap.cs" />
     <Compile Include="ModelConfigs\UserFavoriteMap.cs" />
     <Compile Include="Models\ArticleType.cs" />
     <Compile Include="Models\Banner.cs" />

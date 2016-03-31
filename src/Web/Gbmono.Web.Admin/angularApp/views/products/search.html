@@ -71,3 +71,15 @@
     </div>
 
 </div>
+
+<!-- tags window -->
+<div kendo-window="winTag" k-position="{ top: 120, left: '40%' }"
+     k-width="550" k-height="280" k-visible="false" k-modal="true">
+
+    <select kendo-multi-select="mSelect" k-options="selectOptions" k-ng-model="selectedTagIds"></select>
+    <br /><br />
+    <button class="btn btn-primary btn-lg"
+            ng-click="saveTags()">
+        <i class="fa fa-save"></i> Save
+    </button>
+</div>

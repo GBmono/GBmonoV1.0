@@ -34,6 +34,7 @@ namespace Gbmono.Api.Admin.Controllers
                                      .SingleOrDefault(m => m.CategoryId == id);
         }
 
+        [AllowAnonymous]
         [Route("Top")]
         public async Task<IEnumerable<Category>> GetTopCategories()
         {
