@@ -7,6 +7,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Gbmono.CrawlerDB;
+using Gbmono.EF.Infrastructure;
+using Gbmono.EF.Models;
 using HtmlAgilityPack;
 
 namespace Gbmono.Crawler.Processor
@@ -74,6 +76,7 @@ namespace Gbmono.Crawler.Processor
                     var fileId = int.Parse(Path.GetFileNameWithoutExtension(filePath));
                     using (var db = new NCrawlerEntitiesDbServices())
                     {
+
                         var url = db.CrawlHistory.Single(m => m.Id == fileId).Key;
                         if (db.ProductInfoes.Any(m => m.Url == url))
                         {
@@ -82,7 +85,7 @@ namespace Gbmono.Crawler.Processor
                         }
                         var product = AddProduct(url, webSiteId);
 
-                        var barcodeNode = info.DocumentNode.SelectSingleNode("//span[@class='sale_desc']//table//tr//td[contains(text(),'JAN')]/following-sibling::td");
+                        var barcodeNode = info.DocumentNode.SelectSingleNode("//table//tr//td[contains(text(),'JAN')]/following-sibling::td");
                         if (barcodeNode != null)
                         {
                             barcode = barcodeNode.InnerText;
@@ -99,10 +102,10 @@ namespace Gbmono.Crawler.Processor
                             return;
                         }
 
-                        var functionNode = info.DocumentNode.SelectSingleNode("//span[@class='sale_desc']//table//tr//td[contains(text(),'効能・効果')]/following-sibling::td");
+                        var functionNode = info.DocumentNode.SelectSingleNode("//table//tr//td[contains(text(),'効能・効果')]/following-sibling::td");
                         if (functionNode != null)
                         {
-                            function = functionNode.InnerHtml.Split(new string[2] { "<br>", "、" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                            function = functionNode.InnerHtml.Split(new string[] { "<br>", "、", "・", "●", ",", "。",}, StringSplitOptions.RemoveEmptyEntries).ToList();
 
                             if (function.Any())
                             {
@@ -112,14 +115,13 @@ namespace Gbmono.Crawler.Processor
                                     {
                                         ProductId = product.ProductInfoId,
                                         KeywordTypeId = keywordTypeList.Single(m => m.Name == "効能効果").KeywordTypeId,
-                                        Value = i
+                                        Value = i.StripHtml().Trim()
                                     });
                                 }
                             }
-
                         }
 
-                        var usageNode = info.DocumentNode.SelectSingleNode("//span[@class='sale_desc']//table//tr//td[contains(text(),'用法・用量')]/following-sibling::td");
+                        var usageNode = info.DocumentNode.SelectSingleNode("//table//tr//td[contains(text(),'用法・用量')]/following-sibling::td");
                         if (usageNode != null)
                         {
                             usage = usageNode.InnerText;
@@ -131,7 +133,7 @@ namespace Gbmono.Crawler.Processor
                             });
                         }
 
-                        var distinguishNode = info.DocumentNode.SelectSingleNode("//span[@class='sale_desc']//table//tr//td[contains(text(),'商品区分')]/following-sibling::td");
+                        var distinguishNode = info.DocumentNode.SelectSingleNode("//table//tr//td[contains(text(),'商品区分')]/following-sibling::td");
                         if (distinguishNode != null)
                         {
                             distinguish = distinguishNode.InnerText;
@@ -143,7 +145,7 @@ namespace Gbmono.Crawler.Processor
                             });
                         }
 
-                        var shapeNode = info.DocumentNode.SelectSingleNode("//span[@class='sale_desc']//table//tr//td[contains(text(),'剤形')]/following-sibling::td");
+                        var shapeNode = info.DocumentNode.SelectSingleNode("//table//tr//td[contains(text(),'剤形')]/following-sibling::td");
                         if (shapeNode != null)
                         {
                             shape = shapeNode.InnerText;
@@ -155,7 +157,7 @@ namespace Gbmono.Crawler.Processor
                             });
                         }
 
-                        var additiveNode = info.DocumentNode.SelectSingleNode("//span[@class='sale_desc']//table//tr//td[contains(text(),'添加物')]/following-sibling::td");
+                        var additiveNode = info.DocumentNode.SelectSingleNode("//table//tr//td[contains(text(),'添加物')]/following-sibling::td");
                         if (additiveNode != null)
                         {
                             additive = additiveNode.InnerHtml.Split(new string[2] { "<br>", "、" }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -173,7 +175,7 @@ namespace Gbmono.Crawler.Processor
                             }
                         }
 
-                        var componenteNode = info.DocumentNode.SelectSingleNode("//span[@class='sale_desc']//table//tr//td[contains(text(),'成分・分量')]/following-sibling::td");
+                        var componenteNode = info.DocumentNode.SelectSingleNode("//table//tr//td[contains(text(),'成分・分量')]/following-sibling::td");
                         if (componenteNode != null)
                         {
                             component = componenteNode.InnerHtml.Split(new string[2] { "<br>", "、" }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -192,7 +194,7 @@ namespace Gbmono.Crawler.Processor
                         }
 
 
-                        var saleCompanyNode = info.DocumentNode.SelectSingleNode("//span[@class='sale_desc']//table//tr//td[contains(text(),'製造販売会社')]/following-sibling::td");
+                        var saleCompanyNode = info.DocumentNode.SelectSingleNode("//table//tr//td[contains(text(),'製造販売会社')]/following-sibling::td");
                         if (saleCompanyNode != null)
                         {
                             saleCompany = saleCompanyNode.InnerText;
@@ -265,20 +267,79 @@ namespace Gbmono.Crawler.Processor
             }
         }
 
-        private Website A(int groupId, string domain)
+    }
+
+
+    public class ProductMap
+    {
+
+        public void Mapping()
         {
-            Website result;
+            var _repoManager = new RepositoryManager();
+            var punchedBarcode = new List<string>();
             using (var db = new NCrawlerEntitiesDbServices())
             {
-                result = db.Websites.SingleOrDefault(m => m.GroupId == groupId);
-                if (result == null)
+                var productBarcode = _repoManager.ProductRepository.Table.Select(m => m.BarCode.ToString()).ToList();
+
+                var crawlBarcode = db.ProductKeywords.Where(m => m.KeywordTypeId == 1).Select(m => m.Value.Substring(0, 13)).ToList();
+
+                punchedBarcode = crawlBarcode.Intersect(productBarcode).ToList();
+
+                Console.WriteLine(punchedBarcode.Count);
+            }
+
+            foreach (var barcode in punchedBarcode)
+            {
+                using (var db = new NCrawlerEntitiesDbServices())
                 {
-                    result = new Website() { GroupId = groupId, Url = domain };
-                    db.Websites.AddObject(result);
-                    db.SaveChanges();
+                    var productId =
+                        db.ProductKeywords.First(m => m.KeywordTypeId == 1 && m.Value.Substring(0, 13) == barcode)
+                            .ProductId;
+                    var functions = db.ProductKeywords.Where(m => m.KeywordTypeId == 2 && m.ProductId == productId).ToList();
+
+                    var pId = _repoManager.ProductRepository.Table.First(m => m.BarCode == barcode).ProductId;
+                    if (functions.Any())
+                    {
+                        foreach (var f in functions)
+                        {
+                            if (f.Value.Length<20)
+                            {
+                                var tag = _repoManager.TagRepository.Table.FirstOrDefault(m => m.Name == f.Value);
+                                if (tag == null)
+                                {
+                                    tag = new Tag() { Name = f.Value };
+                                    _repoManager.TagRepository.Create(tag);
+                                    _repoManager.TagRepository.Save();
+                                    Console.Write("+");
+                                }
+                                else
+                                {
+                                    Console.Write("-");
+                                }
+                                if (!_repoManager.ProductTagRepository.Table.Any(m=>m.ProductId==pId&&m.TagId==tag.TagId))
+                                {
+                                    _repoManager.ProductTagRepository.Create(new ProductTag() { ProductId = pId, TagId = tag.TagId });
+                                    _repoManager.ProductRepository.Save();
+                                }
+                              
+                            }
+                        }
+                    }
+                    Console.WriteLine("!");
                 }
-                return result;
             }
         }
+    }
+
+
+    public static class Commom
+    {
+        public static string StripHtml(this string originalHtml)
+        {
+            return Regex.Replace(originalHtml, @"<(.|\n)*?>",
+                string.Empty).Replace("\n", string.Empty);
+        }
+
+
     }
 }
