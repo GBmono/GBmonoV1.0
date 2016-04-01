@@ -17,25 +17,25 @@
                         <a ng-href="#/categories/{{ topCate.categoryId }}/products">{{ topCate.name }}</a>
                     </h3>                      
                     <hr />
-                    <div class="row" style="min-height:85px;">
-                        <div class="col-md-12">
+                    <div class="row" style="min-height:100px;">
+                        <!--<div class="col-md-12">
                             <ul class="list-inline">
-                                <li ng-repeat="subCate in topCate.subCategories" style="width:135px;">
+                                <li ng-repeat="subCate in topCate.subCategories" style="width:128px;margin-bottom:5px;">
                                     <a class="sub-category"
                                        ng-href="#/categories/{{ topCate.categoryId }}/products?filters={{ subCate.categoryId }}">
                                         {{ subCate.name }}
                                     </a>
                                 </li>
                             </ul>
-                        </div>
-                        <!--<div class="col-md-3 col-xs-4" ng-repeat="subCate in topCate.subCategories">
+                        </div>-->
+                        <div class="col-md-3 col-xs-4" ng-repeat="subCate in topCate.subCategories">
                             <p>
                                 <a class="sub-category" 
                                    ng-href="#/categories/{{ topCate.categoryId }}/products?filters={{ subCate.categoryId }}">
                                     {{ subCate.name }}
                                 </a>
                             </p>
-                        </div>-->
+                        </div>
                     </div>
                 </div>
 
