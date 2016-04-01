@@ -113,10 +113,11 @@
                     <b class="arrow"></b>
                 </li>
 
+                <!-- products -->
                 <li class="">
                     <a href="" class="dropdown-toggle">
                         <i class="menu-icon fa fa-tags"></i>
-                        <span class="menu-text"> 产品管理 </span>
+                        <span class="menu-text"> 产品 </span>
 
                         <b class="arrow fa fa-angle-down"></b>
                     </a>
@@ -124,20 +125,69 @@
                     <b class="arrow"></b>
 
                     <ul class="submenu">
-
                         <li class="">
-                            <a ng-href="#/products">
+                            <a ng-href="#/categories">
                                 <i class="menu-icon fa fa-caret-right"></i>
-                                产品管理
+                                品类
                             </a>
 
                             <b class="arrow"></b>
                         </li>
 
                         <li class="">
-                            <a ng-href="#/categories">
+                            <a ng-href="#/products">
                                 <i class="menu-icon fa fa-caret-right"></i>
-                                品类管理
+                                产品
+                            </a>
+
+                            <b class="arrow"></b>
+                        </li>
+
+                        <li class="">
+                            <a ng-href="#/tags">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                标签
+                            </a>
+
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- retailers -->
+                <li class="">
+                    <a href="" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-shopping-bag"></i>
+                        <span class="menu-text"> 零售商 </span>
+
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="">
+                            <a ng-href="#/">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                零售商
+                            </a>
+
+                            <b class="arrow"></b>
+                        </li>
+
+                        <li class="">
+                            <a ng-href="#/">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                店铺
+                            </a>
+
+                            <b class="arrow"></b>
+                        </li>
+
+                        <li class="">
+                            <a ng-href="#/">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                网店
                             </a>
 
                             <b class="arrow"></b>
@@ -145,26 +195,14 @@
                     </ul>
                 </li>
 
+                <!-- brands -->
                 <li class="">
-                    <a href="" class="dropdown-toggle">
+                    <a ng-href="#/brands">
                         <i class="menu-icon fa fa-map"></i>
-                        <span class="menu-text"> 品牌 </span>
-
-                        <b class="arrow fa fa-angle-down"></b>
+                        <span class="menu-text"> 品牌商 </span>
                     </a>
 
                     <b class="arrow"></b>
-
-                    <ul class="submenu">
-                        <li class="">
-                            <a ng-href="#/brands">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                品牌商管理
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                    </ul>
                 </li>
 
                 <li class="">
@@ -324,6 +362,7 @@
     <script src="angularApp/controllers/products/productCreateController.js"></script>
     <script src="angularApp/controllers/products/productEditController.js"></script>
     <script src="angularApp/controllers/brands/brandListController.js"></script>
+    <script src="angularApp/controllers/tags/tagListController.js"></script> 
     <!-- kendo ui -->
     <script src="scripts/kendo/kendo.all.min.js"></script> 
 </body>

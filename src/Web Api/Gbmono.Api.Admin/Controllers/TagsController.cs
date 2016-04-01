@@ -31,5 +31,48 @@ namespace Gbmono.Api.Admin.Controllers
         {
             return await _repositoryManager.TagRepository.Table.OrderBy(m => m.Name).ToListAsync();
         }
+
+        // get by id
+        public async Task<Tag> Get(int id)
+        {
+            return await _repositoryManager.TagRepository.GetAsync(id);
+        }
+
+        // create new tag
+        [HttpPost]
+        public async Task<IHttpActionResult> Create([FromBody] Tag tag)
+        {
+            // todo: check if name exists
+
+            _repositoryManager.TagRepository.Create(tag);
+            await _repositoryManager.TagRepository.SaveAsync();
+
+            return Ok();
+        }
+        
+        // update tag
+        [HttpPut]
+        public async Task<IHttpActionResult> Update(int id, [FromBody] Tag tag)
+        {
+            _repositoryManager.TagRepository.Update(tag);
+            await _repositoryManager.TagRepository.SaveAsync();
+
+            return Ok();
+        }
+
+        // delete tag
+        [HttpDelete]
+        public async Task<IHttpActionResult> Delete(int id)
+        {
+            if(_repositoryManager.ProductTagRepository.Table.Any(m => m.TagId == id))
+            {
+                return new DataInvalidResult("Tag is being using.", Request);
+            }
+
+            _repositoryManager.TagRepository.Delete(id);
+            await _repositoryManager.TagRepository.SaveAsync();
+
+            return Ok();
+        }
     }
 }
