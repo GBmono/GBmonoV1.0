@@ -123,6 +123,7 @@
   <ItemGroup>
     <Content Include="CrawlerInstance\matsukiyo\OriginalWebSite.txt" />
     <Content Include="CrawlerInstance\rakuten\OriginalWebSite.txt" />
+    <Content Include="CrawlerInstance\store\OriginalWebSite.txt" />
     <Content Include="NCrawlerEntities.edmx.sql" />
   </ItemGroup>
   <ItemGroup>
