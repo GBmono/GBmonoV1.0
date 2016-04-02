@@ -138,6 +138,58 @@
 })(angular.module('gbmono'));
 
 /*
+ retailer data factory
+*/
+(function (module) {
+    // inject params
+    factory.$inject = ['$http'];
+
+    // create instance
+    module.factory('retailerDataFactory', factory);
+
+    // factory implement
+    function factory($http) {
+
+        // return data factory with CRUD calls
+        return {
+            getAll: getAll
+        };
+
+        function getAll() {
+            return $http.get(gbmono.api_site_prefix.retailer_api_url);
+        }
+
+    }
+
+})(angular.module('gbmono'));
+
+/*
+ retailer shop data factory
+*/
+(function (module) {
+    // inject params
+    factory.$inject = ['$http'];
+
+    // create instance
+    module.factory('retailerShopDataFactory', factory);
+
+    // factory implement
+    function factory($http) {
+
+        // return data factory with CRUD calls
+        return {
+            search: search
+        };
+
+        function search(model) {
+            return $http.post(gbmono.api_site_prefix.retailer_shop_api_url + '/Search', model);
+        }
+
+    }
+
+})(angular.module('gbmono'));
+
+/*
     user favorite data factory
 */
 (function (module) {

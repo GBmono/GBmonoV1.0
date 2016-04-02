@@ -155,6 +155,7 @@
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RetailersController.cs" />
+    <Compile Include="Controllers\RetailerShopsController.cs" />
     <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Controllers\UserFavoritesController.cs" />
     <Compile Include="ExceptionHandling\GenericExceptionHandler.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Const.cs" />
     <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\Search.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\ApplicationOAuthProvider.cs" />

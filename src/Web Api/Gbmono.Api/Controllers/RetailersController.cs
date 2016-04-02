@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
@@ -23,19 +24,9 @@ namespace Gbmono.Api.Controllers
         }
         #endregion
 
-        public IEnumerable<Retailer> GetAll()
+        public async Task<IEnumerable<Retailer>> GetAll()
         {
-            return _repositoryManager.RetailerRepository.Table.Include(m=>m.Shops).ToList();
-        }
-
-
-        public Retailer GetById(int id)
-        {
-            // load retailer entity with all the related shops
-            return _repositoryManager.RetailerRepository
-                                     .Table
-                                     .Include(m => m.Shops)
-                                     .SingleOrDefault(m => m.RetailerId == id);
+            return await _repositoryManager.RetailerRepository.Table.ToListAsync();
         }
 
     }

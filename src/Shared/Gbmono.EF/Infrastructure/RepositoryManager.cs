@@ -46,6 +46,7 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<Brand> _brandRepository;
         
         private IRepository<Retailer> _retailerRepository;
+        private IRepository<RetailerShop> _retailerShopRepository;
 
 
         // public accessors
@@ -81,6 +82,20 @@ namespace Gbmono.EF.Infrastructure
         }
         #endregion
 
+        #region retailer & shops
+
+        public IRepository<Retailer> RetailerRepository
+        {
+            get { return _retailerRepository ?? (_retailerRepository = new Repository<Retailer>(Context)); }
+        }
+
+        public IRepository<RetailerShop> RetailerShopRepository
+        {
+            get { return _retailerShopRepository ?? (_retailerShopRepository = new Repository<RetailerShop>(Context)); }
+        }
+
+        #endregion
+
         public IRepository<UserFavorite> UserFavoriteRepository
         {
             get { return _userFavoriteRepository ?? (_userFavoriteRepository = new Repository<UserFavorite>(Context)); }
@@ -92,10 +107,6 @@ namespace Gbmono.EF.Infrastructure
             get { return _brandRepository ?? (_brandRepository = new Repository<Brand>(Context)); }
         }
 
-        public IRepository<Retailer> RetailerRepository
-        {
-            get { return _retailerRepository ?? (_retailerRepository = new Repository<Retailer>(Context)); }
-        }
 
 
     }

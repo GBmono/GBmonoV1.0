@@ -70,6 +70,12 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
+                .when('/retailshops', { // retail shops
+                    templateUrl: gbmono.app_view_path + '/retailers/shops.html',
+                    controller: 'retailShopController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
                 .when('/articles', { // articles, news, information
                     templateUrl: gbmono.app_view_path + '/articles/index.html',
                     controller: 'articleIndexController',

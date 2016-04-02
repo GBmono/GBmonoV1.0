@@ -1,0 +1,63 @@
+﻿/*
+    shop list controller
+*/
+(function (module) {
+    // inject the controller params
+    ctrl.$inject = ['$routeParams',
+                    'pluginService',
+                    'retailerDataFactory',
+                    'retailerShopDataFactory'];
+
+    // create controller
+    module.controller('retailShopController', ctrl);
+
+    // controller body
+    function ctrl($routeParams, pluginService, retailerDataFactory, retailerShopDataFactory) {
+        var vm = this;
+        // retailers
+        vm.retailers = [];
+        // retail shops
+        vm.shops = [];
+        // search model
+        vm.searchModel = {};
+        
+        // if any retailer id passed by url
+        var retailerId = $routeParams.retailerId ? parseInt($routeParams.retailerId) : 0;
+
+        // page init 
+        init(); 
+
+        function init() {
+            // load retailers
+            getRetailers();
+        }
+
+        /* event handlers*/
+        vm.search = function () {
+            searchShops(vm.searchModel);
+        };
+
+        function getRetailers() {
+            retailerDataFactory.getAll()
+                .success(function (data) {
+                    vm.retailers = data;
+
+                    // if retailer id is passed
+                    if (retailerId != 0) {
+                        vm.searchModel.retailerId = retailerId;
+                    }
+                    else {
+                        // default retailer
+                        vm.searchModel.retailerId = data[0].retailerId;
+                    }
+                });
+        }
+
+        function searchShops(model) {
+            retailerShopDataFactory.search(model)
+                .success(function (data) {
+                    vm.shops = data; console.log(data);
+                });
+        }
+    }
+})(angular.module('gbmono'));

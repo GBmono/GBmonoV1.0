@@ -30,11 +30,9 @@ namespace Gbmono.EF.DataContext
 
             modelBuilder.Configurations.Add(new BrandMap());
             // modelBuilder.Configurations.Add(new CountryMap());
-            modelBuilder.Configurations.Add(new RetailShopMap());
+            modelBuilder.Configurations.Add(new RetailerShopMap());
             modelBuilder.Configurations.Add(new RetailerMap());
             
-            // modelBuilder.Entity<Banner>().ToTable("Banner");
-
             base.OnModelCreating(modelBuilder);
         }
     }

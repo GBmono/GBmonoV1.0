@@ -59,7 +59,7 @@
     <Compile Include="ModelConfigs\ProductMap.cs" />
     <Compile Include="ModelConfigs\ProductTagMap.cs" />
     <Compile Include="ModelConfigs\RetailerMap.cs" />
-    <Compile Include="ModelConfigs\RetailShopMap.cs" />
+    <Compile Include="ModelConfigs\RetailerShopMap.cs" />
     <Compile Include="ModelConfigs\TagMap.cs" />
     <Compile Include="ModelConfigs\UserFavoriteMap.cs" />
     <Compile Include="Models\ArticleType.cs" />
@@ -77,7 +77,7 @@
     <Compile Include="Models\ProductEvent.cs" />
     <Compile Include="Models\ProductTag.cs" />
     <Compile Include="Models\Retailer.cs" />
-    <Compile Include="Models\RetailShop.cs" />
+    <Compile Include="Models\RetailerShop.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\UserFavorite.cs" />
     <Compile Include="Models\WebShop.cs" />
