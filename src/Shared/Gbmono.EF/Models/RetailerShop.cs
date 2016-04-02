@@ -27,6 +27,12 @@ namespace Gbmono.EF.Models
 
         // public float Longitude { get; set; }
 
+        public string OpenTime { get; set; }
+
+        public string CloseDay { get; set; }
+
+        public string Phone { get; set; }
+
         public bool Enabled { get; set; }
 
     }

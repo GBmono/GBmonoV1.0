@@ -54,9 +54,16 @@
         }
 
         function searchShops(model) {
+            // data loading indicator
+            pluginService.showDataLoadingIndicator('#shops', { left: "50%", top: "180px;" });
+
+            // call data facotry
             retailerShopDataFactory.search(model)
                 .success(function (data) {
-                    vm.shops = data; console.log(data);
+                    vm.shops = data;
+
+                    // close data loading
+                    pluginService.closeDataLoadingIndicator('#shops');
                 });
         }
     }
