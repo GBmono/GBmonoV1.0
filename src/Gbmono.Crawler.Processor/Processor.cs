@@ -332,14 +332,4 @@ namespace Gbmono.Crawler.Processor
     }
 
 
-    public static class Commom
-    {
-        public static string StripHtml(this string originalHtml)
-        {
-            return Regex.Replace(originalHtml, @"<(.|\n)*?>",
-                string.Empty).Replace("\n", string.Empty);
-        }
-
-
-    }
 }

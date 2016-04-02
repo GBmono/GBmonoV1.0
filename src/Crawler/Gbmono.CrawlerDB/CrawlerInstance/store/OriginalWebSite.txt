@@ -1,0 +1,14 @@
+{"OriginalWebSite":"http://www.e-map.ne.jp/p/matukiyo/search.htm?&cond27=1&&&his=sa&type=ShopA&area1=&area2=&slogflg=1&areaptn=1&page=0",
+"ThridPartyUserId":"1",
+"StoreRegex":[
+"http://www.e-map.ne.jp/p/matukiyo/search.htm[?]&cond27=1&&&his=sa&type=ShopA&area1=&area2=&slogflg=1&areaptn=1&page=\\d{1}$",
+"http://www.e-map.ne.jp/p/matukiyo/search.htm[?]&cond27=1&&&his=sa&&type=ShopA&area1=\\d{1,2}&slogflg=1&areaptn=1&selnm=[^,./?#&]*$",
+"http://www.e-map.ne.jp/p/matukiyo/search.htm[?]&cond27=1&&&his=sa1&type=ShopA&area1=\\d{1,2}&area2=&slogflg=1&areaptn=1&page=\\d{1,2}$",
+"http://www.e-map.ne.jp/p/matukiyo/search.htm[?]&cond27=1&&&his=sa1&&type=ShopA&area1=\\d{1,2}&area2=[^,./?#&]*&slogflg=1&areaptn=1&selnm=[^,./?#&]*$",
+"http://www.e-map.ne.jp/p/matukiyo/search.htm[?]&cond27=1&&&his=sa%2Csa1%2Csa2&type=ShopA&area1=\\d{1,2}&area2=[^,./?#&]*&slogflg=1&areaptn=1&page=\\d{1,2}",
+"http://www.e-map.ne.jp/p/matukiyo/dtl/\\d{1,10}/[?]&cond27=1&&his=sa2$"
+],
+"RecipeRegex":[
+"http://www.e-map.ne.jp/p/matukiyo/dtl/\\d{1,10}/[?]&cond27=1&&his=sa2$"
+],
+"BlockRegex":null}
