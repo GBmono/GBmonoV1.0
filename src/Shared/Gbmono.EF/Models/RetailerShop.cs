@@ -23,16 +23,11 @@ namespace Gbmono.EF.Models
 
         public string Address { get; set; }
 
-        // public float? Latitude { get; set; }
+        // public float Latitude { get; set; }
 
-        // public float? Longitude { get; set; }
+        // public float Longitude { get; set; }
 
-        public string OpenTime { get; set; }
+        public bool Enabled { get; set; }
 
-        public string CloseDay  { get; set; }
-
-        public string Phone { get; set; }
-
-        public bool? Enabled { get; set; }
     }
 }
