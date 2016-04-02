@@ -52,6 +52,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfigs\BrandMap.cs" />
     <Compile Include="ModelConfigs\CategoryMap.cs" />
+    <Compile Include="ModelConfigs\CityMap.cs" />
     <Compile Include="ModelConfigs\CountryMap.cs" />
     <Compile Include="ModelConfigs\ManufacturerMap.cs" />
     <Compile Include="ModelConfigs\ProductEventMap.cs" />
@@ -60,6 +61,9 @@
     <Compile Include="ModelConfigs\ProductTagMap.cs" />
     <Compile Include="ModelConfigs\RetailerMap.cs" />
     <Compile Include="ModelConfigs\RetailShopMap.cs" />
+    <Compile Include="ModelConfigs\RetailShopSaleProductCategoryMap.cs" />
+    <Compile Include="ModelConfigs\SaleProductCategoryMap.cs" />
+    <Compile Include="ModelConfigs\StateMap.cs" />
     <Compile Include="ModelConfigs\TagMap.cs" />
     <Compile Include="ModelConfigs\UserFavoriteMap.cs" />
     <Compile Include="Models\ArticleType.cs" />
@@ -67,6 +71,7 @@
     <Compile Include="Models\BannerType.cs" />
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\City.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Product.cs" />
@@ -78,6 +83,9 @@
     <Compile Include="Models\ProductTag.cs" />
     <Compile Include="Models\Retailer.cs" />
     <Compile Include="Models\RetailShop.cs" />
+    <Compile Include="Models\RetailShopSaleProductCategory.cs" />
+    <Compile Include="Models\SaleProductCategory.cs" />
+    <Compile Include="Models\State.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\UserFavorite.cs" />
     <Compile Include="Models\WebShop.cs" />
@@ -86,7 +94,9 @@
     <Compile Include="Sql\SqlService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

@@ -18,8 +18,10 @@ namespace Gbmono.EF.Models
         public int CountryId { get; set; }
 
         public int StateId { get; set; }
+        public State State { set; get; }
 
-        public int SuburbId { get; set; }
+        public int CityId { get; set; }
+        public City City { get; set; }
 
         public string Address { get; set; }
 
@@ -28,6 +30,16 @@ namespace Gbmono.EF.Models
         public string Longitude { get; set; }
 
         public bool Enabled { get; set; }
+
+        public string OpenTime { set; get; }
+
+        public string Service { set; get; }
+
+        public string PayWay { set; get; }
+
+        public string CloseDay { set; get; }
+
+        public string Tel { set; get; }
 
         // public ICollection<Product> Products { get; set; }
     }
