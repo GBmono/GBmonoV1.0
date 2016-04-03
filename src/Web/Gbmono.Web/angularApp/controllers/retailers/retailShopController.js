@@ -4,6 +4,7 @@
 (function (module) {
     // inject the controller params
     ctrl.$inject = ['$routeParams',
+                    '$sce',
                     'pluginService',
                     'retailerDataFactory',
                     'retailerShopDataFactory'];
@@ -12,7 +13,7 @@
     module.controller('retailShopController', ctrl);
 
     // controller body
-    function ctrl($routeParams, pluginService, retailerDataFactory, retailerShopDataFactory) {
+    function ctrl($routeParams, $sce, pluginService, retailerDataFactory, retailerShopDataFactory) {
         var vm = this;
         // retailers
         vm.retailers = [];
@@ -20,7 +21,9 @@
         vm.shops = [];
         // search model
         vm.searchModel = {};
-        
+        // map url
+        vm.mapUrl = '';
+
         // if any retailer id passed by url
         var retailerId = $routeParams.retailerId ? parseInt($routeParams.retailerId) : 0;
 
@@ -33,8 +36,17 @@
         }
 
         /* event handlers*/
+        // search shops
         vm.search = function () {
             searchShops(vm.searchModel);
+        };
+
+        // show map
+        vm.showMap = function (addr) {
+            vm.mapUrl = $sce.trustAsResourceUrl('https://www.google.com/maps?q=' + addr + "&output=embed");
+            // console.log(vm.mapUrl);
+            // show modal
+            pluginService.modal('#map');
         };
 
         function getRetailers() {
