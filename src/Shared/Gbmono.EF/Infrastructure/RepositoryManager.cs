@@ -44,10 +44,11 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<UserFavorite> _userFavoriteRepository;
 
         private IRepository<Brand> _brandRepository;
-        
+
         private IRepository<Retailer> _retailerRepository;
         private IRepository<RetailerShop> _retailerShopRepository;
-
+        private IRepository<City> _cityRepository;
+        private IRepository<State> _stateRepository;
 
         // public accessors
         #region category & product
@@ -95,6 +96,20 @@ namespace Gbmono.EF.Infrastructure
         }
 
         #endregion
+
+        #region state & city
+        public IRepository<City> CityRepository
+        {
+            get { return _cityRepository ?? (_cityRepository = new Repository<City>(Context)); }
+        }
+
+        public IRepository<State> StateRepository
+        {
+            get { return _stateRepository ?? (_stateRepository = new Repository<State>(Context)); }
+        }
+
+        #endregion
+
 
         public IRepository<UserFavorite> UserFavoriteRepository
         {

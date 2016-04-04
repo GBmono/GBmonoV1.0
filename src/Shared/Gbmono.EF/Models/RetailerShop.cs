@@ -19,13 +19,19 @@ namespace Gbmono.EF.Models
 
         public int StateId { get; set; }
 
+        public int CityId { get; set; }
+
         // public int SuburbId { get; set; }
 
         public string Address { get; set; }
 
-        // public float Latitude { get; set; }
+        public string Service { set; get; }
 
-        // public float Longitude { get; set; }
+        public string PayWay { set; get; }
+
+        public string Latitude { get; set; }
+
+        public string Longitude { get; set; }
 
         public string OpenTime { get; set; }
 
@@ -35,5 +41,8 @@ namespace Gbmono.EF.Models
 
         public bool Enabled { get; set; }
 
+        public bool TaxFree { set; get; }
+
     }
 }
+

@@ -73,7 +73,7 @@ namespace Gbmono.Crawler.Processor
                 {
                     string name, address, tel, openTime;
                     List<string> closeday = new List<string>();
-                
+
 
 
                     var info = new HtmlDocument();
@@ -348,7 +348,7 @@ namespace Gbmono.Crawler.Processor
 
                         using (var db = new NCrawlerEntitiesDbServices())
                         {
-                            var retailShop = new RetailShop();
+                            var retailShop = new RetailerShop();
 
                             var shop = db.ProductInfoes.Single(m => m.ProductInfoId == shopId);
                             var keywords = db.ProductKeywords.Where(m => m.ProductId == shopId);
@@ -357,7 +357,7 @@ namespace Gbmono.Crawler.Processor
                             if (name != null)
                             {
                                 retailShop.Name = name.Value;
-    }
+                            }
 
                             var address = keywords.FirstOrDefault(m => m.KeywordTypeId == shopAddressId);
                             if (address != null)
@@ -368,8 +368,8 @@ namespace Gbmono.Crawler.Processor
                             var tel = keywords.FirstOrDefault(m => m.KeywordTypeId == shopTelId);
                             if (tel != null)
                             {
-                                retailShop.Tel = tel.Value;
-}
+                                retailShop.Phone = tel.Value;
+                            }
 
                             var openTime = keywords.FirstOrDefault(m => m.KeywordTypeId == shopOpenTimeId);
                             if (openTime != null)
@@ -432,34 +432,34 @@ namespace Gbmono.Crawler.Processor
                                 retailShop.StateId = stateI.StateId;
                             }
                             retailShop.Enabled = true;
-                            retailShop.RetailderId = 1;
+                            retailShop.RetailerId = 1;
                             _repoManager.RetailerShopRepository.Create(retailShop);
                             _repoManager.RetailerShopRepository.Save();
 
                             var saleCategory = keywords.Where(m => m.KeywordTypeId == shopPcId);
-                            if (saleCategory.Any())
-                            {
-                                foreach (var sc in saleCategory)
-                                {
-                                    var scI = _repoManager.SaleProductCategoryRepository.Table.FirstOrDefault(m => m.Name == sc.Value);
-                                    if (scI == null)
-                                    {
-                                        scI = new SaleProductCategory() { Name = sc.Value };
-                                        _repoManager.SaleProductCategoryRepository.Create(scI);
-                                        _repoManager.SaleProductCategoryRepository.Save();
-                                    }
-                                    if (!_repoManager.RetailShopSaleProductCategoryRepository.Table.Any(m => m.RetailShopId == retailShop.RetailShopId && m.RetailShopSaleProductCategoryId == scI.SaleProductCategoryId))
-                                    {
-                                        _repoManager.RetailShopSaleProductCategoryRepository.Create(new RetailShopSaleProductCategory() { RetailShopId = retailShop.RetailShopId, SaleProductCategoryId = scI.SaleProductCategoryId });
-                                        _repoManager.RetailShopSaleProductCategoryRepository.Save();
-                                    }
-                                }
-                            }
+                            //if (saleCategory.Any())
+                            //{
+                            //    foreach (var sc in saleCategory)
+                            //    {
+                            //        var scI = _repoManager.SaleProductCategoryRepository.Table.FirstOrDefault(m => m.Name == sc.Value);
+                            //        if (scI == null)
+                            //        {
+                            //            scI = new SaleProductCategory() { Name = sc.Value };
+                            //            _repoManager.SaleProductCategoryRepository.Create(scI);
+                            //            _repoManager.SaleProductCategoryRepository.Save();
+                            //        }
+                            //        if (!_repoManager.RetailShopSaleProductCategoryRepository.Table.Any(m => m.RetailShopId == retailShop.RetailShopId && m.RetailShopSaleProductCategoryId == scI.SaleProductCategoryId))
+                            //        {
+                            //            _repoManager.RetailShopSaleProductCategoryRepository.Create(new RetailShopSaleProductCategory() { RetailShopId = retailShop.RetailShopId, SaleProductCategoryId = scI.SaleProductCategoryId });
+                            //            _repoManager.RetailShopSaleProductCategoryRepository.Save();
+                            //        }
+                            //    }
+                            //}
                         }
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);                        
+                        Console.WriteLine(ex);
                     }
                     Console.Write("+");
                 }
