@@ -46,13 +46,7 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<Brand> _brandRepository;
         
         private IRepository<Retailer> _retailerRepository;
-        private IRepository<RetailShop> _retailerShopRepository;
-        private IRepository<City> _cityRepository;
-        private IRepository<State> _stateRepository;
-        private IRepository<RetailShopSaleProductCategory> _retailShopSaleProductCategoryRepository;
-        private IRepository<SaleProductCategory> _saleProductCategoryRepository;
-
-
+        private IRepository<RetailerShop> _retailerShopRepository;
 
 
         // public accessors
@@ -88,6 +82,20 @@ namespace Gbmono.EF.Infrastructure
         }
         #endregion
 
+        #region retailer & shops
+
+        public IRepository<Retailer> RetailerRepository
+        {
+            get { return _retailerRepository ?? (_retailerRepository = new Repository<Retailer>(Context)); }
+        }
+
+        public IRepository<RetailerShop> RetailerShopRepository
+        {
+            get { return _retailerShopRepository ?? (_retailerShopRepository = new Repository<RetailerShop>(Context)); }
+        }
+
+        #endregion
+
         public IRepository<UserFavorite> UserFavoriteRepository
         {
             get { return _userFavoriteRepository ?? (_userFavoriteRepository = new Repository<UserFavorite>(Context)); }
@@ -98,33 +106,6 @@ namespace Gbmono.EF.Infrastructure
         {
             get { return _brandRepository ?? (_brandRepository = new Repository<Brand>(Context)); }
         }
-
-        public IRepository<Retailer> RetailerRepository
-        {
-            get { return _retailerRepository ?? (_retailerRepository = new Repository<Retailer>(Context)); }
-        }
-
-        public IRepository<RetailShop> RetailerShopRepository
-        {
-            get { return _retailerShopRepository ?? (_retailerShopRepository = new Repository<RetailShop>(Context)); }
-        }
-        public IRepository<City> CityRepository
-        {
-            get { return _cityRepository ?? (_cityRepository = new Repository<City>(Context)); }
-        }
-        public IRepository<State> StateRepository
-        {
-            get { return _stateRepository ?? (_stateRepository = new Repository<State>(Context)); }
-        }
-        public IRepository<RetailShopSaleProductCategory> RetailShopSaleProductCategoryRepository
-        {
-            get { return _retailShopSaleProductCategoryRepository ?? (_retailShopSaleProductCategoryRepository = new Repository<RetailShopSaleProductCategory>(Context)); }
-        }
-        public IRepository<SaleProductCategory> SaleProductCategoryRepository
-        {
-            get { return _saleProductCategoryRepository ?? (_saleProductCategoryRepository = new Repository<SaleProductCategory>(Context)); }
-        }
-
 
 
 

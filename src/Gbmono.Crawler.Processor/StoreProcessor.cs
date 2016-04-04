@@ -73,7 +73,7 @@ namespace Gbmono.Crawler.Processor
                 {
                     string name, address, tel, openTime;
                     List<string> closeday = new List<string>();
-
+                
 
 
                     var info = new HtmlDocument();
@@ -357,7 +357,7 @@ namespace Gbmono.Crawler.Processor
                             if (name != null)
                             {
                                 retailShop.Name = name.Value;
-                            }
+    }
 
                             var address = keywords.FirstOrDefault(m => m.KeywordTypeId == shopAddressId);
                             if (address != null)
@@ -369,7 +369,7 @@ namespace Gbmono.Crawler.Processor
                             if (tel != null)
                             {
                                 retailShop.Tel = tel.Value;
-                            }
+}
 
                             var openTime = keywords.FirstOrDefault(m => m.KeywordTypeId == shopOpenTimeId);
                             if (openTime != null)

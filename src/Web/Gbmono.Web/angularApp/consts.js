@@ -28,14 +28,16 @@
         product_api_url: gbmono.web_api_app_name + '/Products',
         // user favorite url
         userfavorite_api_url: gbmono.web_api_app_name + '/UserFavorites',
+        // retailer url
+        retailer_api_url: gbmono.web_api_app_name + '/Retailers',
+        // retailer shop url
+        retailer_shop_api_url: gbmono.web_api_app_name + '/RetailerShops',
         // brand url
         brand_api_url: gbmono.web_api_app_name + '/Brands',
         // profile url
         profile_api_url: gbmono.web_api_app_name + '/Profiles'
         //// banner url
         //banner_api_url: gbmono.web_api_app_name + '/Banners',
-        //// retail url
-        //retail_api_url: gbmono.web_api_app_name + '/Retailers'
     };
 
     // image type

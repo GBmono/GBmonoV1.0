@@ -29,20 +29,10 @@ namespace Gbmono.EF.DataContext
             modelBuilder.Configurations.Add(new UserFavoriteMap());
 
             modelBuilder.Configurations.Add(new BrandMap());
-            //modelBuilder.Configurations.Add(new CountryMap());
-            modelBuilder.Configurations.Add(new RetailShopMap());
+            // modelBuilder.Configurations.Add(new CountryMap());
+            modelBuilder.Configurations.Add(new RetailerShopMap());
             modelBuilder.Configurations.Add(new RetailerMap());
-
-            modelBuilder.Configurations.Add(new CityMap());
-            modelBuilder.Configurations.Add(new SaleProductCategoryMap());
-            modelBuilder.Configurations.Add(new RetailShopSaleProductCategoryMap());
-            modelBuilder.Configurations.Add(new StateMap());
-
-
-
-
-            // modelBuilder.Entity<Banner>().ToTable("Banner");
-
+            
             base.OnModelCreating(modelBuilder);
         }
     }
