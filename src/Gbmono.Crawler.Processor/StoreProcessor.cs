@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -21,10 +22,10 @@ namespace Gbmono.Crawler.Processor
         //private static int groupId = 301315303;
         private static string htmlFilePath = @"C:\GbmonoCrawlerHtml\" + groupId;
         private static string domain = "http://www.e-map.ne.jp/p/matukiyo/";
-        private static List<string> keywordList = new List<string>() { "店铺名", "地址", "电话", "营业时间", "休息日", "设施服务", "商品类型", "结算方式", "都道府県", "市","lat","long" };
+        private static List<string> keywordList = new List<string>() { "店铺名", "地址", "电话", "营业时间", "休息日", "设施服务", "商品类型", "结算方式", "都道府県", "市", "lat", "long" };
         private static List<KeywordType> keywordTypeList = new List<KeywordType>();
 
-        private static List<string> add12 = new List<string>() { "都", "道", "府", "県", "市","区","郡" };
+        private static List<string> add12 = new List<string>() { "都", "道", "府", "県", "市", "区", "郡" };
 
         public void Process()
         {
@@ -72,7 +73,7 @@ namespace Gbmono.Crawler.Processor
                 {
                     string name, address, tel, openTime;
                     List<string> closeday = new List<string>();
-                
+
 
 
                     var info = new HtmlDocument();
@@ -122,7 +123,7 @@ namespace Gbmono.Crawler.Processor
                         {
                             return;
                         }
-                        var address12Splic = address.Split(add12.ToArray(),StringSplitOptions.RemoveEmptyEntries).ToArray();
+                        var address12Splic = address.Split(add12.ToArray(), StringSplitOptions.RemoveEmptyEntries).ToArray();
                         var add1 = address12Splic[0];
                         var add2 = address12Splic[1];
                         db.ProductKeywords.AddObject(new ProductKeyword()
@@ -138,7 +139,7 @@ namespace Gbmono.Crawler.Processor
                             Value = add2
                         });
 
-                        var locationNode = info.DocumentNode.SelectSingleNode("//body").Attributes["onload"].Value.Split(';')[0].Replace("ZdcEmapInit","").Replace("'","").Replace("(","").Replace(")","").Split(',');
+                        var locationNode = info.DocumentNode.SelectSingleNode("//body").Attributes["onload"].Value.Split(';')[0].Replace("ZdcEmapInit", "").Replace("'", "").Replace("(", "").Replace(")", "").Split(',');
                         db.ProductKeywords.AddObject(new ProductKeyword()
                         {
                             ProductId = product.ProductInfoId,
@@ -310,11 +311,165 @@ namespace Gbmono.Crawler.Processor
 
     public class StoreMapping
     {
+        private static List<string> keywordList = new List<string>() { "店铺名", "地址", "电话", "营业时间", "休息日", "设施服务", "商品类型", "结算方式", "都道府県", "市", "lat", "long" };
 
 
+        public void Mapping()
+        {
+            var _repoManager = new RepositoryManager();
+
+            var keywordTypes = new List<KeywordType>();
+            var shopIds = new List<int>();
+            using (var db = new NCrawlerEntitiesDbServices())
+            {
+                shopIds = db.ProductInfoes.Where(m => m.WebsiteId == 4).Select(m => m.ProductInfoId).ToList();
+                keywordTypes = db.KeywordTypes.ToList();
+            }
+            var shopNameId = keywordTypes.First(m => m.Name == keywordList[0]).KeywordTypeId;
+            var shopAddressId = keywordTypes.First(m => m.Name == keywordList[1]).KeywordTypeId;
+            var shopTelId = keywordTypes.First(m => m.Name == keywordList[2]).KeywordTypeId;
+            var shopOpenTimeId = keywordTypes.First(m => m.Name == keywordList[3]).KeywordTypeId;
+            var shopCloseDayId = keywordTypes.First(m => m.Name == keywordList[4]).KeywordTypeId;
+            var shopServiceId = keywordTypes.First(m => m.Name == keywordList[5]).KeywordTypeId;
+            var shopPcId = keywordTypes.First(m => m.Name == keywordList[6]).KeywordTypeId;
+            var shopPayId = keywordTypes.First(m => m.Name == keywordList[7]).KeywordTypeId;
+            var shopStateId = keywordTypes.First(m => m.Name == keywordList[8]).KeywordTypeId;
+            var shopCityId = keywordTypes.First(m => m.Name == keywordList[9]).KeywordTypeId;
+            var shopLatId = keywordTypes.First(m => m.Name == keywordList[10]).KeywordTypeId;
+            var shopLongId = keywordTypes.First(m => m.Name == keywordList[11]).KeywordTypeId;
+
+            if (shopIds.Any())
+            {
+                foreach (var shopId in shopIds)
+                {
+                    try
+                    {
 
 
+                        using (var db = new NCrawlerEntitiesDbServices())
+                        {
+                            var retailShop = new RetailShop();
+
+                            var shop = db.ProductInfoes.Single(m => m.ProductInfoId == shopId);
+                            var keywords = db.ProductKeywords.Where(m => m.ProductId == shopId);
+
+                            var name = keywords.FirstOrDefault(m => m.KeywordTypeId == shopNameId);
+                            if (name != null)
+                            {
+                                retailShop.Name = name.Value;
+                            }
+
+                            var address = keywords.FirstOrDefault(m => m.KeywordTypeId == shopAddressId);
+                            if (address != null)
+                            {
+                                retailShop.Address = address.Value;
+                            }
+
+                            var tel = keywords.FirstOrDefault(m => m.KeywordTypeId == shopTelId);
+                            if (tel != null)
+                            {
+                                retailShop.Tel = tel.Value;
+                            }
+
+                            var openTime = keywords.FirstOrDefault(m => m.KeywordTypeId == shopOpenTimeId);
+                            if (openTime != null)
+                            {
+                                retailShop.OpenTime = openTime.Value;
+                            }
+
+                            var closeDay = keywords.Where(m => m.KeywordTypeId == shopCloseDayId).ToList();
+                            if (closeDay.Any())
+                            {
+                                retailShop.CloseDay = closeDay.Select(m => m.Value).Aggregate((m1, m2) => m1 + "," + m2);
+                            }
+
+                            var service = keywords.Where(m => m.KeywordTypeId == shopServiceId).ToList();
+                            if (service.Any())
+                            {
+                                retailShop.Service = service.Select(m => m.Value).Aggregate((m1, m2) => m1 + "," + m2);
+                            }
+
+                            var pay = keywords.Where(m => m.KeywordTypeId == shopPayId).ToList();
+                            if (pay.Any())
+                            {
+                                retailShop.PayWay = pay.Select(m => m.Value).Aggregate((m1, m2) => m1 + "," + m2);
+                            }
+
+                            var lat = keywords.FirstOrDefault(m => m.KeywordTypeId == shopLatId);
+                            if (lat != null)
+                            {
+                                retailShop.Latitude = lat.Value;
+                            }
+                            var longt = keywords.FirstOrDefault(m => m.KeywordTypeId == shopLongId);
+                            if (longt != null)
+                            {
+                                retailShop.Longitude = longt.Value;
+                            }
+
+                            var city = keywords.FirstOrDefault(m => m.KeywordTypeId == shopCityId);
+                            if (city != null)
+                            {
+                                var cityI = _repoManager.CityRepository.Table.FirstOrDefault(m => m.Name == city.Value);
+                                if (cityI == null)
+                                {
+                                    cityI = new City() { Name = city.Value };
+                                    _repoManager.CityRepository.Create(cityI);
+                                    _repoManager.CityRepository.Save();
+                                }
+                                retailShop.CityId = cityI.CityId;
+                            }
+
+                            var state = keywords.FirstOrDefault(m => m.KeywordTypeId == shopStateId);
+                            if (state != null)
+                            {
+                                var stateI = _repoManager.StateRepository.Table.FirstOrDefault(m => m.Name == state.Value);
+                                if (stateI == null)
+                                {
+                                    stateI = new State() { Name = state.Value };
+                                    _repoManager.StateRepository.Create(stateI);
+                                    _repoManager.StateRepository.Save();
+                                }
+                                retailShop.StateId = stateI.StateId;
+                            }
+                            retailShop.Enabled = true;
+                            retailShop.RetailderId = 1;
+                            _repoManager.RetailerShopRepository.Create(retailShop);
+                            _repoManager.RetailerShopRepository.Save();
+
+                            var saleCategory = keywords.Where(m => m.KeywordTypeId == shopPcId);
+                            if (saleCategory.Any())
+                            {
+                                foreach (var sc in saleCategory)
+                                {
+                                    var scI = _repoManager.SaleProductCategoryRepository.Table.FirstOrDefault(m => m.Name == sc.Value);
+                                    if (scI == null)
+                                    {
+                                        scI = new SaleProductCategory() { Name = sc.Value };
+                                        _repoManager.SaleProductCategoryRepository.Create(scI);
+                                        _repoManager.SaleProductCategoryRepository.Save();
+                                    }
+                                    if (!_repoManager.RetailShopSaleProductCategoryRepository.Table.Any(m => m.RetailShopId == retailShop.RetailShopId && m.RetailShopSaleProductCategoryId == scI.SaleProductCategoryId))
+                                    {
+                                        _repoManager.RetailShopSaleProductCategoryRepository.Create(new RetailShopSaleProductCategory() { RetailShopId = retailShop.RetailShopId, SaleProductCategoryId = scI.SaleProductCategoryId });
+                                        _repoManager.RetailShopSaleProductCategoryRepository.Save();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);                        
+                    }
+                    Console.Write("+");
+                }
+            }
+
+        }
     }
 
 
 }
+
+
+
