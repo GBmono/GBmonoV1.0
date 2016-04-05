@@ -10,6 +10,8 @@ namespace Gbmono.EF.Models
     {
         public int CityId { get; set; }
 
+        public int StateId { set; get; }
         public string Name { get; set; }
+
     }
 }

@@ -32,7 +32,8 @@ namespace Gbmono.EF.DataContext
             // modelBuilder.Configurations.Add(new CountryMap());
             modelBuilder.Configurations.Add(new RetailerShopMap());
             modelBuilder.Configurations.Add(new RetailerMap());
-            
+            modelBuilder.Configurations.Add(new StateMap());
+            modelBuilder.Configurations.Add(new CityMap());
             base.OnModelCreating(modelBuilder);
         }
     }
