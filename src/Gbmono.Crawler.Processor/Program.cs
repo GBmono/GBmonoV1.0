@@ -18,8 +18,13 @@ namespace Gbmono.Crawler.Processor
 
             //var processor = new StoreProcessor();
             //processor.Process();
-            var processor = new StoreMapping();
-            processor.Mapping();
+
+            //var processor = new StoreMapping();
+            //processor.Mapping();
+
+            var processor = new ProductTagRandomAssign();
+            processor.RandomMapping();
+
 
 
 
