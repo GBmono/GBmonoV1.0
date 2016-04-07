@@ -22,9 +22,12 @@ namespace Gbmono.Crawler.Processor
             //var processor = new StoreMapping();
             //processor.Mapping();
 
-            var processor = new ProductTagRandomAssign();
-            processor.RandomMapping();
+            //var processor = new ProductTagRandomAssign();
+            //processor.RandomMapping();
 
+            //Chinese Tester
+            var processor = new ChineseProcessor();
+            processor.Test();
 
 
 

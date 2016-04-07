@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChineseProcessor.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="ProductTagRandomAssign.cs" />
@@ -77,6 +78,13 @@
       <Project>{25e50af1-7433-42ee-a5fa-ed1f1ac8466a}</Project>
       <Name>Gbmono.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utils\Gbmono.Utils.Chinese\Gbmono.Utils.Chinese.csproj">
+      <Project>{49ab0c23-2ff3-4f92-8abb-82ff59efb653}</Project>
+      <Name>Gbmono.Utils.Chinese</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
