@@ -1,0 +1,125 @@
+﻿<div id="all">
+    <div id="content">
+        <div class="container">
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+
+                    <li>
+                        <a ng-href="#/">首页</a>
+                    </li>
+                    <li>店铺浏览</li>
+                </ul>
+
+                <div class="box text-center">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-6">
+                            <div class="form-group">
+                                <select class="form-control"
+                                        ng-options="retailer.retailerId as retailer.name for retailer in vm.retailers"
+                                        ng-model="vm.searchModel.retailerId">                                    
+                                    <option value="">零售商</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-6">
+                            <div class="form-group">
+                                <select class="form-control"
+                                        ng-options="state.stateId as state.displayName for state in vm.states"
+                                        ng-model="vm.searchModel.stateId"
+                                        ng-change="vm.stateChanged()">
+                                    <option value="">地区</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-6">
+                            <div class="input-group">
+                                <select class="form-control"
+                                        ng-options="city.cityId as city.displayName for city in vm.cities"
+                                        ng-model="vm.searchModel.cityId">
+                                    <option value="">城市</option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary"
+                                            ng-disabled="!vm.searchModel.cityId || !vm.searchModel.retailerId"
+                                            ng-click="vm.search()">
+                                        <i class="fa fa-hand-o-right"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="shops">
+                <div class="col-md-9">
+                    <div class="table-responsive" ng-repeat="shop in vm.shops">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th style="width:30%">名称</th>
+                                    <td>{{ shop.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>地址</th>
+                                    <td>
+                                        <a href="" ng-click="vm.showMap(shop.address)" class="grey">
+                                            {{ shop.address }} <i class="fa fa-map-marker main-color"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>营业时间</th>
+                                    <td>{{ shop.openTime }}</td>
+                                </tr>
+                                <tr>
+                                    <th>休息日</th>
+                                    <td>{{ shop.closeDay }}</td>
+                                </tr>
+                                <tr>
+                                    <th>联系电话</th>
+                                    <td>{{ shop.phone }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                    </div>
+                </div>
+                <div class="col-md-3" ng-show="vm.shops.length > 0">
+                    <!-- adv banners -->
+                    <div class="banner">
+                        <a href="">
+                            <img src="content/img/adv4.jpg" class="img-responsive" />
+                        </a>
+                    </div>
+                    <div class="banner">
+                        <a href="">
+                            <img src="content/img/adv1.jpg" class="img-responsive" />
+                        </a>
+                    </div>
+                    <div class="banner">
+                        <a href="">
+                            <img src="content/img/adv2.jpg" class="img-responsive" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- google map modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="map">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">地图</h4>
+            </div>
+            <div class="modal-body">
+                <iframe ng-src="{{ vm.mapUrl }}" style="border: none; width:95%; height:450px;"> </iframe>
+            </div>
+        </div>
+    </div>
+</div>

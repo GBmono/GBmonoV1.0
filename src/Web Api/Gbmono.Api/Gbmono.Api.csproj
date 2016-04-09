@@ -152,7 +152,7 @@
     <Compile Include="Controllers\BannersController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
-    <Compile Include="Controllers\CountriesController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RetailersController.cs" />
     <Compile Include="Controllers\RetailerShopsController.cs" />

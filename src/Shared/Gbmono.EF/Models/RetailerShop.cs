@@ -11,13 +11,11 @@ namespace Gbmono.EF.Models
         public int RetailShopId { get; set; }
 
         public int RetailerId { get; set; }
-        public Retailer Retailer { get; set; } // 零售商
+        public Retailer Retailer { get; set; } 
 
         public string Name { get; set; }
 
-        // public int CountryId { get; set; }
-
-        public int StateId { get; set; }
+        public string DisplayName { get; set; }
 
         public int CityId { get; set; }
 
@@ -29,9 +27,9 @@ namespace Gbmono.EF.Models
 
         //public string PayWay { set; get; }
 
-        public float Latitude { get; set; }
+        public double? Latitude { get; set; }
 
-        public float Longitude { get; set; }
+        public double? Longitude { get; set; }
 
         public string OpenTime { get; set; }
 

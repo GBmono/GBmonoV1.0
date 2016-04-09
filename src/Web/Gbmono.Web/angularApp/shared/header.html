@@ -109,8 +109,16 @@ _________________________________________________________ -->
                 <li>
                     <a ng-href="#/articles">市场动态</a>
                 </li>
-                <li>
-                    <a ng-href="#/retailshops">药妆店</a>
+                <li class="dropdown normal-dropdown">
+                    <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">药妆店<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a ng-href="#/retailshops">店铺浏览</a>
+                        </li>
+                        <li>
+                            <a ng-href="#/retailshops/search">店铺查找</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
             

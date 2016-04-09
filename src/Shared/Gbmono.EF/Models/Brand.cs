@@ -11,7 +11,11 @@ namespace Gbmono.EF.Models
 
         public string Name { get; set; }
 
+        public string DisplayName { get; set; }
+
         public string BrandCode { get; set; }
+
+        public string FirstCharacter { get; set; }
 
         public string LogoUrl { get; set; }
 

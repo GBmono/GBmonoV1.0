@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gbmono.EF.Models
 {
@@ -11,7 +7,9 @@ namespace Gbmono.EF.Models
         public int CityId { get; set; }
 
         public int StateId { set; get; }
+
         public string Name { get; set; }
 
+        public string DisplayName { get; set; }
     }
 }

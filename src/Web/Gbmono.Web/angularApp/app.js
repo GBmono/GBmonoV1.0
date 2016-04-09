@@ -70,9 +70,15 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/retailshops', { // retail shops
+                .when('/retailshops', { // retail shops browse 
+                    templateUrl: gbmono.app_view_path + '/retailers/shoplist.html',
+                    controller: 'retailShopBrowseController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
+                .when('/retailshops/search', { // retail shops search
                     templateUrl: gbmono.app_view_path + '/retailers/shops.html',
-                    controller: 'retailShopController',
+                    controller: 'retailShopSearchController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
@@ -93,7 +99,7 @@
                     controller: 'profileController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
-                })
+                })               
                 .otherwise({
                     templateUrl: gbmono.app_view_path + '/home/home.html',
                     controller: 'homeController',

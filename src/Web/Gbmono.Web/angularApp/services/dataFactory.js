@@ -58,14 +58,18 @@
             getBrands: getBrands
         }
 
+        // update version number when json file is updated
+        // so data factory would download new json file from server instead of loading cached files
+        var version = '1.0';
+
         // read cached data from json file
         function getAll() {
-            return $http.get('/gbmono/angularApp/data/category.json');
+            return $http.get('/gbmono/angularApp/data/category.json?v=' + version);
             // return $http.get(gbmono.api_site_prefix.category_api_url);
         }
 
         function getTopCates() {
-            return $http.get('/gbmono/angularApp/data/category_top.json');
+            return $http.get('/gbmono/angularApp/data/category_top.json?v=' + version);
             // return $http.get(gbmono.api_site_prefix.category_api_url + '/Top');
         }
 
@@ -178,8 +182,13 @@
 
         // return data factory with CRUD calls
         return {
+            getByCity: getByCity,
             search: search
         };
+
+        function getByCity(retailerId, cityId) {
+            return $http.get(gbmono.api_site_prefix.retailer_shop_api_url + '/Retailer/' + retailerId +  '/City/' + cityId);
+        }
 
         function search(model) {
             return $http.post(gbmono.api_site_prefix.retailer_shop_api_url + '/Search', model);
@@ -276,5 +285,34 @@
 
 })(angular.module('gbmono'));
 
+/*
+    location data factory
+*/
+(function (module) {
+    // inject params
+    factory.$inject = ['$http'];
 
+    // create instance
+    module.factory('locationDataFactory', factory);
+
+    // factory implement
+    function factory($http) {
+
+        // return data factory with CRUD calls
+        return {
+            getStates: getStates,
+            getCities: getCities
+        };
+
+        function getStates(countryId) {
+            return $http.get(gbmono.api_site_prefix.location_api_url + '/' + countryId + '/States');
+        }
+
+        function getCities(stateId) {
+            return $http.get(gbmono.api_site_prefix.location_api_url + '/' + stateId + '/Cities');
+        }
+
+    }
+
+})(angular.module('gbmono'));
 

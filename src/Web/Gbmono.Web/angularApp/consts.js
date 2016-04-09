@@ -35,9 +35,9 @@
         // brand url
         brand_api_url: gbmono.web_api_app_name + '/Brands',
         // profile url
-        profile_api_url: gbmono.web_api_app_name + '/Profiles'
-        //// banner url
-        //banner_api_url: gbmono.web_api_app_name + '/Banners',
+        profile_api_url: gbmono.web_api_app_name + '/Profiles',
+        // location url
+        location_api_url: gbmono.web_api_app_name + '/Locations'
     };
 
     // image type

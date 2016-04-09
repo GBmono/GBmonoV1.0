@@ -207,7 +207,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Gbmono.CrawlerModel\Gbmono.CrawlerModel.csproj">
       <Project>{2beb8dc6-3def-4ac7-933b-6aff7aaa30a0}</Project>
-      <Name>Handpick.CrawlerModel</Name>
+      <Name>Gbmono.CrawlerModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
