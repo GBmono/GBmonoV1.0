@@ -339,6 +339,7 @@ namespace Gbmono.Utils.ProductDataImporter
                 brand = new Brand
                 {
                     Name = brandName,
+                    DisplayName = brandName,
                     Enabled = true
                 };
 
