@@ -20,27 +20,23 @@ namespace Gbmono.Search.IndexManager
         public EsRequestException CheckResponse<T>(ISearchResponse<T> response) where T : class
         {
             EsRequestException exception = null;
-            if (response.ConnectionStatus.HttpStatusCode > 200)
+            if (response.ApiCall.HttpStatusCode > 200)
             {
                 #region Generate Exception
 
                 var msg = "";
                 if (response.ServerError != null)
                 {
-                    msg = response.ServerError.Error;
+                    var err = response.ServerError.Error;
+                    msg = string.Format("Reason:{0} Type:{1}", err.Reason, err.Type);
                 }
 
                 exception = new EsRequestException(msg)
                 {
                     IsTimeOut = response.TimedOut,
                     Isvalid = response.IsValid,
-                    IsSuccess = response.ConnectionStatus.Success
+                    IsSuccess = response.ApiCall.Success
                 };
-
-                if (null != response.ConnectionStatus.ResponseRaw)
-                {
-                    exception.RawResponse = Encoding.Default.GetString(response.ConnectionStatus.ResponseRaw);
-                }
                 #endregion
 
 

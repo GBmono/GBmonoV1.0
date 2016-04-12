@@ -11,7 +11,7 @@ namespace Gbmono.Search.Utils
         public class AppSettingsKeys
         {
             public const string ElasticNodeUrlKey = "elasticNodeUrl";
-
+            public const string ElasticHttpCompressed = "elasticHttpCompressed";
         }
     }
 }

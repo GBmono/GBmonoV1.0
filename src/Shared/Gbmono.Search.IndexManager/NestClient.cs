@@ -17,10 +17,30 @@ namespace Gbmono.Search.IndexManager
 
         private string _indexName = string.Empty;
         private string _typeName = null;
-        private int _pageSize = 0;
+        private string _routeName = null;
+        private int _pageSize = 10;
         private int _pageNumber = 1;
 
-        private Func<FluentFieldList<T>, FluentFieldList<T>> _excludedFields;
+        private static bool? _httpCompressed;
+
+        public bool HttpComppressed
+        {
+            get
+            {
+                if (!_httpCompressed.HasValue)
+                {
+                    var settingVal = ConfigHelper.GetSetting(Constants.AppSettingsKeys.ElasticHttpCompressed, "no");
+
+                    _httpCompressed = settingVal.Trim().ToLower() == "yes";
+                }
+
+                return _httpCompressed.Value;
+            }
+        }
+
+        private Func<FieldsDescriptor<T>, IPromise<Fields>> _excludedFields;
+
+        private Func<SortDescriptor<T>, IPromise<IList<ISort>>> _sortSelector;
 
         private ElasticClient _client;
 
@@ -29,8 +49,8 @@ namespace Gbmono.Search.IndexManager
             get
             {
                 var node = new Uri(_nodeUrl);
-                var conn = new ConnectionSettings(node).ExposeRawResponse();
-
+                var conn = new ConnectionSettings(node).DisableDirectStreaming(true);
+                conn.EnableHttpCompression(HttpComppressed);
                 return conn;
             }
         }
@@ -53,6 +73,12 @@ namespace Gbmono.Search.IndexManager
             {
                 return new ElasticClientProxy(EsClient, Conn);
             }
+        }
+
+        public NestClient(string urlKey = null)
+        {
+            urlKey = string.IsNullOrWhiteSpace(urlKey) ? Constants.AppSettingsKeys.ElasticNodeUrlKey : urlKey;
+            _nodeUrl = ConfigHelper.GetSetting(urlKey, "http://localhost:9200");
         }
 
         #region Bilder Pattern
@@ -150,7 +176,7 @@ namespace Gbmono.Search.IndexManager
                 }
 
                 Console.WriteLine("Error:{0}", response.ServerError.Error);
-                Console.WriteLine("Exception:{0}", response.ServerError.ExceptionType);
+                Console.WriteLine("Exception:{0}", response.ServerError.Error.Type);
             }
         }
 
@@ -171,7 +197,7 @@ namespace Gbmono.Search.IndexManager
             if (response.ServerError != null)
             {
                 Console.WriteLine("Error:{0}", response.ServerError.Error);
-                Console.WriteLine("Exception:{0}", response.ServerError.ExceptionType);
+                Console.WriteLine("Exception:{0}", response.ServerError.Error.Type);
             }
         }
 
@@ -191,7 +217,7 @@ namespace Gbmono.Search.IndexManager
             if (response.ServerError != null)
             {
                 Console.WriteLine("Error: {0}", response.ServerError.Error);
-                Console.WriteLine("Exception: {0}", response.ServerError.ExceptionType);
+                Console.WriteLine("Exception: {0}", response.ServerError.Error.Type);
             }
         }
 
@@ -205,7 +231,7 @@ namespace Gbmono.Search.IndexManager
             Client.Delete<T>(id, d => d.Index(_indexName).Type(_typeName));
         }
 
-        public ISearchResponse<T> SearchResponse(IQueryContainer query = null, FilterContainer filter = null, Func<AggregationDescriptor<T>, AggregationDescriptor<T>> aggregation = null)
+        public ISearchResponse<T> SearchResponse(IQueryContainer query = null, IQueryContainer filter = null, Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregation = null)
         {
             int skip = _pageSize * (_pageNumber - 1);
 
@@ -221,66 +247,42 @@ namespace Gbmono.Search.IndexManager
             {
                 descriptor += i => i.Source(s => s.Exclude(_excludedFields));
             }
-            if (query != null)
+            if (query != null || filter != null)
             {
-                descriptor += i => i.Query(query);
-            }
+                var mainQuery = new QueryContainer();
 
-            if (filter != null)
-            {
-                descriptor += i => i.Filter(filter);
+                if (query != null)
+                {
+                    mainQuery &= (QueryContainer)query;
+                }
+                if (filter != null)
+                {
+                    mainQuery &= new BoolQuery() { Filter = new[] { (QueryContainer)filter } };
+                }
+                descriptor += i => i.Query(q => mainQuery);
             }
 
             if (aggregation != null)
             {
                 descriptor += i => i.Aggregations(aggregation);
             }
-
+            if (_sortSelector != null)
+            {
+                descriptor += i => i.Sort(_sortSelector);
+            }
             var response = Client.Search<T>(descriptor);
 
             return response;
         }
 
-        public PagedResponse<T> PostSearch(IQueryContainer query = null, FilterContainer filter = null, Func<AggregationDescriptor<T>, AggregationDescriptor<T>> aggregation = null)
+        public PagedResponse<T> PostSearch(IQueryContainer query = null, IQueryContainer filter = null, Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregation = null)
         {
             var response = this.SearchResponse(query, filter, aggregation);
 
             return WrapResult(response);
-        }
+        }        
 
-        public ISearchResponse<T> SearchResponse(Func<QueryDescriptor<T>, QueryContainer> query, Func<FilterDescriptor<T>, FilterContainer> filter = null)
-        {
-            int skip = _pageSize * (_pageNumber - 1);
-
-            skip = Math.Max(0, skip);
-
-            Func<SearchDescriptor<T>, SearchDescriptor<T>> descriptor =
-                i => i.Index(_indexName)
-                      .Type(_typeName)
-                      .Skip(skip)
-                      .Size(_pageSize);
-
-            if (_excludedFields != null)
-            {
-                descriptor = i => i.Source(s => s.Exclude(_excludedFields));
-            }
-
-            if (query != null)
-            {
-                //query += q => q.FunctionScore(f => f.ScriptScore(s => s.ScriptFile("my_test1").Lang("groovy").Params(d => d.Add("factor", 2))));
-                descriptor += i => i.Query(query);
-            }
-
-            if (filter != null)
-            {
-                descriptor += i => i.Filter(filter);
-            }
-
-            var response = Client.Search<T>(descriptor);
-            return response;
-        }
-
-        public PagedResponse<T> PostSearch(Func<QueryDescriptor<T>, QueryContainer> query, Func<FilterDescriptor<T>, FilterContainer> filter = null)
+        public PagedResponse<T> PostSearch(QueryContainer query, QueryContainer filter = null)
         {
             var response = SearchResponse(query, filter);
 
@@ -297,7 +299,7 @@ namespace Gbmono.Search.IndexManager
             if (response.ServerError != null)
             {
                 Console.WriteLine(response.ServerError.Error);
-                Console.WriteLine(response.ServerError.ExceptionType);
+                Console.WriteLine(response.ServerError.Error.Type);
             }
         }
 
