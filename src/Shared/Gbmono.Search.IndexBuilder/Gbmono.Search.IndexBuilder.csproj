@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\RetailerShopsBuilder.cs" />
     <Compile Include="ProductCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,6 +59,14 @@
     <ProjectReference Include="..\Gbmono.EF\Gbmono.EF.csproj">
       <Project>{25e50af1-7433-42ee-a5fa-ed1f1ac8466a}</Project>
       <Name>Gbmono.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gbmono.Search.IndexManager\Gbmono.Search.IndexManager.csproj">
+      <Project>{ccfab03b-77de-4da4-9e58-88f6d6ed7313}</Project>
+      <Name>Gbmono.Search.IndexManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gbmono.Search.Utils\Gbmono.Search.Utils.csproj">
+      <Project>{778c29d8-194a-48e8-bbe4-24ec07ea6971}</Project>
+      <Name>Gbmono.Search.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

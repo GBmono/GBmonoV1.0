@@ -13,5 +13,15 @@ namespace Gbmono.Search.Utils
             public const string ElasticNodeUrlKey = "elasticNodeUrl";
             public const string ElasticHttpCompressed = "elasticHttpCompressed";
         }
+
+        public class IndexName
+        {
+            public const string GbmonoV1 = "GbmonoV1";
+        }
+
+        public class TypeName
+        {
+            public const string RetailShop = "retailshop";
+        }
     }
 }

@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Documents\ProductDoc.cs" />
+    <Compile Include="Documents\RetailShopDoc.cs" />
     <Compile Include="ElasticClientProxy.cs" />
     <Compile Include="EsRequestException.cs" />
     <Compile Include="NestClient.cs" />
