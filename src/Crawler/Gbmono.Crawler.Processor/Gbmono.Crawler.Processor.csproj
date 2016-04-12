@@ -70,15 +70,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Crawler\Gbmono.CrawlerDB\Gbmono.CrawlerDB.csproj">
+    <ProjectReference Include="..\Gbmono.CrawlerDB\Gbmono.CrawlerDB.csproj">
       <Project>{09e49b72-91df-43ee-a516-1c6d583d8360}</Project>
       <Name>Gbmono.CrawlerDB</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Shared\Gbmono.EF\Gbmono.EF.csproj">
+    <ProjectReference Include="..\..\Shared\Gbmono.EF\Gbmono.EF.csproj">
       <Project>{25e50af1-7433-42ee-a5fa-ed1f1ac8466a}</Project>
       <Name>Gbmono.EF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utils\Gbmono.Utils.Chinese\Gbmono.Utils.Chinese.csproj">
+    <ProjectReference Include="..\..\Utils\Gbmono.Utils.Chinese\Gbmono.Utils.Chinese.csproj">
       <Project>{49ab0c23-2ff3-4f92-8abb-82ff59efb653}</Project>
       <Name>Gbmono.Utils.Chinese</Name>
     </ProjectReference>

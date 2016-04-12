@@ -427,7 +427,7 @@ namespace Gbmono.Crawler.Processor
                                     _repoManager.StateRepository.Create(stateI);
                                     _repoManager.StateRepository.Save();
                                 }
-                                retailShop.StateId = stateI.StateId;
+                                //retailShop.StateId = stateI.StateId;
 
                                 var city = keywords.FirstOrDefault(m => m.KeywordTypeId == shopCityId);
                                 if (city != null)
