@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Gbmono.Search.Utils;
+using Nest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Gbmono.Search.IndexManager.Documents
 {
-    [ElasticsearchType(IdProperty = "RetailShopId",Name ="retailshop")]
+    [ElasticsearchType(IdProperty = "RetailShopId",Name =Constants.TypeName.RetailShop)]
     public class RetailShopDoc
     {
         public int RetailShopId { get; set; }
