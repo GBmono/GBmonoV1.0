@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Admin.Models;
-
+using System.Configuration;
 
 namespace Gbmono.Api.Admin.Controllers
 {
@@ -21,13 +21,13 @@ namespace Gbmono.Api.Admin.Controllers
     {
         private readonly RepositoryManager _repositoryManager;
         // images, static files host in seperate IIS app
-        private readonly string _productImageSaveFolder;
+        private readonly string _productImageSaveFolder = ConfigurationManager.AppSettings["ImgPath"] + "\\products";
 
         #region ctor
         public ProductImagesController()
         {
             _repositoryManager = new RepositoryManager();
-            _productImageSaveFolder = AppDomain.CurrentDomain.BaseDirectory + "\\Files\\Products";
+            // _productImageSaveFolder = AppDomain.CurrentDomain.BaseDirectory + "\\Files\\Products";
         }
         #endregion
 
@@ -44,6 +44,7 @@ namespace Gbmono.Api.Admin.Controllers
         }
 
         // upload image and create new ProductImage record
+        [AllowAnonymous]
         [Route("Upload/{productId}/{imageTypeId}")]
         [HttpPost]
         public async Task<IHttpActionResult> UploadImage(int productId, short imageTypeId)
@@ -78,13 +79,36 @@ namespace Gbmono.Api.Admin.Controllers
                 });
             }
 
+            // todo: validate file extension to avoid files of other types being upload
+
+            // get product category
+            var product = _repositoryManager.ProductRepository.Get(productId);
+
+            // category
+            var category = _repositoryManager.CategoryRepository
+                                             .Table
+                                             .Include(m => m.ParentCategory.ParentCategory)
+                                             .SingleOrDefault(m => m.CategoryId == product.CategoryId);
+
+            // get product sub directory
+            var subDirectory = category.ParentCategory.ParentCategory.CategoryCode + "\\" + category.ParentCategory.CategoryCode + "\\" + category.CategoryCode;
+
             // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
             // so this is how you can get the original file name
             var originalFileName = GetDeserializedFileName(file);
             var newFileName = GenerateImageFileName(productId) + Path.GetExtension(originalFileName);
 
+            // saving directory
+            var imgDirectory = Path.Combine(_productImageSaveFolder, subDirectory);
+
+            // create if directory doesn't exist
+            if (!Directory.Exists(imgDirectory))
+            {
+                Directory.CreateDirectory(imgDirectory);
+            }
+
             // todo: then we can rename the file into the originalfile name
-            File.Copy(file.LocalFileName, Path.Combine(_productImageSaveFolder, newFileName), true);
+            File.Copy(file.LocalFileName, Path.Combine(imgDirectory, newFileName), true);
 
             // delete the curent file
             File.Delete(file.LocalFileName);
@@ -93,7 +117,7 @@ namespace Gbmono.Api.Admin.Controllers
             var newProductImage = new ProductImage
             {
                 ProductId = productId,
-                FileName = newFileName,
+                FileName = category.ParentCategory.ParentCategory.CategoryCode + "/" + category.ParentCategory.CategoryCode + "/" + category.CategoryCode + "/" + newFileName, // add sub cateogry path into the name
                 ProductImageTypeId = imageTypeId // todo:                
             };
 
@@ -190,8 +214,7 @@ namespace Gbmono.Api.Admin.Controllers
             {
                 i += 1;
             }
-
-
+             
             return fileName + i.ToString();
         }
     }

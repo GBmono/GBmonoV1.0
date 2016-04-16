@@ -10,9 +10,10 @@
     /* web page view root path */
     gbmono.app_view_path = '/gbmono/angularApp/views';
 
-    /* product image root path (web api admin) */
-    gbmono.img_root_path = 'http://localhost/adminapi/Files/Products/'
-
+    /* gbmono product images url */
+    gbmono.img_root_path = 'http://localhost/images/products/'
+    /* gbmono article images url */
+    gbmono.img_article_root_path = 'http://localhost/images/articles/'
 
     /* web api controller route prefix */
     /* bearer token entry point*/

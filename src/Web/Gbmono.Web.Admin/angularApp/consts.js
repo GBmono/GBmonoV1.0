@@ -14,8 +14,8 @@
     /* web page app view root path */
     gbmono.app_view_path = '/admin/angularApp/views';
 
-    /* product image root path */
-    gbmono.img_root_path = gbmono.api_app + '/files/products';
+    /* gbmono product images url */
+    gbmono.img_root_path = 'http://localhost/images/products/'
    
     /* web api controller route prefix */
     /* bearer token entry point*/
