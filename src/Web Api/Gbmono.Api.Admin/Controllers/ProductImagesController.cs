@@ -20,6 +20,7 @@ namespace Gbmono.Api.Admin.Controllers
     public class ProductImagesController : ApiController
     {
         private readonly RepositoryManager _repositoryManager;
+        // images, static files host in seperate IIS app
         private readonly string _productImageSaveFolder;
 
         #region ctor

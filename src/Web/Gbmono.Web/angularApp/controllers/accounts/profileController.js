@@ -3,13 +3,20 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['$location', 'utilService', 'userFavoriteDataFactory'];
+    ctrl.$inject = ['$location',
+                    'utilService',
+                    'pluginService',
+                    'userFavoriteDataFactory'];
 
     // create controller
     module.controller('profileController', ctrl);
 
     // controller body
-    function ctrl($location, utilService, userFavoriteDataFactory) {
+    function ctrl($location,
+                  utilService,
+                  pluginService,
+                  userFavoriteDataFactory) {
+        // controller 
         var vm = this;
         // user favorite products
         vm.products = [];
@@ -48,6 +55,10 @@
         }
 
         function getFavoriteProducts(userToken, pageIndex, pageSize) {
+            // loading icon
+            pluginService.showDataLoadingIndicator('#products', { left: "50%", top: "80px;" });
+
+            // call service
             userFavoriteDataFactory.getFavoriteProducts(userToken, pageIndex, pageSize)
                 .then(function successCallback(response) {
                     // add products into collection
@@ -59,6 +70,10 @@
                         // disable or hide the button
                         vm.isAllDataLoaded = true;
                     }
+                    
+                    // close data loading
+                    pluginService.closeDataLoadingIndicator('#products');
+
                 }, function errorCallback(response) {
                     // if user is not authorized
                     if (response.status === 401) {

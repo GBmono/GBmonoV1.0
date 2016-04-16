@@ -156,13 +156,16 @@
 
                     // format the activation date json into date format
                     $scope.editProduct.activationDate = $filter('date')($scope.editProduct.activationDate, 'yyyy-MM-dd')
-                    // load categories
+                    
                     // select category by product category
                     // get top categories and auto load second, third level categories
                     getTopCategories();
 
                     // get brands
                     getBrands();
+
+                    // generate barcode image
+                    generateBarcodeImage($scope.editProduct.barCode);
                 });
         }
 
@@ -247,6 +250,10 @@
                         pluginService.notify(error, 'error')
                     });
             }
+        }
+
+        function generateBarcodeImage(barcode) {
+            pluginService.generateBarcodeImage('#barcodeImg', barcode, 'ean13');
         }
     }
 })(angular.module('gbmono'));

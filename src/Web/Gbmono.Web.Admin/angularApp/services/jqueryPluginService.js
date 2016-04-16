@@ -12,7 +12,8 @@
         return {
             notify: notify,
             showDataLoading: showDataLoading,
-            closeDataLoading: closeDataLoading
+            closeDataLoading: closeDataLoading,
+            generateBarcodeImage: generateBarcodeImage
         };
 
         // $.growl notification
@@ -88,9 +89,11 @@
         function closeDataLoading(selector) {
             // remove the indicator div
             $(selector).find('.widget-box-overlay').remove();
-
-            //$(selector).widget_box('close');
         }
 
+        // generate barcode image
+        function generateBarcodeImage(seletor, data, type) {
+            $(seletor).barcode(data, type, { barWidth: 2, barHeight: 55 });
+        }
     }
 })(angular.module('gbmono'));
