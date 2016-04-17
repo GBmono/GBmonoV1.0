@@ -191,7 +191,7 @@
             // add div with progress indicator on the top of the current widget
             $(selector).append('<div class="widget-box-overlay">' +
                                 '<div class="loading-icon" style="left:' + position.left + '; top:' + position.top + '">' +
-                                '<img src="/gbmono/content/img/loading_1.gif" alt="loading"/>' +
+                                '<img src="content/img/loading_1.gif" alt="loading"/>' +
                                 '</div>' +
                             '</div>');
         }
