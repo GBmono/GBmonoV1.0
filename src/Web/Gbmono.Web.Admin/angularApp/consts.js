@@ -36,7 +36,9 @@
         // brand api url
         brand_api_url: gbmono.web_api_root + '/Brands',
         // stats api url
-        stats_api_url: gbmono.web_api_root + '/Statistics'
+        stats_api_url: gbmono.web_api_root + '/Statistics',
+        // retailer shop api url 
+        retailer_shop_api_url: gbmono.web_api_root + '/RetailerShops',
     };
 
     // notification plain text

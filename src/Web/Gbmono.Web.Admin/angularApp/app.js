@@ -87,9 +87,14 @@
                     controller: 'retailerListController',
                     caseInsensitiveMatch: true
                 })
-                .when('/retailershops', { // retailer shop list page
+                .when('/retailershops/:retailerId', { // retailer shop list page
                     templateUrl: gbmono.app_view_path + '/retailers/shop.html',
                     controller: 'retailerShopListController',
+                    caseInsensitiveMatch: true
+                })
+                .when('/retailershops/edit/:retailerShopId', { // retailer shop list page
+                    templateUrl: gbmono.app_view_path + '/retailers/shopEdit.html',
+                    controller: 'retailerShopEditController',
                     caseInsensitiveMatch: true
                 })
                 .otherwise({
