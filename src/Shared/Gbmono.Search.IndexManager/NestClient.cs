@@ -201,6 +201,34 @@ namespace Gbmono.Search.IndexManager
             }
         }
 
+        public void BulkIndexRoutedDocument(IEnumerable<Models.RouteGeneric<T>> routeNamedDocs)
+        {
+            if (null == routeNamedDocs || !routeNamedDocs.Any())
+            {
+                throw new ArgumentException("docs");
+            }
+
+            var descriptor = new BulkDescriptor();
+            foreach (var routedDoc in routeNamedDocs)
+            {
+                Func<BulkIndexDescriptor<T>, BulkIndexDescriptor<T>> selector = i => i.Index(_indexName).Type(_typeName).Document(routedDoc.Doc);
+
+                if (!string.IsNullOrWhiteSpace(routedDoc.RouteName))
+                {
+                    selector += i => i.Routing(routedDoc.RouteName);
+                }
+
+                descriptor.Index<T>(selector);
+            }
+            var response = Client.Bulk(d => descriptor);
+
+            if (response.ServerError != null)
+            {
+                Console.WriteLine("Error:{0}", response.ServerError.Error.CausedBy);
+                Console.WriteLine("Exception:{0}", response.ServerError.Error.Type);
+            }
+        }
+
         public void BulkIndexDocument(ConcurrentDictionary<T, string> dict)
         {
             if (null == dict || dict.Count == 0)

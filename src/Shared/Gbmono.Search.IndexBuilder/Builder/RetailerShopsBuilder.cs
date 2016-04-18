@@ -61,24 +61,37 @@ namespace Gbmono.Search.IndexBuilder.Builder
                         TaxFree = shop.TaxFree,
                         Unionpay = shop.Unionpay
                     };
+                    docList.Add(doc);                  
+                }
 
-                    tasks.Add(Task.Run(() => Client.IndexDocuments(docList)));
+                //tasks.Add(
+                try
+                {
+                    //Task.Run(
+                    //() => 
+                    Client.IndexDocuments(docList);
+                        //);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                
+                    //);
 
-                    if (tasks.Count > 3)
+                if (tasks.Count > 3)
+                {
+                    Task.WaitAny(tasks.ToArray());
+                    var toRemove = tasks.Where(m => m.IsCompleted).ToArray();
+                    foreach (var t in toRemove)
                     {
-                        Task.WaitAny(tasks.ToArray());
-                        var toRemove = tasks.Where(m => m.IsCompleted).ToArray();
-                        foreach (var t in toRemove)
-                        {
-                            tasks.Remove(t);
-                        }
-                        Console.WriteLine("#");
+                        tasks.Remove(t);
                     }
-
-                    Console.WriteLine("{0} retail shop indexed", startIndex);
+                    Console.WriteLine("#");
                 }
 
                 startIndex += chunkSize;
+                Console.WriteLine("{0} retail shop indexed", startIndex);                
             }
         }
 
