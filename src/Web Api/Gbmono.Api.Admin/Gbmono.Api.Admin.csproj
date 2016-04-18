@@ -140,6 +140,7 @@
     <Compile Include="Controllers\ProductImagesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductTagsController.cs" />
+    <Compile Include="Controllers\RetailerShopsController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="ExceptionHandling\GenericExceptionHandler.cs" />
