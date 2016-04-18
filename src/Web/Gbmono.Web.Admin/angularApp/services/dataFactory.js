@@ -321,7 +321,7 @@
         }
 
         function update(retailerShop) {
-            return $http.put(gbmono.api_site_prefix.retailer_shop_api_url + '/' + retailerShop.retailerShopId, retailerShop);
+            return $http.put(gbmono.api_site_prefix.retailer_shop_api_url + '/' + retailerShop.retailShopId, retailerShop);
         }
     }
 

@@ -39,5 +39,14 @@ namespace Gbmono.Api.Admin.Controllers
                 .Table.Single(m => m.RetailShopId == id)).Result;
         }
 
+
+        [HttpPut]
+        public IHttpActionResult Update(int id, [FromBody]RetailerShop retailerShop)
+        {
+            _repositoryManager.RetailerShopRepository.Update(retailerShop);
+            _repositoryManager.RetailerShopRepository.Save();
+
+            return Ok(retailerShop.RetailShopId);
+        }
     }
 }

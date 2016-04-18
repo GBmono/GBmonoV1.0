@@ -28,6 +28,20 @@
                     $scope.editRetailerShop = data;
                 });
         }
+
+        $scope.update = function () {
+            update($scope.editRetailerShop);
+        };
+
+        function update(retailerShop) {
+            retailerShopsDataFactory.update(retailerShop)
+                .success(function () {
+                    pluginService.notify('店铺更新成功', 'success');
+                })
+                .error(function (error) {
+                    pluginService.notify(error, 'error')
+                });
+        }
       
     }
 })(angular.module('gbmono'));
