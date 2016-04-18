@@ -54,7 +54,7 @@
                 columns: [
                     {
                         field: "name", title: "名称", width: 250,
-                        template: '<i class="ace-icon fa fa-caret-right blue"></i> <a class="grey" ng-href="\\#/retailerShop/#=retailShopId#/second">#= name #</a>',
+                        template: '<i class="ace-icon fa fa-caret-right blue"></i> <a class="grey" ng-href="\\#/retailershops/edit/#=retailShopId#">#= name #</a>',
                     },
                     {
                         field: "displayName", title: "显示名", width: 250,

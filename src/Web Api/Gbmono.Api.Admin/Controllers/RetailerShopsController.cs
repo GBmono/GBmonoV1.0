@@ -12,6 +12,7 @@ using Gbmono.EF.Models;
 namespace Gbmono.Api.Admin.Controllers
 {
     [RoutePrefix("api/RetailerShops")]
+    [AllowAnonymous]
     public class RetailerShopsController : ApiController
     {
         private readonly RepositoryManager _repositoryManager;
@@ -23,13 +24,19 @@ namespace Gbmono.Api.Admin.Controllers
         }
         #endregion
 
-        [AllowAnonymous]
-        public async Task<IEnumerable<RetailerShop>> GetByRetailerId(int id)
+        [Route("Retailer/{retailerId}")]
+        public async Task<IEnumerable<RetailerShop>> GetByRetailerId(int retailerId)
         {
             return await _repositoryManager.RetailerShopRepository
                                      .Table
-                                     .Where(m => m.RetailerId == id)
+                                     .Where(m => m.RetailerId == retailerId)
                                      .ToListAsync();
+        }
+
+        public async Task<RetailerShop> GetById(int id)
+        {
+            return Task.Run(() => _repositoryManager.RetailerShopRepository
+                .Table.Single(m => m.RetailShopId == id)).Result;
         }
 
     }

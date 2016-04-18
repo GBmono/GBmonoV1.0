@@ -308,13 +308,17 @@
         // return data factory with CRUD calls
         return {
             getByShopsByRetailerId: getByShopsByRetailerId,
+            getById:getById,
             update: update
         }
 
         function getByShopsByRetailerId(id) {
-            return $http.get(gbmono.api_site_prefix.retailer_shop_api_url + "/" + id);
+            return $http.get(gbmono.api_site_prefix.retailer_shop_api_url + "/Retailer/" + id);
         }
 
+        function getById(id) {
+            return $http.get(gbmono.api_site_prefix.retailer_shop_api_url + "/" + id);
+        }
 
         function update(retailerShop) {
             return $http.put(gbmono.api_site_prefix.retailer_shop_api_url + '/' + retailerShop.retailerShopId, retailerShop);

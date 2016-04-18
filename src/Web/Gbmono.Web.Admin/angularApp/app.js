@@ -92,6 +92,11 @@
                     controller: 'retailerShopListController',
                     caseInsensitiveMatch: true
                 })
+                .when('/retailershops/edit/:retailerShopId', { // retailer shop list page
+                    templateUrl: gbmono.app_view_path + '/retailers/shopEdit.html',
+                    controller: 'retailerShopEditController',
+                    caseInsensitiveMatch: true
+                })
                 .otherwise({
                     templateUrl: gbmono.app_view_path + '/dashboard/dashboard.html',
                     controller: 'dashboardController',
