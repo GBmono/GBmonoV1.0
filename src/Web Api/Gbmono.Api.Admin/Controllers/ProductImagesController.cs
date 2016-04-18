@@ -44,7 +44,6 @@ namespace Gbmono.Api.Admin.Controllers
         }
 
         // upload image and create new ProductImage record
-        [AllowAnonymous]
         [Route("Upload/{productId}/{imageTypeId}")]
         [HttpPost]
         public async Task<IHttpActionResult> UploadImage(int productId, short imageTypeId)

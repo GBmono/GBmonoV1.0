@@ -82,6 +82,16 @@
                     controller: 'thirdCategoryController',
                     caseInsensitiveMatch: true
                 })
+                .when('/retailers', { // retailer list page
+                    templateUrl: gbmono.app_view_path + '/retailers/list.html',
+                    controller: 'retailerListController',
+                    caseInsensitiveMatch: true
+                })
+                .when('/retailershops', { // retailer shop list page
+                    templateUrl: gbmono.app_view_path + '/retailers/shop.html',
+                    controller: 'retailerShopListController',
+                    caseInsensitiveMatch: true
+                })
                 .otherwise({
                     templateUrl: gbmono.app_view_path + '/dashboard/dashboard.html',
                     controller: 'dashboardController',

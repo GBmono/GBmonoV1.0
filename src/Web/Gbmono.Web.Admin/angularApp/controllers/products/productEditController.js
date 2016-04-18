@@ -11,7 +11,8 @@
                     'productImageDataFactory',
                     'brandDataFactory',
                     'pluginService',
-                    'validator'];
+                    'validator',
+                    'utilService'];
 
     // create controller
     module.controller('productEditController', ctrl);
@@ -25,7 +26,8 @@
                   productImageDataFactory,
                   brandDataFactory,
                   pluginService,
-                  validator) {
+                  validator,
+                  utilService) {
         // top level categories
         $scope.topCates = [];
         $scope.selectedTopCateId = 0;
@@ -87,6 +89,24 @@
                     alert("Only .jpg / .png allowed.");
                 }
             });
+        };
+
+        // attach authorization token before uploading file
+        $scope.onUpload = function (e) {
+            // get httl request obj
+            var xhr = e.XMLHttpRequest;
+            
+            // get token from local storage
+            var token = utilService.getToken();
+
+            // attach token 
+            if (xhr) {
+                xhr.addEventListener("readystatechange", function (e) {
+                    if (xhr.readyState == 1 /* OPENED */) {
+                        xhr.setRequestHeader("Authorization", "Bearer " + token);
+                    }
+                });
+            }
         };
 
         // file upload on success 
