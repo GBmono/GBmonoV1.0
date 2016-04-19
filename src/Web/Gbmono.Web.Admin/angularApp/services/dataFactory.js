@@ -45,7 +45,7 @@
     function factory($http) {
         // return data factory with CRUD calls
         return {
-            getById:getById,
+            getById: getById,
             getTopCategories: getTopCategories,
             getByParent: getByParent,
             getTreeviewItems: getTreeviewItems,
@@ -161,7 +161,7 @@
         function search(model) {
             return $http.post(gbmono.api_site_prefix.product_api_url + '/Search', model);
         }
-        
+
         function getTags(id) {
             return $http.get(gbmono.api_site_prefix.product_api_url + "/" + id + '/Tags');
         }
@@ -217,7 +217,7 @@
             return $http.delete(gbmono.api_site_prefix.product_image_api_url + '/' + id);
         }
     }
-            
+
 })(angular.module('gbmono'));
 
 
@@ -301,19 +301,19 @@
     factory.$inject = ['$http'];
 
     // create instance
-    module.factory('retailerShopsDataFactory', factory);
+    module.factory('retailerShopDataFactory', factory);
 
     // factory implement
     function factory($http) {
         // return data factory with CRUD calls
         return {
-            getByShopsByRetailerId: getByShopsByRetailerId,
-            getById:getById,
+            getbyRetailerCity: getbyRetailerCity,
+            getById: getById,
             update: update
         }
 
-        function getByShopsByRetailerId(id) {
-            return $http.get(gbmono.api_site_prefix.retailer_shop_api_url + "/Retailer/" + id);
+        function getbyRetailerCity(retailerId, cityId) {
+            return $http.get(gbmono.api_site_prefix.retailer_shop_api_url + '/Retailer/' + retailerId + '/City/' + cityId);
         }
 
         function getById(id) {
@@ -327,7 +327,63 @@
 
 })(angular.module('gbmono'));
 
+/*
+ retailer data factory
+*/
+(function (module) {
+    // inject params
+    factory.$inject = ['$http'];
 
+    // create instance
+    module.factory('retailerDataFactory', factory);
+
+    // factory implement
+    function factory($http) {
+
+        // return data factory with CRUD calls
+        return {
+            getAll: getAll
+        };
+
+        function getAll() {
+            return $http.get(gbmono.api_site_prefix.retailer_api_url);
+        }
+
+    }
+
+})(angular.module('gbmono'));
+
+
+/*
+    location data factory
+*/
+(function (module) {
+    // inject params
+    factory.$inject = ['$http'];
+
+    // create instance
+    module.factory('locationDataFactory', factory);
+
+    // factory implement
+    function factory($http) {
+
+        // return data factory with CRUD calls
+        return {
+            getStates: getStates,
+            getCities: getCities
+        };
+
+        function getStates(countryId) {
+            return $http.get(gbmono.api_site_prefix.location_api_url + '/' + countryId + '/States');
+        }
+
+        function getCities(stateId) {
+            return $http.get(gbmono.api_site_prefix.location_api_url + '/' + stateId + '/Cities');
+        }
+
+    }
+
+})(angular.module('gbmono'));
 
 /*
     country data factory

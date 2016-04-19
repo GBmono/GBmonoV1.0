@@ -6,35 +6,88 @@
     ctrl.$inject = ['$scope',
                     '$routeParams',
                     'pluginService',
-                    'retailerShopsDataFactory'];
+                    'retailerDataFactory',
+                    'retailerShopDataFactory',
+                    'locationDataFactory'];
 
     // create controller
     module.controller('retailerShopListController', ctrl);
 
     // controller body
-    function ctrl($scope, $routeParams, pluginService, retailerShopsDataFactory) {
-
-        //retailerId
-        var retailerId = $routeParams.retailerId ? parseInt($routeParams.retailerId) : 0;
-
+    function ctrl($scope, $routeParams, pluginService, retailerDataFactory, retailerShopDataFactory, locationDataFactory) {
         // page init
         init();
 
+        // retailers
+        $scope.retailers = [];
+        // states
+        $scope.states = [];
+        // cities
+        $scope.cities = [];
+        // retail shops
+        $scope.shops = [];
+        // search model
+        $scope.searchModel = {
+            retailerId: -1,
+            cityId: -1
+        };
 
         // update event handelr
 
         function init() {
-            bindShops(retailerId);
+            // get retailers
+            getRetailers();
+
+            // get states, for stage 1, jp only
+            getStates(1);
+
+            bindShopsGrid();
         }
 
-        // retreive brand data and binding it into kendo grid
-        function bindShops() {
-            // init kendo ui grid with brand data
+        // load cities by state
+        $scope.stateChanged = function () {
+            if ($scope.searchModel.stateId && $scope.searchModel.stateId != '') {
+                getCities($scope.searchModel.stateId);
+            }
+        };
+
+        // get shops
+        $scope.search = function () {
+            $scope.grid.dataSource.read();
+        };
+
+
+        // load retailers
+        function getRetailers() {
+            retailerDataFactory.getAll()
+                .success(function (data) {
+                    $scope.retailers = data;
+                });
+        }
+
+        // load states
+        function getStates(countryId) {
+            locationDataFactory.getStates(countryId)
+                .success(function (data) {
+                    $scope.states = data;
+                });
+        }
+
+        // load cities
+        function getCities(stateId) {
+            locationDataFactory.getCities(stateId)
+                .success(function (data) {
+                    $scope.cities = data;
+                    // load finishes
+                });
+        }
+
+        function bindShopsGrid() {
             $scope.mainGridOptions = {
                 dataSource: {
                     transport: {
                         read: function (e) {
-                            retailerShopsDataFactory.getByShopsByRetailerId(retailerId)
+                            retailerShopDataFactory.getbyRetailerCity($scope.searchModel.retailerId, $scope.searchModel.cityId)
                                 .success(function (data) {
                                     e.success(data);
                                 });
@@ -77,11 +130,10 @@
                         field: "enabled", title: "激活", width: 80,
                         template: "<input type='checkbox' disabled='true' data-bind='checked: enabled' #= enabled ? checked='checked' : '' #/>",
                     }
-                    
+
                 ]
             };
         }
-
 
     }
 })(angular.module('gbmono'));

@@ -225,7 +225,6 @@
                 fullProductCode: $scope.search.type == 2 ? $scope.search.value : ""
             };
 
-            
             // parent grid
             $scope.grid.dataSource.read();
         }

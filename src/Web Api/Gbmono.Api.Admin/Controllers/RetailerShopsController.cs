@@ -24,13 +24,14 @@ namespace Gbmono.Api.Admin.Controllers
         }
         #endregion
 
-        [Route("Retailer/{retailerId}")]
-        public async Task<IEnumerable<RetailerShop>> GetByRetailerId(int retailerId)
+        [Route("Retailer/{retailerId}/City/{cityId}")]
+        public async Task<IEnumerable<RetailerShop>> GetByRetailerCity(int retailerId, int cityId)
         {
             return await _repositoryManager.RetailerShopRepository
-                                     .Table
-                                     .Where(m => m.RetailerId == retailerId)
-                                     .ToListAsync();
+                                           .Table
+                                           .Where(m => m.CityId == cityId && m.RetailerId == retailerId)
+                                           .OrderBy(m => m.DisplayName)
+                                           .ToListAsync();
         }
 
         public async Task<RetailerShop> GetById(int id)
