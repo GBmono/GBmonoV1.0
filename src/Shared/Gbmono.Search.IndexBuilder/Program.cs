@@ -1,4 +1,5 @@
 ﻿using Gbmono.Search.IndexBuilder.Builder;
+using Gbmono.Search.IndexBuilder.Test;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,14 @@ namespace Gbmono.Search.IndexBuilder
     {
         static void Main(string[] args)
         {
-            var builder = new RetailerShopsBuilder();
-            builder.Build();
+            //retail shop builder
+            //var builder = new RetailerShopsBuilder();
+            //builder.Build();
+
+            //retail shop test
+            RetailShopTest test = new RetailShopTest();
+            //test.GetRetailShopById();
+            test.GetRetailShopByCity();
         }
     }
 }

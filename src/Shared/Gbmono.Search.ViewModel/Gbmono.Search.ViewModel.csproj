@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GeoPoint.cs" />
+    <Compile Include="PagedRequest.cs" />
     <Compile Include="PagedResponse.cs" />
     <Compile Include="Pager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
