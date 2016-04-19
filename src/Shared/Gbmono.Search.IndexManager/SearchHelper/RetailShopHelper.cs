@@ -26,5 +26,7 @@ namespace Gbmono.Search.IndexManager.SearchHelper
             var resp = Client.SearchResponse(query);
             return resp.Documents.First();
         }
+
+        //public RetailShopDoc GetRetailShopDocByCity()
     }
 }
