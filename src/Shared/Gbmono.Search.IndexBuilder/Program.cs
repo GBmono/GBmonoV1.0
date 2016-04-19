@@ -18,7 +18,8 @@ namespace Gbmono.Search.IndexBuilder
 
             //retail shop test
             RetailShopTest test = new RetailShopTest();
-            test.GetRetailShopById(14);
+            //test.GetRetailShopById();
+            test.GetRetailShopByCity();
         }
     }
 }

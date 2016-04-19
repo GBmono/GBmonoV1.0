@@ -15,8 +15,9 @@ namespace Gbmono.Search.IndexBuilder.Test
             helper = new RetailShopHelper();
         }
 
-        public void GetRetailShopById(int retailshopId)
+        public void GetRetailShopById()
         {
+            var retailshopId = 14;
             var doc = helper.GetRetailShopDocById(retailshopId);
 
             Console.WriteLine("retail name :{0}", doc.Name);
@@ -27,6 +28,13 @@ namespace Gbmono.Search.IndexBuilder.Test
             Console.WriteLine("retail phone :{0}", doc.Phone);
             Console.WriteLine("retail latitude :{0}", doc.Latitude);
             Console.WriteLine("retail longitude :{0}", doc.Longitude);
+        }
+
+        public void GetRetailShopByCity()
+        {
+            var cityId = 2;
+            var retailId = 1;
+            var result = helper.GetRetailShopDocByCity(cityId, retailId);
         }
     }
 }
