@@ -120,15 +120,15 @@
                     },
                     {
                         field: "taxFree", title: "免税", width: 80,
-                        template: "<input type='checkbox' disabled='true'  data-bind='checked: taxFree' #= taxFree ? checked='checked' : '' #/>",
+                        template: "<input type='checkbox' disabled='true' ng-model='dataItem.taxFree' />",
                     },
                     {
                         field: "unionpay", title: "银联", width: 80,
-                        template: "<input type='checkbox' disabled='true' data-bind='checked: unionpay' #= unionpay ? checked='checked' : '' #/>",
+                        template: "<input type='checkbox' disabled='true' ng-model='dataItem.unionpay'/>",
                     },
                     {
                         field: "enabled", title: "激活", width: 80,
-                        template: "<input type='checkbox' disabled='true' data-bind='checked: enabled' #= enabled ? checked='checked' : '' #/>",
+                        template: "<input type='checkbox' disabled='true' ng-model='dataItem.enabled' />",
                     }
 
                 ]
