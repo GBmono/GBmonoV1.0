@@ -49,5 +49,6 @@ namespace Gbmono.Api.Admin.Controllers
 
             return Ok(retailerShop.RetailShopId);
         }
+      
     }
 }

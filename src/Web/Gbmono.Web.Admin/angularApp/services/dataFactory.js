@@ -320,8 +320,8 @@
             return $http.get(gbmono.api_site_prefix.retailer_shop_api_url + "/" + id);
         }
 
-        function update(retailerShop) {
-            return $http.put(gbmono.api_site_prefix.retailer_shop_api_url + '/' + retailerShop.retailShopId, retailerShop);
+        function update(shop) {
+            return $http.put(gbmono.api_site_prefix.retailer_shop_api_url + '/' + shop.retailShopId, shop);
         }
     }
 

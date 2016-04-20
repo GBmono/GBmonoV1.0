@@ -26,6 +26,8 @@
         $scope.cities = [];
         // retail shops
         $scope.shops = [];
+        // edit shop
+        $scope.editShop = {};
         // search model
         $scope.searchModel = {
             retailerId: -1,
@@ -56,6 +58,33 @@
             $scope.grid.dataSource.read();
         };
 
+        // event hadlers
+        $scope.showEdit = function (dataItem) {
+            $scope.editShop = dataItem;
+
+            // show window
+            $scope.winEdit.open();
+        };
+
+        $scope.update = function (dataItem) {
+             updateShop($scope.editShop);
+            // show window
+            $scope.winEdit.open();
+        };
+
+        // update shop
+        function updateShop(shop) {
+            retailerShopDataFactory.update(shop)
+               .success(function (data) {
+                   // reload data
+                   $scope.grid.dataSource.read();
+                   // close window
+                   $scope.winEdit.close();
+               })
+               .error(function (error) {
+                    pluginService.notify(error, 'error');
+                });
+        }
 
         // load retailers
         function getRetailers() {
@@ -106,17 +135,17 @@
                 filterable: false,
                 columns: [
                     {
-                        field: "name", title: "名称", width: 250,
+                        field: "name", title: "名称", width: 220,
                         template: '<i class="ace-icon fa fa-caret-right blue"></i> <a class="grey" ng-href="\\#/retailershops/edit/#=retailShopId#">#= name #</a>',
                     },
                     {
-                        field: "displayName", title: "显示名", width: 250,
+                        field: "displayName", title: "显示名", width: 220,
                     },
                     {
-                        field: "address", title: "地址", width: 250
+                        field: "address", title: "地址", width: 220
                     },
                     {
-                        field: "phone", title: "电话", width: 150
+                        field: "phone", title: "电话", width: 120
                     },
                     {
                         field: "taxFree", title: "免税", width: 80,
@@ -129,7 +158,12 @@
                     {
                         field: "enabled", title: "激活", width: 80,
                         template: "<input type='checkbox' disabled='true' ng-model='dataItem.enabled' />",
-                    }
+                    },
+                     {
+                         template: '<button class="btn btn-xs btn-info" ng-click="showEdit(dataItem)"><i class="ace-icon fa fa-edit bigger-120"></i></button>&nbsp;&nbsp;' +
+                                   '<button class="btn btn-xs btn-danger" ng-click=""><i class="ace-icon fa fa-trash-o bigger-120"></i></button>', width: 150
+                     }
+
 
                 ]
             };
