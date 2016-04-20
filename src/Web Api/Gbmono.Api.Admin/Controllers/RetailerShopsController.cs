@@ -29,6 +29,7 @@ namespace Gbmono.Api.Admin.Controllers
         {
             return await _repositoryManager.RetailerShopRepository
                                            .Table
+                                           .Include(m=>m.City.State)
                                            .Where(m => m.CityId == cityId && m.RetailerId == retailerId)
                                            .OrderBy(m => m.DisplayName)
                                            .ToListAsync();
@@ -37,13 +38,15 @@ namespace Gbmono.Api.Admin.Controllers
         public async Task<RetailerShop> GetById(int id)
         {
             return Task.Run(() => _repositoryManager.RetailerShopRepository
-                .Table.Single(m => m.RetailShopId == id)).Result;
+                .Table.Include(m => m.City.State).Single(m => m.RetailShopId == id)).Result;
         }
 
 
         [HttpPut]
         public IHttpActionResult Update(int id, [FromBody]RetailerShop retailerShop)
         {
+            var city = _repositoryManager.CityRepository.Get(retailerShop.CityId);
+            retailerShop.City = city;
             _repositoryManager.RetailerShopRepository.Update(retailerShop);
             _repositoryManager.RetailerShopRepository.Save();
 

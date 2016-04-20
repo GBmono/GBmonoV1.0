@@ -33,6 +33,7 @@
             retailerId: -1,
             cityId: -1
         };
+        $scope.editShopStateId = null;
 
         // update event handelr
 
@@ -53,6 +54,11 @@
             }
         };
 
+        // load cities by state for edit
+        $scope.stateChangedForEdit = function () {
+            getCitiesForEdit($scope.editShopStateId);
+        };
+
         // get shops
         $scope.search = function () {
             $scope.grid.dataSource.read();
@@ -62,12 +68,13 @@
         $scope.showEdit = function (dataItem) {
             $scope.editShop = dataItem;
 
+            $scope.editShopStateId = -1;
             // show window
             $scope.winEdit.open();
         };
 
         $scope.update = function (dataItem) {
-             updateShop($scope.editShop);
+            updateShop($scope.editShop);
             // show window
             $scope.winEdit.open();
         };
@@ -82,8 +89,8 @@
                    $scope.winEdit.close();
                })
                .error(function (error) {
-                    pluginService.notify(error, 'error');
-                });
+                   pluginService.notify(error, 'error');
+               });
         }
 
         // load retailers
@@ -107,9 +114,21 @@
             locationDataFactory.getCities(stateId)
                 .success(function (data) {
                     $scope.cities = data;
-                    // load finishes
                 });
         }
+
+        // load cities for edit
+        function getCitiesForEdit(stateId) {
+            if (stateId) {
+                locationDataFactory.getCities(stateId)
+                    .success(function(data) {
+                        $scope.citiesForEdit = data;
+                    });
+            } else {
+                $scope.citiesForEdit = [];
+            }
+        }
+
 
         function bindShopsGrid() {
             $scope.mainGridOptions = {

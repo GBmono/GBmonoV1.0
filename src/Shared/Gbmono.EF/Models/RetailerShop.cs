@@ -18,6 +18,7 @@ namespace Gbmono.EF.Models
         public string DisplayName { get; set; }
 
         public int CityId { get; set; }
+        public City City { get; set; }
 
         // public int SuburbId { get; set; }
 
