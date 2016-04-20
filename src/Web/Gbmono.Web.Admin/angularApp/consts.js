@@ -3,10 +3,24 @@
 */
 (function (gbmono) {
     /* html app name */
-    gbmono.html_app = 'http://localhost/admin';
 
+    //Testing
+    gbmono.html_app = 'http://localhost/admin';
     /* web api app name */
     gbmono.api_app = 'http://localhost/adminapi';
+    /* gbmono product images url */
+    gbmono.img_root_path = 'http://localhost/images/products/'
+
+
+    ////Live
+    //gbmono.html_app = 'http://119.9.104.196/admin';
+    ///* web api app name */
+    //gbmono.api_app = 'http://119.9.104.196/adminapi';
+    ///* gbmono product images url */
+    //gbmono.img_root_path = 'http://119.9.104.196/images/products/'
+
+
+    
 
     /* web api root */
     gbmono.web_api_root = gbmono.api_app + '/api';
@@ -14,8 +28,7 @@
     /* web page app view root path */
     gbmono.app_view_path = '/admin/angularApp/views';
 
-    /* gbmono product images url */
-    gbmono.img_root_path = 'http://localhost/images/products/'
+    
    
     /* web api controller route prefix */
     /* bearer token entry point*/
