@@ -78,6 +78,28 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label  class="col-sm-3 control-label no-padding-right"> 地区 </label>
+                                        <div  class="col-md-6 col-sm-9">
+                                            <select class="form-control"
+                                                    ng-options="state.stateId as state.displayName for state in states"
+                                                    ng-model="editShopStateId"
+                                                    ng-change="stateChangedForEdit()">
+                                                <option value="">默认：{{editRetailerShop.city.state.displayName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-class="{ 'has-error': formedit.nameEdit.$dirty && formedit.nameEdit.$error.required }">
+                                        <label  class="col-sm-3 control-label no-padding-right"> 城市 </label>
+                                        <div  class="col-md-6 col-sm-9">
+                                            <select class="form-control"
+                                                    ng-options="city.cityId as city.displayName for city in citiesForEdit"
+                                                    ng-model="editRetailerShop.cityId" required>
+                                                <option value="">默认：{{editRetailerShop.city.displayName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label class="col-sm-3 control-label no-padding-right"> 免税</label>
                                         <div class="col-md-6 col-sm-9">
                                             <input type="checkbox" ng-model="editRetailerShop.taxFree" />
