@@ -87,7 +87,7 @@
                     controller: 'retailerListController',
                     caseInsensitiveMatch: true
                 })
-                .when('/retailershops/:retailerId', { // retailer shop list page
+                .when('/retailershops', { // retailer shop list page
                     templateUrl: gbmono.app_view_path + '/retailers/shop.html',
                     controller: 'retailerShopListController',
                     caseInsensitiveMatch: true
