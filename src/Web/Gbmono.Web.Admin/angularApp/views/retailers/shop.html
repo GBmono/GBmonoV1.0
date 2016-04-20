@@ -154,7 +154,6 @@
                         ng-options="state.stateId as state.displayName for state in states"
                         ng-model="editShopStateId"
                         ng-change="stateChangedForEdit()">
-                    <option value="">默认：{{editShop.city.state.displayName}}</option>
                 </select>
             </div>
         </div>
@@ -164,7 +163,6 @@
                 <select class="form-control"
                         ng-options="city.cityId as city.displayName for city in citiesForEdit"
                         ng-model="editShop.cityId" required>
-                    <option value="">默认：{{editShop.city.displayName}}</option>
                 </select>
             </div>
         </div>

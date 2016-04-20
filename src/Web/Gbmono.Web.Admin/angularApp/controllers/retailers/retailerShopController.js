@@ -68,7 +68,9 @@
         $scope.showEdit = function (dataItem) {
             $scope.editShop = dataItem;
 
-            $scope.editShopStateId = -1;
+            $scope.editShopStateId = dataItem.city.state.stateId;
+            getCitiesForEdit($scope.editShopStateId);
+
             // show window
             $scope.winEdit.open();
         };

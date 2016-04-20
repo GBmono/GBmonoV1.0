@@ -59,6 +59,9 @@
             retailerShopDataFactory.getById(id)
                 .success(function (data) {
                     $scope.editRetailerShop = data;
+                    $scope.editShopStateId = data.city.state.stateId;
+
+                    getCitiesForEdit(data.city.state.stateId);
                 });
         }
 
