@@ -11,45 +11,6 @@
 
 
     </ul><!-- /.breadcrumb -->
-    <div class="box text-center">
-        <div class="row">
-            <div class="col-md-3 col-xs-3">
-                <div class="form-group">
-                    <select class="form-control"
-                            ng-options="retailer.retailerId as retailer.name for retailer in retailers"
-                            ng-model="searchModel.retailerId">
-                        <option value="">零售商</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3 col-xs-3">
-                <div class="form-group">
-                    <select class="form-control"
-                            ng-options="state.stateId as state.displayName for state in states"
-                            ng-model="searchModel.stateId"
-                            ng-change="stateChanged()">
-                        <option value="">地区</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3 col-xs-3">
-                <div class="input-group">
-                    <select class="form-control"
-                            ng-options="city.cityId as city.displayName for city in cities"
-                            ng-model="searchModel.cityId">
-                        <option value="">城市</option>
-                    </select>
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-primary"
-                                ng-disabled="!searchModel.cityId || !searchModel.retailerId"
-                                ng-click="search()">
-                            <i class="fa fa-hand-o-right"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- view -->
@@ -67,11 +28,50 @@
                 </div>
                 <div class="widget-body">
                     <div class="widget-main padding-18 no-padding-left no-padding-right">
+                        <div class="row">
+                            <div class="col-md-3 col-xs-3">
+                                <div class="form-group">
+                                    <select class="form-control"
+                                            ng-options="retailer.retailerId as retailer.name for retailer in retailers"
+                                            ng-model="searchModel.retailerId">
+                                        <option value="">零售商</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-3">
+                                <div class="form-group">
+                                    <select class="form-control"
+                                            ng-options="state.stateId as state.displayName for state in states"
+                                            ng-model="searchModel.stateId"
+                                            ng-change="stateChanged()">
+                                        <option value="">地区</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-3">
+                                <div class="input-group">
+                                    <select class="form-control"
+                                            ng-options="city.cityId as city.displayName for city in cities"
+                                            ng-model="searchModel.cityId">
+                                        <option value="">城市</option>
+                                    </select>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary form-control"
+                                                ng-disabled="!searchModel.cityId || !searchModel.retailerId"
+                                                ng-click="search()">
+                                            <i class="fa fa-refresh"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
                         <p>
                             <btn class="btn btn-info" ng-click="">
                                 <i class="ace-icon fa fa-pencil align-top bigger-125"></i>
                             </btn>
                         </p>
+                       
                         <div class="row">
                             <div class="col-xs-12">
                                 <div kendo-grid="grid"
