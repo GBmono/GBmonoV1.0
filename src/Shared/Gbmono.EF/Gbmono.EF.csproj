@@ -50,6 +50,7 @@
     <Compile Include="Infrastructure\RepositoryManager.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ModelConfigs\ArticleMap.cs" />
     <Compile Include="ModelConfigs\BrandMap.cs" />
     <Compile Include="ModelConfigs\CategoryMap.cs" />
     <Compile Include="ModelConfigs\CityMap.cs" />

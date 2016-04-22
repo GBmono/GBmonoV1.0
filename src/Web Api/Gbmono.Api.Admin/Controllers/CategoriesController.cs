@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -9,7 +10,6 @@ using System.Threading.Tasks;
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Admin.Models;
-using System.Data.Entity;
 using Gbmono.Api.Admin.HttpResults;
 
 namespace Gbmono.Api.Admin.Controllers
@@ -34,7 +34,6 @@ namespace Gbmono.Api.Admin.Controllers
                                      .SingleOrDefault(m => m.CategoryId == id);
         }
 
-        [AllowAnonymous]
         [Route("Top")]
         public async Task<IEnumerable<Category>> GetTopCategories()
         {

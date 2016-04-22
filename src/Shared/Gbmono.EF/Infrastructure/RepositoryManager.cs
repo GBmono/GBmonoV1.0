@@ -44,6 +44,7 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<UserFavorite> _userFavoriteRepository;
 
         private IRepository<Brand> _brandRepository;
+        private IRepository<Article> _articleRepository;
 
         private IRepository<Retailer> _retailerRepository;
         private IRepository<RetailerShop> _retailerShopRepository;
@@ -81,6 +82,26 @@ namespace Gbmono.EF.Infrastructure
         {
             get { return _productTagRepository ?? (_productTagRepository = new Repository<ProductTag>(Context)); }
         }
+
+        public IRepository<UserFavorite> UserFavoriteRepository
+        {
+            get { return _userFavoriteRepository ?? (_userFavoriteRepository = new Repository<UserFavorite>(Context)); }
+
+        }
+        #endregion
+
+        #region brands
+        public IRepository<Brand> BrandRepository
+        {
+            get { return _brandRepository ?? (_brandRepository = new Repository<Brand>(Context)); }
+        }
+        #endregion
+
+        #region articles
+        public IRepository<Article> ArticleRepository
+        {
+            get { return _articleRepository ?? (_articleRepository = new Repository<Article>(Context)); }
+        }
         #endregion
 
         #region retailer & shops
@@ -109,20 +130,5 @@ namespace Gbmono.EF.Infrastructure
         }
 
         #endregion
-
-
-        public IRepository<UserFavorite> UserFavoriteRepository
-        {
-            get { return _userFavoriteRepository ?? (_userFavoriteRepository = new Repository<UserFavorite>(Context)); }
-
-        }
-
-        public IRepository<Brand> BrandRepository
-        {
-            get { return _brandRepository ?? (_brandRepository = new Repository<Brand>(Context)); }
-        }
-
-
-
     }
 }

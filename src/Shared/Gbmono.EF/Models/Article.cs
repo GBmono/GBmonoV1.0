@@ -20,6 +20,10 @@ namespace Gbmono.EF.Models
 
         public string CreatedBy { get; set; }
 
-        public DateTime IsPublished { get; set; }
+        public DateTime ModifiedDate { get; set; }
+
+        public string ModifiedBy { get; set; }
+
+        public bool IsPublished { get; set; }
     }
 }

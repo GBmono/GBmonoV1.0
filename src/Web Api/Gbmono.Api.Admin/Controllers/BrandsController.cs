@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
@@ -22,9 +24,9 @@ namespace Gbmono.Api.Admin.Controllers
         }
         #endregion
 
-        public IEnumerable<Brand> GetAll()
+        public async Task<IEnumerable<Brand>> GetAll()
         {
-            return _repositoryManager.BrandRepository.Table.OrderBy(m => m.Name).ToList();
+            return await _repositoryManager.BrandRepository.Table.OrderBy(m => m.Name).ToListAsync();
         }
 
         [HttpPost]

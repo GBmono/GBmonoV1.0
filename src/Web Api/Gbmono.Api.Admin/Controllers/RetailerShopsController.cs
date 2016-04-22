@@ -37,8 +37,9 @@ namespace Gbmono.Api.Admin.Controllers
 
         public async Task<RetailerShop> GetById(int id)
         {
-            return Task.Run(() => _repositoryManager.RetailerShopRepository
-                .Table.Include(m => m.City.State).Single(m => m.RetailShopId == id)).Result;
+            return await _repositoryManager.RetailerShopRepository
+                                           .Table.Include(m => m.City.State)
+                                           .SingleOrDefaultAsync(m => m.RetailShopId == id);
         }
 
 

@@ -2,7 +2,7 @@
 
 namespace Gbmono.Api.Admin.Models
 {
-    // kendo ui category treeview item model
+    #region kendo ui treeview
     public class KendoTreeViewItem
     {
         public int Id { get; set; } // key 
@@ -15,16 +15,30 @@ namespace Gbmono.Api.Admin.Models
 
         public string LinksTo { get; set; } // url link
     }
+    #endregion
 
+    #region kendo ui charts
     public class KendoChartBase
     {
         public string Category { get; set; }
     }
 
     // kendo ui product count buy category model
-    public class KendoBarChartItem: KendoChartBase
+    public class KendoBarChartItem : KendoChartBase
     {
         public int ProductCount { get; set; }
     }
+    #endregion
+
+    #region kendo ui upload
+    public class KendoUploadImg
+    {
+        public string Name { get; set; }
+
+        public string Type { get; set; }
+
+        public int Size { get; set; }    
+    }
+    #endregion
 
 }
