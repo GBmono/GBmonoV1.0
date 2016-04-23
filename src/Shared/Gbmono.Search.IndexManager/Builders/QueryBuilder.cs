@@ -288,6 +288,55 @@ namespace Gbmono.Search.IndexManager.Builders
             return AddMatch(fieldName, fieldValue, false);
         }
 
+        private QueryBuilder AddMultiMatch<T>(string[] fieldNames, T fieldValue, bool andOp, bool not = false)
+        {
+            if (fieldNames == null || fieldNames.Length == 0 || fieldValue == null)
+            {
+                return this;
+            }
+
+            var mq = new MultiMatchQuery() { Fields = fieldNames, Query = fieldValue.ToString() };
+
+            if (_context == null)
+            {
+                _context = new Context() { mainQuery = new QueryContainer(mq) };
+                if (not)
+                {
+                    _context.mainQuery = !_context.mainQuery;
+                }
+            }
+            else
+            {
+                if (andOp)
+                {
+                    _opList.Add(new AndOp()
+                    {
+                        Query = not ? !new QueryContainer(mq) : new QueryContainer(mq)
+                    });
+
+                }
+                else
+                {
+                    _opList.Add(new OrOp()
+                    {
+                        Query = not ? !new QueryContainer(mq) : new QueryContainer(mq)
+                    });
+                }
+            }
+
+            return this;
+        }
+
+        public QueryBuilder AndMultiMatch<T>(string[] fieldNames, T fieldValue)
+        {
+            return AddMultiMatch(fieldNames, fieldValue, true);
+        }
+
+        public QueryBuilder OrMultiMatch<T>(string[] fieldNames, T fieldValue)
+        {
+            return AddMultiMatch(fieldNames, fieldValue, false);
+        }
+
         public QueryBuilder Not()
         {
             if (_opList.Any())

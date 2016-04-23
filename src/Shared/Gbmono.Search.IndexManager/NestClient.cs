@@ -1,4 +1,5 @@
-﻿using Gbmono.Search.Utils;
+﻿using Gbmono.Search.IndexManager.Documents;
+using Gbmono.Search.Utils;
 using Gbmono.Search.Utils.Extentions;
 using Gbmono.Search.ViewModel;
 using Nest;
@@ -13,13 +14,15 @@ namespace Gbmono.Search.IndexManager
 {
     public class NestClient<T> where T : class
     {
+        #region Variables
         private string _nodeUrl = ConfigHelper.GetSetting(Constants.AppSettingsKeys.ElasticNodeUrlKey, "http://localhost:9200");
-
+               
         private string _indexName = string.Empty;
         private string _typeName = null;
         private string _routeName = null;
         private int _pageSize = 10;
-        private int _pageNumber = 1;
+        private int _pageNumber = 0;
+        private bool _pageNum1stAsZero = false;
 
         private static bool? _httpCompressed;
 
@@ -37,9 +40,12 @@ namespace Gbmono.Search.IndexManager
                 return _httpCompressed.Value;
             }
         }
+        #endregion
 
+        #region Properties
         private Func<FieldsDescriptor<T>, IPromise<Fields>> _excludedFields;
 
+        private IGeoDistanceSort _distanceSort;
         private Func<SortDescriptor<T>, IPromise<IList<ISort>>> _sortSelector;
 
         private ElasticClient _client;
@@ -75,13 +81,15 @@ namespace Gbmono.Search.IndexManager
             }
         }
 
+        #endregion
+
         public NestClient(string urlKey = null)
         {
             urlKey = string.IsNullOrWhiteSpace(urlKey) ? Constants.AppSettingsKeys.ElasticNodeUrlKey : urlKey;
             _nodeUrl = ConfigHelper.GetSetting(urlKey, "http://localhost:9200");
         }
 
-        #region Bilder Pattern
+        #region Builder Pattern
 
         public NestClient<T> SetIndex(string indexName)
         {
@@ -95,6 +103,12 @@ namespace Gbmono.Search.IndexManager
             return this;
         }
 
+        public NestClient<T> SetRoute(string routeName)
+        {
+            _routeName = routeName;
+            return this;
+        }
+
         public NestClient<T> SetPageSize(int pageSize)
         {
             if (pageSize >= 0)
@@ -105,12 +119,45 @@ namespace Gbmono.Search.IndexManager
             return this;
         }
 
+        public NestClient<T> Pager1stAsZero(bool zeroAs1stPage = true)
+        {
+            _pageNum1stAsZero = zeroAs1stPage;
+
+            return this;
+        }
+
         public NestClient<T> SetPageNum(int pageNum)
         {
-            if (pageNum > 0)
+            if (pageNum >= 0)
             {
                 _pageNumber = pageNum;
             }
+            return this;
+        }
+
+        public NestClient<T> SetExcludedFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields)
+        {
+            _excludedFields = fields;
+            return this;
+        }
+
+        public NestClient<T> SetSort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> sortSelector)
+        {
+            _sortSelector = sortSelector;
+
+            return this;
+        }
+
+        public NestClient<T> SetDistanceSort(IGeoDistanceSort distanceSort)
+        {
+            _distanceSort = distanceSort;
+            return this;
+        }
+
+        public NestClient<T> SetSort(string fieldName, bool asc = true)
+        {
+            _sortSelector = s => s.Field(fieldName, asc ? SortOrder.Ascending : SortOrder.Descending);
+
             return this;
         }
         #endregion
@@ -336,6 +383,15 @@ namespace Gbmono.Search.IndexManager
             //var response=Client.CreateIndex(d=> d
             //.Index(_indexName)
             //.AddMapping<Product>
+        }
+
+        public void CreateIndexWithMappingForRetailShop()
+        {
+            var response = Client.CreateIndex(Constants.IndexName.GbmonoV1, i => i.Mappings(m => m.Map<RetailShopDoc>(s => s.AutoMap())));
+            if (response.ServerError != null)
+            {
+                Console.WriteLine(response.ServerError.Error);
+            }
         }
 
         public PagedResponse<T> WrapResult(ISearchResponse<T> response)

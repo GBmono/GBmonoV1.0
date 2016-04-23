@@ -13,9 +13,12 @@ namespace Gbmono.Search.IndexManager.Documents
     {
         public int RetailShopId { get; set; }
         public int RetailerId { get; set; }
+        [String(Analyzer = "ik_max_word", SearchAnalyzer ="ik_max_word")]
         public string Name { get; set; }
+        [String(Analyzer = "ik_max_word", SearchAnalyzer = "ik_max_word")]
         public string DisplayName { get; set; }
         public int CityId { get; set; }
+        [String(Analyzer = "ik_max_word", SearchAnalyzer = "ik_max_word")]
         public string Address { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
