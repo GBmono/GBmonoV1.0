@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Models;
-
+using Gbmono.Search.IndexManager.SearchHelper;
+using Gbmono.Search.IndexManager.Documents;
+using Gbmono.Search.ViewModel;
 
 namespace Gbmono.Api.Controllers
 {
@@ -18,22 +20,32 @@ namespace Gbmono.Api.Controllers
     public class RetailerShopsController : ApiController
     {
         private readonly RepositoryManager _repositoryManager;
-
+        private readonly RetailShopHelper _retailShopHelper;
         #region ctor
         public RetailerShopsController()
         {
             _repositoryManager = new RepositoryManager();
+            _retailShopHelper = new RetailShopHelper();
         }
         #endregion
 
+        //[Route("Retailer/{retailerId}/City/{cityId}")]
+        //public async Task<IEnumerable<RetailerShop>> GetByCity(int retailerId, int cityId)
+        //{
+        //    return await _repositoryManager.RetailerShopRepository
+        //                                   .Table
+        //                                   .Where(m => m.CityId == cityId && m.RetailerId == retailerId)
+        //                                   .OrderBy(m => m.DisplayName)
+        //                                   .ToListAsync();
+        //}
+
         [Route("Retailer/{retailerId}/City/{cityId}")]
-        public async Task<IEnumerable<RetailerShop>> GetByCity(int retailerId, int cityId)
-        {
-            return await _repositoryManager.RetailerShopRepository
-                                           .Table
-                                           .Where(m => m.CityId == cityId && m.RetailerId == retailerId)
-                                           .OrderBy(m => m.DisplayName)
-                                           .ToListAsync();
+        public async Task<PagedResponse<RetailShopDoc>> GetByCity(int retailerId, int cityId)
+        {            
+            return await Task.Run(() =>
+            {
+                return _retailShopHelper.GetRetailShopDocByCity(cityId, retailerId);
+            });            
         }
 
         [Route("Search")]
