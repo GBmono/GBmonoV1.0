@@ -1,6 +1,7 @@
 ﻿using Gbmono.Search.IndexManager.Builders;
 using Gbmono.Search.IndexManager.Documents;
 using Gbmono.Search.Utils;
+using Gbmono.Search.ViewModel;
 using Nest;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,8 @@ namespace Gbmono.Search.IndexManager.SearchHelper
         }
 
         //public RetailShopDoc GetRetailShopDocByCity(int cityId, int? retailerId = null)
-        public ISearchResponse<RetailShopDoc> GetRetailShopDocByCity(int cityId, int? retailerId = null)
+        //public ISearchResponse<RetailShopDoc> GetRetailShopDocByCity(int cityId, int? retailerId = null)
+        public PagedResponse<RetailShopDoc> GetRetailShopDocByCity(int cityId, int? retailerId = null)
         {
             var fb = new FilterBuilder().AndTerm("cityId", cityId);
             if (retailerId.HasValue)
@@ -40,7 +42,7 @@ namespace Gbmono.Search.IndexManager.SearchHelper
             // maybe add size 
             var cityAgg = new AggregationContainerDescriptor<RetailShopDoc>().Terms("agg_city", f => f.Field("cityId"));
             var result = Client.SearchResponse(filter: filter, aggregation: a => cityAgg);
-            return result;
+            return Client.WrapResult(result);                   
         }
     }
 }
