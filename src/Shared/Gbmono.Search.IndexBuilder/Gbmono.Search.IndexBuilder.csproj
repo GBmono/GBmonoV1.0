@@ -91,6 +91,10 @@
       <Project>{778c29d8-194a-48e8-bbe4-24ec07ea6971}</Project>
       <Name>Gbmono.Search.Utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gbmono.Search.ViewModel\Gbmono.Search.ViewModel.csproj">
+      <Project>{a5de2c79-abda-445b-86ee-f49aa788aee2}</Project>
+      <Name>Gbmono.Search.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

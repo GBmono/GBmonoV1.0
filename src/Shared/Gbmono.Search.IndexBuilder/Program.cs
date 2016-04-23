@@ -14,12 +14,14 @@ namespace Gbmono.Search.IndexBuilder
         {
             //retail shop builder
             //var builder = new RetailerShopsBuilder();
+            //builder.CreateIndexMapping();
             //builder.Build();
 
             //retail shop test
             RetailShopTest test = new RetailShopTest();
             //test.GetRetailShopById();
-            test.GetRetailShopByCity();
+            //test.GetRetailShopByCity();
+            test.GetRetailShopByKeyword();
         }
     }
 }

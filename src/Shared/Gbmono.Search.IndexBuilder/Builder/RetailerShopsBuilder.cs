@@ -26,7 +26,10 @@ namespace Gbmono.Search.IndexBuilder.Builder
             }
         }
 
-        
+        public void CreateIndexMapping()
+        {
+            Client.CreateIndexWithMappingForRetailShop();
+        }
 
         public void Build()
         {
