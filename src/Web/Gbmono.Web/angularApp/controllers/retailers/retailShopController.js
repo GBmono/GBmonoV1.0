@@ -129,11 +129,17 @@
 
     // controller body
     function ctrl($routeParams, $sce, pluginService, retailerDataFactory, retailerShopDataFactory) {
-        var vm = this;
+        var vm = this;        
         // retailers
         vm.retailers = [];
         // retail shops
         vm.shops = [];
+        vm.pagedRequest = {
+            //page number
+            pageNumber: 1,
+            //page size
+            pageSize: 10
+        };
         // search model
         vm.searchModel = {};
         // map url
@@ -187,10 +193,11 @@
             // data loading indicator
             pluginService.showDataLoadingIndicator('#shops', { left: "50%", top: "180px;" });
 
+            vm.pagedRequest.data = model;
             // call data facotry
-            retailerShopDataFactory.search(model)
+            retailerShopDataFactory.search(vm.pagedRequest)
                 .success(function (data) {
-                    vm.shops = data;
+                    vm.shops = data.data;
 
                     // close data loading
                     pluginService.closeDataLoadingIndicator('#shops');
