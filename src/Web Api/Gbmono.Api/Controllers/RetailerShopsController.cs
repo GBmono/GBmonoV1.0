@@ -13,6 +13,7 @@ using Gbmono.Api.Models;
 using Gbmono.Search.IndexManager.SearchHelper;
 using Gbmono.Search.IndexManager.Documents;
 using Gbmono.Search.ViewModel;
+using Gbmono.Search.ViewModel.Requests;
 
 namespace Gbmono.Api.Controllers
 {
@@ -48,22 +49,31 @@ namespace Gbmono.Api.Controllers
             });            
         }
 
+        //[Route("Search")]
+        //public async Task<IEnumerable<RetailerShop>> Search([FromBody] RetailerShopSearchCriteria model)
+        //{
+        //    var shops =  _repositoryManager.RetailerShopRepository
+        //                                   .Table
+        //                                   .Where(m => m.RetailerId == model.RetailerId)
+        //                                   .OrderBy(m => m.DisplayName);
+
+        //    // if retailer is not available
+        //    if (!shops.Any())
+        //    {
+        //        return shops;
+        //    }
+
+        //    // search by address or name
+        //    return await shops.Where(m => m.Address.Contains(model.Keyword) || m.Name.Contains(model.Keyword)).ToListAsync();
+        //}
+
         [Route("Search")]
-        public async Task<IEnumerable<RetailerShop>> Search([FromBody] RetailerShopSearchCriteria model)
+        public async Task<PagedResponse<RetailShopDoc>> Search(PagedRequest<RetailShopSearchRequest> req)
         {
-            var shops =  _repositoryManager.RetailerShopRepository
-                                           .Table
-                                           .Where(m => m.RetailerId == model.RetailerId)
-                                           .OrderBy(m => m.DisplayName);
-
-            // if retailer is not available
-            if (!shops.Any())
+            return await Task.Run(() =>
             {
-                return shops;
-            }
-
-            // search by address or name
-            return await shops.Where(m => m.Address.Contains(model.Keyword) || m.Name.Contains(model.Keyword)).ToListAsync();
+                return _retailShopHelper.SearchByKeyword(req);
+            });
         }
     }
 }
