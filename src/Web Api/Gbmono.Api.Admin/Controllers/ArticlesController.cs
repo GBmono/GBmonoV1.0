@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Net.Http.Headers;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -13,6 +16,7 @@ using Newtonsoft.Json;
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Admin.Models;
+
 
 namespace Gbmono.Api.Admin.Controllers
 {
@@ -37,18 +41,71 @@ namespace Gbmono.Api.Admin.Controllers
                                            .Table
                                            .Where(m => m.ArticleId == type &&
                                                        m.ModifiedDate >= from &&
-                                                       m.ModifiedDate < to)
+                                                       m.ModifiedDate <  DbFunctions.AddDays(to, 1))
                                            .OrderByDescending(m => m.ModifiedDate)
                                            .ToListAsync();
         }
 
+        // get by id
+        public async Task<Article> GetById(int id)
+        {
+            return await _repositoryManager.ArticleRepository.GetAsync(id);
+        }
+
+        // create entity
+        [HttpPost]
+        public async Task<IHttpActionResult> Create([FromBody] Article article)
+        {
+            // created date
+            article.CreatedDate = DateTime.Now;
+            article.CreatedBy = User.Identity.Name;
+
+            // modified date
+            article.ModifiedDate = DateTime.Now;
+            article.ModifiedBy = User.Identity.Name;
+
+            // unpublished
+            article.IsPublished = false;
+
+            // create
+            _repositoryManager.ArticleRepository.Create(article);
+            await _repositoryManager.ArticleRepository.SaveAsync();
+
+            // return id of the created article
+            return Ok(article.ArticleId);
+        }
+
+        // update entity
+        [HttpPut]
+        public async Task<IHttpActionResult> Update(int id, [FromBody] Article article)
+        {
+            // update modified date and user
+            article.ModifiedDate = DateTime.Now;
+            article.ModifiedBy = User.Identity.Name;
+
+            // reset publish status to false every time article is updated??
+            article.IsPublished = false;
+
+            _repositoryManager.ArticleRepository.Update(article);
+            await _repositoryManager.ArticleRepository.SaveAsync();
+
+            return Ok();
+        }
+
         // return image list by article id 
-        [Route("BrowseImages")]
+        [Route("BrowseImages/{id}")]
+        [HttpPost]
         public IEnumerable<KendoUploadImg> BrowseFiles(int id)
         {
             // upload file path
             // check if upload folder exists
             var imgDirectory = Path.Combine(_articleImageSaveFolder, id.ToString());
+
+            // create folder if it doesn't exist            
+            if (!Directory.Exists(imgDirectory))
+            {
+                Directory.CreateDirectory(imgDirectory);
+            }
 
             List<KendoUploadImg> images = new List<KendoUploadImg>();
 
@@ -73,6 +130,44 @@ namespace Gbmono.Api.Admin.Controllers
             }
 
             return images;
+        }
+
+        // return thumbnail image
+        [Route("Thumbnails/{path}/{id}")]
+        [AllowAnonymous]
+        public HttpResponseMessage GetImage(string path, int id)
+        {
+            // upload file path
+            // check if upload folder exists
+            var imgDirectory = Path.Combine(_articleImageSaveFolder, id.ToString());
+
+            // create folder if it doesn't exist            
+            if (!Directory.Exists(imgDirectory))
+            {
+                Directory.CreateDirectory(imgDirectory);
+            }
+
+            var filePath = Path.Combine(imgDirectory , path);
+
+            var img = Image.FromFile(filePath); // load oringinal image file from specific path
+
+            MemoryStream ms = new MemoryStream();
+            img.Save(ms, ImageFormat.Jpeg);
+
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            response.Content = new ByteArrayContent(ms.ToArray());
+            ms.Close();
+            ms.Dispose();
+
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpg");
+            response.StatusCode = HttpStatusCode.OK;
+
+            // dispose image
+            img.Dispose();
+
+            return response;
+
         }
 
         // upload image from kendo ui editor image browser

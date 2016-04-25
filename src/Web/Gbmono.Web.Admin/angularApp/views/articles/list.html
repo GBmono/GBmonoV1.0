@@ -1,0 +1,125 @@
+﻿<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a ng-href="#/">主页</a>
+        </li>
+
+        <li>
+            <a href="">新闻管理</a>
+        </li>
+    </ul><!-- /.breadcrumb -->
+</div>
+
+<!-- list -->
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-10 col-xs-12">
+            <div class="widget-box transparent">
+                <div class="widget-header">
+                    <h4 class="widget-title lighter"> 新闻资讯 </h4>
+
+                    <div class="widget-toolbar no-border">
+                        <a href="" data-action="collapse">
+                            <i class="ace-icon fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="widget-body">
+                    <div class="widget-main padding-18 no-padding-left no-padding-right">
+                        <p>
+                            <btn class="btn btn-info" ng-click="openCreateWin();">
+                                <i class="ace-icon fa fa-pencil align-top bigger-125"></i>
+                            </btn>
+
+                        </p>
+                        <div class="row">
+                            <div class="col-md-3 col-xs-3">
+                                <div class="form-group">
+                                    <input kendo-date-picker
+                                           k-format="'yyyy-MM-dd'"
+                                           style="width: 100%;"
+                                           ng-model="filter.from" />
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-3">
+                                <div class="form-group">
+                                    <input kendo-date-picker
+                                           k-format="'yyyy-MM-dd'"
+                                           style="width: 100%;"
+                                           ng-model="filter.to" />
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-3">
+                                <div class="input-group">
+                                    <select class="form-control"
+                                            ng-options="type.value as type.name for type in articleTypes"
+                                            ng-model="filter.type">                                        
+                                    </select>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary form-control"
+                                                ng-click="search()">
+                                            <i class="fa fa-refresh"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div kendo-grid="grid"
+                                     k-options="mainGridOptions">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- create window -->
+    <div kendo-window="winCreate" k-position="{ top: 120, left: '30%' }"
+         k-width="750" k-visible="false" k-modal="true">
+        <div class="form-horizontal" ng-form="formedit">
+            <div class="form-group">
+                <label class="col-md-2 control-label"> 类别 </label>
+                <div class="col-md-8">
+                    <select class="form-control"
+                            ng-options="type.value as type.name for type in articleTypes"
+                            ng-model="newArticle.articleTypeId">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group"
+                 ng-class="{ 'has-error': formedit.title.$dirty && formedit.title.$error.required }">
+                <label class="col-md-2 control-label"> 标题 </label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="title"
+                           ng-model="newArticle.title"
+                           required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-8">
+                    <button type="button" class="btn btn-primary btn-lg"
+                            ng-click="create()"
+                            ng-disabled="formedit.$invalid">
+                        <i class="zmdi zmdi-edit"></i> 创建
+                    </button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default btn-lg"
+                            ng-click="winCreate.close();">
+                        <i class="zmdi zmdi-close"></i> 关闭
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

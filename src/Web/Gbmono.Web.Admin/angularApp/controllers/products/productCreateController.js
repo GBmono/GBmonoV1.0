@@ -162,7 +162,7 @@
         // image upload target url
         $scope.fileUploadUrl = gbmono.api_site_prefix.product_image_api_url + '/Upload/' + productId;
         // image url root
-        $scope.imgUrl = gbmono.img_root_path;
+        $scope.imgUrl = gbmono.img_product_path;
 
         // product images
         $scope.images = [];

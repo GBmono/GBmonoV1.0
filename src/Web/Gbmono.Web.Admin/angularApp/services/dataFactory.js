@@ -125,7 +125,6 @@
 
 })(angular.module('gbmono'));
 
-
 /*
     product data factory
 */
@@ -185,7 +184,6 @@
 
 })(angular.module('gbmono'));
 
-
 /*
     product image factory
 */
@@ -219,7 +217,6 @@
     }
 
 })(angular.module('gbmono'));
-
 
 /*
     brand data factory
@@ -292,7 +289,6 @@
 
 })(angular.module('gbmono'));
 
-
 /*
     retailer shops data factory
 */
@@ -353,7 +349,6 @@
 
 })(angular.module('gbmono'));
 
-
 /*
     location data factory
 */
@@ -381,6 +376,51 @@
             return $http.get(gbmono.api_site_prefix.location_api_url + '/' + stateId + '/Cities');
         }
 
+    }
+
+})(angular.module('gbmono'));
+
+/*
+    article data factory
+*/
+(function (module) {
+    // inject params
+    factory.$inject = ['$http'];
+
+    // create instance
+    module.factory('articleDataFactory', factory);
+
+    // factory implement
+    function factory($http) {
+
+        // return data factory with CRUD calls
+        return {
+            getByDate: getByDate,
+            getById: getById,
+            create: create,
+            update: update,
+            del: del
+        };
+
+        function getByDate(from, to, type) {
+            return $http.get(gbmono.api_site_prefix.article_api_url + '/' + from + '/' + to + '/' + type);
+        }
+
+        function getById(id) {
+            return $http.get(gbmono.api_site_prefix.article_api_url + '/' + id);
+        }
+
+        function create(article) {
+            return $http.post(gbmono.api_site_prefix.article_api_url, article);
+        }
+
+        function update(article) {
+            return $http.put(gbmono.api_site_prefix.article_api_url + '/' + article.articleId, article);
+        }
+
+        function del(id) {
+            return $http.delete(gbmono.api_site_prefix.article_api_url + '/' + id);
+        }
     }
 
 })(angular.module('gbmono'));

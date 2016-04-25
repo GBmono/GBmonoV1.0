@@ -9,18 +9,18 @@
     /* web api app name */
     gbmono.api_app = 'http://localhost/adminapi';
     /* gbmono product images url */
-    gbmono.img_root_path = 'http://localhost/images/products/'
-
+    gbmono.img_product_path = 'http://localhost/images/products/'
+    /* gbmono article images url */
+    gbmono.img_article_path = 'http://localhost/images/articles/'
 
     ////Live
     //gbmono.html_app = 'http://119.9.104.196/admin';
     ///* web api app name */
     //gbmono.api_app = 'http://119.9.104.196/adminapi';
     ///* gbmono product images url */
-    //gbmono.img_root_path = 'http://119.9.104.196/images/products/'
-
-
-    
+    //gbmono.img_product_path = 'http://119.9.104.196/images/products/'
+    ///* gbmono article images url */
+    //gbmono.img_article_path = 'http://119.9.104.196/images/articles/'
 
     /* web api root */
     gbmono.web_api_root = gbmono.api_app + '/api';
@@ -28,8 +28,7 @@
     /* web page app view root path */
     gbmono.app_view_path = '/admin/angularApp/views';
 
-    
-   
+      
     /* web api controller route prefix */
     /* bearer token entry point*/
     gbmono.api_token_url = gbmono.api_app + '/token'; // bearer token end point
@@ -55,7 +54,9 @@
         // retailer api url
         retailer_api_url: gbmono.web_api_root + '/Retailers',
         // location api url
-        location_api_url: gbmono.web_api_root + '/Locations'
+        location_api_url: gbmono.web_api_root + '/Locations',
+        // article api url
+        article_api_url: gbmono.web_api_root + '/Articles'
     };
 
     // notification plain text

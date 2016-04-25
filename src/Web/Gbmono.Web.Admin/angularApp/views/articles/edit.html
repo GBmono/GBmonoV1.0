@@ -1,0 +1,61 @@
+﻿<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a ng-href="#/">主页</a>
+        </li>
+
+        <li>
+            <a href="">新闻管理</a>
+        </li>
+    </ul><!-- /.breadcrumb -->
+</div>
+
+<!-- list -->
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-10 col-xs-12">
+            <div class="widget-box transparent">
+                <div class="widget-header">
+                    <h4 class="widget-title lighter"> 新闻资讯 </h4>
+
+                    <div class="widget-toolbar no-border">
+                        <a href="" data-action="collapse">
+                            <i class="ace-icon fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="widget-body">
+                    <div class="widget-main padding-18 no-padding-left no-padding-right">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-md-10 offset-1">
+                                            <p>标题</p>
+                                            <input class="form-control" type="text" />
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="form-group">  
+                                        <div  class="col-md-11 offset-1">
+                                            <p>内容</p>
+                                            <textarea id="content" style="height:550px;" 
+                                                      ng-model="editPage.pageContent"></textarea>
+                                        </div>                                     
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

@@ -14,7 +14,7 @@ namespace Gbmono.EF.Models
         public string Title { get; set; }
 
         // html code
-        public string Content { get; set; }
+        public string Body { get; set; }
 
         public DateTime CreatedDate { get; set; }
 

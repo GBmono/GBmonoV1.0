@@ -97,6 +97,16 @@
                     controller: 'retailerShopEditController',
                     caseInsensitiveMatch: true
                 })
+                .when('/articles', { // article list page
+                    templateUrl: gbmono.app_view_path + '/articles/list.html',
+                    controller: 'articleListController',
+                    caseInsensitiveMatch: true
+                })
+                .when('/articles/edit/:articleId', { // article edit page
+                    templateUrl: gbmono.app_view_path + '/articles/edit.html',
+                    controller: 'articleEditController',
+                    caseInsensitiveMatch: true
+                })
                 .otherwise({
                     templateUrl: gbmono.app_view_path + '/dashboard/dashboard.html',
                     controller: 'dashboardController',

@@ -49,7 +49,7 @@
         $scope.editProduct = {};
 
         // image url root
-        $scope.imgUrl = gbmono.img_root_path;
+        $scope.imgUrl = gbmono.img_product_path;
         // product images
         $scope.images = [];
         // image type

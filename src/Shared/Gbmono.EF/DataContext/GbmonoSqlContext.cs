@@ -27,7 +27,7 @@ namespace Gbmono.EF.DataContext
             modelBuilder.Configurations.Add(new ProductTagMap());
             modelBuilder.Configurations.Add(new UserFavoriteMap());
 
-            // modelBuilder.Configurations.Add(new ArticleMap());
+            modelBuilder.Configurations.Add(new ArticleMap());
             modelBuilder.Configurations.Add(new BrandMap());
             
             modelBuilder.Configurations.Add(new RetailerShopMap());

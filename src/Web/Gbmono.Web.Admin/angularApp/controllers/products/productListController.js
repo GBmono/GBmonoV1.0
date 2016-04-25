@@ -114,7 +114,7 @@
                     {
                         field: "primaryName", title: "名称",
                         template: "<div class='product-grid-img'" +
-                                        "style='background-image: url(#:gbmono.img_root_path + '/' + data.imgUrl#);'></div>" +
+                                        "style='background-image: url(#:gbmono.img_product_path + '/' + data.imgUrl#);'></div>" +
                                     "<div class='product-grid-name'><a ng-href='\\#/products/edit/#=productId#'>#: primaryName #</a></div>"
                     },
                     { field: "secondaryName", title: "名称2" },
@@ -290,7 +290,7 @@
                     {
                         field: "primaryName", title: "名称",
                         template: "<div class='product-grid-img'" +
-                                        "style='background-image: url(#:gbmono.img_root_path + '/' + data.imgUrl#);'></div>" +
+                                        "style='background-image: url(#:gbmono.img_product_path + '/' + data.imgUrl#);'></div>" +
                                     "<div class='product-grid-name'><a ng-href='\\#/products/edit/#=productId#'>#: primaryName #</a></div>"
                     },
                     { field: "brandName", title: "品牌 (制造商)" },
