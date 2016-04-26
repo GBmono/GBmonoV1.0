@@ -183,6 +183,12 @@
                             },
 
                             thumbnailUrl: gbmono.api_site_prefix.article_api_url + "/Thumbnails/{0}/" + articleId,
+                            //thumbnailUrl: {
+                            //    url: function(){
+                            //        return gbmono.api_site_prefix.article_api_url + "/Thumbnails/{0}/" + articleId;
+                            //    },
+                            //    headers: { Authorization: 'Bearer ' + token }
+                            //},
                             uploadUrl: gbmono.api_site_prefix.article_api_url + "/Upload",
                             imageUrl: gbmono.img_article_path + '/' + articleId + '/{0}'
                             // imageUrl: gbmono.api_site_prefix.article_api_url + "/GetImage?path={0}"
