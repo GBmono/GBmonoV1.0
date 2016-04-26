@@ -169,6 +169,27 @@
                         messages: {
                             dropFilesHere: "Drop files here"
                         },
+                        execute: function (e) {
+                            console.log(e);
+                            if (e.name == "insertimage") {
+                                setTimeout(function () {
+                                    var imagebrowser = $("[data-role=imagebrowser]").data("kendoImageBrowser");
+                                    imagebrowser.upload.bind("upload", function (e) {
+                                        var xhr = e.XMLHttpRequest;
+                                        if (xhr) {
+                                            xhr.addEventListener("readystatechange", function (e) {
+                                                if (xhr.readyState === 1 /* OPENED */) {
+                                                    xhr.setRequestHeader("Authorization", "Bearer " + token);
+                                                }
+                                            });
+                                        }
+                                    });
+                                }, 0);
+                            }
+                        },
+                        upload: function(e){
+                            console.log(e);
+                        },
                         transport: {
                             // read: gbmono.api_site_prefix.article_api_url + "/BrowseImages",
                             //destroy: {
@@ -182,16 +203,28 @@
                                 headers: { Authorization: 'Bearer ' + token } // bear token
                             },
 
-                            thumbnailUrl: gbmono.api_site_prefix.article_api_url + "/Thumbnails/{0}/" + articleId,
-                            //thumbnailUrl: {
-                            //    url: function(){
-                            //        return gbmono.api_site_prefix.article_api_url + "/Thumbnails/{0}/" + articleId;
-                            //    },
-                            //    headers: { Authorization: 'Bearer ' + token }
-                            //},
-                            uploadUrl: gbmono.api_site_prefix.article_api_url + "/Upload",
+                            thumbnailUrl: gbmono.api_site_prefix.article_api_url + "/Thumbnails/{0}/" + articleId,                           
+                            uploadUrl: gbmono.api_site_prefix.article_api_url + "/Upload/" + articleId,
                             imageUrl: gbmono.img_article_path + '/' + articleId + '/{0}'
                             // imageUrl: gbmono.api_site_prefix.article_api_url + "/GetImage?path={0}"
+                        }
+                    },
+                    execute: function (e) {
+                        // attach bearer token into request when uploading image
+                        if (e.name == "insertimage") {
+                            setTimeout(function () {
+                                var imagebrowser = $("[data-role=imagebrowser]").data("kendoImageBrowser");
+                                imagebrowser.upload.bind("upload", function (e) {
+                                    var xhr = e.XMLHttpRequest;
+                                    if (xhr) {
+                                        xhr.addEventListener("readystatechange", function (e) {
+                                            if (xhr.readyState === 1 /* OPENED */) {
+                                                xhr.setRequestHeader("Authorization", "Bearer " + token);
+                                            }
+                                        });
+                                    }
+                                });
+                            }, 0);
                         }
                     }
                 }

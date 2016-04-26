@@ -171,18 +171,19 @@ namespace Gbmono.Api.Admin.Controllers
         }
 
         // upload image from kendo ui editor image browser
-        [Route("Upload")]
-        [HttpPost]
-        public async Task<IHttpActionResult> UploadImage(int id)
+        [Route("Upload/{id}")]
+        [HttpPost]      
+        public async Task<KendoUploadImg> UploadImage(int id)
         {
             // Check if the request contains multipart/form-data.
             if (!Request.Content.IsMimeMultipartContent())
             {
-                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.UnsupportedMediaType)
-                {
-                    RequestMessage = Request,
-                    Content = new StringContent("The request doesn't contain multipart/form-data.")
-                });
+                return null;
+                //return ResponseMessage(new HttpResponseMessage(HttpStatusCode.UnsupportedMediaType)
+                //{
+                //    RequestMessage = Request,
+                //    Content = new StringContent("The request doesn't contain multipart/form-data.")
+                //});
             }
 
             // upload image root path
@@ -197,11 +198,12 @@ namespace Gbmono.Api.Admin.Controllers
 
             if (file == null)
             {
-                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.InternalServerError)
-                {
-                    RequestMessage = Request,
-                    Content = new StringContent("Failed to upload file.")
-                });
+                return null;
+                //return ResponseMessage(new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                //{
+                //    RequestMessage = Request,
+                //    Content = new StringContent("Failed to upload file.")
+                //});
             }
 
             // todo: validate file extension to avoid files of other types being upload
@@ -228,7 +230,14 @@ namespace Gbmono.Api.Admin.Controllers
             // delete the oringinal img file from 
             File.Delete(file.LocalFileName);
 
-            return Ok();
+            var uploadedImg = new KendoUploadImg
+            {
+                Name = newFileName,
+                Size = 1000,
+                Type =  "f"
+            };
+
+            return uploadedImg;
         }
 
         /// <summary>
