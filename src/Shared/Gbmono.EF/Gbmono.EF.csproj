@@ -51,6 +51,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfigs\ArticleMap.cs" />
+    <Compile Include="ModelConfigs\ArticleTagMap.cs" />
     <Compile Include="ModelConfigs\BrandMap.cs" />
     <Compile Include="ModelConfigs\CategoryMap.cs" />
     <Compile Include="ModelConfigs\CityMap.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="ModelConfigs\StateMap.cs" />
     <Compile Include="ModelConfigs\TagMap.cs" />
     <Compile Include="ModelConfigs\UserFavoriteMap.cs" />
+    <Compile Include="Models\ArticleTag.cs" />
     <Compile Include="Models\ArticleType.cs" />
     <Compile Include="Models\Banner.cs" />
     <Compile Include="Models\BannerType.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Models\RetailerShop.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\TagType.cs" />
     <Compile Include="Models\UserFavorite.cs" />
     <Compile Include="Models\WebShop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

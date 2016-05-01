@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Admin.Models;
-
+using Gbmono.Common;
 
 namespace Gbmono.Api.Admin.Controllers
 {
@@ -47,9 +47,26 @@ namespace Gbmono.Api.Admin.Controllers
         }
 
         // get by id
-        public async Task<Article> GetById(int id)
+        public async Task<ArticleBindingModel> GetById(int id)
         {
-            return await _repositoryManager.ArticleRepository.GetAsync(id);
+            var article =  await _repositoryManager.ArticleRepository.GetAsync(id);
+
+            // load article tags
+            var tags = await _repositoryManager.ArticleTagRepository
+                                               .Table
+                                               .Where(m => m.ArticleId == id)
+                                               .ToListAsync();
+
+            // return bindig model model
+            var binding = new ArticleBindingModel
+            {
+                ArticleId = article.ArticleId,
+                Title = article.Title,
+                Content = article.Body,
+                TagIds = tags.Select(m => m.TagId)
+            };
+
+            return binding;
         }
 
         // create entity
@@ -77,9 +94,14 @@ namespace Gbmono.Api.Admin.Controllers
 
         // update entity
         [HttpPut]
-        public async Task<IHttpActionResult> Update(int id, [FromBody] Article article)
+        public async Task<IHttpActionResult> Update(int id, [FromBody] ArticleBindingModel model)
         {
+            // reload article by id
+            var article = _repositoryManager.ArticleRepository.Get(id);
+
             // update modified date and user
+            article.Title = model.Title;
+            article.Body = model.Content;
             article.ModifiedDate = DateTime.Now;
             article.ModifiedBy = User.Identity.Name;
 
@@ -88,6 +110,35 @@ namespace Gbmono.Api.Admin.Controllers
 
             _repositoryManager.ArticleRepository.Update(article);
             await _repositoryManager.ArticleRepository.SaveAsync();
+
+            // update article tag list
+            var currentTags = await _repositoryManager.ArticleTagRepository
+                                                      .Table
+                                                      .Where(m => m.ArticleId == id)
+                                                      .ToListAsync();
+            
+            // remove article tag from db if it's not in the list
+            foreach(var tag in currentTags)
+            {
+                if(!model.TagIds.Any(m => m == tag.TagId))
+                {
+                    _repositoryManager.ArticleTagRepository.Delete(tag);
+                }
+            }
+
+            // create new tag
+            foreach(var tagId in model.TagIds)
+            {
+                // create if it doesn't exist
+                if(!currentTags.Any(m => m.TagId == tagId))
+                {
+                    // create
+                    _repositoryManager.ArticleTagRepository.Create(new ArticleTag { ArticleId = id, TagId = tagId });
+                }
+            }
+
+            // save changes
+            await _repositoryManager.ArticleTagRepository.SaveAsync();
 
             return Ok();
         }
@@ -132,45 +183,8 @@ namespace Gbmono.Api.Admin.Controllers
             return images;
         }
 
-        // return thumbnail image
-        [Route("Thumbnails/{path}/{id}")]
-        [AllowAnonymous]
-        public HttpResponseMessage GetImage(string path, int id)
-        {
-            // upload file path
-            // check if upload folder exists
-            var imgDirectory = Path.Combine(_articleImageSaveFolder, id.ToString());
-
-            // create folder if it doesn't exist            
-            if (!Directory.Exists(imgDirectory))
-            {
-                Directory.CreateDirectory(imgDirectory);
-            }
-
-            var filePath = Path.Combine(imgDirectory , path);
-
-            var img = Image.FromFile(filePath); // load oringinal image file from specific path
-
-            MemoryStream ms = new MemoryStream();
-            img.Save(ms, ImageFormat.Jpeg);
-
-            HttpResponseMessage response = new HttpResponseMessage();
-
-            response.Content = new ByteArrayContent(ms.ToArray());
-            ms.Close();
-            ms.Dispose();
-
-            response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpg");
-            response.StatusCode = HttpStatusCode.OK;
-
-            // dispose image
-            img.Dispose();
-
-            return response;
-
-        }
-
-        // upload image from kendo ui editor image browser
+        // upload image by article id
+        // create thumbnail image
         [Route("Upload/{id}")]
         [HttpPost]      
         public async Task<KendoUploadImg> UploadImage(int id)
@@ -179,11 +193,6 @@ namespace Gbmono.Api.Admin.Controllers
             if (!Request.Content.IsMimeMultipartContent())
             {
                 return null;
-                //return ResponseMessage(new HttpResponseMessage(HttpStatusCode.UnsupportedMediaType)
-                //{
-                //    RequestMessage = Request,
-                //    Content = new StringContent("The request doesn't contain multipart/form-data.")
-                //});
             }
 
             // upload image root path
@@ -199,11 +208,6 @@ namespace Gbmono.Api.Admin.Controllers
             if (file == null)
             {
                 return null;
-                //return ResponseMessage(new HttpResponseMessage(HttpStatusCode.InternalServerError)
-                //{
-                //    RequestMessage = Request,
-                //    Content = new StringContent("Failed to upload file.")
-                //});
             }
 
             // todo: validate file extension to avoid files of other types being upload
@@ -229,6 +233,25 @@ namespace Gbmono.Api.Admin.Controllers
 
             // delete the oringinal img file from 
             File.Delete(file.LocalFileName);
+
+            // create thumbnail image
+            var thumbnailDirectory = Path.Combine(imgDirectory, "thumbnails");
+
+            // create folder if it doesn't exist
+            if (!Directory.Exists(thumbnailDirectory))
+            {
+                Directory.CreateDirectory(thumbnailDirectory);
+            }
+
+            // generate thumnail image then save into the directory
+            ImageHelper.CreateThumbnail(
+                        Path.Combine(imgDirectory, newFileName), // source image
+                        68, // width
+                        68, // height
+                        "image/jpeg", // mime type
+                        Path.Combine(thumbnailDirectory, newFileName), // save path
+                        100 // quality
+                );
 
             var uploadedImg = new KendoUploadImg
             {

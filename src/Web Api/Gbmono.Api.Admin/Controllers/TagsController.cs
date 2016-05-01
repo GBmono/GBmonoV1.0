@@ -14,7 +14,7 @@ using Gbmono.Api.Admin.HttpResults;
 
 namespace Gbmono.Api.Admin.Controllers
 {
-    [RoutePrefix("api/Categories")]
+    [RoutePrefix("api/Tags")]
     public class TagsController : ApiController
     {
         private readonly RepositoryManager _repositoryManager;
@@ -30,6 +30,17 @@ namespace Gbmono.Api.Admin.Controllers
         public async Task<IEnumerable<Tag>> Get()
         {
             return await _repositoryManager.TagRepository.Table.OrderBy(m => m.Name).ToListAsync();
+        }
+
+        // get tags by id
+        [Route("Types/{typeId}")]
+        public async Task<IEnumerable<Tag>> GetByType(int typeId)
+        {
+            return await _repositoryManager.TagRepository
+                                           .Table
+                                           .Where(m => m.TagTypeId == typeId)
+                                           .OrderBy(m => m.Name)
+                                           .ToListAsync();
         }
 
         // get by id

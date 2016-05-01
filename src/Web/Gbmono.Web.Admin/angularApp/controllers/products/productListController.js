@@ -159,7 +159,7 @@
                 dataSource: {
                     transport: {
                         read: function (e) {
-                            tagDataFactory.getAll()
+                            tagDataFactory.getByType(1) // retreive product tags
                                 .success(function (data) {
                                     // kendo selection callback
                                     e.success(data);

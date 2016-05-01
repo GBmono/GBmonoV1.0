@@ -96,6 +96,7 @@
         // return data factory with CRUD calls
         return {
             getAll: getAll,
+            getByType: getByType,
             getById: getById,
             create: create,
             update: update,
@@ -104,6 +105,10 @@
 
         function getAll() {
             return $http.get(gbmono.api_site_prefix.tag_api_url);
+        }
+
+        function getByType(typeId) {
+            return $http.get(gbmono.api_site_prefix.tag_api_url + '/Types/' + typeId);
         }
 
         function getById(id) {

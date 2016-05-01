@@ -45,7 +45,7 @@ namespace Gbmono.EF.Infrastructure
 
         private IRepository<Brand> _brandRepository;
         private IRepository<Article> _articleRepository;
-
+        private IRepository<ArticleTag> _articleTagRepository;
         private IRepository<Retailer> _retailerRepository;
         private IRepository<RetailerShop> _retailerShopRepository;
         private IRepository<City> _cityRepository;
@@ -101,6 +101,11 @@ namespace Gbmono.EF.Infrastructure
         public IRepository<Article> ArticleRepository
         {
             get { return _articleRepository ?? (_articleRepository = new Repository<Article>(Context)); }
+        }
+
+        public IRepository<ArticleTag> ArticleTagRepository
+        {
+            get { return _articleTagRepository ?? (_articleTagRepository = new Repository<ArticleTag>(Context)); }
         }
         #endregion
 

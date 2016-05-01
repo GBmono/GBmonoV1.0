@@ -7,5 +7,7 @@ namespace Gbmono.EF.Models
         public int TagId { get; set; }
 
         public string Name { get; set; }
+
+        public short TagTypeId { get; set; }
     }
 }

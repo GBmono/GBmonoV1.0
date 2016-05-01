@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
-
+using System.Web.Http.ExceptionHandling;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Owin.Security.OAuth;
+
 using Gbmono.Api.Admin.Attributes;
+using Gbmono.Api.Admin.ExceptionHandling;
 
 namespace Gbmono.Api.Admin
 {
@@ -34,7 +36,7 @@ namespace Gbmono.Api.Admin
             // There must be exactly one exception handler. (There is a default one that may be replaced.)
             // To make this sample easier to run in a browser, replace the default exception handler with one that sends
             // back text/plain content for all errors.
-            // config.Services.Replace(typeof(IExceptionHandler), new GenericExceptionHandler());
+            config.Services.Replace(typeof(IExceptionHandler), new GenericExceptionHandler());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

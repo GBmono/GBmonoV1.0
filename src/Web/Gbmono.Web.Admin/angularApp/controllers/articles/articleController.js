@@ -5,6 +5,7 @@
     // inject the controller params
     ctrl.$inject = ['$scope',
                     '$filter',
+                    '$location',
                     'pluginService',
                     'articleDataFactory'];
 
@@ -14,6 +15,7 @@
     // controller body
     function ctrl($scope,
                   $filter,
+                  $location,
                   pluginService,
                   articleDataFactory) {
         // new article
@@ -92,7 +94,8 @@
         function createArticle(article) {
             articleDataFactory.create(article)
                 .success(function (data) {
-                    console.log(data);
+                    // redirect into edit page
+                    $location.path('/articles/edit/' + data);
                 })
                 .error(function (error) {
                     pluginService.notify('error', error);
@@ -109,7 +112,9 @@
     ctrl.$inject = ['$scope',
                     '$routeParams',
                     'utilService',
-                    'articleDataFactory'];
+                    'pluginService',
+                    'articleDataFactory',
+                    'tagDataFactory'];
 
     // create controller
     module.controller('articleEditController', ctrl);
@@ -118,9 +123,20 @@
     function ctrl($scope,
                   $routeParams,
                   utilService,
-                  articleDataFactory) {
+                  pluginService,
+                  articleDataFactory,
+                  tagDataFactory) {
         // retreive id from url
         var articleId = $routeParams.articleId ? parseInt($routeParams.articleId) : 0;
+
+        // edit model
+        $scope.editArticle = {};
+
+        // kendo multiple selection options
+        $scope.selectOptions = {};
+
+        // selected product tag ids
+        $scope.selectedTagIds = [];
 
         // retreive token from local storage
         var token = utilService.getToken();
@@ -128,10 +144,33 @@
         // page init
         init();
 
+        // event handlers
+        $scope.update = function () {
+            // read content from kendo editor
+            var content = $('#content').val();
+
+            // convert into html
+            var html = $('#content').html(content).text();
+            
+            // update html content
+            $scope.editArticle.content = html;
+            
+            // update
+            save($scope.editArticle);
+        };
+
         function init() {
-            initKendoEditor();
+            // kendo editor
+            // initKendoEditor();
+
+            // kendo multi-selection
+            bindTagSelection();
+
+            // load article
+            getArticleById(articleId);
         }
 
+        // init kendo editor
         function initKendoEditor() {
             $("#content").kendoEditor(
                 {
@@ -161,37 +200,15 @@
                         "viewHtml",
                         "formatting",
                         "cleanFormatting",
-                        "fontName",
-                        "fontSize",
+                        //"fontName",
+                        //"fontSize",
                         "print"
                     ],
                     imageBrowser: {
                         messages: {
                             dropFilesHere: "Drop files here"
                         },
-                        execute: function (e) {
-                            console.log(e);
-                            if (e.name == "insertimage") {
-                                setTimeout(function () {
-                                    var imagebrowser = $("[data-role=imagebrowser]").data("kendoImageBrowser");
-                                    imagebrowser.upload.bind("upload", function (e) {
-                                        var xhr = e.XMLHttpRequest;
-                                        if (xhr) {
-                                            xhr.addEventListener("readystatechange", function (e) {
-                                                if (xhr.readyState === 1 /* OPENED */) {
-                                                    xhr.setRequestHeader("Authorization", "Bearer " + token);
-                                                }
-                                            });
-                                        }
-                                    });
-                                }, 0);
-                            }
-                        },
-                        upload: function(e){
-                            console.log(e);
-                        },
                         transport: {
-                            // read: gbmono.api_site_prefix.article_api_url + "/BrowseImages",
                             //destroy: {
                             //    url: metsys.api_file_prefix + "/DeleteImage",
                             //    type: "POST"
@@ -202,10 +219,12 @@
                                 },
                                 headers: { Authorization: 'Bearer ' + token } // bear token
                             },
-
-                            thumbnailUrl: gbmono.api_site_prefix.article_api_url + "/Thumbnails/{0}/" + articleId,                           
+                            thumbnailUrl: function (path, name) {
+                                return gbmono.img_article_path + articleId + '/' + 'thumbnails' + '/' + name;
+                            },
+                            // thumbnailUrl: gbmono.img_article_path + '/thumbnails/' + articleId + '/{0}',
                             uploadUrl: gbmono.api_site_prefix.article_api_url + "/Upload/" + articleId,
-                            imageUrl: gbmono.img_article_path + '/' + articleId + '/{0}'
+                            imageUrl: gbmono.img_article_path +  articleId + '/{0}'
                             // imageUrl: gbmono.api_site_prefix.article_api_url + "/GetImage?path={0}"
                         }
                     },
@@ -230,10 +249,56 @@
                 }
             );
 
-            // var editor = $("#page-content").data("kendoEditor");
+            var editor = $("#content").data("kendoEditor");
 
             // set value for kendo editor with page content
-            // editor.value($scope.editPage.pageContent);
+            editor.value($scope.editArticle.content);
+        }
+
+        // bind article tags into multi-selection
+        function bindTagSelection() {
+            $scope.selectOptions = {
+                placeholder: "Select tags...",
+                dataTextField: "name",
+                dataValueField: "tagId",
+                valuePrimitive: true,
+                autoBind: false,
+                dataSource: {
+                    transport: {
+                        read: function (e) {
+                            tagDataFactory.getByType(2) // retreive product tags
+                                .success(function (data) {
+                                    // kendo selection callback
+                                    e.success(data);
+                                });
+                        }
+                    }
+                }
+            };
+        }
+
+        // get article by id
+        function getArticleById(id) {
+            articleDataFactory.getById(id)
+                .success(function (data) {
+                    // retreive the  data
+                    $scope.editArticle = data;
+
+                    // init kendo ui editor
+                    // retreive html content 
+                    initKendoEditor();
+                });
+        }
+
+        // save article
+        function save(model) {
+            articleDataFactory.update(model)
+                .success(function () {
+                    pluginService.notify('更新成功', 'success');
+                })
+                .error(function (error) {
+                    pluginService.notify(error, 'error')
+                });
         }
     }
 })(angular.module('gbmono'));
