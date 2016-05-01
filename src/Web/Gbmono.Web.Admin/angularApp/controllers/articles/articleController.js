@@ -160,9 +160,6 @@
         };
 
         function init() {
-            // kendo editor
-            // initKendoEditor();
-
             // kendo multi-selection
             bindTagSelection();
 
@@ -210,22 +207,20 @@
                         },
                         transport: {
                             //destroy: {
-                            //    url: metsys.api_file_prefix + "/DeleteImage",
+                            //    url: gbmono.api_site_prefix.article_api_url + "/DeleteImage",
                             //    type: "POST"
                             //},
-                            read: {
+                            read: { // image list browse
                                 url: function () {                     
                                     return gbmono.api_site_prefix.article_api_url + "/BrowseImages/" + articleId;
                                 },
                                 headers: { Authorization: 'Bearer ' + token } // bear token
                             },
-                            thumbnailUrl: function (path, name) {
+                            thumbnailUrl: function (path, name) { // each single thubnail
                                 return gbmono.img_article_path + articleId + '/' + 'thumbnails' + '/' + name;
-                            },
-                            // thumbnailUrl: gbmono.img_article_path + '/thumbnails/' + articleId + '/{0}',
-                            uploadUrl: gbmono.api_site_prefix.article_api_url + "/Upload/" + articleId,
-                            imageUrl: gbmono.img_article_path +  articleId + '/{0}'
-                            // imageUrl: gbmono.api_site_prefix.article_api_url + "/GetImage?path={0}"
+                            },                            
+                            uploadUrl: gbmono.api_site_prefix.article_api_url + "/Upload/" + articleId, // upload image action
+                            imageUrl: gbmono.img_article_path +  articleId + '/{0}'  // selected image url                           
                         }
                     },
                     execute: function (e) {
