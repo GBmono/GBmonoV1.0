@@ -55,6 +55,7 @@
     <Compile Include="Builders\Context.cs" />
     <Compile Include="Builders\FilterBuilder.cs" />
     <Compile Include="Builders\QueryBuilder.cs" />
+    <Compile Include="Documents\BrandDoc.cs" />
     <Compile Include="Documents\ProductDoc.cs" />
     <Compile Include="Documents\RetailShopDoc.cs" />
     <Compile Include="ElasticClientProxy.cs" />

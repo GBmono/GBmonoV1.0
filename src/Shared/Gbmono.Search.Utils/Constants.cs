@@ -22,6 +22,7 @@ namespace Gbmono.Search.Utils
         public class TypeName
         {
             public const string RetailShop = "retailshop";
+            public const string Brand = "brand";
         }
     }
 }

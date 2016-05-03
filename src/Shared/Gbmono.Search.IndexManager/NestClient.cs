@@ -394,6 +394,24 @@ namespace Gbmono.Search.IndexManager
             }
         }
 
+        public void CreateIndexWIthMappingForBrand()
+        {
+            var response = Client.CreateIndex(Constants.IndexName.GbmonoV1, i => i.Mappings(m => m.Map<BrandDoc>(s => s.AutoMap())));
+            if (response.ServerError != null)
+            {
+                Console.WriteLine(response.ServerError.Error);
+            }
+        }
+
+        public void CreateIndexWithAutoMapping()
+        {
+            var response = Client.CreateIndex(_indexName, i => i.Mappings(m => m.Map<T>(s => s.AutoMap())));
+            if (response.ServerError != null)
+            {
+                Console.WriteLine(response.ServerError.Error);
+            }
+        }
+
         public PagedResponse<T> WrapResult(ISearchResponse<T> response)
         {
             var result = new PagedResponse<T>();
