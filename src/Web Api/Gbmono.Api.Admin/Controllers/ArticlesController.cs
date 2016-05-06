@@ -39,7 +39,7 @@ namespace Gbmono.Api.Admin.Controllers
         {
             return await _repositoryManager.ArticleRepository
                                            .Table
-                                           .Where(m => m.ArticleId == type &&
+                                           .Where(m => m.ArticleTypeId == type &&
                                                        m.ModifiedDate >= from &&
                                                        m.ModifiedDate <  DbFunctions.AddDays(to, 1))
                                            .OrderByDescending(m => m.ModifiedDate)
@@ -139,6 +139,42 @@ namespace Gbmono.Api.Admin.Controllers
 
             // save changes
             await _repositoryManager.ArticleTagRepository.SaveAsync();
+
+            return Ok();
+        }
+
+        // delete entity
+        [HttpDelete]
+        public async Task<IHttpActionResult> Delete(int id)
+        {
+            // remove folder with images & thumbnails
+            // get article image directory by id
+            var imgDirectory = Path.Combine(_articleImageSaveFolder, id.ToString());
+
+            if (Directory.Exists(imgDirectory))
+            {
+                // delete
+                Directory.Delete(imgDirectory, true); 
+            }
+
+            // delete tag mappings
+            var articleTags = _repositoryManager.ArticleTagRepository
+                                                .Table
+                                                .Where(m => m.ArticleId == id)
+                                                .ToList();
+
+            foreach(var tag in articleTags)
+            {
+                // delete
+                _repositoryManager.ArticleTagRepository.Delete(tag);
+            }
+
+            await _repositoryManager.ArticleTagRepository.SaveAsync();
+
+            // delete from article entity
+            _repositoryManager.ArticleRepository.Delete(id);
+            // save
+            await _repositoryManager.ArticleRepository.SaveAsync();
 
             return Ok();
         }

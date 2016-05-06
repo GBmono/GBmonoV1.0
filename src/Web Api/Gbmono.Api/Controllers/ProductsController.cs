@@ -108,6 +108,25 @@ namespace Gbmono.Api.Controllers
             return products.Select(m => m.ToSimpleModel()).Skip(startIndex).Take(pageSize.Value);
         }
 
+        // get product list by brand
+        [Route("Brands/{brandId}/{pageIndex:int?}/{pageSize:int?}")]
+        public async Task<IEnumerable<ProductSimpleModel>> GetByBrand(int brandId, int? pageIndex = 1, int? pageSize = 10)
+        {
+            // calculate start index 
+            var startIndex = (pageIndex.Value - 1) * pageSize.Value;
+
+            // second level
+            var products = await _repositoryManager.ProductRepository
+                                                   .Table
+                                                   .Include(m => m.Brand)
+                                                   .Include(m => m.Category)
+                                                   .Include(m => m.Images) // include product images
+                                                   .Where(m => m.BrandId == brandId)
+                                                   .ToListAsync();
+
+            return products.Select(m => m.ToSimpleModel()).Skip(startIndex).Take(pageSize.Value);
+        }
+
         // get ranking product list
         [Route("Ranking")]
         public async Task<IEnumerable<ProductSimpleModel>> GetByRanking()

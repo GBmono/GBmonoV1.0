@@ -108,6 +108,7 @@
             getNewProducts: getNewProducts,
             getByRanking: getByRanking,
             getByCategory: getByCategory,
+            getByBrand: getByBrand,
             getById: getById
         };
 
@@ -119,6 +120,10 @@
             return $http.get(gbmono.api_site_prefix.product_api_url + '/Categories/' + categoryId + '/' + pageIndex + '/' + pageSize);
         }
         
+        function getByBrand(brandId, pageIndex, pageSize) {
+            return $http.get(gbmono.api_site_prefix.product_api_url + '/Brands/' + brandId + '/' + pageIndex + '/' + pageSize);
+        }
+
         function getByRanking() {
             return $http.get(gbmono.api_site_prefix.product_api_url + '/Ranking');
         }

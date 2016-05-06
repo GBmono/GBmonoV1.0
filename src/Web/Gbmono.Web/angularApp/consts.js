@@ -11,9 +11,11 @@
     gbmono.app_view_path = '/gbmono/angularApp/views';
 
     /* gbmono product images url */
-    gbmono.img_root_path = 'http://localhost/images/products/'
+    gbmono.img_root_path = 'http://localhost/images/products/';
     /* gbmono article images url */
-    gbmono.img_article_root_path = 'http://localhost/images/articles/'
+    gbmono.img_article_root_path = 'http://localhost/images/articles/';
+    /* gbmono brand images url */
+    gbmono.img_brand_root_path = 'http://localhost/images/brands/';
 
     /* web api controller route prefix */
     /* bearer token entry point*/

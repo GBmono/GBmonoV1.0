@@ -42,7 +42,7 @@
                 <div class="col-md-3 col-sm-6" style="margin-bottom:15px;"
                      ng-repeat="brand in vm.brands">
                     <p>
-                        <a href="" class="brand" ng-click="vm.showBrandDetail()">{{ brand.name }}</a>
+                        <a href="" class="brand" ng-href="#/brands/{{ brand.brandId }}">{{ brand.name }}</a>
                     </p>
                 </div>
             </div>

@@ -1,0 +1,128 @@
+﻿<div id="all">
+    <div id="content">
+        <div class="container">
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+
+                    <li>
+                        <a ng-href="#/">首页</a>
+                    </li>
+                    <li>品牌商详情</li>
+                </ul>
+                <div class="row">
+                    <div class="box text-center">
+                        <div class="row">
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <h1> {{ vm.brand.name }} </h1>
+                                <p class="text-muted"> {{ vm.brand.displayName }} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="brands">
+                <div class="col-md-9">
+                    <!-- tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#info" role="tab" data-toggle="tab" aria-controls="desc" aria-expanded="true">品牌商介绍</a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#products" role="tab" data-toggle="tab" aria-controls="instruction" aria-expanded="false">商品</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="info" aria-labelledby="desc-tab">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <br />
+                                    <!--<img alt="产品图片" class="img-responsive img-center"
+                                            ng-src="{{ vm.brandImgRoot + '1.jpg' }}">-->
+                                    <blockquote>
+                                        <p>
+                                            <pre> {{ vm.brand.description }} </pre>
+                                        </p>
+                                    </blockquote>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="products" aria-labelledby="instruction-tab">
+                            <br />
+                            <!-- products -->
+                            <div class="row products" id="products">
+                                <div class="col-md-4 col-sm-6"
+                                     ng-repeat="product in vm.products">
+                                    <div class="product">
+                                        <div class="image">
+                                            <a ng-href="#/products/{{product.productId}}">
+                                                <img ng-src="{{ vm.imgRoot + product.imgUrl}}" alt="" class="img-responsive produt-list-img">
+                                            </a>
+                                        </div>
+                                        <!-- /.image -->
+                                        <div class="text">
+                                            <h3><a ng-href="#/products/{{product.productId}}">{{ product.brandName }}</a></h3>
+                                            <a ng-href="#/products/{{product.productId}}" title="{{ product.fullName }}">{{ product.shortName }}</a>
+                                            <p class="price">{{ product.price | currency:"¥"}}</p>
+                                        </div>
+                                        <!-- /.text -->
+                                    </div>
+                                    <!-- /.product -->
+                                </div>
+                            </div>
+
+                            <div class="pages">
+                                <p class="loadMore">
+                                    <button type="button" class="btn btn-primary"
+                                            ng-click="vm.load()"
+                                            ng-disabled="vm.isAllDataLoaded">
+                                        <i class="fa fa-chevron-down"></i> Load more
+                                    </button>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div id="categoryMenu">
+                        <h3>品牌商专区</h3>
+
+                        <ul class="nav nav-pills nav-stacked">
+                            <li>
+                                <a href="">主页</a>
+                            </li>
+                            <li>
+                                <a href="">产品介绍</a>
+                            </li>
+                            <li>
+                                <a href="">专家专栏</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="banner">
+                        <a href="">
+                            <img src="content/img/adv5.jpg" class="img-responsive" />
+                        </a>
+                    </div>
+
+                    <div class="banner">
+                        <a href="">
+                            <img src="content/img/adv1.jpg" class="img-responsive" />
+                        </a>
+                    </div>
+                    <div class="banner">
+                        <a href="">
+                            <img src="content/img/adv2.jpg" class="img-responsive" />
+                        </a>
+                    </div>
+                    <!-- /.banner -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

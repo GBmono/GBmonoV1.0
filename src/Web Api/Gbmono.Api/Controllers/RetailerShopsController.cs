@@ -30,24 +30,24 @@ namespace Gbmono.Api.Controllers
         }
         #endregion
 
-        //[Route("Retailer/{retailerId}/City/{cityId}")]
-        //public async Task<IEnumerable<RetailerShop>> GetByCity(int retailerId, int cityId)
-        //{
-        //    return await _repositoryManager.RetailerShopRepository
-        //                                   .Table
-        //                                   .Where(m => m.CityId == cityId && m.RetailerId == retailerId)
-        //                                   .OrderBy(m => m.DisplayName)
-        //                                   .ToListAsync();
-        //}
-
         [Route("Retailer/{retailerId}/City/{cityId}")]
-        public async Task<PagedResponse<RetailShopDoc>> GetByCity(int retailerId, int cityId)
-        {            
-            return await Task.Run(() =>
-            {
-                return _retailShopHelper.GetRetailShopDocByCity(cityId, retailerId);
-            });            
+        public async Task<IEnumerable<RetailerShop>> GetByCity(int retailerId, int cityId)
+        {
+            return await _repositoryManager.RetailerShopRepository
+                                           .Table
+                                           .Where(m => m.CityId == cityId && m.RetailerId == retailerId)
+                                           .OrderBy(m => m.DisplayName)
+                                           .ToListAsync();
         }
+
+        //[Route("Retailer/{retailerId}/City/{cityId}")]
+        //public async Task<PagedResponse<RetailShopDoc>> GetByCity(int retailerId, int cityId)
+        //{
+        //    return await Task.Run(() =>
+        //    {
+        //        return _retailShopHelper.GetRetailShopDocByCity(cityId, retailerId);
+        //    });
+        //}
 
         //[Route("Search")]
         //public async Task<IEnumerable<RetailerShop>> Search([FromBody] RetailerShopSearchCriteria model)

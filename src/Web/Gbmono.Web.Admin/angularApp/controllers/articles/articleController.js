@@ -32,6 +32,11 @@
         // page init
         init();
 
+        // reload data
+        $scope.reload = function () {
+            $scope.grid.dataSource.read();
+        };
+
         // open create window
         $scope.openCreateWin = function () {
             $scope.winCreate.open();
@@ -40,6 +45,14 @@
         // create new article
         $scope.create = function () {
             createArticle($scope.newArticle);
+        };
+
+        // delete article
+        $scope.delete = function (id) {
+            var r = confirm('Are you sure to delete? ');
+            if (r) {
+                deleteArticle(id);
+            }
         };
 
         function init() {
@@ -85,12 +98,13 @@
                     { field: "modifiedBy", title: "修改用户", width: 150 },
                     {
                         template: '<a class="btn btn-xs btn-info" ng-href="\\#/articles/edit/#=articleId#"><i class="ace-icon fa fa-pencil bigger-120"></i></a>&nbsp;&nbsp;' +
-                                  '<button class="btn btn-xs btn-danger" ng-click=""><i class="ace-icon fa fa-trash-o bigger-120"></i></button>', width: 100
+                                  '<button class="btn btn-xs btn-danger" ng-click="delete(dataItem.articleId)"><i class="ace-icon fa fa-trash-o bigger-120"></i></button>', width: 100
                     }
                 ]
             };
         }
 
+        // create new article with title only
         function createArticle(article) {
             articleDataFactory.create(article)
                 .success(function (data) {
@@ -99,6 +113,18 @@
                 })
                 .error(function (error) {
                     pluginService.notify('error', error);
+                });
+        }
+
+        // delete article
+        function deleteArticle(id) {
+            articleDataFactory.del(id)
+                .success(function () {
+                    // reload data
+                    $scope.grid.dataSource.read();
+                })
+                .error(function (error) {
+                    pluginService.notify(error, 'error')
                 });
         }
     }
