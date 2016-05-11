@@ -52,6 +52,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfigs\ArticleMap.cs" />
     <Compile Include="ModelConfigs\ArticleTagMap.cs" />
+    <Compile Include="ModelConfigs\BrandCollectionMap.cs" />
     <Compile Include="ModelConfigs\BrandMap.cs" />
     <Compile Include="ModelConfigs\CategoryMap.cs" />
     <Compile Include="ModelConfigs\CityMap.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Models\Banner.cs" />
     <Compile Include="Models\BannerType.cs" />
     <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\BrandCollection.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Country.cs" />
