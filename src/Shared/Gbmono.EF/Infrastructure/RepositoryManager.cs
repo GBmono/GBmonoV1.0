@@ -50,12 +50,19 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<RetailerShop> _retailerShopRepository;
         private IRepository<City> _cityRepository;
         private IRepository<State> _stateRepository;
+        private IRepository<BrandCollection> _brandCollectionRepository;
+
+
 
         // public accessors
         #region category & product
         public IRepository<Category> CategoryRepository
         {
             get { return _categoryRepository ?? (_categoryRepository = new Repository<Category>(Context)); }
+        }
+        public IRepository<BrandCollection> BrandCollectionRepository
+        {
+            get { return _brandCollectionRepository ?? (_brandCollectionRepository = new Repository<BrandCollection>(Context)); }
         }
 
         public IRepository<Tag> TagRepository
