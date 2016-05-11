@@ -25,6 +25,8 @@ namespace Gbmono.Utils.ProductDataImporter
         // repo manager
         static readonly RepositoryManager _repositoryManager = new RepositoryManager();
 
+        private static List<string> secondaryNameBlankList = new List<string>() { "-", "" };
+
         // working directory
         //static readonly string WorkingDirectory = Path.GetFullPath(@"..\..") + "\\files\\";
         private static readonly string WorkingDirectory = ConfigurationSettings.AppSettings["sourceFilesFolder"];
@@ -255,6 +257,8 @@ namespace Gbmono.Utils.ProductDataImporter
             _repositoryManager.ProductRepository.Create(newProduct);
             _repositoryManager.ProductRepository.Save();
 
+            //BrandCollectionCheck
+            BrandCollectionCheck(newProduct);
 
 
             //ImportImage
@@ -263,6 +267,34 @@ namespace Gbmono.Utils.ProductDataImporter
 
             return newProduct.ProductId;
         }
+
+
+
+        static void BrandCollectionCheck(Product product)
+        {
+            if (!secondaryNameBlankList.Contains(product.SecondaryName))
+            {
+                var brandCollection =
+                    _repositoryManager.BrandCollectionRepository.Table.FirstOrDefault(
+                        m => m.BrandId == product.BrandId && m.Name == product.PrimaryName);
+                if (brandCollection==null)
+                {
+                    brandCollection=new BrandCollection()
+                    {
+                        BrandId = product.BrandId,
+                        DisplayName = product.PrimaryName,
+                        Name = product.PrimaryName
+                    };
+
+                    _repositoryManager.BrandCollectionRepository.Create(brandCollection);
+                    _repositoryManager.BrandCollectionRepository.Save();
+                }
+
+                //Todo Add ProductId,BrandCollectionid to Mapping
+
+            }
+        }
+
 
         static void ImportImage(WorksheetPart wsPart, int productId, string categoryCodeLevel1, string categoryCodeLevel2, string categoryCodeLevel3)
         {
