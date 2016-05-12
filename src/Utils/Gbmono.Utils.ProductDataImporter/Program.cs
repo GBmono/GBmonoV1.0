@@ -277,9 +277,9 @@ namespace Gbmono.Utils.ProductDataImporter
                 var brandCollection =
                     _repositoryManager.BrandCollectionRepository.Table.FirstOrDefault(
                         m => m.BrandId == product.BrandId && m.Name == product.PrimaryName);
-                if (brandCollection==null)
+                if (brandCollection == null)
                 {
-                    brandCollection=new BrandCollection()
+                    brandCollection = new BrandCollection()
                     {
                         BrandId = product.BrandId,
                         DisplayName = product.PrimaryName,
@@ -290,8 +290,14 @@ namespace Gbmono.Utils.ProductDataImporter
                     _repositoryManager.BrandCollectionRepository.Save();
                 }
 
-                //Todo Add ProductId,BrandCollectionid to Mapping
 
+                _repositoryManager.ProductBrandCollectionRepository.Create(new ProductBrandCollection()
+                {
+                    ProductId = product.ProductId,
+                    BrandCollectionId = brandCollection.BrandCollectionId
+                });
+
+                _repositoryManager.ProductBrandCollectionRepository.Save();
             }
         }
 
