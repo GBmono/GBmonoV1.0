@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builder\BrandBuilder.cs" />
+    <Compile Include="Builder\ProductBuilder.cs" />
     <Compile Include="Builder\RetailerShopsBuilder.cs" />
     <Compile Include="ProductCreator.cs" />
     <Compile Include="Program.cs" />

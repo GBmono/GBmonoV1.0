@@ -23,6 +23,7 @@ namespace Gbmono.Search.Utils
         {
             public const string RetailShop = "retailshop";
             public const string Brand = "brand";
+            public const string Product = "product";
         }
     }
 }
