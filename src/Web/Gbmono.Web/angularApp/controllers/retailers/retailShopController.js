@@ -103,7 +103,7 @@
             // call data facotry
             retailerShopDataFactory.getByCity(retailerId, cityId)
                 .success(function (data) {
-                    vm.shops = data.data;
+                    vm.shops = data;
                     // close data loading
                     pluginService.closeDataLoadingIndicator('#shops');
                 });
