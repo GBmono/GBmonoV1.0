@@ -18,10 +18,15 @@ namespace Gbmono.Search.IndexBuilder
             //builder.Build();
 
             //retail shop test
-            RetailShopTest test = new RetailShopTest();
+            //RetailShopTest test = new RetailShopTest();
             //test.GetRetailShopById();
             //test.GetRetailShopByCity();
-            test.GetRetailShopByKeyword();
+            //test.GetRetailShopByKeyword();
+
+            //product builder
+            var builder = new ProductBuilder();
+            builder.CreateIndexMapping();
+            builder.Build();
         }
     }
 }
