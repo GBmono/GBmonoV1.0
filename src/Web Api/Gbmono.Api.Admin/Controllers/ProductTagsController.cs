@@ -27,5 +27,14 @@ namespace Gbmono.Api.Admin.Controllers
         #endregion
 
 
+        [Route("Product/{id}")]
+        public async Task<List<ProductTag>> GetById(int id)
+        {
+            return await _repositoryManager.ProductTagRepository
+                                           .Table
+                                           .Include(m=>m.Tag)
+                                           .Where(m => m.ProductId == id).ToListAsync();
+        }
+
     }
 }

@@ -153,12 +153,15 @@ namespace Gbmono.Api.Controllers
             // record product view event
             await Task.Run(() => CreateProductEvent(id, (short)ProductEventType.View));
 
+
+
             // return detailed product model
             return await _repositoryManager.ProductRepository
                                            .Table
                                            .Include(m => m.Brand)
                                            .Include(m => m.Images)
                                            .Include(m => m.Category.ParentCategory.ParentCategory)
+                                           .Include(m=>m.Tags)
                                            .SingleOrDefaultAsync(m => m.ProductId == id);
         }
 

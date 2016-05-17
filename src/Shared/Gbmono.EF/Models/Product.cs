@@ -110,6 +110,8 @@ namespace Gbmono.EF.Models
         //// 网店列表
         //public ICollection<WebShop> WebShops { get; set; }
 
+        public ICollection<ProductTag> Tags { get; set; }
+
         // todo:
         // 季节推荐
         // 关联商品

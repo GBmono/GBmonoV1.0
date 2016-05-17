@@ -9,6 +9,7 @@
                     'categoryDataFactory',
                     'productDataFactory',
                     'productImageDataFactory',
+                    'productTagDataFactory',
                     'brandDataFactory',
                     'pluginService',
                     'validator',
@@ -24,6 +25,7 @@
                   categoryDataFactory,
                   productDataFactory,
                   productImageDataFactory,
+                  productTagDataFactory,
                   brandDataFactory,
                   pluginService,
                   validator,
@@ -58,6 +60,11 @@
         $scope.editImage = {};
         // img types
         $scope.imgTypes = [{ name: '商品图片', value: 1 }, { name: '介绍图片', value: 2 }, { name: "使用说明图片", value: 3 }, { name: "追加文案图片", value: 4 }];
+
+        // tags
+        $scope.tags = [];
+
+
         // retreive product id from routeparams
         var productId = $routeParams.id ? parseInt($routeParams.id) : 0;
 
@@ -95,7 +102,7 @@
         $scope.onUpload = function (e) {
             // get httl request obj
             var xhr = e.XMLHttpRequest;
-            
+
             // get token from local storage
             var token = utilService.getToken();
 
@@ -161,12 +168,16 @@
         function init() {
             // image upload target url
             $scope.fileUploadUrl = gbmono.api_site_prefix.product_image_api_url + '/Upload/' + productId + "/" + $scope.selectedImgTypeId;
-            
+
             // get product
             getProduct(productId);
 
             // get product images
             getImages(productId);
+
+
+            // get product images
+            getTags(productId);
         }
 
         function getProduct(id) {
@@ -176,7 +187,7 @@
 
                     // format the activation date json into date format
                     $scope.editProduct.activationDate = $filter('date')($scope.editProduct.activationDate, 'yyyy-MM-dd')
-                    
+
                     // select category by product category
                     // get top categories and auto load second, third level categories
                     getTopCategories();
@@ -186,6 +197,7 @@
 
                     // generate barcode image
                     generateBarcodeImage($scope.editProduct.barCode);
+
                 });
         }
 
@@ -194,6 +206,13 @@
                 .success(function (data) {
                     $scope.images = data;
                 });
+        }
+
+        function getTags(id) {
+            productTagDataFactory.getByProductId(id)
+              .success(function (data) {
+                  $scope.tags = data;
+              });
         }
 
         function getTopCategories() {
@@ -222,7 +241,7 @@
             categoryDataFactory.getByParent(secondCateId)
                 .success(function (data) {
                     $scope.thirdCates = data;
-                    
+
                 });
         }
 
@@ -242,7 +261,7 @@
                     pluginService.notify(error, 'error')
                 });
         }
-        
+
         function updateImageInfo(image) {
             productImageDataFactory.update(image)
                 .success(function () {
