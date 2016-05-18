@@ -102,6 +102,7 @@ namespace Gbmono.Api.Admin.Controllers
             return await _repositoryManager.ProductRepository
                                            .Table
                                            .Include(m => m.Category.ParentCategory)
+                                           .Include(m=>m.BrandCollection)
                                            .SingleOrDefaultAsync(m => m.ProductId == id);
         }
 

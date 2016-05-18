@@ -115,9 +115,20 @@
 
                                         </div>
                                     </div>
-
-
                                     <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right"> 系列</label>
+                                        <div class="col-md-6 col-sm-9">
+                                            <select class="col-xs-12"
+                                                    ng-options="brandcollection.brandcollectionId as brandcollection.displayName for brandcollection in brandcollections"
+                                                    ng-model="editProduct.brandcollectionId==null?'':editProduct.brandcollectionId">
+                                                <option value="" >空</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+                                <div class="form-group">
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 商品名称1 </label>
 
                                         <div class="col-md-6 col-sm-9">

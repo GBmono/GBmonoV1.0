@@ -56,7 +56,9 @@
         // location api url
         location_api_url: gbmono.web_api_root + '/Locations',
         // article api url
-        article_api_url: gbmono.web_api_root + '/Articles'
+        article_api_url: gbmono.web_api_root + '/Articles',
+        // brand collection api url
+        brand_collection_api_url: gbmono.web_api_root + '/BrandCollections'
     };
 
     // notification plain text

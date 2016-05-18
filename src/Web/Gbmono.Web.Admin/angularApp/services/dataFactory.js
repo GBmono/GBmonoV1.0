@@ -190,7 +190,7 @@
 })(angular.module('gbmono'));
 
 /*
-    product data factory
+    productTag data factory
 */
 (function (module) {
     // inject params
@@ -210,6 +210,31 @@
             return $http.get(gbmono.api_site_prefix.product_tag_api_url + "/Product/" + id);
         }
     
+    }
+
+})(angular.module('gbmono'));
+
+/*
+    brand collection factory
+*/
+(function (module) {
+    // inject params
+    factory.$inject = ['$http'];
+
+    // create instance
+    module.factory('brandCollectionDataFactory', factory);
+
+    // factory implement
+    function factory($http) {
+        // return data factory with CRUD calls
+        return {
+            getByBrandId: getByBrandId
+        };
+
+        function getByBrandId(id) {
+            return $http.get(gbmono.api_site_prefix.brand_collection_api_url + "/Brand/" + id);
+        }
+
     }
 
 })(angular.module('gbmono'));

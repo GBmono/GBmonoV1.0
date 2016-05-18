@@ -11,6 +11,7 @@
                     'productImageDataFactory',
                     'productTagDataFactory',
                     'brandDataFactory',
+                    'brandCollectionDataFactory',
                     'pluginService',
                     'validator',
                     'utilService'];
@@ -27,6 +28,7 @@
                   productImageDataFactory,
                   productTagDataFactory,
                   brandDataFactory,
+                  brandCollectionDataFactory,
                   pluginService,
                   validator,
                   utilService) {
@@ -49,6 +51,9 @@
 
         // edit product model
         $scope.editProduct = {};
+
+        // brandcollection collection
+        $scope.brandcollections = [];
 
         // image url root
         $scope.imgUrl = gbmono.img_product_path;
@@ -198,7 +203,16 @@
                     // generate barcode image
                     generateBarcodeImage($scope.editProduct.barCode);
 
+                    // get brand collections
+                    getBrandCollections(data.brandId);
                 });
+        }
+
+        function getBrandCollections(id) {
+            brandCollectionDataFactory.getByBrandId(id)
+                .success(function (data) {
+                    $scope.brandcollections = data;
+                });;
         }
 
         function getImages(id) {
