@@ -23,8 +23,13 @@ namespace Gbmono.Search.IndexBuilder.Builder
         {
             get
             {
-                return new NestClient<ProductDoc>().SetIndex(Constants.IndexName.GbmonoV1).SetType(Constants.TypeName.Product);
+                return new NestClient<ProductDoc>().SetIndex(Constants.IndexName.GbmonoV1_product).SetType(Constants.TypeName.Product);
             }
+        }
+
+        public void DeleteIndex()
+        {
+            Client.DeleteIndex();
         }
 
         public void CreateIndexMapping()
@@ -51,7 +56,39 @@ namespace Gbmono.Search.IndexBuilder.Builder
                     var doc = new ProductDoc
                     {
                         ProductId = product.ProductId,
-                        Categories = GetParentCategories(product.CategoryId)
+                        Categories = GetParentCategories(product.CategoryId),
+                        BrandId = product.BrandId,
+                        //BrandCollectionId = product.BrandCollectionId.HasValue ? product.BrandCollectionId.Value : 0,
+                        BrandCollectionId=product.BrandCollectionId,
+                        ProductCode = product.ProductCode,
+                        Barcode = product.BarCode,
+                        Name = product.SecondaryName,
+                        PromotionCode = product.PromotionCode,
+                        CuponCode = product.CuponCode,
+                        TopicCode = product.TopicCode,
+                        RankingCode = product.RankingCode,
+                        Capacity = product.Capacity,
+                        Weight = product.Weight,
+                        Flavor = product.Flavor,
+                        //Width = product.Width.HasValue ? product.Width.Value : 0,
+                        //Height = product.Height.HasValue ? product.Height.Value:0,
+                        //Depth=product.Depth.HasValue?product.Depth.Value:0,
+                        Width=product.Width,
+                        Height=product.Height,
+                        Depth=product.Depth,
+                        Price=product.Price,
+                        Spring=product.Spring,
+                        Summer=product.Summer,
+                        Autumn=product.Autumn,
+                        Winter=product.Winter,
+                        Discount=product.Discount,
+                        Description=product.Description,
+                        Instruction=product.Instruction,
+                        ExtraInformation=product.ExtraInformation,
+                        UpdatedDate=product.UpdatedDate,
+                        ActivationDate=product.ActivationDate,
+                        ExpiryDate=product.ExpiryDate,
+                        Tags=string.Join(" ",product.Tags.Select(s=>s.TagId).ToList())
                     };
                 }
             }
@@ -84,7 +121,9 @@ namespace Gbmono.Search.IndexBuilder.Builder
                     categoryList.Add(parentCategory.ParentId.Value);
                 }
             }
-            return categoryList.ToString();
+            return string.Join(" ", categoryList.ToString());
         }
+
+        private string GetProductTags()
     }
 }

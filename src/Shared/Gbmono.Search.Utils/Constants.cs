@@ -17,6 +17,7 @@ namespace Gbmono.Search.Utils
         public class IndexName
         {
             public const string GbmonoV1 = "gbmono_v1";
+            public const string GbmonoV1_product = "gbmono_v1_product";
         }
 
         public class TypeName
