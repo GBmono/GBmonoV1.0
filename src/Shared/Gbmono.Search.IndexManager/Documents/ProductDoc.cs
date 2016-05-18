@@ -16,7 +16,7 @@ namespace Gbmono.Search.IndexManager.Documents
         public int BrandId { get; set; }
         public string ProductCode { get; set; }
         public string Barcode { get; set; }
-        public int BrandCollectionId { get; set; }
+        public int? BrandCollectionId { get; set; }
         [String(Analyzer ="ik_max_word",SearchAnalyzer ="ik_max_word")]
         public string Name { get; set; }
         public string PromotionCode { get; set; }
@@ -40,7 +40,7 @@ namespace Gbmono.Search.IndexManager.Documents
         public string ExtraInformation { get; set; }
         public DateTime UpdatedDate { get; set; }
         public DateTime ActivationDate { get; set; }
-        public DateTime ExpiryDate { get; set; }
+        public DateTime? ExpiryDate { get; set; }
         public string Tags { get; set; }
     }
 }
