@@ -40,7 +40,6 @@ namespace Gbmono.EF.DataContext
 
             modelBuilder.Configurations.Add(new BrandCollectionMap());
 
-            modelBuilder.Configurations.Add(new ProductBrandCollectionMap());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -27,7 +27,7 @@ namespace Gbmono.EF.Models
 
         // 名称 (系列名称)
         public string PrimaryName { get; set; }
-        
+
         // 补充名称
         public string SecondaryName { get; set; }
 
@@ -76,7 +76,7 @@ namespace Gbmono.EF.Models
         public bool? Autumn { get; set; }
 
         public bool? Winter { get; set; }
-        
+
         // 入库日期
         public DateTime CreatedDate { get; set; }
 
@@ -112,6 +112,10 @@ namespace Gbmono.EF.Models
 
         public ICollection<ProductTag> Tags { get; set; }
 
+
+        public int? BrandCollectionId { set; get; }
+
+        public BrandCollection BrandCollection { set; get; }
         // todo:
         // 季节推荐
         // 关联商品

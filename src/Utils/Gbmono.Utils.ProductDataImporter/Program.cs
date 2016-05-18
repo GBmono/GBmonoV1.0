@@ -291,13 +291,10 @@ namespace Gbmono.Utils.ProductDataImporter
                 }
 
 
-                _repositoryManager.ProductBrandCollectionRepository.Create(new ProductBrandCollection()
-                {
-                    ProductId = product.ProductId,
-                    BrandCollectionId = brandCollection.BrandCollectionId
-                });
+                var productInstance = _repositoryManager.ProductRepository.Get(product.ProductId);
+                productInstance.BrandCollectionId = brandCollection.BrandCollectionId;
+                _repositoryManager.ProductRepository.Save();
 
-                _repositoryManager.ProductBrandCollectionRepository.Save();
             }
         }
 

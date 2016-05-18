@@ -177,7 +177,7 @@
 
 
             // get product images
-            getTags(productId);
+            //getTags(productId);
         }
 
         function getProduct(id) {

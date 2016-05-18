@@ -51,7 +51,7 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<City> _cityRepository;
         private IRepository<State> _stateRepository;
         private IRepository<BrandCollection> _brandCollectionRepository;
-        private IRepository<ProductBrandCollection> _productBrandCollectionRepository;
+        
 
 
 
@@ -66,10 +66,6 @@ namespace Gbmono.EF.Infrastructure
             get { return _brandCollectionRepository ?? (_brandCollectionRepository = new Repository<BrandCollection>(Context)); }
         }
 
-        public IRepository<ProductBrandCollection> ProductBrandCollectionRepository
-        {
-            get { return _productBrandCollectionRepository ?? (_productBrandCollectionRepository = new Repository<ProductBrandCollection>(Context)); }
-        }
 
         public IRepository<Tag> TagRepository
         {
