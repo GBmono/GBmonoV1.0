@@ -123,7 +123,5 @@ namespace Gbmono.Search.IndexBuilder.Builder
             }
             return string.Join(" ", categoryList.ToString());
         }
-
-        private string GetProductTags()
     }
 }
