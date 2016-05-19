@@ -167,6 +167,11 @@
             }
         }
 
+        // changed brand
+        $scope.brandChanged = function() {
+            getBrandCollections($scope.editProduct.brandId);
+        }
+
         // page init
         init();
 
@@ -189,7 +194,7 @@
             productDataFactory.getById(id)
                 .success(function (data) {
                     $scope.editProduct = data;
-
+                    debugger;
                     // format the activation date json into date format
                     $scope.editProduct.activationDate = $filter('date')($scope.editProduct.activationDate, 'yyyy-MM-dd')
 

@@ -31,12 +31,12 @@ namespace Gbmono.Api.Admin.Controllers
         [Route("Categories/{categoryId}")]
         public async Task<IEnumerable<ProductSimpleModel>> GetByCategory(int categoryId)
         {
-            var products =  await _repositoryManager.ProductRepository
+            var products = await _repositoryManager.ProductRepository
                                      .Table
                                      .Include(m => m.Brand)
                                      // .Include(m => m.Country)
                                      .Include(m => m.Images)
-                                     .Where(m => m.CategoryId == categoryId)                                     
+                                     .Where(m => m.CategoryId == categoryId)
                                      .ToListAsync();
 
             return products.Select(m => m.ToSimpleModel());
@@ -72,7 +72,7 @@ namespace Gbmono.Api.Admin.Controllers
                                             .ToListAsync();
 
                 // convert into binding model
-                return newProducts.Select(m => m.ToSimpleModel());                                        
+                return newProducts.Select(m => m.ToSimpleModel());
             }
 
             // full product code
@@ -82,7 +82,7 @@ namespace Gbmono.Api.Admin.Controllers
             var thirdCateCode = model.FullProductCode.Substring(4, 2);
             var productCode = model.FullProductCode.Substring(6, 4);
 
-            var productsByCode =  await _repositoryManager.ProductRepository
+            var productsByCode = await _repositoryManager.ProductRepository
                                             .Table
                                             .Include(m => m.Brand)
                                             .Include(m => m.Images)
@@ -102,7 +102,7 @@ namespace Gbmono.Api.Admin.Controllers
             return await _repositoryManager.ProductRepository
                                            .Table
                                            .Include(m => m.Category.ParentCategory)
-                                           .Include(m=>m.BrandCollection)
+                                           .Include(m => m.BrandCollection)
                                            .SingleOrDefaultAsync(m => m.ProductId == id);
         }
 
@@ -122,7 +122,7 @@ namespace Gbmono.Api.Admin.Controllers
         }
 
         // return product count by top category
-        [Route("CountByTopCategory")]        
+        [Route("CountByTopCategory")]
         public async Task<IEnumerable<KendoBarChartItem>> GetProductCount()
         {
             // get top categories
@@ -136,7 +136,7 @@ namespace Gbmono.Api.Admin.Controllers
             var resultset = new List<KendoBarChartItem>();
 
             // count the product by each top category
-            foreach(var cate in categories)
+            foreach (var cate in categories)
             {
                 var productCount = _repositoryManager.ProductRepository
                                                      .Table
@@ -169,6 +169,12 @@ namespace Gbmono.Api.Admin.Controllers
         [HttpPut]
         public IHttpActionResult Update(int id, [FromBody]Product product)
         {
+            if (product.BrandCollectionId != null)
+            {
+                var brandcollection = _repositoryManager.BrandCollectionRepository.Get((int)product.BrandCollectionId);
+                product.BrandCollection = brandcollection;
+            }
+
             product.UpdatedDate = DateTime.Now;
 
             _repositoryManager.ProductRepository.Update(product);

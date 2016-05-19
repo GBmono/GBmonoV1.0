@@ -111,7 +111,8 @@
                                         <div class="col-md-6 col-sm-9">
                                             <select class="col-xs-12"
                                                     ng-options="brand.brandId as brand.name for brand in brands"
-                                                    ng-model="editProduct.brandId"></select>
+                                                    ng-model="editProduct.brandId"
+                                                    ng-change="brandChanged()"></select>
 
                                         </div>
                                     </div>
@@ -119,9 +120,9 @@
                                         <label class="col-sm-3 control-label no-padding-right"> 系列</label>
                                         <div class="col-md-6 col-sm-9">
                                             <select class="col-xs-12"
-                                                    ng-options="brandcollection.brandcollectionId as brandcollection.displayName for brandcollection in brandcollections"
-                                                    ng-model="editProduct.brandcollectionId==null?'':editProduct.brandcollectionId">
-                                                <option value="" >空</option>
+                                                    ng-options="brandcollection.brandCollectionId as brandcollection.displayName for brandcollection in brandcollections"
+                                                    ng-model="editProduct.brandCollectionId">
+                                                <option value="">空</option>
                                             </select>
                                         </div>
                                     </div>
