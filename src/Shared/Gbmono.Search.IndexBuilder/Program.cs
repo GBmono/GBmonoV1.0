@@ -26,6 +26,7 @@ namespace Gbmono.Search.IndexBuilder
             //product builder
             var builder = new ProductBuilder();
             builder.CreateIndexMapping();
+            builder.DeleteIndex();
             builder.Build();
         }
     }
