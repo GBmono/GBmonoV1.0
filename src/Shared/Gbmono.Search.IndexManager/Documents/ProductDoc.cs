@@ -35,8 +35,11 @@ namespace Gbmono.Search.IndexManager.Documents
         public bool? Autumn { get; set; }
         public bool? Winter { get; set; }
         public double? Discount { get; set; }
+        [String(Analyzer = "ik_max_word", SearchAnalyzer = "ik_max_word")]
         public string Description { get; set; }
+        [String(Analyzer = "ik_max_word", SearchAnalyzer = "ik_max_word")]
         public string Instruction { get; set; }
+        [String(Analyzer = "ik_max_word", SearchAnalyzer = "ik_max_word")]
         public string ExtraInformation { get; set; }
         public DateTime UpdatedDate { get; set; }
         public DateTime ActivationDate { get; set; }
