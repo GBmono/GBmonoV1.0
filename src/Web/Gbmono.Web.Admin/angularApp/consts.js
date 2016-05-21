@@ -9,18 +9,18 @@
     /* web api app name */
     gbmono.api_app = 'http://localhost/adminapi';
     /* gbmono product images url */
-    gbmono.img_product_path = 'http://localhost/images/products/'
+    gbmono.img_product_path = 'http://localhost/images/products/';
     /* gbmono article images url */
-    gbmono.img_article_path = 'http://localhost/images/articles/'
+    gbmono.img_article_path = 'http://localhost/images/articles/';
 
     ////Live
     //gbmono.html_app = 'http://119.9.104.196/admin';
     ///* web api app name */
     //gbmono.api_app = 'http://119.9.104.196/adminapi';
     ///* gbmono product images url */
-    //gbmono.img_product_path = 'http://119.9.104.196/images/products/'
+    //gbmono.img_product_path = 'http://119.9.104.196/images/products/';
     ///* gbmono article images url */
-    //gbmono.img_article_path = 'http://119.9.104.196/images/articles/'
+    //gbmono.img_article_path = 'http://119.9.104.196/images/articles/';
 
     /* web api root */
     gbmono.web_api_root = gbmono.api_app + '/api';
