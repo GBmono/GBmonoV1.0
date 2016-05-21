@@ -5,6 +5,7 @@ using Gbmono.Search.IndexManager.Documents;
 using Gbmono.Search.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -123,6 +124,22 @@ namespace Gbmono.Search.IndexBuilder.Builder
                     doc.ActivationDate = product.ActivationDate;
                     doc.ExpiryDate = product.ExpiryDate;
                     doc.Tags = string.Join(" ", GetProductTags(product.ProductId));
+                    if (product.Images != null && product.Images.Count > 0)
+                    {
+                        doc.Images = new List<ProductImageDoc>();
+                    }
+                    foreach (var image in product.Images)
+                    {
+                        var imageDoc = new ProductImageDoc();
+                        imageDoc.ProductImageId = image.ProductImageId;
+                        imageDoc.Name = image.Name;
+                        imageDoc.FileName = image.FileName;
+                        imageDoc.ProductId = image.ProductId;
+                        imageDoc.IsPrimary = image.IsPrimary;
+                        imageDoc.IsThumbnail = image.IsThumbnail;
+                        imageDoc.ProductImageTypeId = image.ProductImageTypeId;
+                        doc.Images.Add(imageDoc);
+                    }
                     docList.Add(doc);
                 }
 
@@ -163,7 +180,7 @@ namespace Gbmono.Search.IndexBuilder.Builder
 
         private List<Product> GetChunkProduct(int index, int size)
         {
-            return _repositoryManager.ProductRepository.Table.Where(m => m.ProductId >= index && m.ProductId < index + size).ToList();
+            return _repositoryManager.ProductRepository.Table.Include(m=>m.Images).Where(m => m.ProductId >= index && m.ProductId < index + size).ToList();
         }
 
         private List<int> GetProductTags(int productId)

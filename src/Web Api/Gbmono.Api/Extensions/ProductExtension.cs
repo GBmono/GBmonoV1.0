@@ -5,6 +5,7 @@ using System.Web;
 
 using Gbmono.Api.Models;
 using Gbmono.EF.Models;
+using Gbmono.Search.IndexManager.Documents;
 
 namespace Gbmono.Api.Extensions
 {
@@ -27,10 +28,45 @@ namespace Gbmono.Api.Extensions
             };
         }
 
+        public static ProductSimpleModel ToSimpleModel(this ProductDoc doc)
+        {
+            return new ProductSimpleModel
+            {
+                ProductId = doc.ProductId,
+                PrimaryName = string.Empty,
+                SecondaryName = doc.Name,
+                BrandId = doc.BrandId,
+                BrandName = string.Empty,
+                Price = doc.Price,
+                Discount = doc.Discount,
+                ImgUrl = GetPrimaryImgUrl(doc.Images)
+            };
+        }
+
         private static string GetPrimaryImgUrl(IEnumerable<ProductImage> images)
         {
             // no images
             if(images == null)
+            {
+                // return no-pic image
+                return _noImage;
+            }
+
+            // no product images
+            var productImg = images.FirstOrDefault(s => s.ProductImageTypeId == (short)ProductImageType.Product);
+            if (productImg == null)
+            {
+                return _noImage;
+            }
+
+            // return product img url
+            return productImg.FileName;
+        }
+
+        private static string GetPrimaryImgUrl(IEnumerable<ProductImageDoc> images)
+        {
+            // no images
+            if (images == null)
             {
                 // return no-pic image
                 return _noImage;

@@ -45,5 +45,17 @@ namespace Gbmono.Search.IndexManager.Documents
         public DateTime ActivationDate { get; set; }
         public DateTime? ExpiryDate { get; set; }
         public string Tags { get; set; }
+        public List<ProductImageDoc> Images { get; set; }
+    }
+
+    public class ProductImageDoc
+    {
+        public int ProductImageId { get; set; }
+        public string Name { get; set; }
+        public string FileName { get; set; }
+        public int ProductId { get; set; }
+        public bool? IsPrimary { get; set; }
+        public bool? IsThumbnail { get; set; }
+        public short? ProductImageTypeId { get; set; }
     }
 }

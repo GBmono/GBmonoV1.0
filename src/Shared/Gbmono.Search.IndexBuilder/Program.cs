@@ -24,10 +24,10 @@ namespace Gbmono.Search.IndexBuilder
             //test.GetRetailShopByKeyword();
 
             //product builder
-            //var builder = new ProductBuilder();
-            //builder.DeleteIndex();
-            //builder.CreateIndexMapping();            
-            //builder.Build();
+            var builder = new ProductBuilder();
+            builder.DeleteIndex();
+            builder.CreateIndexMapping();
+            builder.Build();
 
             //product test
             var test = new ProductTest();
