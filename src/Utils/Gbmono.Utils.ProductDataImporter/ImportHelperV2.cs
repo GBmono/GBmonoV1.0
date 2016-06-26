@@ -82,6 +82,7 @@ namespace Gbmono.Utils.ProductDataImporter
             // 大分类CD
             var categoryCodeLevel1 = GetCellPathValue(wbPart, wsPart, "P9").RemoveEmptyOrWrapCharacters().ToDBC();
             var categoryCodeLevel1Name = GetCellPathValue(wbPart, wsPart, "T9").RemoveEmptyOrWrapCharacters().ToDBC();
+
             // 陈列标准CD
             var categoryCodeLevel2 = GetCellPathValue(wbPart, wsPart, "Z9").RemoveEmptyOrWrapCharacters().ToDBC();
             var categoryCodeLevel2Name = GetCellPathValue(wbPart, wsPart, "AD9").RemoveEmptyOrWrapCharacters().ToDBC();
@@ -282,6 +283,10 @@ namespace Gbmono.Utils.ProductDataImporter
                                 value = "TRUE";
                                 break;
                         }
+                        break;
+                    case CellValues.String:
+                        if (theCell.CellValue != null)
+                            value = theCell.CellValue.InnerText;
                         break;
                 }
             }
