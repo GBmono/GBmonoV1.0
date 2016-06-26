@@ -117,13 +117,13 @@ namespace Gbmono.Utils.ProductDataImporter
 
             // 激活日期
             var activationDateText = GetCellPathValue(wbPart, wsPart, "H44").RemoveEmptyOrWrapCharacters().ToDBC();
-            DateTime activationDate= activationDateText.From1900();
-         
+            DateTime activationDate = activationDateText.From1900();
+
 
             //下架时间
             var expiryDateText = GetCellPathValue(wbPart, wsPart, "H45").RemoveEmptyOrWrapCharacters().ToDBC();
             DateTime expiryDate = expiryDateText.From1900();
-          
+
             //商品名1
             var primaryName = GetCellPathValue(wbPart, wsPart, "N6").RemoveEmptyOrWrapCharacters();
             //商品名2
@@ -165,6 +165,19 @@ namespace Gbmono.Utils.ProductDataImporter
             var winterData = GetCellPathValue(wbPart, wsPart, "Y62").Trim();
             bool? winter = GetSeason(winterData);
 
+            //W
+            var wData = GetCellPathValue(wbPart, wsPart, "G58").RemoveEmptyOrWrapCharacters().ToDBC();
+            double wValue;
+            Double.TryParse(wData, out wValue);
+            //H
+            var hData = GetCellPathValue(wbPart, wsPart, "M58").RemoveEmptyOrWrapCharacters().ToDBC();
+            double hValue;
+            Double.TryParse(hData, out hValue);
+            //D
+            var dData = GetCellPathValue(wbPart, wsPart, "J58").RemoveEmptyOrWrapCharacters().ToDBC();
+            double dValue;
+            Double.TryParse(dData, out dValue);
+
             // new product instance
             var newProduct = new Product
             {
@@ -175,6 +188,9 @@ namespace Gbmono.Utils.ProductDataImporter
                 BarCode = barCode,
                 Flavor = flavor,
                 Weight = weight,
+                Width = wValue,
+                Depth = hValue,
+                Height = dValue,
                 ProductCode = productCode,
                 PromotionCode = promotionCode,
                 CuponCode = cuponCode,
@@ -361,7 +377,7 @@ namespace Gbmono.Utils.ProductDataImporter
                 categoryCodeLevel3);
 
             return finalPath;
-        }   
+        }
 
 
         static int GetBrandId(string brandName)
@@ -454,7 +470,7 @@ namespace Gbmono.Utils.ProductDataImporter
         }
 
 
-        
+
     }
 
     //Will move to unify util project

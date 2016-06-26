@@ -29,7 +29,7 @@ namespace Gbmono.Utils.ProductDataImporter
 
         // working directory
         //static readonly string WorkingDirectory = Path.GetFullPath(@"..\..") + "\\files\\";
-         private static readonly string WorkingDirectory = ConfigurationSettings.AppSettings["sourceFilesFolder"];
+        private static readonly string WorkingDirectory = ConfigurationSettings.AppSettings["sourceFilesFolder"];
 
         static void Main(string[] args)
         {
@@ -59,7 +59,7 @@ namespace Gbmono.Utils.ProductDataImporter
                     Logger.Log(LogLevel.Error, baseExp.StackTrace);
 
                     // move file into error folder
-                    //FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\error", file.Name));
+                    FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\error", file.Name));
                 }
 
             }
