@@ -46,7 +46,7 @@ namespace Gbmono.Utils.ProductDataImporter
                 try
                 {
                     // load
-                    ImportHelperV2.Load(file);
+                    ImportHelperV3.Load(file);
 
                     // move file into success folder when it finishes
                     FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\success", file.Name));
@@ -59,7 +59,7 @@ namespace Gbmono.Utils.ProductDataImporter
                     Logger.Log(LogLevel.Error, baseExp.StackTrace);
 
                     // move file into error folder
-                    FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\error", file.Name));
+                    //FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\error", file.Name));
                 }
 
             }
