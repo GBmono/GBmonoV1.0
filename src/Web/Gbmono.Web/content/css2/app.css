@@ -1,0 +1,77 @@
+body {
+    font: normal 14px/24px "Microsoft Yahei","冬青黑体简体中文 w3","宋体";
+}
+
+body a {
+    text-decoration: none;
+    color: #000;
+}
+
+.dnone{
+    display: none;
+}
+
+header.min-header {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    max-width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    margin: 0 auto;
+
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+
+#pageTop figure{
+    position: fixed;
+    z-index: 999;
+    cursor: pointer;
+
+    right: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.page-top-outer{
+    top: 74px;
+}
+
+footer {
+    clear: both;
+}
+
+footer .footer-container-outer{
+    background: #333;
+    color: #ccc;
+    padding: 20px 0;
+    font-size: 12px;
+    line-height: 28px;
+}
+
+footer .footer-container-inner{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+
+    max-width: 1200px;
+}
+
+footer ul li {
+    display: inline-block;
+}
+
+.nav,.subnav{
+    margin-left: -40px;
+}
+
+footer a{
+    color:#ccc;
+    text-decoration: none;
+}

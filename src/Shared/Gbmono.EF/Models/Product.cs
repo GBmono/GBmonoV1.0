@@ -21,6 +21,10 @@ namespace Gbmono.EF.Models
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
 
+        // brand collection (optional)
+        public int? BrandCollectionId { set; get; }
+        public BrandCollection BrandCollection { set; get; }
+
         // todo: delete -- 产地, map to country
         // public int CountryId { get; set; }
         // public Country Country { get; set; }
@@ -112,10 +116,6 @@ namespace Gbmono.EF.Models
 
         public ICollection<ProductTag> Tags { get; set; }
 
-
-        public int? BrandCollectionId { set; get; }
-
-        public BrandCollection BrandCollection { set; get; }
         // todo:
         // 季节推荐
         // 关联商品
