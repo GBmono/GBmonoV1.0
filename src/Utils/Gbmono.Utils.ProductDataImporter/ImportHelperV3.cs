@@ -99,21 +99,126 @@ namespace Gbmono.Utils.ProductDataImporter
                 //商品CD
                 var productCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("E", index)).RemoveEmptyOrWrapCharacters().ToDBC();
                 //促销CD
-                var promotionCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("H", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                var promotionCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("G", index)).RemoveEmptyOrWrapCharacters().ToDBC();
                 //优惠CD
-                var cuponCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("I", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                var cuponCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("H", index)).RemoveEmptyOrWrapCharacters().ToDBC();
                 //Topic CD
-                var topicCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("J", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                var topicCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("I", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                //中分類ランキングCD ?
+                var nKnow = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("J", index)).RemoveEmptyOrWrapCharacters().ToDBC();
                 //二维码
                 var barCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("K", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                //品牌
+                var brandName = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("L", index)).RemoveEmptyOrWrapCharacters();
+                var brandId = GetBrandId(brandName);
                 //商品名1
                 var primaryName = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("M", index)).RemoveEmptyOrWrapCharacters();
                 //商品名2
                 var secondaryName = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("N", index)).RemoveEmptyOrWrapCharacters();
-               
                 //特征
-                var flavor = GetCellPathValue(wbPart, wsPart, "AH6").RemoveEmptyOrWrapCharacters();
+                var flavor = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("O", index)).RemoveEmptyOrWrapCharacters();
+                //容量
+                var weight = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("P", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                //价格
+                var priceText = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("Q", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                // convert
+                double price;
+                if (!double.TryParse(Regex.Replace(priceText, @"[^0-9.]", string.Empty), out price))
+                {
+                    price = 0;
+                }
+                //产品特征
+                var description = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("R", index)).Trim();
+                //使用方法
+                var instruction = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("S", index)).Trim();
+                //追加
+                var extraInformation = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("T", index)).Trim();
 
+
+                // 激活日期 掲載開始日
+                var activationDateText = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("AN", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                DateTime activationDate = activationDateText.From1900();
+
+
+                //下架时间  掲載終了日
+                var expiryDateText = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("AO", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                DateTime expiryDate = expiryDateText.From1900();
+
+                //商品発売日 
+                var 商品発売日 = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("AP", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                DateTime 商品発売日Date = 商品発売日.From1900();
+
+                //製造中止日
+                var 製造中止日 = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("AQ", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                DateTime 製造中止日Date = 製造中止日.From1900();
+
+
+                //W
+                var wData = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("AS", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                double wValue;
+                Double.TryParse(wData, out wValue);
+                //D
+                var dData = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("AT", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                double dValue;
+                Double.TryParse(dData, out dValue);
+                //H
+                var hData = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("AU", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                double hValue;
+                Double.TryParse(hData, out hValue);
+                //情報更新日
+                var updateDataText= GetCellPathValue(wbPart, wsPart, Util.IndexAppend("AW", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                DateTime updateData = updateDataText.From1900();
+
+
+                //春
+                var springData = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("CB", index)).Trim();
+                bool? spring = GetSeason(springData);
+
+                //夏
+                var summerData = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("CC", index)).Trim();
+                bool? summer = GetSeason(summerData);
+
+                //秋
+                var autumnData = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("CD", index)).Trim();
+                bool? autumn = GetSeason(autumnData);
+
+                //冬
+                var winterData = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("CE", index)).Trim();
+                bool? winter = GetSeason(winterData);
+
+                var newProduct = new Product
+                {
+                    //Todo
+                    CategoryId = 1,
+                    BrandId = brandId,
+                    PrimaryName = primaryName,
+                    SecondaryName = secondaryName,
+                    BarCode = barCode,
+                    Flavor = flavor,
+                    Weight = weight,
+                    Width = wValue,
+                    Depth = hValue,
+                    Height = dValue,
+                    ProductCode = productCode,
+                    PromotionCode = promotionCode,
+                    CuponCode = cuponCode,
+                    TopicCode = topicCode,
+                    Description = description,
+                    Instruction = instruction,
+                    ExtraInformation = extraInformation,
+                    // CountryId = 1, // take out contry id from product table
+                    CreatedDate = DateTime.Now,
+                    UpdatedDate = updateData,
+                    ActivationDate = activationDate,
+                    //ExpiryDate = expiryDate
+                    Spring = spring,
+                    Summer = summer,
+                    Autumn = autumn,
+                    Winter = winter,
+                    Price = price,
+                    IsPublished = true
+                };
+                productList.Add(newProduct);
                 index++;
             }
             return 1;
