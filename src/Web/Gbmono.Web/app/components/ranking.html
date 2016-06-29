@@ -1,0 +1,27 @@
+﻿<!-- ranking-->
+<article class="ranking">
+    <div class="header">
+        <h2 class="initial-title">人气商品</h2>
+        <p class="title-description">综合排名</p>
+    </div>
+
+    <div class="daily-rank">
+        <section ng-repeat="product in vm.products track by $index">
+            <div class="daily-rank-outer">
+                <div>
+                    <a ng-href="#/">
+                        <img class="lazy" style="height:68px; width:130px;"
+                             ng-src="{{ vm.imgRoot + product.imgUrl}}">
+                        <!--  -->
+                    </a>
+                </div>
+                <div class="daily-rank-inner">
+                    <p>NO.{{ $index + 1 }}</p>
+                    <p>
+                        <a ng-href="">{{ product.brandName }} - {{ product.shortName }}</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</article>

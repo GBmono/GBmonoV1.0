@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html id="ng-app" ng-app="gbmono">
+<head>
+    <title>集匠网</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+
+    <link href="content/css2/init.css" rel="stylesheet" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.png">
+</head>
+<body ng-controller="masterController as vm">
+    <div id="indexView">
+        <!-- container -->
+        <section class="container">
+            <!-- header -->
+            <!-- included header -->
+            <div ng-include="'app/components/header.html'"
+                 ng-controller="headerController as vm">
+            </div>
+            
+            <!-- content, ng view injected-->
+            <div class="wrapper">
+                <div ng-view class="slide"></div>
+            </div>
+
+        </section>
+        <!-- footer -->
+        <div ng-include="'app/components/footer.html'"
+             ng-controller="footerController">
+        </div>
+
+        <!-- back to top -->
+        <div id="pageTop" class="dnone"
+             ng-click="vm.backToTop()">
+            <figure class="page-top-outer">
+                <img src="content/img2/pagetop.png" alt="">
+            </figure>
+        </div>
+    </div>
+
+    <!-- scripts -->
+    <script src="scripts/jquery-1.11.0.min.js"></script>
+    <!--<script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/jquery.cookie.js"></script>
+    <script src="scripts/front.js"></script>-->
+    <!-- jquery plugins -->
+
+    <script src="scripts/owl.carousel.js"></script>
+    <!--<script src="scripts/bootstrap-growl.min.js"></script>-->
+    <!-- angularJs -->
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.min.js"></script>
+    <script src="scripts/angular-animate.min.js"></script>
+    <script src="scripts/angular-local-storage.js"></script>
+
+    <!-- app module -->
+    <script src="app/consts.js"></script>
+    <script src="app/app.js"></script>
+
+    <!-- services -->
+    <script src="app/services/jqueryPluginService.js"></script>
+    <script src="app/services/dataFactory.js"></script>
+    <script src="app/services/pageDataFactory.js"></script>
+    <!--<script src="angularApp/services/pageDataFactory.js"></script>
+    <script src="angularApp/services/dataFactory.js"></script>
+    <script src="angularApp/services/jqueryPluginService.js"></script>
+    <script src="angularApp/services/utilService.js"></script>-->
+
+    <!-- layout (master) page controller-->
+    <script src="app/master.js"></script>
+    <script src="app/component.js"></script>
+    <script src="app/controllers/home/homeController.js"></script>
+    <!--<script src="angularApp/controllers/home/homeController.js"></script>
+    <script src="angularApp/controllers/categories/categoryListController.js"></script>
+    <script src="angularApp/controllers/products/productListController.js"></script>
+    <script src="angularApp/controllers/products/productDetailController.js"></script>
+    <script src="angularApp/controllers/products/productPinController.js"></script>
+    <script src="angularApp/controllers/products/productRankingController.js"></script>
+    <script src="angularApp/controllers/products/topicController.js"></script>
+    <script src="angularApp/controllers/accounts/accountController.js"></script>
+    <script src="angularApp/controllers/accounts/profileController.js"></script>
+    <script src="angularApp/controllers/articles/articleIndexController.js"></script>
+    <script src="angularApp/controllers/brands/brandController.js"></script>
+    <script src="angularApp/controllers/retailers/retailShopController.js"></script>-->  
+</body>
+</html>
