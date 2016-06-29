@@ -87,7 +87,7 @@
                 <section class="shop-item"
                          ng-repeat="product in vm.products">
                     <div class="shop-item-outer">
-                        <p>商品</p>
+                        <p>{{ product.brandName}}</p>
                         <div>
                             <a ng-href="/#">
                                 <img class="lazy" style="width:230px; height:130px;" 
@@ -97,7 +97,7 @@
 
                         <div class="shop-item-inner">
                             <p>
-                                <a ng-href="/#">{{ product.brandName }}</a>
+                                <a ng-href="/#">{{ product.shortName }}</a>
                             </p>
 
                             <p>
