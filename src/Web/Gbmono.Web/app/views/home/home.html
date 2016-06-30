@@ -64,7 +64,6 @@
 
         <!-- adv -->
         <article class="advert-append">
-
             <section>
                 <p>
                     <a ng-href="/#">
@@ -112,87 +111,87 @@
 
         </article>
 
-        <!-- snap -->
-        <article class="snap">
+        <!-- snap -->       
+        <div ng-include="'app/components/products/recommend.html'"
+             ng-controller="recommendController as vm">
+        </div>
 
+        <br />
+        <!-- new events-->
+        <article>
             <div class="header">
-                <h2 class="initial-title">集匠推荐</h2>
-                <p class="title-description">推荐产品或者Topics</p>
+                <h2 class="initial-title">集匠特辑</h2>
+                <p class="title-description">精选特辑，专题</p>
             </div>
 
-            <div class="snap-list-wrapper">
-                <section id="snapList">
+            <div class="shop-item-list">
+                <section class="shop-item">
+                    <div class="shop-item-outer">
+                        <p></p>   
+                        <div>
+                            <a ng-href="/#">
+                                <img class="lazy"  width="260" height="146"
+                                     src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/Nui.brand2_.jpg" />
+                            </a>
+                        </div>
 
-                    <div class="snap-list-outer">
-                        <div class="snap-list-inner">
-                            <a ng-href="#/">
-                                <img width="155" height="217" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/IMG_0310-460x644.jpg" class="attachment-160x217 size-160x217 wp-post-image" alt="IMG_0310">
-                            </a>
-                            <a ng-href="#/">
-                                <img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/bin_logo.gif" alt="BIN">
-                            </a>
+                        <div class="shop-item-inner">
+                            <p>
+                                <a ng-href="/#">宿屋業界に新たなジャンルが。新・サブカルチャー、ゲストハウス。</a>
+                            </p>
+                            <p>
+                                <time datetime="2016-06-22T21:15:20+00:00">2016.6.22 Wed</time>
+                            </p>
                         </div>
                     </div>
 
-                    <div class="snap-list-outer">
-                        <div class="snap-list-inner">
+                </section>
+                <section class="shop-item">
+                    <div class="shop-item-outer">
+                        <p></p>  
+                        <div>
                             <a ng-href="/#">
-                                <img width="155" height="217" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/IMG_0310-460x644.jpg" class="attachment-160x217 size-160x217 wp-post-image" alt="IMG_0310">
+                                <img class="lazy" width="260" height="146"
+                                     src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/raf.brand1_.jpg" />
                             </a>
-                            <a ng-href="/#">
-                                <img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/bin_logo.gif" alt="BIN">
-                            </a>
+                        </div>
+
+                        <div class="shop-item-inner">
+                            <p>
+                                <a ng-href="/#">ラフ・シモンズが語る2017年春夏コレクションとフィレンツェへの想い。</a>
+                            </p>
+                            <p>
+                                <time datetime="2016-06-22T21:15:20+00:00">2016.6.22 Wed</time>
+                            </p>
                         </div>
                     </div>
 
-                    <div class="snap-list-outer">
-                        <div class="snap-list-inner">
+                </section>
+                <section class="shop-item">
+                    <div class="shop-item-outer">
+                        <p></p>  
+                        <div>
                             <a ng-href="/#">
-                                <img width="155" height="217" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/IMG_0310-460x644.jpg" class="attachment-160x217 size-160x217 wp-post-image" alt="IMG_0310">
-                            </a>
-                            <a ng-href="/#">
-                                <img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/bin_logo.gif" alt="BIN">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="snap-list-outer">
-                        <div class="snap-list-inner">
-                            <a ng-href="/#">
-                                <img width="155" height="217" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/IMG_0310-460x644.jpg" class="attachment-160x217 size-160x217 wp-post-image" alt="IMG_0310">
-                            </a>
-                            <a ng-href="/#">
-                                <img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/bin_logo.gif" alt="BIN">
+                                <img class="lazy" width="260" height="146"
+                                     src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/Brand_1200_675_-3.jpg" />
                             </a>
                         </div>
-                    </div>
 
-                    <div class="snap-list-outer">
-                        <div class="snap-list-inner">
-                            <a ng-href="/#">
-                                <img width="155" height="217" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/IMG_0310-460x644.jpg" class="attachment-160x217 size-160x217 wp-post-image" alt="IMG_0310">
-                            </a>
-                            <a ng-href="/#">
-                                <img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/bin_logo.gif" alt="BIN">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="snap-list-outer">
-                        <div class="snap-list-inner">
-                            <a ng-href="/#">
-                                <img width="155" height="217" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/IMG_0310-460x644.jpg" class="attachment-160x217 size-160x217 wp-post-image" alt="IMG_0310">
-                            </a>
-                            <a ng-href="/#">
-                                <img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/bin_logo.gif" alt="BIN">
-                            </a>
+                        <div class="shop-item-inner">
+                            <p>
+                                <a ng-href="/#">陽気でフリーキーな旋律。 ロード・エコーのジャパンツアー。</a>
+                            </p>
+                            <p>
+                                <time datetime="2016-06-22T21:15:20+00:00">2016.6.22 Wed</time>
+                            </p>
                         </div>
                     </div>
 
                 </section>
             </div>
-        </article>
 
+        </article>
+    
     </section>
 
     <!-- right side bar-->
@@ -219,7 +218,7 @@
         </div>
 
         <!-- ranking-->
-        <div ng-include="'app/components/ranking.html'"
+        <div ng-include="'app/components/products/ranking.html'"
              ng-controller="rankingController as vm">
         </div>
 

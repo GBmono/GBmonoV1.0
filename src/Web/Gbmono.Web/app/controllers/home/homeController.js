@@ -30,9 +30,6 @@
             // call jquery initialization
             pluginService.slider();
 
-            // snap slider at bottom
-            pluginService.snap();
-
             // get new products
             getNewProducts();
 
