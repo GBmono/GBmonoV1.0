@@ -41,7 +41,7 @@
         function getNewProducts() {
             // get new arrived products
             // load first 12 new products 
-            productDataFactory.getNewProducts(1, 6)
+            productDataFactory.getNewProducts(1, 8)
                 .success(function (data) {
                     // retreive data
                     vm.products = data;

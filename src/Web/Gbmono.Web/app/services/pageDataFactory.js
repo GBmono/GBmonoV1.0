@@ -24,7 +24,7 @@
         }
 
         function getArticles() {
-            return $http.get(pageDataPath + '/article.json?v=2');
+            return $http.get(pageDataPath + '/article.json?v=1.2');
         }
 
         function getNews() {

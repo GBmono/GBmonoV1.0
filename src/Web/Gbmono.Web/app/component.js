@@ -14,6 +14,25 @@
         init();
 
         function init() {
+            // menu hover
+            var productBtn = $(".gb-products");
+            $(".gb-products-btn").hover(function (e) {
+                if (!productBtn.hasClass("open"))
+                    productBtn.addClass("open");
+                return false;
+            }, function (e) {
+                productBtn.removeClass("open");
+            });
+
+            productBtn.hover(function () {
+                if (!productBtn.hasClass("open"))
+                    productBtn.addClass("open");
+                return false;
+            }, function (e) {
+                productBtn.removeClass("open");
+            });
+
+            // scroll
             window.addEventListener("scroll", function (event) {
                 const pageTopEl = $("#pageTop");
                 const headerDomEl = $("#menuHeader");

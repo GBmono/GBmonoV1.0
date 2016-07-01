@@ -35,12 +35,11 @@
             <div class="shop-item-list">
                 <section class="shop-item"
                          ng-repeat="article in vm.articles">
-
                     <div class="shop-item-outer">
                         <p>{{ article.header }}</p>
                         <div>
                             <a ng-href="/#">
-                                <img class="lazy" style="width:230px; height:130px;"
+                                <img class="lazy"
                                      ng-src="{{ article.imgUrl}}" />
                             </a>
                         </div>
@@ -55,11 +54,8 @@
                             </p>
                         </div>
                     </div>
-
                 </section>
-
             </div>
-
         </article>
 
         <!-- adv -->
@@ -74,10 +70,8 @@
 
         </article>
             
-        <br />
-
         <!-- new products -->
-        <article>
+        <article class="feature">
             <div class="header">
                 <h2 class="initial-title">最新商品</h2>
                 <p class="title-description">商品最新情报</p>
@@ -89,7 +83,7 @@
                         <p>{{ product.brandName}}</p>
                         <div>
                             <a ng-href="/#">
-                                <img class="lazy" style="width:230px; height:130px;" 
+                                <img class="lazy" 
                                      ng-src="{{ vm.imgRoot + product.imgUrl}}" />
                             </a>
                         </div>
@@ -116,7 +110,6 @@
              ng-controller="recommendController as vm">
         </div>
 
-        <br />
         <!-- new events-->
         <article>
             <div class="header">
@@ -179,7 +172,7 @@
 
                         <div class="shop-item-inner">
                             <p>
-                                <a ng-href="/#">陽気でフリーキーな旋律。 ロード・エコーのジャパンツアー。</a>
+                                <a ng-href="/#">陽気でフリーキーな旋律。 ロード・エコーのジャパンツアー。ロード・エコーのジャパンツアー。</a>
                             </p>
                             <p>
                                 <time datetime="2016-06-22T21:15:20+00:00">2016.6.22 Wed</time>
