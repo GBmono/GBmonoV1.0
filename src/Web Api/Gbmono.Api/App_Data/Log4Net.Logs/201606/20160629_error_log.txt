@@ -1,0 +1,16 @@
+2016-06-29 21:19:15,153 [22](:0) ERROR Gbmono.Api.Utils.Logger [(null)] - RequestUri:http://localhost/gbmonoapi/api/Products/Ranking Error:Invalid column name 'BrandCollectionId'. /n Stack Trace:   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__167_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.<ExecuteStoreCommandsAsync>d__c.MoveNext()
+
+2016-06-29 21:19:15,160 [34](:0) ERROR Gbmono.Api.Utils.Logger [(null)] - RequestUri:http://localhost/gbmonoapi/api/Products/Ranking Error:Invalid column name 'BrandCollectionId'. /n Stack Trace:   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__167_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.<ExecuteStoreCommandsAsync>d__c.MoveNext()
+

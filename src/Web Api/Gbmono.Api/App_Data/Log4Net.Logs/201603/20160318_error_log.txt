@@ -1,0 +1,26 @@
+2016-03-18 21:18:34,834 [7](E:\Projects\GBmono\v1.0\src\Web Api\Gbmono.Api\Controllers\ProductsController.cs:164) ERROR Gbmono.Api.Utils.Logger [(null)] - RequestUri:http://localhost/gbmonoapi/api/Products/40 Error:Cannot insert the value NULL into column 'ProductEventId', table 'Gbmono.dbo.ProductEvent'; column does not allow nulls. INSERT fails.
+The statement has been terminated. /n Stack Trace:   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__167_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.<ExecuteAsync>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.<UpdateAsync>d__0.MoveNext()
+
+2016-03-18 21:20:12,006 [25](E:\Projects\GBmono\v1.0\src\Web Api\Gbmono.Api\Controllers\ProductsController.cs:164) ERROR Gbmono.Api.Utils.Logger [(null)] - RequestUri:http://localhost/gbmonoapi/api/Products/40 Error:Cannot insert the value NULL into column 'ProductEventId', table 'Gbmono.dbo.ProductEvent'; column does not allow nulls. INSERT fails.
+The statement has been terminated. /n Stack Trace:   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__167_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.<ExecuteAsync>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.<UpdateAsync>d__0.MoveNext()
+

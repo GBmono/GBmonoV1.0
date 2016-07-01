@@ -1,0 +1,9 @@
+diff a/src/Web/Gbmono.Web/app/views/home/home.html b/src/Web/Gbmono.Web/app/views/home/home.html	(rejected hunks)
+@@ -90,6 +90,7 @@
+                         <p>{{ product.brandName}}</p>
+                         <div>
+                             <a ng-href="/#">
++                                <img class="lazy" style="width:200px; height:130px; display: block;margin-left: auto;margin-right: auto" 
+                                      ng-src="{{ vm.imgRoot + product.imgUrl}}" />
+                             </a>
+                         </div>
