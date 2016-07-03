@@ -38,9 +38,19 @@ header.min-header {
     height: 40px;
 }
 
-.page-top-outer{
-    top: 74px;
+@media (min-width: 1024px){
+    .page-top-outer{
+        top: 74px;
+    }
 }
+
+@media (max-width: 1024px){
+    .page-top-outer{
+        bottom: 0px;
+    }
+}
+
+
 
 footer {
     clear: both;

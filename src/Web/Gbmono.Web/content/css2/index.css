@@ -1,7 +1,12 @@
-#menuHeader .outer,
 .container .wrapper {
     margin: 0 auto;
     max-width: 1200px;
+}
+
+#menuHeader .outer{
+    margin: 0 auto;
+    max-width: 1200px;
+    position: relative;
 }
 
 #menuHeader {
@@ -36,21 +41,38 @@
     position: relative;
 }
 
-.gb-products-btn .dropdown-menu{
-    max-width: 1200px;
+
+@media (min-width: 1024px){
+    #menuHeader .search-outer{
+        margin-right: 0;
+        padding-right: 0;
+    }
 }
 
+@media (max-width: 780px){
+    #menuHeader .search-outer{
+        display: none;
+    }
 
+    .info-list-outer .main-list {
+        width: 100%!important;
+        max-width: 1200px!important;
+    }
 
-
-#menuHeader .search-outer{
-    margin-right: 0;
+    .side-bar {
+        display: none !important;
+    }
 }
+
+/*@media all and (min-width: 1024px) and (max-width:1200px)
+{
+}*/
+
+
+
 
 #menuHeader .search .input-text {
-    padding-right: 30px;
     padding-left: 10px;
-    width: 180px;
 }
 
 .main-visual {
@@ -93,6 +115,7 @@
     padding-top: 20px;
 }
 
+.daily-rank-inner p>a,
 .shop-item-outer p>a {
     color: #b2b2b2;
 }
@@ -188,10 +211,21 @@
 
 
 }
-
+.gb-products-btn:hover >.dropdown-menu,
 .medicine-shop:hover >.dropdown-menu,
 .gb-recommend:hover>.dropdown-menu {
     display: block;
+}
+
+.gb-products-btn .dropdown-menu{
+    min-width: 700px;
+    padding-left: 10px;
+}
+
+.gb-products-btn .dropdown-menu li{
+    min-width: 160px;
+    text-align: center;
+    display: inline-block;
 }
 
 .open>.dropdown-menu {
@@ -200,7 +234,7 @@
 
 .dropdown-menu {
     position: absolute;
-    top: 100%;
+    top: 98%;
     left: 0;
     z-index: 1000;
     display: none;
@@ -333,4 +367,14 @@
 
 .gb-products .product-content a:hover{
     color: #c27baa;
+}
+
+
+.shop-item-date{
+    text-align: left !important;
+    font-size: 12px;
+}
+
+.shop-item-date .new{
+    color: #d50000;
 }

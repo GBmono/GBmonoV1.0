@@ -3,34 +3,21 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = [];
+    ctrl.$inject = ['categoryDataFactory'];
 
     // create controller
     module.controller('headerController', ctrl);
 
     // controller body
-    function ctrl() {
+    function ctrl(categoryDataFactory) {        
+        var vm = this;
+        // product top categories
+        vm.topCates = [];
 
         init();
 
         function init() {
-            // menu hover
-            var productBtn = $(".gb-products");
-            $(".gb-products-btn").hover(function (e) {
-                if (!productBtn.hasClass("open"))
-                    productBtn.addClass("open");
-                return false;
-            }, function (e) {
-                productBtn.removeClass("open");
-            });
-
-            productBtn.hover(function () {
-                if (!productBtn.hasClass("open"))
-                    productBtn.addClass("open");
-                return false;
-            }, function (e) {
-                productBtn.removeClass("open");
-            });
+            getProductTopCategories();
 
             // scroll
             window.addEventListener("scroll", function (event) {
@@ -46,6 +33,13 @@
                     pageTopEl.hide();
                 }
             });
+        }
+
+        function getProductTopCategories() {
+            categoryDataFactory.getTopCates()
+                .success(function (data) {
+                    vm.topCates = data;
+                });
         }
     }
 
