@@ -95,11 +95,10 @@
                                 <a ng-href="/#">{{ product.shortName }}</a>
                             </p>
 
-                            <p>
+                            <p class="shop-item-date">
                                 <span class="new">NEW</span>
-                                <time datetime="2016-06-22T21:15:20+00:00">2016.6.22 Wed</time>
+                                <small>2016.6.22 Wed</small>
                             </p>
-
                         </div>
                     </div>
                 </section>
@@ -112,8 +111,10 @@
              ng-controller="recommendController as vm">
         </div>
 
+        <br />
+        <br />
         <!-- new events-->
-        <article>
+        <article class="news">
             <div class="header">
                 <h2 class="initial-title">集匠特辑</h2>
                 <p class="title-description">精选特辑，专题</p>
@@ -197,24 +198,30 @@
         </div>
         <!-- adv -->
         <div class="ad-recommend">
-
             <div>
-                <a ng-href="/#" target="_blank">
+                <a href="" target="_blank">
                     <img class="lazy" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/sp.banner.4.jpg" />
                 </a>
             </div>
-
-            <!--<div>
-                <a ng-href="/#" target="_blank">
-                    <img class="lazy" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/Unplugged_Vol3_300_-thumb-300x250-46312.jpg" />
-                </a>
-            </div>-->
-
         </div>
 
         <!-- ranking-->
         <div ng-include="'app/components/products/ranking.html'"
              ng-controller="rankingController as vm">
+        </div>
+
+        <div class="ad-recommend">
+            <div>
+                <a href="" target="_blank">
+                    <img src="content/img/adv4.jpg" />
+                </a>
+            </div>
+
+            <div>
+                <a href="" target="_blank">
+                    <img src="content/img/adv1.jpg" />
+                </a>
+            </div>
         </div>
 
     </section>
