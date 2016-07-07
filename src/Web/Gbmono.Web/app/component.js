@@ -12,7 +12,11 @@
     function ctrl(categoryDataFactory) {        
         var vm = this;
         // product top categories
-        vm.topCates = [];
+        // devided into 4 collections map into 4 vertical list elements
+        vm.topCatesCol1 = [];
+        vm.topCatesCol2 = [];
+        vm.topCatesCol3 = [];
+        vm.topCatesCol4 = [];
 
         init();
 
@@ -38,8 +42,24 @@
         function getProductTopCategories() {
             categoryDataFactory.getTopCates()
                 .success(function (data) {
-                    vm.topCates = data;
+                    vm.topCatesCol1 = fillCategories(0, data);
+                    vm.topCatesCol2 = fillCategories(4, data);
+                    vm.topCatesCol3 = fillCategories(8, data);
+                    vm.topCatesCol4 = fillCategories(12, data);
+                    //console.log(vm.topCatesCol1);
                 });
+        }
+
+        function fillCategories(startIndex, data) {
+            var result = [];
+            for (var i = startIndex; i < startIndex + 4; i++) {
+                if (i > data.length) {
+                    break;
+                }
+                result.push(data[i]);
+            }
+
+            return result;
         }
     }
 

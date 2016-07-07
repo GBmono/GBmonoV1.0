@@ -77,7 +77,7 @@ footer ul li {
     display: inline-block;
 }
 
-.nav,.subnav{
+footer .nav,.subnav{
     margin-left: -40px;
 }
 
