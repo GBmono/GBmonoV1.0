@@ -26,10 +26,11 @@ namespace Gbmono.Crawler.Processor
             //processor.RandomMapping();
 
             //Chinese Tester
-            var processor = new ChineseProcessor();
-            processor.Test();
+            //var processor = new ChineseProcessor();
+            //processor.Test();
 
-
+            var processor = new ArticleProcessor();
+            processor.Process();
 
         }
     }

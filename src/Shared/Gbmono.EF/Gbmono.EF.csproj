@@ -58,6 +58,8 @@
     <Compile Include="ModelConfigs\CityMap.cs" />
     <Compile Include="ModelConfigs\CountryMap.cs" />
     <Compile Include="ModelConfigs\ManufacturerMap.cs" />
+    <Compile Include="ModelConfigs\NArticleImageMap.cs" />
+    <Compile Include="ModelConfigs\NArticleMap.cs" />
     <Compile Include="ModelConfigs\ProductEventMap.cs" />
     <Compile Include="ModelConfigs\ProductImageMap.cs" />
     <Compile Include="ModelConfigs\ProductMap.cs" />
@@ -77,6 +79,8 @@
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\NArticle.cs" />
+    <Compile Include="Models\NArticleImage.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Manufacturer.cs" />
     <Compile Include="Models\ProductEventType.cs" />

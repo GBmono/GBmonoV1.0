@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleProcessor.cs" />
     <Compile Include="ChineseProcessor.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Processor.cs" />
