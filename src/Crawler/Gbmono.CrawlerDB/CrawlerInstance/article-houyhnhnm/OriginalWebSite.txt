@@ -1,0 +1,5 @@
+{"OriginalWebSite":"http://www.houyhnhnm.jp/news/",
+"ThridPartyUserId":"167288",
+"StoreRegex":["http://www.houyhnhnm.jp/news/$","http://www.houyhnhnm.jp/news/page/\\d{0,2}/$","http://www.houyhnhnm.jp/news/\\d{0,4}/$"],
+"RecipeRegex":["http://www.houyhnhnm.jp/news/\\d{0,4}/$"],
+"BlockRegex":null}
