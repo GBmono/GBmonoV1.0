@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gbmono.CrawlerDB;
+using Gbmono.EF.DataContext;
+using Gbmono.EF.Infrastructure;
+using Gbmono.EF.Models;
 using HtmlAgilityPack;
 
 namespace Gbmono.Crawler.Processor
@@ -54,10 +57,10 @@ namespace Gbmono.Crawler.Processor
         {
             try
             {
+                var repo = new RepositoryManager();
                 if (File.Exists(filePath))
                 {
-                    string title,corver;
-
+                    string title, corver, body, bodyHtml;
 
 
                     var info = new HtmlDocument();
@@ -67,6 +70,9 @@ namespace Gbmono.Crawler.Processor
                     {
 
                         var url = db.CrawlHistory.Single(m => m.Id == fileId).Key;
+                        if(repo.NArticleRepository.Table.Any(m=>m.SourceUrl==url))
+                            return;
+
                         if (db.ProductInfoes.Any(m => m.Url == url))
                         {
                             Console.WriteLine("Duplicate Url:" + url);
@@ -99,9 +105,45 @@ namespace Gbmono.Crawler.Processor
                             return;
                         }
 
+                        var bodyNode =
+                            info.DocumentNode.SelectSingleNode(
+                                "//article[@class='news-detail']//div[@class='body']//section//div[@class='inner']");
+                        if (bodyNode != null)
+                        {
+                            body = bodyNode.InnerText;
+                            bodyHtml = bodyNode.InnerHtml;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                        var article = new NArticle()
+                        {
+                            Body = body,
+                            BodyHtml = bodyHtml,
+                            CorverUrl = corver,
+                            CreateDate = DateTime.Now,
+                            PublicshDate = DateTime.Now,
+                            SourceUrl = url,
+                            Title = title
+                        };
+                        repo.NArticleRepository.Create(article);
+                        repo.NArticleRepository.Save();
 
 
-                        db.SaveChanges();
+
+                        var imagesNode = info.DocumentNode.SelectNodes("//article[@class='news-detail']//div[@class='body']//img");
+                        if (imagesNode != null && imagesNode.Any())
+                        {
+                            foreach (var image in imagesNode)
+                            {
+                                var imageUrl = image.Attributes["src"].Value;
+
+                                repo.NArticleImageRepository.Create(new NArticleImage() { NArticleId = article.NArticleId, Url = imageUrl });
+                            }
+                            repo.NArticleRepository.Save();
+                        }
+
                         Console.Write("+");
                     }
                 }

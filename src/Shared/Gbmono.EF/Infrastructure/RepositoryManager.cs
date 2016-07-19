@@ -51,7 +51,9 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<City> _cityRepository;
         private IRepository<State> _stateRepository;
         private IRepository<BrandCollection> _brandCollectionRepository;
-        
+        private IRepository<NArticle> _nArticleRepository;
+        private IRepository<NArticleImage> _nArticleImageRepository;
+
 
 
 
@@ -143,6 +145,18 @@ namespace Gbmono.EF.Infrastructure
             get { return _stateRepository ?? (_stateRepository = new Repository<State>(Context)); }
         }
 
+        #endregion
+
+        #region Article
+        public IRepository<NArticle> NArticleRepository
+        {
+            get { return _nArticleRepository ?? (_nArticleRepository = new Repository<NArticle>(Context)); }
+        }
+
+        public IRepository<NArticleImage> NArticleImageRepository
+        {
+            get { return _nArticleImageRepository ?? (_nArticleImageRepository = new Repository<NArticleImage>(Context)); }
+        }
         #endregion
     }
 }

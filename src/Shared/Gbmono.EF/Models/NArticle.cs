@@ -16,6 +16,8 @@ namespace Gbmono.EF.Models
         // html code
         public string Body { get; set; }
 
+        public string BodyHtml { get; set; }
+
         public string CorverUrl { get; set; }
 
         public DateTime CreateDate { get; set; }
