@@ -3,7 +3,10 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['productDataFactory',
+    // todo: remove page data factory once article data is ready in db
+    ctrl.$inject = ['$filter',
+                    'productDataFactory',
+                    'articleDataFactory',
                     'pageDataFactory',
                     'pluginService'];
 
@@ -11,16 +14,22 @@
     module.controller('homeController', ctrl);
 
     // controller body
-    function ctrl(productDataFactory,
+    function ctrl($filter,
+                  productDataFactory,
+                  articleDataFactory,
                   pageDataFactory,
                   pluginService) {
         var vm = this;
         // new products
         vm.products = [];
-        // articles
+        // articles // todo: to be deprecated
         vm.articles = [];
+        // articles 2
+        vm.articles2 = [];
         // product image root path
         vm.imgRoot = gbmono.img_root_path;
+        // article image root path
+        vm.articleImgRoot = gbmono.img_article_root_path;
 
         // call page init function
         init();
@@ -30,11 +39,16 @@
             // call jquery initialization
             pluginService.slider();
 
+            // date range, last 14 days
+            var to = $filter('date')(new Date(), 'yyyy-MM-dd')
+            var from = $filter('date')(new Date().setDate(new Date().getDate() - 14), 'yyyy-MM-dd');
+
             // get new products
             getNewProducts();
 
             // get latest articles
             getArticles();
+            getArticlesByDate(from, to);
         }
 
         // get new products
@@ -53,6 +67,14 @@
             pageDataFactory.getArticles()
                 .success(function (data) {
                     vm.articles = data;
+                });
+        }
+
+        // get articles by date
+        function getArticlesByDate(from, to) {
+            articleDataFactory.getByDate(from, to)
+                .success(function (data) {
+                    vm.articles2 = data; console.log(data);
                 });
         }
     }

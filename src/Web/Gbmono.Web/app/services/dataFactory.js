@@ -291,6 +291,30 @@
 })(angular.module('gbmono'));
 
 /*
+    article data factory
+*/
+(function (module) {
+    // inject params
+    factory.$inject = ['$http'];
+
+    // create instance
+    module.factory('articleDataFactory', factory);
+
+    // factory implement
+    function factory($http) {
+
+        // return data factory with CRUD calls
+        return {
+            getByDate: getByDate
+        };
+
+        function getByDate(from, to) {
+            return $http.get(gbmono.api_site_prefix.article_api_url + '/' + from + '/' + to);
+        }
+    }
+
+})(angular.module('gbmono'));
+/*
     location data factory
 */
 (function (module) {

@@ -148,6 +148,7 @@
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="ExceptionHandling\GenericExceptionHandler.cs" />
+    <Compile Include="Extensions\ArticleExtension.cs" />
     <Compile Include="Extensions\ProductExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

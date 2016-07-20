@@ -113,7 +113,7 @@
 
         <br />
         <br />
-        <!-- new events-->
+        <!-- new articles in db testing -->
         <article class="news">
             <div class="header">
                 <h2 class="initial-title">集匠特辑</h2>
@@ -121,12 +121,46 @@
             </div>
 
             <div class="shop-item-list">
-                <section class="shop-item">
+                <section class="shop-item" ng-repeat="article in vm.articles2">
                     <div class="shop-item-outer">
                         <p></p>   
                         <div>
                             <a ng-href="/#">
                                 <img class="lazy"  width="260" height="146"
+                                     ng-src="{{ vm.articleImgRoot + article.coverThumbnailUrl }}" />
+                            </a>
+                        </div>
+
+                        <div class="shop-item-inner">
+                            <p>
+                                <a ng-href="/#">{{ article.title }}</a>
+                            </p>
+                            <p>
+                                <time datetime="2016-06-22T21:15:20+00:00">{{ article.modifiedDate | date: 'yyyy-MM-dd'}}</time>
+                            </p>
+                        </div>
+                    </div>
+
+                </section>
+
+            </div>
+
+        </article>
+    
+        <!-- new events-->
+        <article class="news">
+            <div class="header">
+                <h2 class="initial-title">店铺信息</h2>
+                <p class="title-description">最新情报</p>
+            </div>
+
+            <div class="shop-item-list">
+                <section class="shop-item">
+                    <div class="shop-item-outer">
+                        <p></p>
+                        <div>
+                            <a ng-href="/#">
+                                <img class="lazy" width="260" height="146"
                                      src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/Nui.brand2_.jpg" />
                             </a>
                         </div>
@@ -144,7 +178,7 @@
                 </section>
                 <section class="shop-item">
                     <div class="shop-item-outer">
-                        <p></p>  
+                        <p></p>
                         <div>
                             <a ng-href="/#">
                                 <img class="lazy" width="260" height="146"
@@ -165,7 +199,7 @@
                 </section>
                 <section class="shop-item">
                     <div class="shop-item-outer">
-                        <p></p>  
+                        <p></p>
                         <div>
                             <a ng-href="/#">
                                 <img class="lazy" width="260" height="146"
@@ -187,7 +221,6 @@
             </div>
 
         </article>
-    
     </section>
 
     <!-- right side bar-->

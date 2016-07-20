@@ -10,10 +10,7 @@ using System.Threading.Tasks;
 using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Models;
-using Gbmono.Search.IndexManager.SearchHelper;
-using Gbmono.Search.IndexManager.Documents;
-using Gbmono.Search.ViewModel;
-using Gbmono.Search.ViewModel.Requests;
+
 
 namespace Gbmono.Api.Controllers
 {
@@ -21,12 +18,12 @@ namespace Gbmono.Api.Controllers
     public class RetailerShopsController : ApiController
     {
         private readonly RepositoryManager _repositoryManager;
-        private readonly RetailShopHelper _retailShopHelper;
+        // private readonly RetailShopHelper _retailShopHelper;
         #region ctor
         public RetailerShopsController()
         {
             _repositoryManager = new RepositoryManager();
-            _retailShopHelper = new RetailShopHelper();
+            // _retailShopHelper = new RetailShopHelper();
         }
         #endregion
 
@@ -67,13 +64,13 @@ namespace Gbmono.Api.Controllers
         //    return await shops.Where(m => m.Address.Contains(model.Keyword) || m.Name.Contains(model.Keyword)).ToListAsync();
         //}
 
-        [Route("Search")]
-        public async Task<PagedResponse<RetailShopDoc>> Search(PagedRequest<RetailShopSearchRequest> req)
-        {
-            return await Task.Run(() =>
-            {
-                return _retailShopHelper.SearchByKeyword(req);
-            });
-        }
+        //[Route("Search")]
+        //public async Task<PagedResponse<RetailShopDoc>> Search(PagedRequest<RetailShopSearchRequest> req)
+        //{
+        //    return await Task.Run(() =>
+        //    {
+        //        return _retailShopHelper.SearchByKeyword(req);
+        //    });
+        //}
     }
 }

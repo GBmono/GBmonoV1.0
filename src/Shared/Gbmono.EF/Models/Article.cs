@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Gbmono.EF.Models
 {
@@ -25,5 +26,12 @@ namespace Gbmono.EF.Models
         public string ModifiedBy { get; set; }
 
         public bool IsPublished { get; set; }
+
+        // article images
+        public ICollection<ArticleImage> Images { get; set; }
+        
+        // article tags
+        // public IEnumerable<ArticleTag> Tags { get; set; }
+
     }
 }

@@ -21,7 +21,10 @@
         // new article
         $scope.newArticle = { articleTypeId : 1}; // default  selection
         // article types
-        $scope.articleTypes = [{ name: "News", value: 1 }, { name: "Blog", value: 2 }]
+        $scope.articleTypes = [{ name: "行业", value: 1 },
+                               { name: "店铺", value: 2 },
+                               { name: "产品", value: 3 },
+                               { name: "其他", value: 4 } ]
         // filter
         $scope.filter = {
             from: $filter('date')(new Date().setDate(new Date().getDate() - 7), 'yyyy-MM-dd'),

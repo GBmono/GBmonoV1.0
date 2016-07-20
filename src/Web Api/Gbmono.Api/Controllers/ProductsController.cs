@@ -11,10 +11,7 @@ using Gbmono.EF.Models;
 using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Models;
 using Gbmono.Api.Extensions;
-using Gbmono.Search.IndexManager.SearchHelper;
-using Gbmono.Search.ViewModel;
-using Gbmono.Search.IndexManager.Documents;
-using Gbmono.Search.ViewModel.Requests;
+
 
 namespace Gbmono.Api.Controllers
 {
@@ -22,7 +19,7 @@ namespace Gbmono.Api.Controllers
     public class ProductsController : ApiController
     {
         private readonly RepositoryManager _repositoryManager;
-        private readonly ProductHelper _productHelper;
+        // private readonly ProductHelper _productHelper;
         // ctor
         public ProductsController()
         {
@@ -188,14 +185,14 @@ namespace Gbmono.Api.Controllers
             return product;
         }
 
-        [Route("Search")]
-        public async Task<PagedResponse<ProductDoc>> Search(PagedRequest<ProductSearchRequest> req)
-        {
-            return await Task.Run(() =>
-            {
-                return _productHelper.SearchByKeyword(req);
-            });
-        }
+        //[Route("Search")]
+        //public async Task<PagedResponse<ProductDoc>> Search(PagedRequest<ProductSearchRequest> req)
+        //{
+        //    return await Task.Run(() =>
+        //    {
+        //        return _productHelper.SearchByKeyword(req);
+        //    });
+        //}
         /// <summary>
         /// create product event record when product is accessed
         /// </summary>

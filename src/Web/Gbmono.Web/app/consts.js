@@ -37,6 +37,8 @@
         retailer_shop_api_url: gbmono.web_api_app_name + '/RetailerShops',
         // brand url
         brand_api_url: gbmono.web_api_app_name + '/Brands',
+        // article url
+        article_api_url: gbmono.web_api_app_name + '/Articles',
         // profile url
         profile_api_url: gbmono.web_api_app_name + '/Profiles',
         // location url

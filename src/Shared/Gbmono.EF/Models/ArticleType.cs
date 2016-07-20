@@ -4,8 +4,12 @@ namespace Gbmono.EF.Models
 {
     public enum ArticleType
     {
-        News = 1, //
+        News = 1, // marketing, industry news?
 
-        Blog = 2
+        Shops = 2, // shops information
+
+        Products = 3, // product information
+
+        Others = 4
     }
 }

@@ -282,13 +282,17 @@ namespace Gbmono.Api.Admin.Controllers
             // generate thumnail image then save into the directory
             ImageHelper.CreateThumbnail(
                         Path.Combine(imgDirectory, newFileName), // source image
-                        68, // width
-                        68, // height
+                        260, // width
+                        150, // height
                         "image/jpeg", // mime type
                         Path.Combine(thumbnailDirectory, newFileName), // save path
                         100 // quality
                 );
 
+            // todo: insert new row into ArticleImageTable once image is uploaded
+            CreateArticleImage(id, id + "/" + newFileName, id + "/thumbnails/" + newFileName);
+
+            // return json data 
             var uploadedImg = new KendoUploadImg
             {
                 Name = newFileName,
@@ -297,6 +301,26 @@ namespace Gbmono.Api.Admin.Controllers
             };
 
             return uploadedImg;
+        }
+
+        /// <summary>
+        /// insert new row into ArticleImage table
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <param name="url"></param>
+        /// <param name="thumbnailUrl"></param>
+        private void CreateArticleImage(int articleId, string url, string thumbnailUrl)
+        {
+            var articleImage = new ArticleImage
+            {
+                ArticleId = articleId,
+                Url = url,
+                ThumbnailUrl = thumbnailUrl,
+                IsCoverImage = true // todo: set to false?
+            };
+
+            _repositoryManager.ArticleImageRepository.Create(articleImage);
+            _repositoryManager.ArticleImageRepository.Save();
         }
 
         /// <summary>

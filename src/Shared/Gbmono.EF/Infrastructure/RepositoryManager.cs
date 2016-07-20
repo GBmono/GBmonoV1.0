@@ -44,18 +44,19 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<UserFavorite> _userFavoriteRepository;
 
         private IRepository<Brand> _brandRepository;
+        private IRepository<BrandCollection> _brandCollectionRepository;
+
         private IRepository<Article> _articleRepository;
         private IRepository<ArticleTag> _articleTagRepository;
+        private IRepository<ArticleImage> _articleImageRepository;
+
         private IRepository<Retailer> _retailerRepository;
         private IRepository<RetailerShop> _retailerShopRepository;
         private IRepository<City> _cityRepository;
         private IRepository<State> _stateRepository;
-        private IRepository<BrandCollection> _brandCollectionRepository;
-        private IRepository<NArticle> _nArticleRepository;
-        private IRepository<NArticleImage> _nArticleImageRepository;
-
-
-
+        
+        //private IRepository<NArticle> _nArticleRepository;
+        //private IRepository<NArticleImage> _nArticleImageRepository;
 
         // public accessors
         #region category & product
@@ -114,6 +115,11 @@ namespace Gbmono.EF.Infrastructure
             get { return _articleRepository ?? (_articleRepository = new Repository<Article>(Context)); }
         }
 
+        public IRepository<ArticleImage> ArticleImageRepository
+        {
+            get { return _articleImageRepository ?? (_articleImageRepository = new Repository<ArticleImage>(Context)); }
+        }
+
         public IRepository<ArticleTag> ArticleTagRepository
         {
             get { return _articleTagRepository ?? (_articleTagRepository = new Repository<ArticleTag>(Context)); }
@@ -148,15 +154,15 @@ namespace Gbmono.EF.Infrastructure
         #endregion
 
         #region Article
-        public IRepository<NArticle> NArticleRepository
-        {
-            get { return _nArticleRepository ?? (_nArticleRepository = new Repository<NArticle>(Context)); }
-        }
+        //public IRepository<NArticle> NArticleRepository
+        //{
+        //    get { return _nArticleRepository ?? (_nArticleRepository = new Repository<NArticle>(Context)); }
+        //}
 
-        public IRepository<NArticleImage> NArticleImageRepository
-        {
-            get { return _nArticleImageRepository ?? (_nArticleImageRepository = new Repository<NArticleImage>(Context)); }
-        }
+        //public IRepository<NArticleImage> NArticleImageRepository
+        //{
+        //    get { return _nArticleImageRepository ?? (_nArticleImageRepository = new Repository<NArticleImage>(Context)); }
+        //}
         #endregion
     }
 }
