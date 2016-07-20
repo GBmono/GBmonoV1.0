@@ -1,0 +1,5 @@
+{"OriginalWebSite":"http://by-s.me/lifestyle$",
+"ThridPartyUserId":"167288",
+"StoreRegex":["http://by-s.me/article/\\d*$","http://by-s.me/lifestyle$","http://by-s.me/lifestyle[?]page=\\d{1,2}$"],
+"RecipeRegex":["http://by-s.me/article/\\d*$"],
+"BlockRegex":null}

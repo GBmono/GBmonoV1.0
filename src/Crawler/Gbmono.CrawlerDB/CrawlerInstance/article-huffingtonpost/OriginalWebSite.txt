@@ -1,0 +1,5 @@
+{"OriginalWebSite":"http://www.huffingtonpost.jp/news/japan-lifestyle/",
+"ThridPartyUserId":"167288",
+"StoreRegex":["http://www.huffingtonpost.jp/news/japan-lifestyle/$","http://www.huffingtonpost.jp/\\d{4}/\\d{2}/\\d{2}/[^,./?#&]*.html[?]utm_hp_ref=japan-lifestyle$","http://www.huffingtonpost.jp/news/japan-lifestyle/\\d{1,2}$"],
+"RecipeRegex":["http://www.huffingtonpost.jp/\\d{4}/\\d{2}/\\d{2}/[^,./?#&]*.html[?]utm_hp_ref=japan-lifestyle$"],
+"BlockRegex":null}

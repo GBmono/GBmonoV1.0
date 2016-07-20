@@ -70,8 +70,8 @@ namespace Gbmono.Crawler.Processor
                     {
 
                         var url = db.CrawlHistory.Single(m => m.Id == fileId).Key;
-                        if(repo.NArticleRepository.Table.Any(m=>m.SourceUrl==url))
-                            return;
+                        //if(repo.NArticleRepository.Table.Any(m=>m.SourceUrl==url))
+                        //    return;
 
                         if (db.ProductInfoes.Any(m => m.Url == url))
                         {
@@ -127,8 +127,8 @@ namespace Gbmono.Crawler.Processor
                             SourceUrl = url,
                             Title = title
                         };
-                        repo.NArticleRepository.Create(article);
-                        repo.NArticleRepository.Save();
+                        //repo.NArticleRepository.Create(article);
+                        //repo.NArticleRepository.Save();
 
 
 
@@ -139,9 +139,9 @@ namespace Gbmono.Crawler.Processor
                             {
                                 var imageUrl = image.Attributes["src"].Value;
 
-                                repo.NArticleImageRepository.Create(new NArticleImage() { NArticleId = article.NArticleId, Url = imageUrl });
+                                //repo.NArticleImageRepository.Create(new NArticleImage() { NArticleId = article.NArticleId, Url = imageUrl });
                             }
-                            repo.NArticleRepository.Save();
+                            //repo.NArticleRepository.Save();
                         }
 
                         Console.Write("+");

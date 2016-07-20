@@ -121,7 +121,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CrawlerInstance\article-by-sme\OriginalWebSite.txt" />
     <Content Include="CrawlerInstance\article-houyhnhnm\OriginalWebSite.txt" />
+    <Content Include="CrawlerInstance\article-huffingtonpost\OriginalWebSite.txt" />
     <Content Include="CrawlerInstance\matsukiyo\OriginalWebSite.txt" />
     <Content Include="CrawlerInstance\rakuten\OriginalWebSite.txt" />
     <Content Include="CrawlerInstance\store\OriginalWebSite.txt" />
