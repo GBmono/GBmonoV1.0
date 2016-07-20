@@ -282,7 +282,7 @@ namespace Gbmono.Api.Admin.Controllers
             // generate thumnail image then save into the directory
             ImageHelper.CreateThumbnail(
                         Path.Combine(imgDirectory, newFileName), // source image
-                        260, // width
+                        260, // width todo:??
                         150, // height
                         "image/jpeg", // mime type
                         Path.Combine(thumbnailDirectory, newFileName), // save path
