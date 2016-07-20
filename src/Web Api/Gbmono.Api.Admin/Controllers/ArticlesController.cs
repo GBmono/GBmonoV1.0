@@ -209,7 +209,7 @@ namespace Gbmono.Api.Admin.Controllers
                 var image = new KendoUploadImg
                 {
                     Name = filename,
-                    Size = size,
+                    //Size = size,
                     Type = "f"
                 };
 
@@ -296,7 +296,7 @@ namespace Gbmono.Api.Admin.Controllers
             var uploadedImg = new KendoUploadImg
             {
                 Name = newFileName,
-                Size = 1000,
+                //Size = 1000,
                 Type =  "f"
             };
 
