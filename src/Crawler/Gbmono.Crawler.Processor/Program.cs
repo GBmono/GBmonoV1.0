@@ -29,8 +29,11 @@ namespace Gbmono.Crawler.Processor
             //var processor = new ChineseProcessor();
             //processor.Test();
 
-            var processor = new ArticleProcessor();
-            processor.Process();
+            //var processor = new ArticleProcessor();
+            //processor.Process();
+
+            var process = new ArticleHuffingtonProcess();
+            process.Process();
 
         }
     }
