@@ -43,17 +43,17 @@ namespace Gbmono.Api.Controllers
                                                           .OrderBy(m => m.CategoryCode)
                                                           .ToListAsync();
 
-                //// add third level cates
-                //foreach (var secondCate in secondCates)
-                //{
-                //    var thirdCates = await _repositoryManager.CategoryRepository
-                //                                          .Table
-                //                                          .Where(m => m.ParentId == secondCate.CategoryId)
-                //                                          .OrderBy(m => m.CategoryCode)
-                //                                          .ToListAsync();
+                // add third level cates
+                foreach (var secondCate in secondCates)
+                {
+                    var thirdCates = await _repositoryManager.CategoryRepository
+                                                          .Table
+                                                          .Where(m => m.ParentId == secondCate.CategoryId)
+                                                          .OrderBy(m => m.CategoryCode)
+                                                          .ToListAsync();
 
-                //    secondCate.SubCategories = thirdCates;
-                //}
+                    secondCate.SubCategories = thirdCates;
+                }
 
                 topCate.SubCategories = secondCates;
             }
@@ -61,6 +61,13 @@ namespace Gbmono.Api.Controllers
             return topCates;
         }
 
+        // get by id
+        public async Task<Category> GetById(int id)
+        {
+            return await _repositoryManager.CategoryRepository.GetAsync(id);
+        }
+
+        // todo: to be deprecated
         // return category menu binding models
         [Route("Menu/{id}")]
         public async Task<CategoryMenu> GetCategoryMenuItems(int id)
@@ -104,6 +111,7 @@ namespace Gbmono.Api.Controllers
                                            .ToListAsync();
         }
 
+        // todo: to be deprecated
         // return third level categories by second or top category id
         [Route("Third/{id}")]
         public async Task<IEnumerable<Category>> GetThirdCategories(int id)
@@ -129,18 +137,45 @@ namespace Gbmono.Api.Controllers
         }
 
         // get brands by top category id
-        [Route("{id}/Brands")]
-        public async Task<IEnumerable<Brand>> GetBrands(int id)
+        [Route("{id}/Brands/{levelId}")]
+        public async Task<IEnumerable<Brand>> GetBrands(int id, int levelId)
         {
-            // return brands by product top category
-            return await _repositoryManager.ProductRepository
-                                           .Table
-                                           .Include(m => m.Brand)
-                                           .Include(m => m.Category.ParentCategory)
-                                           .Where(m => m.Category.ParentCategory.ParentId == id)
-                                           .Select(m => m.Brand)
-                                           .Distinct()
-                                           .ToListAsync();
+            if(levelId == 1)
+            {
+                // return brands by product top category
+                return await _repositoryManager.ProductRepository
+                                               .Table
+                                               .Include(m => m.Brand)
+                                               .Include(m => m.Category.ParentCategory)
+                                               .Where(m => m.Category.ParentCategory.ParentId == id)
+                                               .Select(m => m.Brand)
+                                               .Distinct()
+                                               .ToListAsync();
+            }
+            else if(levelId == 2)
+            {
+                // return brands by product second level category
+                return await _repositoryManager.ProductRepository
+                                               .Table
+                                               .Include(m => m.Brand)
+                                               .Include(m => m.Category.ParentCategory)
+                                               .Where(m => m.Category.ParentId == id)
+                                               .Select(m => m.Brand)
+                                               .Distinct()
+                                               .ToListAsync();
+            }
+            else
+            {
+                // return brands by third level category
+                return await _repositoryManager.ProductRepository
+                                               .Table
+                                               .Include(m => m.Brand)
+                                               .Where(m => m.CategoryId == id)
+                                               .Select(m => m.Brand)
+                                               .Distinct()
+                                               .ToListAsync();
+            }
+
         }
 
     }

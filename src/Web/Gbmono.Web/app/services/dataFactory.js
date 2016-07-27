@@ -52,39 +52,32 @@
         // return data factory with CRUD calls
         return {
             getAll: getAll,
-            getMenu: getMenu,
+            getById:getById,
             getTopCates: getTopCates,
-            getThirdCates:getThirdCates,
             getBrands: getBrands
         }
 
         // update version number when json file is updated
         // so data factory would download new json file from server instead of loading cached files
-        var version = '1.0';
+        // var version = '1.0';
 
         // read cached data from json file
         function getAll() {
-            return $http.get('/gbmono/angularApp/data/category.json?v=' + version);
-            // return $http.get(gbmono.api_site_prefix.category_api_url);
+            // return $http.get('/gbmono/angularApp/data/category.json?v=' + version);
+            return $http.get(gbmono.api_site_prefix.category_api_url);
+        }
+
+        function getById(id) {
+            return $http.get(gbmono.api_site_prefix.category_api_url + '/' + id);
         }
 
         function getTopCates() {
-            return $http.get('/gbmono/angularApp/data/category_top.json?v=' + version);
-            // return $http.get(gbmono.api_site_prefix.category_api_url + '/Top');
+            // return $http.get('/gbmono/angularApp/data/category_top.json?v=' + version);
+            return $http.get(gbmono.api_site_prefix.category_api_url + '/Top');
         }
-
-        function getMenu (id) {
-            return $http.get(gbmono.api_site_prefix.category_api_url + '/Menu/' + id);
-        }
-
-
-
-        function getThirdCates(id) {
-            return $http.get(gbmono.api_site_prefix.category_api_url + '/Third/' + id);
-        }
-
-        function getBrands(id) {
-            return $http.get(gbmono.api_site_prefix.category_api_url + '/' + id + '/Brands');
+        
+        function getBrands(id, levelId) {
+            return $http.get(gbmono.api_site_prefix.category_api_url + '/' + id + '/Brands/' + levelId);
         }
     }
 
@@ -305,11 +298,21 @@
 
         // return data factory with CRUD calls
         return {
-            getByDate: getByDate
+            getById:getById,
+            getByDate: getByDate,
+            getByRanking: getByRanking
+        };
+
+        function getById(id) {
+            return $http.get(gbmono.api_site_prefix.article_api_url + '/' + id);
         };
 
         function getByDate(from, to) {
             return $http.get(gbmono.api_site_prefix.article_api_url + '/' + from + '/' + to);
+        }
+
+        function getByRanking() {
+            return $http.get(gbmono.api_site_prefix.article_api_url + '/Ranking');
         }
     }
 

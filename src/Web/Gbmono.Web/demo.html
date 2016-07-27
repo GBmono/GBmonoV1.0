@@ -5,23 +5,31 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- css -->
-    <link href="content/css2/init.css" rel="stylesheet" />
+    <link href="content/css2/articleDetailInit.css" rel="stylesheet" />
+    <link href="content/css2/brandInit.css" rel="stylesheet" />
+    <link href="content/css2/indexInit.css" rel="stylesheet" />
+    <link href="content/css2/loginInit.css" rel="stylesheet" />
+    <link href="content/css2/marketPromotionInit.css" rel="stylesheet" />
+    <link href="content/css2/personCenterInit.css" rel="stylesheet" />
+    <link href="content/css2/productDetailInit.css" rel="stylesheet" />
+    <link href="content/css2/productInit.css" rel="stylesheet" />
+    <link href="content/css2/recommendInit.css" rel="stylesheet" />
+    <link href="content/css2/shopSearchInit.css" rel="stylesheet" />
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.png">
 </head>
 <body ng-controller="masterController as vm">
     <div id="indexView">
+        <!-- header -->
+        <!-- included header -->
+        <div ng-include="'app/components/header.html'"
+             ng-controller="headerController as vm">
+        </div>
+
         <!-- container -->
-        <section class="container">
-            <!-- header -->
-            <!-- included header -->
-            <div ng-include="'app/components/header.html'"
-                 ng-controller="headerController as vm">
-            </div>
-            
+        <section class="container">            
             <!-- content, ng view injected-->
             <div class="wrapper">
                 <div ng-view class="slide"></div>
@@ -65,6 +73,7 @@
     <script src="app/services/jqueryPluginService.js"></script>
     <script src="app/services/dataFactory.js"></script>
     <script src="app/services/pageDataFactory.js"></script>
+    <script src="app/services/utilService.js"></script>
     <!--<script src="angularApp/services/pageDataFactory.js"></script>
     <script src="angularApp/services/dataFactory.js"></script>
     <script src="angularApp/services/jqueryPluginService.js"></script>
@@ -74,6 +83,10 @@
     <script src="app/master.js"></script>
     <script src="app/component.js"></script>
     <script src="app/controllers/home/homeController.js"></script>
+    <script src="app/controllers/products/productListController.js"></script> 
+    <script src="app/controllers/products/productDetailController.js"></script>
+    <script src="app/controllers/articles/articleListController.js"></script>  
+    <script src="app/controllers/articles/articleDetailController.js"></script> 
     <!--<script src="angularApp/controllers/home/homeController.js"></script>
     <script src="angularApp/controllers/categories/categoryListController.js"></script>
     <script src="angularApp/controllers/products/productListController.js"></script>

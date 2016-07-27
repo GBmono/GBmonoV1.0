@@ -12,7 +12,7 @@
             snap: snap,
             menuSliding: menuSliding,
             tab:tab,
-            // productDetailGallery: productDetailGallery,
+            productDetailGallery: productDetailGallery,
             notify: notify,
             showDataLoadingIndicator: showDataLoadingIndicator,
             closeDataLoadingIndicator: closeDataLoadingIndicator,
@@ -83,39 +83,17 @@
         }
 
         // product thumbnail gallery
-        function productDetailGallery(confDetailSwitch) {
+        function productDetailGallery() {
             $timeout(function () {
-                $('#productMain .thumb:first').addClass('active');
-                // timer = setInterval(autoSwitch, confDetailSwitch);
-                $("#productMain .thumb").click(function (e) {
-
-                    switchImage($(this));
-                    // clearInterval(timer);
-                    // timer = setInterval(autoSwitch, confDetailSwitch);
-                    e.preventDefault();
+                $(".thumb").hover(function (e) {
+                    const currentBtn = $(e.currentTarget);
+                    $(".thumb").removeClass("active");
+                    currentBtn.addClass("active");
+                    var bigImg = currentBtn.attr("bigimg");
+                    $(".detail-img img").attr("src", bigImg);
+                }, function () {
+                    //$(".thumb").removeClass("active");
                 });
-                
-                //$('#productMain #mainImage').hover(function () {
-                //    // clearInterval(timer);
-                //}, function () {
-                //    // timer = setInterval(autoSwitch, confDetailSwitch);
-                //});
-
-                //function autoSwitch() {
-                //    var nextThumb = $('#productMain .thumb.active').closest('div').next('div').find('.thumb');
-                //    if (nextThumb.length == 0) {
-                //        nextThumb = $('#productMain .thumb:first');
-                //    }
-                //    switchImage(nextThumb);
-                //}
-
-                function switchImage(thumb) {
-                    // switch thumbnail img 
-                    $('#productMain .thumb').removeClass('active');
-                    var bigUrl = thumb.attr('href');
-                    thumb.addClass('active');
-                    $('#productMain #mainImage img').attr('src', bigUrl);
-                }
             });
         }
 
@@ -123,10 +101,17 @@
         function tab() {
             // disable the default behavior
             $timeout(function () {
-                $('a[data-toggle="tab"]').click(function (e) {
-                    e.preventDefault();
+                $(".product-tab").on("click", function (e) {
+                    var currentBtn = $(e.currentTarget);
+                    $(".product-tab").removeClass("active");
+                    currentBtn.addClass("active");
+                    var dom = currentBtn.attr("chooseitem");
+
+                    $(".tab-item-content").removeClass("active");
+                    $("." + dom).addClass("active");
+
                 });
-            });
+            });                     
         }
 
         // $.growl notification

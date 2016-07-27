@@ -171,8 +171,22 @@ namespace Gbmono.Api.Admin.Controllers
 
             await _repositoryManager.ArticleTagRepository.SaveAsync();
 
+            // delete article image
+            var articleImages = _repositoryManager.ArticleImageRepository
+                                                  .Table
+                                                  .Where(m => m.ArticleId == id)
+                                                  .ToList();
+            foreach(var img in articleImages)
+            {
+                // delete
+                _repositoryManager.ArticleImageRepository.Delete(img);
+            }
+
+            await _repositoryManager.ArticleImageRepository.SaveAsync();
+
             // delete from article entity
             _repositoryManager.ArticleRepository.Delete(id);
+            
             // save
             await _repositoryManager.ArticleRepository.SaveAsync();
 

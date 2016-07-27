@@ -27,6 +27,14 @@ namespace Gbmono.Api.Controllers
 
         }
 
+        public async Task<Article> GetById(int id)
+        {
+            return await _repositoryManager.ArticleRepository
+                                                   .Table
+                                                   .Include(m => m.Images)
+                                                   .SingleOrDefaultAsync(m => m.ArticleId == id);
+        }
+
         [Route("{from}/{to}")]
         public async Task<IEnumerable<ArticleSimpleModel>> GetArticles(DateTime from, DateTime to)
         {
@@ -44,6 +52,23 @@ namespace Gbmono.Api.Controllers
                                                                m.ModifiedDate < DbFunctions.AddDays(to, 1) &&
                                                                m.IsPublished == true)
                                                    .OrderByDescending(m => m.ModifiedDate)
+                                                   .ToListAsync();
+
+            // convert into binding models
+            return articles.Select(m => m.ToSimpleToModel());
+        }
+
+        [Route("Ranking")]
+        public async Task<IEnumerable<ArticleSimpleModel>> GetArticlesByRanking()
+        {
+            // todo: get the articles by ranking
+            // load published articles by date
+            var articles = await _repositoryManager.ArticleRepository
+                                                   .Table
+                                                   .Include(m => m.Images)
+                                                   .Where(m => m.IsPublished == true)
+                                                   .OrderByDescending(m => m.ModifiedDate)
+                                                   .Take(12)
                                                    .ToListAsync();
 
             // convert into binding models

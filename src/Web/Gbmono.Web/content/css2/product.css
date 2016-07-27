@@ -1,0 +1,176 @@
+.router-guide{
+    list-style: none;
+    padding-left: 0;
+}
+
+.router-guide li{
+    list-style: none;
+    display: inline;
+}
+
+.side-column{
+    float: left;
+    width: 18%;
+}
+
+
+.main-column{
+    float: right;
+    width: 81%;
+}
+
+
+.item-category {
+    list-style: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.product-category-list h3 {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #bbb;
+    color: #000000;
+    font-weight: normal;
+    padding: 10px 10px;
+    font-size: 85%;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.item-category li {
+    background: #fff url(../images/icon_category_arrow.gif) no-repeat 190px center;
+}
+
+.item-category li a{
+    padding: 8px 10px 8px 8px;
+    display: block;
+    font-size: 85%;
+}
+
+.brand-category-title{
+    padding-top: 15px!important;
+}
+
+.brand-category li a:hover,
+.item-category li a:hover{
+    text-decoration: underline;
+}
+
+.brand-category li p,
+.item-category li p{
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+
+.brand-category {
+    max-height: 500px;
+    padding-left: 0;
+    overflow-y: scroll;
+    margin-top: 0;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+
+.brand-category li{
+    list-style: none;
+}
+
+.brand-category li a {
+    padding: 3px 10px 2px;
+    display: block;
+}
+
+
+
+
+h2.title.category {
+    font-size: 250%;
+    text-align: center;
+    font-weight: normal;
+    margin: 6px 0 2px;
+    padding: 0;
+}
+
+.page-nav-top-outer{
+    margin: 15px 0 40px;
+    padding: 10px 0 0;
+    border-top: 1px solid #bbb;
+    text-align: right;
+}
+
+.pagenumber-area {
+    clear: both;
+    overflow: hidden;
+    margin: 0 0 20px;
+}
+
+.page-nav-top-outer a:hover {
+    text-decoration: underline;
+}
+
+
+.navi {
+    padding: 10px 0 20px;
+    text-align: center;
+}
+
+.navi strong {
+    margin: 0 3px 0 0;
+    padding: 13px 16px;
+    display: inline;
+    font-weight: normal;
+    background: #eeeeee;
+}
+
+.navi a {
+    margin: 0 3px 0 0;
+    padding: 13px 16px;
+    display: inline;
+    background: #FFF;
+}
+
+.navi a:hover{
+    background: #eeeeee;
+}
+
+
+.list-area {
+    position: relative;
+    width: 24%;
+    margin: 0 -1px -1px 0;
+    padding: 1px;
+    float: left;
+    border: 1px solid #eee;
+    margin-left: 5px;
+}
+
+.listphoto img{
+    width: 100%;
+}
+
+
+.price_area{
+    margin-bottom: 20px;
+}
+
+.bottom-navi{
+    margin-top: 25px;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.menu-button{
+    position: relative;
+}
+
+.menu-button:hover>.dropdown-menu{
+    display: block;
+}
+
+.menu-button .dropdown-menu{
+    left: 80%;
+    top: 0;
+}

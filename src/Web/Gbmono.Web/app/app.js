@@ -40,7 +40,7 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/categories/:id/products/', { // product list
+                .when('/categories/:id/products/:subId', { // product list by category
                     templateUrl: gbmono.app_view_path + '/products/list.html',
                     controller: 'productListController',
                     controllerAs: 'vm',
@@ -89,8 +89,14 @@
                     caseInsensitiveMatch: true
                 })
                 .when('/articles', { // articles, news, information
-                    templateUrl: gbmono.app_view_path + '/articles/index.html',
-                    controller: 'articleIndexController',
+                    templateUrl: gbmono.app_view_path + '/articles/list.html',
+                    controller: 'articleListController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
+                .when('/articles/:id', { // articles, news, information
+                    templateUrl: gbmono.app_view_path + '/articles/detail.html',
+                    controller: 'articleDetailController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })

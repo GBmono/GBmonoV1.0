@@ -1,0 +1,47 @@
+.initial-title {
+    display: inline;
+}
+
+.title-description {
+    display: inline;
+    padding-left: 20px;
+}
+
+
+.shop-item-list .shop-item {
+    padding-right: 15px;
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+.shop-item-outer {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 20px;
+}
+
+
+.shop-item-outer p {
+    letter-spacing: 1px;
+}
+
+.shop-item-outer p>a {
+    color: #b2b2b2;
+}
+
+.shop-item-outer img {
+    height: auto;
+    width: 100%;
+}
+
+
+
+.header{
+    margin-top: 40px;
+    padding-bottom: 20px;
+}
+
+
+
+
