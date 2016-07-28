@@ -1,261 +1,332 @@
-﻿<!-- slider -->
-<div class="main-visual">
-    <div id="visualList">
-        <div class="visual-img-item">
-            <a ng-href="/#">
-                <img class="lazy" width="1200" height="675" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/GONZ_1200_675_.jpg" />
-            </a>
-        </div>
+﻿<div id="indexView" >
+    <!-- slider -->
+    <div class="main-visual">
+        <div id="visualList">
+            <div class="visual-img-item">
+                <a ng-href="/#">
+                    <img class="lazy" width="1200" height="675" 
+                         src="content/img/slider_1.jpg" />
+                </a>
+            </div>
 
-        <div class="visual-img-item">
-            <a ng-href="/#">
-                <img class="lazy" width="1200" height="675" src="http://www.houyhnhnm.jp/wp-content/uploads/3016/06/SA_1200_675_-1.jpg" />
-            </a>
-        </div>
-
-        <div class="visual-img-item">
-            <a ng-href="/#">
-                <img class="lazy" width="1200" height="675" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/reynspooner_1200.jpg" />
-            </a>
+            <div class="visual-img-item">
+                <a ng-href="/#">
+                    <img class="lazy" width="1200" height="675" 
+                         src="content/img/slider_2.jpg" />
+                </a>
+            </div>
         </div>
     </div>
-</div>
+    <!-- info -->
+    <div class="info-list-outer">
+        <!-- news & new activies-->
+        <section class="main-list">
 
-<!-- info -->
-<div class="info-list-outer">
-    <!-- news & new activies-->
-    <section class="main-list">
-        <!-- articles -->
-        <article class="news">
+            <!--- topics -->
+            <article class="gb-topic">
+
+                <div class="header">
+                    <h2 class="initial-title">Topic</h2>
+                    <p class="title-description">精选特辑，专题</p>
+                </div>
+
+                <div class="shop-item-list">
+                    <section class="shop-item">
+
+                        <div class="shop-item-outer">
+                            <div>
+                                <a href="javascript:void(0);">
+                                    <img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/Nui.brand2_.jpg" />
+                                </a>
+                            </div>
+
+                            <div class="shop-item-inner">
+
+                                <p>
+                                    <a href="javascript:void(0);">宿屋業界に新たなジャンルが。新・サブカルチャー、ゲストハウス。</a>
+                                </p>
+
+                                <p>
+                                    <time datetime="2016-06-22T21:15:20+00:00">2016.6.22 Wed</time>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </section>
+                    <section class="shop-item">
+
+                        <div class="shop-item-outer">
+                            <div>
+                                <a href="javascript:void(0);">
+                                    <img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/raf.brand1_.jpg" />
+                                </a>
+                            </div>
+
+                            <div class="shop-item-inner">
+
+                                <p>
+                                    <a href="javascript:void(0);">ラフ・シモンズが語る2017年春夏コレクションとフィレンツェへの想い。</a>
+                                </p>
+
+                                <p>
+                                    <time datetime="2016-06-22T21:15:20+00:00">2016.6.22 Wed</time>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </section>
+                    <section class="shop-item">
+
+                        <div class="shop-item-outer">
+                            <div>
+                                <a href="javascript:void(0);">
+                                    <img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/Brand_1200_675_-3.jpg" />
+                                </a>
+                            </div>
+
+                            <div class="shop-item-inner">
+
+                                <p>
+                                    <a href="javascript:void(0);">陽気でフリーキーな旋律。 ロード・エコーのジャパンツアー。ロード・エコーのジャパンツアー。</a>
+                                </p>
+
+                                <p>
+                                    <time datetime="2016-06-22T21:15:20+00:00">2016.6.22 Wed</time>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+
+            </article>
+
+            <!-- adv -->
+            <article class="advert-append">
+
+                <section>
+                    <p>
+                        <a href="javascript:void(0);">
+                            <img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/Unplugged_Vol3__banner-thumb-822x150-46311.jpg">
+                        </a>
+                    </p>
+                </section>
+
+            </article>
+
+            <!-- recommend products-->
+            <article class="recommend-list">
+                <div class="header">
+                    <h2 class="initial-title">集匠推荐</h2>
+                    <p class="title-description">根据用户定制推荐产品</p>
+                    <span class="list-more">更多</span>
+                </div>
+
+                <div class="snap-list-wrapper">
+                    <section id="snapList">
+                        <div class="snap-list-outer"
+                             ng-repeat="product in vm.recommendProducts">
+                            <div class="snap-list-inner">
+                                <a ng-href="#/products/{{product.productId}}">
+                                    <img class="recommend-product" 
+                                         ng-src="{{ vm.imgRoot + product.imgUrl}}">
+                                </a>
+                                <a ng-href="#/products/{{product.productId}}">
+                                    {{ product.shortName }}
+                                    <!--<img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/bin_logo.gif" alt="BIN">-->
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </article>
+
+            <!-- new products-->
+            <article class="latest-product">
+
+                <div class="header">
+                    <h2 class="initial-title">品类商品</h2>
+                    <p class="title-description">商品情报</p>
+                </div>
+
+                <div class="shop-item-list">
+                    <section class="shop-item"
+                             ng-repeat="product in vm.products">
+                        <div class="shop-item-outer">
+                            <p>{{ product.brandName }}</p>
+                            <div>
+                                <a ng-href="#/products/{{product.productId}}">
+                                    <img ng-src="{{ vm.imgRoot + product.imgUrl}}" />
+                                </a>
+                            </div>
+
+                            <div class="shop-item-inner">
+
+                                <p>
+                                    <a ng-href="#/products/{{product.productId}}">
+                                        {{ product.shortName }}
+                                    </a>
+                                </p>
+
+                                <p class="shop-item-date">
+                                    <span class="new">NEW</span>
+                                    <small> {{ product.date | date: 'yyyy-MM-dd' }}</small>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+            </article>
+
+            <!-- product / brand articles -->
+            <article class="vendor-topic">
+                <div class="header">
+                    <h2 class="initial-title">品牌</h2>
+                    <p class="title-description">精选特辑，专题</p>
+                    <span class="list-more">更多</span>
+                </div>
+
+                <div class="shop-item-list">
+                    <section class="shop-item"
+                             ng-repeat="article in vm.productArticles">
+                        <div class="shop-item-outer">
+                            <div>
+                                <a ng-href="#/articles/{{ article.articleId }}">
+                                    <img ng-src="{{ vm.articleImgRoot + article.coverThumbnailUrl }}" />
+                                </a>
+                            </div>
+
+                            <div class="shop-item-inner">
+                                <p>
+                                    <a ng-href="#/articles/{{ article.articleId }}">
+                                        {{ article.title }}
+                                    </a>
+                                </p>
+
+                                <p>
+                                    <time>{{ article.modifiedDate | date: 'yyyy-MM-dd'}}</time>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+            </article>
+
+            <!-- marketing articles -->
+            <article class="news">
+                <div class="header">
+                    <h2 class="initial-title">市场信息</h2>
+                    <p class="title-description">最新情报</p>
+                    <span class="list-more">更多</span>
+                </div>
+
+                <div class="shop-item-list">
+                    <section class="shop-item"
+                             ng-repeat="article in vm.newsArticles">
+                        <div class="shop-item-outer">
+                            <div>
+                                <a ng-href="#/articles/{{ article.articleId }}">
+                                    <img ng-src="{{ vm.articleImgRoot + article.coverThumbnailUrl }}" />
+                                </a>
+                            </div>
+
+                            <div class="shop-item-inner">
+                                <p>
+                                    <a ng-href="#/articles/{{ article.articleId }}">
+                                        {{ article.title }}
+                                    </a>
+                                </p>
+
+                                <p>
+                                    <time>{{ article.modifiedDate | date: 'yyyy-MM-dd'}}</time>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+            </article>
+
+            <!-- shop articles -->
+            <article class="vendor-shop">
+
+                <div class="header">
+                    <h2 class="initial-title">零售店活动</h2>
+                    <p class="title-description">最新活动</p>
+                    <span class="list-more">更多</span>
+                </div>
+
+                <div class="shop-item-list">
+                    <section class="shop-item"
+                             ng-repeat="article in vm.shopArticles">
+                        <div class="shop-item-outer">
+                            <div>
+                                <a ng-href="#/articles/{{ article.articleId }}">
+                                    <img ng-src="{{ vm.articleImgRoot + article.coverThumbnailUrl }}" />
+                                </a>
+                            </div>
+
+                            <div class="shop-item-inner">
+                                <p>
+                                    <a ng-href="#/articles/{{ article.articleId }}">
+                                        {{ article.title }}
+                                    </a>
+                                </p>
+
+                                <p>
+                                    <time>{{ article.modifiedDate | date: 'yyyy-MM-dd'}}</time>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- right side bar-->
+        <section class="side-bar">
+            <!-- title -->
             <div class="header">
-                <h2 class="initial-title">最新动态</h2>
-                <p class="title-description">店铺，新品上市，最新情报</p>
+                <h2 class="initial-title">&nbsp;</h2>
             </div>
-
-            <div class="shop-item-list">
-                <section class="shop-item"
-                         ng-repeat="article in vm.articles">
-                    <div class="shop-item-outer">
-                        <p>{{ article.header }}</p>
-                        <div>
-                            <a ng-href="/#">
-                                <img class="lazy"
-                                     ng-src="{{ article.imgUrl}}" />
-                            </a>
-                        </div>
-
-                        <div class="shop-item-inner">
-                            <p>
-                                <a ng-href="/#">{{ article.title }}</a>
-                            </p>
-
-                            <p class="shop-item-date">
-                                <span class="new">NEW</span>
-                                <small>2016.6.22 Wed</small>
-                            </p>
-                        </div>
-                    </div>
-
-                </section> 
-            </div>
-        </article>
-
-        <!-- adv -->
-        <article class="advert-append">
-            <section>
-                <p>
-                    <a ng-href="/#">
-                        <img class="lazy" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/Unplugged_Vol3__banner-thumb-822x150-46311.jpg" alt="Unplugged_Vol3__banner-thumb-822x150-46311" width="840" height="150">
+            <!-- adv -->
+            <div class="ad-recommend">
+                <div>
+                    <a href="" target="_blank">
+                        <img class="lazy" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/sp.banner.4.jpg" />
                     </a>
-                </p>
-            </section>
-
-        </article>
-            
-        <!-- new products -->
-        <article class="feature">
-            <div class="header">
-                <h2 class="initial-title">最新商品</h2>
-                <p class="title-description">商品最新情报</p>
-            </div>
-            <div class="shop-item-list">
-                <section class="shop-item"
-                         ng-repeat="product in vm.products">
-                    <div class="shop-item-outer">
-                        <p>{{ product.brandName}}</p>
-                        <div>
-                            <a ng-href="/#">
-                                <img class="lazy" 
-                                     ng-src="{{ vm.imgRoot + product.imgUrl}}" />
-                            </a>
-                        </div>
-
-                        <div class="shop-item-inner">
-                            <p>
-                                <a ng-href="/#">{{ product.shortName }}</a>
-                            </p>
-
-                            <p class="shop-item-date">
-                                <span class="new">NEW</span>
-                                <small>2016.6.22 Wed</small>
-                            </p>
-                        </div>
-                    </div>
-                </section>
+                </div>
             </div>
 
-        </article>
-
-        <!-- snap -->       
-        <div ng-include="'app/components/products/recommend.html'"
-             ng-controller="recommendController as vm">
-        </div>
-
-        <br />
-        <br />
-        <!-- new articles in db testing -->
-        <article class="news">
-            <div class="header">
-                <h2 class="initial-title">集匠特辑</h2>
-                <p class="title-description">精选特辑，专题</p>
+            <!-- ranking-->
+            <div ng-include="'app/components/products/ranking.html'"
+                 ng-controller="rankingController as vm">
             </div>
 
-            <div class="shop-item-list">
-                <section class="shop-item" ng-repeat="article in vm.articles2">
-                    <div class="shop-item-outer">
-                        <p></p>   
-                        <div>
-                            <a ng-href="/#">
-                                <img class="lazy"  width="260" height="146"
-                                     ng-src="{{ vm.articleImgRoot + article.coverThumbnailUrl }}" />
-                            </a>
-                        </div>
+            <div class="ad-recommend">
+                <div>
+                    <a href="" target="_blank">
+                        <img src="content/img/adv4.jpg" />
+                    </a>
+                </div>
 
-                        <div class="shop-item-inner">
-                            <p>
-                                <a ng-href="/#">{{ article.title }}</a>
-                            </p>
-                            <p>
-                                <time datetime="2016-06-22T21:15:20+00:00">{{ article.modifiedDate | date: 'yyyy-MM-dd'}}</time>
-                            </p>
-                        </div>
-                    </div>
-
-                </section>
-
+                <div>
+                    <a href="" target="_blank">
+                        <img src="content/img/adv1.jpg" />
+                    </a>
+                </div>
             </div>
 
-        </article>
-    
-        <!-- new events-->
-        <article class="news">
-            <div class="header">
-                <h2 class="initial-title">店铺信息</h2>
-                <p class="title-description">最新情报</p>
-            </div>
-
-            <div class="shop-item-list">
-                <section class="shop-item">
-                    <div class="shop-item-outer">
-                        <p></p>
-                        <div>
-                            <a ng-href="/#">
-                                <img class="lazy" width="260" height="146"
-                                     src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/Nui.brand2_.jpg" />
-                            </a>
-                        </div>
-
-                        <div class="shop-item-inner">
-                            <p>
-                                <a ng-href="/#">宿屋業界に新たなジャンルが。新・サブカルチャー、ゲストハウス。</a>
-                            </p>
-                            <p>
-                                <time datetime="2016-06-22T21:15:20+00:00">2016.6.22 Wed</time>
-                            </p>
-                        </div>
-                    </div>
-
-                </section>
-                <section class="shop-item">
-                    <div class="shop-item-outer">
-                        <p></p>
-                        <div>
-                            <a ng-href="/#">
-                                <img class="lazy" width="260" height="146"
-                                     src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/raf.brand1_.jpg" />
-                            </a>
-                        </div>
-
-                        <div class="shop-item-inner">
-                            <p>
-                                <a ng-href="/#">ラフ・シモンズが語る2017年春夏コレクションとフィレンツェへの想い。</a>
-                            </p>
-                            <p>
-                                <time datetime="2016-06-22T21:15:20+00:00">2016.6.22 Wed</time>
-                            </p>
-                        </div>
-                    </div>
-
-                </section>
-                <section class="shop-item">
-                    <div class="shop-item-outer">
-                        <p></p>
-                        <div>
-                            <a ng-href="/#">
-                                <img class="lazy" width="260" height="146"
-                                     src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/Brand_1200_675_-3.jpg" />
-                            </a>
-                        </div>
-
-                        <div class="shop-item-inner">
-                            <p>
-                                <a ng-href="/#">陽気でフリーキーな旋律。 ロード・エコーのジャパンツアー。ロード・エコーのジャパンツアー。</a>
-                            </p>
-                            <p>
-                                <time datetime="2016-06-22T21:15:20+00:00">2016.6.22 Wed</time>
-                            </p>
-                        </div>
-                    </div>
-
-                </section>
-            </div>
-
-        </article>
-    </section>
-
-    <!-- right side bar-->
-    <section class="side-bar">
-        <!-- title -->
-        <div class="header">
-            <h2 class="initial-title">&nbsp;</h2>
-        </div>
-        <!-- adv -->
-        <div class="ad-recommend">
-            <div>
-                <a href="" target="_blank">
-                    <img class="lazy" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/sp.banner.4.jpg" />
-                </a>
-            </div>
-        </div>
-
-        <!-- ranking-->
-        <div ng-include="'app/components/products/ranking.html'"
-             ng-controller="rankingController as vm">
-        </div>
-
-        <div class="ad-recommend">
-            <div>
-                <a href="" target="_blank">
-                    <img src="content/img/adv4.jpg" />
-                </a>
-            </div>
-
-            <div>
-                <a href="" target="_blank">
-                    <img src="content/img/adv1.jpg" />
-                </a>
-            </div>
-        </div>
-
-    </section>
+        </section>
+    </div>
 </div>

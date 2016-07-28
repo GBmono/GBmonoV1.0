@@ -1,130 +1,132 @@
-﻿<ol class="breadcrumb">
-    <li>
-        <a ng-href="#/">
-            <span>主页</span>
-        </a>
-    </li>
+﻿<div id="articleDetailView" >
+    <!--<ol class="breadcrumb">
+        <li>
+            <a ng-href="#/">
+                <span>主页</span>
+            </a>
+        </li>
 
-    <li>
-        <span class="divider">&gt;</span>
-        <a ng-href="#/">
-            <span>市场动态</span>
-        </a>
-    </li>
-</ol>
-<div class="main-list">
-    <div class="inner-content">
+        <li>
+            <span class="divider">&gt;</span>
+            <a ng-href="#/">
+                <span>市场动态</span>
+            </a>
+        </li>
+    </ol>-->
 
-        <div class="header title">
-            <p><span>{{ vm.article.modifiedDate | date: 'yyyy-MM-dd'}}</span></p>
-            <h2>{{ vm.article.title }}</h2>
-        </div>
-        <!-- social netword-->
-        <div class="sns">
+    <div class="main-list">
+        <div class="inner-content">
 
-            <!-- JiaThis Button BEGIN -->
-            <div class="jiathis_style_32x32">
-                <a class="jiathis_button_qzone"></a>
-                <a class="jiathis_button_tsina"></a>
-                <a class="jiathis_button_tqq"></a>
-                <a class="jiathis_button_weixin"></a>
-                <a class="jiathis_button_renren"></a>
-                <a href="http://www.jiathis.com/share?uid=2013366" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-                <a class="jiathis_counter_style"></a>
+            <div class="header title">
+                <p><span>{{ vm.article.modifiedDate | date: 'yyyy-MM-dd'}}</span></p>
+                <h2>{{ vm.article.title }}</h2>
             </div>
-            <script type="text/javascript">
+            <!-- social netword-->
+            <div class="sns">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style_32x32">
+                    <a class="jiathis_button_qzone"></a>
+                    <a class="jiathis_button_tsina"></a>
+                    <a class="jiathis_button_tqq"></a>
+                    <a class="jiathis_button_weixin"></a>
+                    <a class="jiathis_button_renren"></a>
+                    <a href="http://www.jiathis.com/share?uid=2013366" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                    <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
                             var jiathis_config = {data_track_clickback:'true'};
-            </script>
-            <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2013366" charset="utf-8"></script>
-            <!-- JiaThis Button END -->
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2013366" charset="utf-8"></script>
+                <!-- JiaThis Button END -->
 
-        </div>
-
-        <div class="body">
-            <!-- artile html body-->
-            <div data-ng-bind-html="vm.htmlBody"></div>
-        </div>
-
-        <hr>
-
-
-        <article class="news">
-
-            <div class="header">
-                <h2 class="initial-title">相关文章</h2>
             </div>
 
-            <div class="shop-item-list">
-                <section class="shop-item">
+            <div class="body">
+                <!-- artile html body-->
+                <div data-ng-bind-html="vm.htmlBody"></div>
+            </div>
 
-                    <div class="shop-item-outer">
-                        <div>
-                            <a href="javascript:void(0);">
-                                <img src="http://119.9.104.196/gbmono/content/img/info1.jpg" />
+            <hr>
+
+            <article class="news">
+                <div class="header">
+                    <h2 class="initial-title">相关文章</h2>
+                </div>
+
+                <div class="shop-item-list">
+                    <section class="shop-item">
+
+                        <div class="shop-item-outer">
+                            <div>
+                                <a href="javascript:void(0);">
+                                    <img src="http://119.9.104.196/gbmono/content/img/info1.jpg" />
+                                </a>
+                            </div>
+
+                            <div class="shop-item-inner">
+
+                                <p>
+                                    <a href="http://www.kundian.net">ファンデーションがうまくのらない……　その原因はスポンジにアリ!?</a>
+                                </p>
+
+                                <p class="shop-item-date">
+                                    <span class="new">NEW</span>
+                                    <small>2016.6.22 Wed</small>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+            </article>
+
+        </div>
+    </div>
+
+    <div class="side-bar">
+
+        <article class="ranking">
+            <div class="header">
+                <h2 class="initial-title">热点文章</h2>
+                <p class="title-description">综合排名</p>
+            </div>
+
+            <div class="daily-rank">
+                <section>
+                    <div class="daily-rank-outer">
+                        <div class="rank-img-wrapper">
+                            <a href="http://www.kundian.net">
+                                <img src="http://cdn.houyhnhnm.jp/2016/07/voterhc001-260x146.jpg">
                             </a>
                         </div>
-
-                        <div class="shop-item-inner">
-
+                        <div class="daily-rank-inner">
+                            <p>NO.1</p>
                             <p>
-                                <a href="http://www.kundian.net">ファンデーションがうまくのらない……　その原因はスポンジにアリ!?</a>
+                                <a href="http://www.houyhnhnm.jp/feature/4043/">vol.1 いま気になるスニーカー。藤原ヒロシの場合。</a>
                             </p>
-
-                            <p class="shop-item-date">
-                                <span class="new">NEW</span>
-                                <small>2016.6.22 Wed</small>
-                            </p>
-
                         </div>
                     </div>
-
                 </section>
             </div>
+
         </article>
 
+        <div class="ad-recommend">
+            <div>
+                <a href="javascript:void(0);" target="_blank">
+                    <img src="http://119.9.104.196/gbmono/content/img/adv4.jpg">
+                </a>
+            </div>
+
+            <div>
+                <a href="javascript:void(0);" target="_blank">
+                    <img src="http://119.9.104.196/gbmono/content/img/adv1.jpg">
+                </a>
+            </div>
+        </div>
+
     </div>
 </div>
 
-<div class="side-bar">
-
-    <article class="ranking">
-        <div class="header">
-            <h2 class="initial-title">热点文章</h2>
-            <p class="title-description">综合排名</p>
-        </div>
-
-        <div class="daily-rank">
-            <section>
-                <div class="daily-rank-outer">
-                    <div class="rank-img-wrapper">
-                        <a href="http://www.kundian.net">
-                            <img src="http://cdn.houyhnhnm.jp/2016/07/voterhc001-260x146.jpg">
-                        </a>
-                    </div>
-                    <div class="daily-rank-inner">
-                        <p>NO.1</p>
-                        <p>
-                            <a href="http://www.houyhnhnm.jp/feature/4043/">vol.1 いま気になるスニーカー。藤原ヒロシの場合。</a>
-                        </p>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-    </article>
-
-    <div class="ad-recommend">
-        <div>
-            <a href="javascript:void(0);" target="_blank">
-                <img src="http://119.9.104.196/gbmono/content/img/adv4.jpg">
-            </a>
-        </div>
-
-        <div>
-            <a href="javascript:void(0);" target="_blank">
-                <img src="http://119.9.104.196/gbmono/content/img/adv1.jpg">
-            </a>
-        </div>
-    </div>
-
-</div>

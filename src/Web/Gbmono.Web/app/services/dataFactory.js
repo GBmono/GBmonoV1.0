@@ -298,7 +298,8 @@
 
         // return data factory with CRUD calls
         return {
-            getById:getById,
+            getById: getById,
+            getNewArticles: getNewArticles,
             getByDate: getByDate,
             getByRanking: getByRanking
         };
@@ -306,6 +307,10 @@
         function getById(id) {
             return $http.get(gbmono.api_site_prefix.article_api_url + '/' + id);
         };
+
+        function getNewArticles(typeId, pageSize) {
+            return $http.get(gbmono.api_site_prefix.article_api_url + '/New/' + typeId + '/' + pageSize);
+        }
 
         function getByDate(from, to) {
             return $http.get(gbmono.api_site_prefix.article_api_url + '/' + from + '/' + to);
@@ -317,6 +322,7 @@
     }
 
 })(angular.module('gbmono'));
+
 /*
     location data factory
 */

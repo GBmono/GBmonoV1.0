@@ -1,26 +1,26 @@
-.breadcrumb{
+#brandView .breadcrumb{
     padding-left: 0;
 }
 
-.breadcrumb>li>.divider {
+#brandView .breadcrumb>li>.divider {
     padding: 0 8px;
     color: #9a9a9a;
 }
 
-.breadcrumb li{
+#brandView .breadcrumb li{
     display: inline;
 }
 
-.breadcrumb a {
+#brandView .breadcrumb a {
     color: #9a9a9a;
 }
 
-.breadcrumb-last{
+#brandView .breadcrumb-last{
     color: #000000;
 }
 
 
-.search-input{
+#brandView .search-input{
     border-bottom: 1px solid #cccccc;
     border-top:1px solid #cccccc;
     padding: 20px 0;
@@ -28,7 +28,7 @@
     text-align: center;
 }
 
-.form-control{
+#brandView .form-control{
     padding-left: 10px;
     width: 70%;
     height: 28px;
@@ -40,7 +40,7 @@
 
 
 
-.menu-column-subcategory{
+#brandView .menu-column-subcategory{
     margin-top: 10px;
     width: 27%;
     vertical-align: top;
@@ -48,30 +48,30 @@
 }
 
 
-.menu-column-subcategory li{
+#brandView .menu-column-subcategory li{
     list-style: none;
 }
 
-.menu-column-subcategory-link {
+#brandView .menu-column-subcategory-link {
     font-size: 18px;
     line-height: 26px;
 }
 
 
 
-.input-group-btn:hover{
+#brandView .input-group-btn:hover{
     background: #000000;
     color: #fff;
     cursor: pointer;
 }
 
-.input-group-btn {
+#brandView .input-group-btn {
     border: 1px solid #000000;
     display: inline-block;
     color: #000000;
 }
 
-.zone-search-btn {
+#brandView .zone-search-btn {
     display: block;
     padding: 5px 5px 3px 5px;
 }

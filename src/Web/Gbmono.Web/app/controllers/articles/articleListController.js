@@ -59,7 +59,7 @@
         // get articles by date
         function getArticlesByDate(from, to) {
             // loading status
-            pluginService.showDataLoadingIndicator('#articles', { left: "38%", top: "60px;" });
+            pluginService.showDataLoadingIndicator('#marketPromotionView', { left: "38%", top: "60px;" });
 
             articleDataFactory.getByDate(from, to)
                 .success(function (data) {
@@ -79,7 +79,7 @@
                         }
                     }
                     // close data loading
-                    pluginService.closeDataLoadingIndicator('#articles');
+                    pluginService.closeDataLoadingIndicator('#marketPromotionView');
 
                     // enable tab
                     initTab();

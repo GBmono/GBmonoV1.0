@@ -20,34 +20,32 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.png">
 </head>
-<body ng-controller="masterController as vm">
-    <div id="indexView">
-        <!-- header -->
-        <!-- included header -->
-        <div ng-include="'app/components/header.html'"
-             ng-controller="headerController as vm">
+<body ng-controller="masterController as vm"> 
+    <!-- header -->
+    <!-- included header -->
+    <div ng-include="'app/components/header.html'"
+            ng-controller="headerController as vm">
+    </div>
+
+    <!-- container -->
+    <section class="container">            
+        <!-- content, ng view injected-->
+        <div class="wrapper" style="padding-top:15px;">
+            <div ng-view class="slide"></div>
         </div>
 
-        <!-- container -->
-        <section class="container">            
-            <!-- content, ng view injected-->
-            <div class="wrapper">
-                <div ng-view class="slide"></div>
-            </div>
+    </section>
+    <!-- footer -->
+    <div ng-include="'app/components/footer.html'"
+            ng-controller="footerController">
+    </div>
 
-        </section>
-        <!-- footer -->
-        <div ng-include="'app/components/footer.html'"
-             ng-controller="footerController">
-        </div>
-
-        <!-- back to top -->
-        <div id="pageTop" class="dnone"
-             ng-click="vm.backToTop()">
-            <figure class="page-top-outer">
-                <img src="content/img2/pagetop.png" alt="">
-            </figure>
-        </div>
+    <!-- back to top -->
+    <div id="pageTop" class="dnone"
+            ng-click="vm.backToTop()">
+        <figure class="page-top-outer">
+            <img src="content/img/pagetop.gif" alt="">
+        </figure>
     </div>
 
     <!-- scripts -->
@@ -72,12 +70,7 @@
     <!-- services -->
     <script src="app/services/jqueryPluginService.js"></script>
     <script src="app/services/dataFactory.js"></script>
-    <script src="app/services/pageDataFactory.js"></script>
     <script src="app/services/utilService.js"></script>
-    <!--<script src="angularApp/services/pageDataFactory.js"></script>
-    <script src="angularApp/services/dataFactory.js"></script>
-    <script src="angularApp/services/jqueryPluginService.js"></script>
-    <script src="angularApp/services/utilService.js"></script>-->
 
     <!-- layout (master) page controller-->
     <script src="app/master.js"></script>
@@ -87,6 +80,8 @@
     <script src="app/controllers/products/productDetailController.js"></script>
     <script src="app/controllers/articles/articleListController.js"></script>  
     <script src="app/controllers/articles/articleDetailController.js"></script> 
+    <script src="app/controllers/shops/shopListController.js"></script>     
+    <script src="app/controllers/shops/shopSearchController.js"></script>
     <!--<script src="angularApp/controllers/home/homeController.js"></script>
     <script src="angularApp/controllers/categories/categoryListController.js"></script>
     <script src="angularApp/controllers/products/productListController.js"></script>
@@ -99,5 +94,26 @@
     <script src="angularApp/controllers/articles/articleIndexController.js"></script>
     <script src="angularApp/controllers/brands/brandController.js"></script>
     <script src="angularApp/controllers/retailers/retailShopController.js"></script>-->  
+
+    <style scoped>
+        .widget-box-overlay {
+            position: absolute;
+            top: -1px;
+            bottom: -1px;
+            right: -1px;
+            left: -1px;
+            z-index: 99;
+            text-align: center;
+            min-height: 100%;
+            background-color: #ffffff;
+            opacity: 0.4;
+        }
+
+            .widget-box-overlay > .loading-icon {
+                position: absolute;
+                margin: auto;
+                text-align: center;
+            }
+    </style>
 </body>
 </html>

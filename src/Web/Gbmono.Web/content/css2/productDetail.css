@@ -1,15 +1,17 @@
-.detail-img{
+#productDetailView .detail-img{
     width: 50%;
     display: inline-block;
     position: relative;
+
 }
 
-.detail-img img{
-    width: 100%;
-    height: auto;
+#productDetailView .detail-img img{
+    margin: 0 auto;
+    display: block;
+
 }
 
-.detail-content{
+#productDetailView .detail-content{
     float: right;
     width: 50%;
     display: inline-block;
@@ -20,33 +22,33 @@
     padding-top: 17px;
 }
 
-.product-name-outer{
+#productDetailView .product-name-outer{
     display: inline;
 
 }
 
-.product-name-right{
+#productDetailView .product-name-right{
     position: absolute;
     right: 0;
     margin-top: 0;
     font-size: 24px;
 }
 
-.product-name-left{
+#productDetailView .product-name-left{
     display: inline;
 }
 
-.price-sale{
+#productDetailView .price-sale{
     color: #000;
     font: bold 1.333em Arial,sans-serif;
 }
 
-.product-number{
+#productDetailView .product-number{
     color: #9a9a9a;
     text-transform: uppercase;
 }
 
-.star_box {
+#productDetailView .star_box {
     background: url(../images/icon_star.png) left top repeat-x;
     display: inline-block;
     width: 60px;
@@ -57,34 +59,35 @@
     font-size: 0;
 }
 
-.item-score{
+#productDetailView .item-score{
     text-decoration: underline;
 }
 
 
-.star_box{
+#productDetailView .star_box{
     width: 70px;
     height: 12px;
     background: url(../images/icon_star.png) repeat-x 0 -12px;
     overflow: hidden;
 }
 
-.star_box .star {
+#productDetailView .star_box .star {
     background: url(../images/icon_star.png) repeat-x 0 0;
     display: block;
     height: 12px;
 }
 
-.thumbs a{
+#productDetailView .thumbs a{
     display: inline-block;
     border: solid 1px transparent;
 }
 
-.thumbs a.active {
+#productDetailView .thumbs a.active {
     border-color: #000;
 }
 
-.thumb img {
+#productDetailView .thumb img {
+    height: 200px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -92,36 +95,36 @@
 }
 
 
-.breadcrumb{
+#productDetailView .breadcrumb{
     padding-left: 0;
 }
 
-.breadcrumb>li>.divider {
+#productDetailView .breadcrumb>li>.divider {
     padding: 0 8px;
     color: #9a9a9a;
 }
 
-.breadcrumb li{
+#productDetailView .breadcrumb li{
     display: inline;
 }
 
-.breadcrumb a {
+#productDetailView .breadcrumb a {
     color: #9a9a9a;
 }
 
-.breadcrumb-last{
+#productDetailView .breadcrumb-last{
     color: #000000;
 }
 
 
-.nav-tabs{
+#productDetailView .nav-tabs{
     padding-left: 0;
     list-style: none;
     border-bottom: 1px solid #000;
     height: 39px;
 }
 
-.product-tab{
+#productDetailView .product-tab{
     display: inline-block;
     width: 24.8%;
     position: relative;
@@ -133,26 +136,26 @@
     background: #f1f1f1;
 }
 
-.product-tab.active,
-.product-tab:hover{
+#productDetailView .product-tab.active,
+#productDetailView .product-tab:hover{
     background: #FFFFFF;
 }
 
-.nav-tab{
+#productDetailView .nav-tab{
     color: #000;
 }
 
-.product-tab{
+#productDetailView .product-tab{
     margin-left: -6px;
     border-left: 0;
 }
 
-.product-tab:first-of-type{
+#productDetailView .product-tab:first-of-type{
     margin-left: 0;
     border-left: 1px solid #000;
 }
 
-.product-tab.active:after {
+#productDetailView .product-tab.active:after {
     width: 16px;
     height: 10px;
     background: transparent url("../images/sprite-desktop.png") no-repeat scroll 0 -341px;
@@ -162,7 +165,7 @@
     position: absolute;
 }
 
-.nav-tabs>li>a {
+#productDetailView .nav-tabs>li>a {
     display: block;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -175,28 +178,28 @@
 
 
 
-.recommend-list{
+#productDetailView .recommend-list{
     clear: both;
 }
 
-.recommend-list .interest-product{
+#productDetailView .recommend-list .interest-product{
     width: 47%;
     display: inline-block;
     position: relative;
 }
 
-.recommend-list .recent-view{
+#productDetailView .recommend-list .recent-view{
     width: 50%;
     display: inline-block;
     position: relative;
 }
 
-.heading-line{
+#productDetailView .heading-line{
     text-align: center;
 }
 
 
-.heading-line:before, .heading-line:after {
+#productDetailView .heading-line:before, .heading-line:after {
     background-color: #000;
     content: "";
     display: inline-block;
@@ -207,7 +210,7 @@
 }
 
 
-.recommend-list-wrapper {
+#productDetailView .recommend-list-wrapper {
     padding: 20px 10px 20px 10px;
     width: 100%;
 }
@@ -215,39 +218,39 @@
 
 
 
-.product-tile{
+#productDetailView .product-tile{
     text-align: center;
     float: left;
     width: 50%;
 }
 
-.brand-name {
+#productDetailView .brand-name {
     display: block;
 }
 
-.brand-name:hover{
+#productDetailView .brand-name:hover{
     text-decoration: underline;
 }
 
-.name-link {
+#productDetailView .name-link {
     display: block;
     margin: 0;
     width: auto;
 }
 
-.name-link:hover{
+#productDetailView .name-link:hover{
     text-decoration: underline;
 }
 
 
-.recommend-list {
+#productDetailView .recommend-list {
     padding: 40px 0;
 }
 
-.tab-item-content{
+#productDetailView .tab-item-content{
     display: none;
 }
 
-.tab-item-content.active{
+#productDetailView .tab-item-content.active{
     display: block;
 }

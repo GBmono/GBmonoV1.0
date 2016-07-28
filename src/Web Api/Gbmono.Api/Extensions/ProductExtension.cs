@@ -24,6 +24,7 @@ namespace Gbmono.Api.Extensions
                 BrandName = model.Brand.Name,
                 Price = model.Price,
                 Discount = model.Discount,
+                Date = model.ActivationDate,
                 ImgUrl = GetPrimaryImgUrl(model.Images) // get the default product image
             };
         }

@@ -76,15 +76,15 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/retailshops', { // retail shops browse 
-                    templateUrl: gbmono.app_view_path + '/retailers/shoplist.html',
-                    controller: 'retailShopBrowseController',
+                .when('/shops', { // retail shops browse 
+                    templateUrl: gbmono.app_view_path + '/shops/list.html',
+                    controller: 'shopListController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/retailshops/search', { // retail shops search
-                    templateUrl: gbmono.app_view_path + '/retailers/shops.html',
-                    controller: 'retailShopSearchController',
+                .when('/shops/search', { // retail shops search
+                    templateUrl: gbmono.app_view_path + '/shops/search.html',
+                    controller: 'shopSearchController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })

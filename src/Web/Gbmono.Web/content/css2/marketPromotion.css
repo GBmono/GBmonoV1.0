@@ -1,11 +1,11 @@
-.main-list {
+#marketPromotionView .main-list {
     display: inline-block;
     float: left;
     width: 75%;
     max-width: 900px;
 }
 
-.side-bar {
+#marketPromotionView .side-bar {
     float: left;
     display: inline-block;
     width: 25%;
@@ -13,7 +13,7 @@
 }
 
 
-.main-list .nav ul {
+#marketPromotionView .main-list .nav ul {
     border-top: 1px solid #e5e5e5;
     border-bottom: 1px solid #e5e5e5;
     width: 94.7%;
@@ -21,7 +21,7 @@
     padding: 30px 0;
 }
 
-.main-list .nav ul li {
+#marketPromotionView .main-list .nav ul li {
     width: 24.5%;
     text-align: center;
     font-size: 17px;
@@ -30,17 +30,17 @@
     cursor: pointer;
 }
 
-.main-list .nav ul li.selected{
+#marketPromotionView .main-list .nav ul li.selected{
     color: #000000;
 }
 
-.main-list .nav ul li:hover{
+#marketPromotionView .main-list .nav ul li:hover{
     color: #000000;
 }
 
 
 
-.shop-item-list .shop-item {
+#marketPromotionView .shop-item-list .shop-item {
     padding-right: 15px;
     width: 30%;
     display: inline-block;
@@ -48,21 +48,21 @@
 }
 
 
-.shop-item-outer {
+#marketPromotionView .shop-item-outer {
     border-top: 1px solid #e5e5e5;
     padding-top: 20px;
 }
 
 
-.shop-item-outer p {
+#marketPromotionView .shop-item-outer p {
     letter-spacing: 1px;
 }
 
-.shop-item-outer p>a {
+#marketPromotionView .shop-item-outer p>a {
     color: #b2b2b2;
 }
 
-.shop-item-outer img {
+#marketPromotionView .shop-item-outer img {
     height: 186px;
     width: 100%;
 }
@@ -73,33 +73,33 @@
 
 
 
-.side-bar .ranking {
+#marketPromotionView .side-bar .ranking {
     margin-top: 20px;
 }
 
-.side-bar .daily-rank section {
+#marketPromotionView .side-bar .daily-rank section {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid #e5e5e5;
 }
 
-.daily-rank img {
+#marketPromotionView .daily-rank img {
     vertical-align: middle;
     height: 83px;
     max-width: 100%;
 }
 
-.daily-rank-outer{
+#marketPromotionView .daily-rank-outer{
     position: relative;
 }
 
-.daily-rank-inner {
+#marketPromotionView .daily-rank-inner {
     width: 65%;
     display: inline-block;
     margin-left: 105px;
 }
 
-.rank-img-wrapper {
+#marketPromotionView .rank-img-wrapper {
     padding-top: 20px;
     width: 30%;
     display: inline-block;
@@ -109,29 +109,29 @@
 
 
 
-.main-list .news-list{
+#marketPromotionView .main-list .news-list{
     display: none;
 }
 
-.main-list .news-list.selected{
+#marketPromotionView .main-list .news-list.selected{
     display: block;
 }
 
 
-.initial-title {
+#marketPromotionView .initial-title {
     display: inline;
 }
 
-.title-description {
+#marketPromotionView .title-description {
     display: inline;
     padding-left: 20px;
 }
 
 
-.wrapper{
+#marketPromotionView .wrapper{
     margin-top: 40px;
 }
 
-.main-list>article>.header{
+#marketPromotionView .main-list>article>.header{
     padding-bottom: 10px;
 }

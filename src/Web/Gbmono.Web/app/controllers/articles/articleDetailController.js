@@ -6,13 +6,18 @@
     ctrl.$inject = ['$routeParams',
                     '$sce',
                     'utilService',
+                    'pluginService',
                     'articleDataFactory'];
 
     // create controller
     module.controller('articleDetailController', ctrl);
 
     // controller body
-    function ctrl($routeParams, $sce, utilService, articleDataFactory) {
+    function ctrl($routeParams,
+                  $sce,
+                  utilService,
+                  pluginService,
+                  articleDataFactory) {
         var vm = this;
         // article
         vm.article = {};
@@ -30,10 +35,16 @@
         }
         
         function getArticleById(id) {
+            // loading progress
+            pluginService.showDataLoadingIndicator('#articleDetailView', { left: "38%", top: "60px;" });
+
             articleDataFactory.getById(id)
                 .success(function (data) {
                     vm.article = data;
                     vm.htmlBody = $sce.trustAsHtml(data.body);
+
+                    // close data loading
+                    pluginService.closeDataLoadingIndicator('#articleDetailView');
                 });
         }
     }

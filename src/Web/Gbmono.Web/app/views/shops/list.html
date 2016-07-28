@@ -1,0 +1,77 @@
+﻿<div id="shopSearchView">
+    <section class="inner-content">
+        <div class="inner">
+            <div class="zone-choose">
+                <select class="select-btn"
+                        ng-options="retailer.retailerId as retailer.name for retailer in vm.retailers"
+                        ng-model="vm.searchModel.retailerId">                                    
+                    <option value="">零售商</option>
+                </select>
+
+                <select class="select-btn"
+                        ng-options="state.stateId as state.displayName for state in vm.states"
+                        ng-model="vm.searchModel.stateId"
+                        ng-change="vm.stateChanged()">
+                    <option value="">地区</option>
+                </select>
+
+                <select class="select-btn"
+                        ng-options="city.cityId as city.displayName for city in vm.cities"
+                        ng-model="vm.searchModel.cityId"
+                        ng-change="vm.search()">
+                    <option value="">城市</option>
+                </select>
+
+            </div>
+
+            <p class="area">店铺列表</p>
+
+            <div class="shop-list">
+                <div class="shop-list-item"
+                     ng-repeat="shop in vm.shops">
+                    <div class="title-index">
+                        <span class="name">{{ shop.name }}</span>
+                        <span class="address">{{ shop.address }}</span>
+                    </div>
+
+                    <div class="info-wrapper">
+                        <div class="map-wrapper">
+                            <div class="map-container">
+                                <iframe ng-src="{{ shop.mapUrl }}" style="border: none; width:95%; height:275px;"> </iframe>
+                            </div>
+                        </div>
+
+                        <div class="shopTxt">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>联系电话</th>
+                                        <td><span class="href-tel">{{ shop.phone }}</span></td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>营业时间</th>
+                                        <td>{{ shop.openTime }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>休息日</th>
+                                        <td>{{ shop.closeDay }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <p>
+                                其他信息<br>
+                                待定1<span class="href-tel">092-263-2720</span>( 1F )<br>
+                                待定2<span class="href-tel">092-263-2720</span>( 1F ) <br>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

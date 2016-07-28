@@ -27,6 +27,7 @@ namespace Gbmono.Api.Controllers
 
         }
 
+        // get article by id
         public async Task<Article> GetById(int id)
         {
             return await _repositoryManager.ArticleRepository
@@ -35,6 +36,23 @@ namespace Gbmono.Api.Controllers
                                                    .SingleOrDefaultAsync(m => m.ArticleId == id);
         }
 
+        // get new articles for each article type with page size
+        [Route("New/{articleTypeId}/{pageSize}")]
+        public async Task<IEnumerable<ArticleSimpleModel>> GetNew(short articleTypeId, int? pageSize = 6)
+        {
+            // marketing article
+            var articles = await _repositoryManager.ArticleRepository
+                                                      .Table
+                                                      .Include(m => m.Images)
+                                                      .Where(m => m.ArticleTypeId == articleTypeId)
+                                                      .OrderByDescending(m => m.ModifiedDate)
+                                                      .Take(pageSize.Value)
+                                                      .ToListAsync();
+
+            return articles.Select(m => m.ToSimpleToModel());
+        }
+
+        // get articles by date
         [Route("{from}/{to}")]
         public async Task<IEnumerable<ArticleSimpleModel>> GetArticles(DateTime from, DateTime to)
         {
@@ -58,6 +76,7 @@ namespace Gbmono.Api.Controllers
             return articles.Select(m => m.ToSimpleToModel());
         }
 
+        // get article by ranking 
         [Route("Ranking")]
         public async Task<IEnumerable<ArticleSimpleModel>> GetArticlesByRanking()
         {

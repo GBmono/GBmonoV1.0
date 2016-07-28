@@ -1,267 +1,269 @@
-﻿<ol class="breadcrumb">
+﻿<div id="productDetailView">
+    <ol class="breadcrumb">
 
-    <li>
-        <a ng-href="#/">
-            <span>主页</span>
-        </a>
-    </li>    
-
-    <li>
-        <span class="divider">&gt;</span>
-        <a ng-href="#/categories/{{ vm.product.category.parentCategory.parentId }}/products/1">
-            <span>{{ vm.product.category.parentCategory.parentCategory.name }}</span>
-        </a>
-    </li>
-
-    <li>
-        <span class="divider">&gt;</span>
-        <a ng-href="#/categories/{{ vm.product.category.parentId }}/products/2">
-            <span>{{ vm.product.category.parentCategory.name }}</span>
-        </a>
-    </li>
-
-    <li>
-        <span class="divider">&gt;</span>
-        <a ng-href="#/categories/{{ vm.product.categoryId}}/products/3">
-            <span>{{ vm.product.category.name }}</span>
-        </a>
-    </li>
-
-</ol>
-
-<div>
-    <span class="detail-img">
-        <img  ng-src="{{ vm.imgRoot + vm.primaryImg }}">
-    </span>
-    <span class="detail-content">
-        <div class="product-name-outer">
-            <h2 class="product-name-left">{{ vm.product.primaryName }}</h2>
-            <strong class="product-name-right">{{ vm.product.brand.name }}マスク</strong>
-        </div>
-
-        <p>{{ vm.product.secondaryName }} </p>
-
-        <p class="price-sale">市场参考价： {{ vm.product.price | currency:"¥"}}</p>
-
-        <p>
-            <span class="product-number">功能(用途): {{ vm.product.category.name}} </span>
-        </p>
-
-        <p>
-            <span class="product-number">重量: {{ vm.product.weight }} </span>
-        </p>
-
-        <p>
-            <span class="product-number">容量: {{ vm.product.capacity }} </span>
-        </p>
-
-        <!--<p>
-            <span class="star_box">
-                <span class="star" style="width:40%"></span>
-            </span>
-
-            <span class="item-score">4.6</span>
-
-            <span>(215)</span>
-
-            <span>评论</span>
-        </p>-->
-
-        <!--<p>
-            <pre>{{ vm.product.description }}</pre>
-        </p>-->
-
-        <div class="thumbs">
-            <a href="javascript:void(0);"
-               class="thumb"
-               bigimg="{{ vm.imgRoot + img.fileName }}"
-               ng-repeat="img in vm.productImages">
-                <img ng-src="{{ vm.imgRoot + img.fileName }}">
+        <li>
+            <a ng-href="#/">
+                <span>主页</span>
             </a>
-        </div>
+        </li>
 
-        <!-- tab cotent -->
-        <div>
-            <ul class="nav-tabs">
-                <li class="product-tab active" chooseitem="tab-detail">
-                    <a class="nav-tab" href="javascript:void(0);">商品详情</a>
-                </li>
+        <li>
+            <span class="divider">&gt;</span>
+            <a ng-href="#/categories/{{ vm.product.category.parentCategory.parentId }}/products/1">
+                <span>{{ vm.product.category.parentCategory.parentCategory.name }}</span>
+            </a>
+        </li>
 
-                <li class="product-tab" chooseitem="tab-instruction">
-                    <a class="nav-tab" href="javascript:void(0);">使用说明</a>
-                </li>
+        <li>
+            <span class="divider">&gt;</span>
+            <a ng-href="#/categories/{{ vm.product.category.parentId }}/products/2">
+                <span>{{ vm.product.category.parentCategory.name }}</span>
+            </a>
+        </li>
 
-                <li class="product-tab" chooseitem="tab-shop">
-                    <a class="nav-tab" href="javascript:void(0);">可购入店铺</a>
-                </li>
+        <li>
+            <span class="divider">&gt;</span>
+            <a ng-href="#/categories/{{ vm.product.categoryId}}/products/3">
+                <span>{{ vm.product.category.name }}</span>
+            </a>
+        </li>
 
-                <li class="product-tab" chooseitem="tab-append">
-                    <a class="nav-tab" href="javascript:void(0);">追加信息</a>
-                </li>
+    </ol>
 
-            </ul>
-
-            <div class="tab-content">
-                <p class="tab-item-content tab-detail active">
-                    {{ vm.product.description }}
-                </p>
-                <p class="tab-item-content tab-instruction">
-                    {{ vm.product.instruction }}
-                </p>
-                <p class="tab-item-content tab-shop">
-                    <img src="content/img/shop1.jpg" />
-                </p>
-                <p class="tab-item-content tab-append">
-                    追加信息暂无
-                </p>
+    <div>
+        <span class="detail-img">
+            <img ng-src="{{ vm.imgRoot + vm.primaryImg }}">
+        </span>
+        <span class="detail-content">
+            <div class="product-name-outer">
+                <h2 class="product-name-left">{{ vm.product.primaryName }}</h2>
+                <strong class="product-name-right">{{ vm.product.brand.name }}マスク</strong>
             </div>
-        </div>
-    </span>
-</div>
 
-<div class="recommend-list">
-    <span class="interest-product">
+            <p>{{ vm.product.secondaryName }} </p>
 
-        <h2 class="heading-line">
-            可能感兴趣的商品
-        </h2>
+            <p class="price-sale">市场参考价： {{ vm.product.price | currency:"¥"}}</p>
 
-        <div class="recommend-list-wrapper">
+            <p>
+                <span class="product-number">功能(用途): {{ vm.product.category.name}} </span>
+            </p>
 
-            <section>
+            <p>
+                <span class="product-number">重量: {{ vm.product.weight }} </span>
+            </p>
 
-                <div class="product-tile">
+            <p>
+                <span class="product-number">容量: {{ vm.product.capacity }} </span>
+            </p>
 
-                    <div class="product-image">
-                        <a href="javascript:void(0);">
-                            <img src="http://demandware.edgesuite.net/aark_prd/on/demandware.static/-/Sites-mecca-online-catalog/default/dw6d43886c/product/bobbi/th/i-012540-ultra-fine-eyeliner-brush-1-150.jpg">
-                        </a>
-                    </div>
+            <!--<p>
+                <span class="star_box">
+                    <span class="star" style="width:40%"></span>
+                </span>
 
-                    <div>
-                        <a class="brand-name" href="javascript:void(0);">
-                            Bobbi Brown
-                        </a>
+                <span class="item-score">4.6</span>
 
-                        <a class="name-link" href="javascript:void(0);">
-                            Ultra Fine Eyeliner Brush
-                        </a>
-                    </div>
+                <span>(215)</span>
 
-                    <div class="product-pricing">
-                        <span class="product-sales-price" title="Sale Price">$37.00</span>
-                    </div>
+                <span>评论</span>
+            </p>-->
+            <!--<p>
+                <pre>{{ vm.product.description }}</pre>
+            </p>-->
 
-                    <span class="star_box">
-                        <span class="star" style="width:40%"></span>
-                    </span>
+            <div class="thumbs">
+                <a href="javascript:void(0);"
+                   class="thumb"
+                   bigimg="{{ vm.imgRoot + img.fileName }}"
+                   ng-repeat="img in vm.productImages">
+                    <img ng-src="{{ vm.imgRoot + img.fileName }}">
+                </a>
+            </div>
 
+            <!-- tab cotent -->
+            <div>
+                <ul class="nav-tabs">
+                    <li class="product-tab active" chooseitem="tab-detail">
+                        <a class="nav-tab" href="javascript:void(0);">商品详情</a>
+                    </li>
+
+                    <li class="product-tab" chooseitem="tab-instruction">
+                        <a class="nav-tab" href="javascript:void(0);">使用说明</a>
+                    </li>
+
+                    <li class="product-tab" chooseitem="tab-shop">
+                        <a class="nav-tab" href="javascript:void(0);">可购入店铺</a>
+                    </li>
+
+                    <li class="product-tab" chooseitem="tab-append">
+                        <a class="nav-tab" href="javascript:void(0);">追加信息</a>
+                    </li>
+
+                </ul>
+
+                <div class="tab-content">
+                    <p class="tab-item-content tab-detail active">
+                        {{ vm.product.description }}
+                    </p>
+                    <p class="tab-item-content tab-instruction">
+                        {{ vm.product.instruction }}
+                    </p>
+                    <p class="tab-item-content tab-shop">
+                        <img src="content/img/shop1.jpg" />
+                    </p>
+                    <p class="tab-item-content tab-append">
+                        追加信息暂无
+                    </p>
                 </div>
+            </div>
+        </span>
+    </div>
 
-                <div class="product-tile">
+    <div class="recommend-list">
+        <span class="interest-product">
 
-                    <div class="product-image">
-                        <a href="javascript:void(0);">
-                            <img src="http://demandware.edgesuite.net/aark_prd/on/demandware.static/-/Sites-mecca-online-catalog/default/dwd0cc4a70/product/bobbi/th/i-012399-long-wear-gel-eyeliner-denim-ink-1-150.jpg">
-                        </a>
+            <h2 class="heading-line">
+                可能感兴趣的商品
+            </h2>
+
+            <div class="recommend-list-wrapper">
+
+                <section>
+
+                    <div class="product-tile">
+
+                        <div class="product-image">
+                            <a href="javascript:void(0);">
+                                <img src="http://demandware.edgesuite.net/aark_prd/on/demandware.static/-/Sites-mecca-online-catalog/default/dw6d43886c/product/bobbi/th/i-012540-ultra-fine-eyeliner-brush-1-150.jpg">
+                            </a>
+                        </div>
+
+                        <div>
+                            <a class="brand-name" href="javascript:void(0);">
+                                Bobbi Brown
+                            </a>
+
+                            <a class="name-link" href="javascript:void(0);">
+                                Ultra Fine Eyeliner Brush
+                            </a>
+                        </div>
+
+                        <div class="product-pricing">
+                            <span class="product-sales-price" title="Sale Price">$37.00</span>
+                        </div>
+
+                        <span class="star_box">
+                            <span class="star" style="width:40%"></span>
+                        </span>
+
                     </div>
 
-                    <div>
-                        <a class="brand-name" href="javascript:void(0);">
-                            Bobbi Brown
-                        </a>
+                    <div class="product-tile">
 
-                        <a class="name-link" href="javascript:void(0);">
-                            Ultra Fine Eyeliner Brush
-                        </a>
+                        <div class="product-image">
+                            <a href="javascript:void(0);">
+                                <img src="http://demandware.edgesuite.net/aark_prd/on/demandware.static/-/Sites-mecca-online-catalog/default/dwd0cc4a70/product/bobbi/th/i-012399-long-wear-gel-eyeliner-denim-ink-1-150.jpg">
+                            </a>
+                        </div>
+
+                        <div>
+                            <a class="brand-name" href="javascript:void(0);">
+                                Bobbi Brown
+                            </a>
+
+                            <a class="name-link" href="javascript:void(0);">
+                                Ultra Fine Eyeliner Brush
+                            </a>
+                        </div>
+
+                        <div class="product-pricing">
+                            <span class="product-sales-price" title="Sale Price">$37.00</span>
+                        </div>
+
+                        <span class="star_box">
+                            <span class="star" style="width:40%"></span>
+                        </span>
+
                     </div>
 
-                    <div class="product-pricing">
-                        <span class="product-sales-price" title="Sale Price">$37.00</span>
+                </section>
+
+            </div>
+
+        </span>
+        <span class="recent-view">
+
+            <h2 class="heading-line">
+                浏览过的产品
+            </h2>
+
+
+            <div class="recommend-list-wrapper">
+
+                <section>
+
+                    <div class="product-tile">
+
+                        <div class="product-image">
+                            <a href="javascript:void(0);">
+                                <img src="http://demandware.edgesuite.net/aark_prd/on/demandware.static/-/Sites-mecca-online-catalog/default/dwd5751ff3/product/kit/th/i-013671-blender-sphere-1-150.jpg">
+                            </a>
+                        </div>
+
+                        <div>
+                            <a class="brand-name" href="javascript:void(0);">
+                                Bobbi Brown
+                            </a>
+
+                            <a class="name-link" href="javascript:void(0);">
+                                Ultra Fine Eyeliner Brush
+                            </a>
+                        </div>
+
+                        <div class="product-pricing">
+                            <span class="product-sales-price" title="Sale Price">$37.00</span>
+                        </div>
+
+                        <span class="star_box">
+                            <span class="star" style="width:40%"></span>
+                        </span>
+
                     </div>
 
-                    <span class="star_box">
-                        <span class="star" style="width:40%"></span>
-                    </span>
+                    <div class="product-tile">
 
-                </div>
+                        <div class="product-image">
+                            <a href="javascript:void(0);">
+                                <img src="http://demandware.edgesuite.net/aark_prd/on/demandware.static/-/Sites-mecca-online-catalog/default/dw6d43886c/product/bobbi/th/i-012540-ultra-fine-eyeliner-brush-1-150.jpg">
+                            </a>
+                        </div>
 
-            </section>
+                        <div>
+                            <a class="brand-name" href="javascript:void(0);">
+                                Bobbi Brown
+                            </a>
 
-        </div>
+                            <a class="name-link" href="javascript:void(0);">
+                                Ultra Fine Eyeliner Brush
+                            </a>
+                        </div>
 
-    </span>
-    <span class="recent-view">
+                        <div class="product-pricing">
+                            <span class="product-sales-price" title="Sale Price">$37.00</span>
+                        </div>
 
-        <h2 class="heading-line">
-            浏览过的产品
-        </h2>
+                        <span class="star_box">
+                            <span class="star" style="width:40%"></span>
+                        </span>
 
-
-        <div class="recommend-list-wrapper">
-
-            <section>
-
-                <div class="product-tile">
-
-                    <div class="product-image">
-                        <a href="javascript:void(0);">
-                            <img src="http://demandware.edgesuite.net/aark_prd/on/demandware.static/-/Sites-mecca-online-catalog/default/dwd5751ff3/product/kit/th/i-013671-blender-sphere-1-150.jpg">
-                        </a>
                     </div>
 
-                    <div>
-                        <a class="brand-name" href="javascript:void(0);">
-                            Bobbi Brown
-                        </a>
+                </section>
 
-                        <a class="name-link" href="javascript:void(0);">
-                            Ultra Fine Eyeliner Brush
-                        </a>
-                    </div>
-
-                    <div class="product-pricing">
-                        <span class="product-sales-price" title="Sale Price">$37.00</span>
-                    </div>
-
-                    <span class="star_box">
-                        <span class="star" style="width:40%"></span>
-                    </span>
-
-                </div>
-
-                <div class="product-tile">
-
-                    <div class="product-image">
-                        <a href="javascript:void(0);">
-                            <img src="http://demandware.edgesuite.net/aark_prd/on/demandware.static/-/Sites-mecca-online-catalog/default/dw6d43886c/product/bobbi/th/i-012540-ultra-fine-eyeliner-brush-1-150.jpg">
-                        </a>
-                    </div>
-
-                    <div>
-                        <a class="brand-name" href="javascript:void(0);">
-                            Bobbi Brown
-                        </a>
-
-                        <a class="name-link" href="javascript:void(0);">
-                            Ultra Fine Eyeliner Brush
-                        </a>
-                    </div>
-
-                    <div class="product-pricing">
-                        <span class="product-sales-price" title="Sale Price">$37.00</span>
-                    </div>
-
-                    <span class="star_box">
-                        <span class="star" style="width:40%"></span>
-                    </span>
-
-                </div>
-
-            </section>
-
-        </div>
+            </div>
 
 
-    </span>
+        </span>
+    </div>
+
 </div>

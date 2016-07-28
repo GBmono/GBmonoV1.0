@@ -2,32 +2,32 @@
     background: url(../images/bg_body.jpg) repeat 0 0;
 }
 
-#menuHeader{
+#shopSearchView #menuHeader{
     background: #FFFFFF;
 }
 
-.b_search{
+#shopSearchView .b_search{
     text-align: center;
     padding-top: 34px;
 }
 
-.search-btn{
+#shopSearchView .search-btn{
     cursor: pointer;
 }
 
 
-.inner-content{
+#shopSearchView .inner-content{
     background: #FFFFFF;
     margin-top: 20px;
 }
 
-.inner-content .inner{
+#shopSearchView .inner-content .inner{
     width: 1200px;
     margin: 0 auto;
     position: relative;
 }
 
-.area{
+#shopSearchView .area{
     padding-top: 20px;
     padding-bottom: 14px;
     padding-left: 15px;
@@ -37,61 +37,61 @@
     line-height: 1.1;
 }
 
-.shop-list-item{
+#shopSearchView .shop-list-item{
     border-top: 1px solid #cbc2b2;
 }
 
-.shop-list-item .title-index{
+#shopSearchView .shop-list-item .title-index{
     width: 100%;
     display: block;
     padding: 15px 0;
-    /*background: url(../images/btn_detail.png) no-repeat right center;*/
     cursor: pointer;
 }
 
-.info-wrapper{
+#shopSearchView .info-wrapper{
     position: relative;
     line-height: 40px;
 }
 
-.info-wrapper .map-wrapper{
+#shopSearchView .info-wrapper .map-wrapper{
     position: absolute;
     height: 100%;
     width: 50%;
 }
 
-.info-wrapper .shopTxt{
+#shopSearchView .info-wrapper .shopTxt{
     display: inline-block;
     margin-left: 50%;
     width: 49%;
 }
 
-.map-container{
+#shopSearchView .map-container{
     height:91%
 }
 
-.shopTxt{
+#shopSearchView .shopTxt{
     padding-left: 40px;
 }
 
-.shopTxt th {
+#shopSearchView .shopTxt th {
     text-align: left;
     width: 9em;
 }
-.b_search:hover .dropdown-menu{
+
+#shopSearchView .b_search:hover .dropdown-menu{
     margin: 0 auto;
     left: 22%;
     display: block;
 }
 
 
-.b_search .dropdown-menu .menu-product-item {
+#shopSearchView .b_search .dropdown-menu .menu-product-item {
     min-width: 150px;
     text-align: left;
     display: block;
 }
 
-.b_search .dropdown-menu>li>a {
+#shopSearchView .b_search .dropdown-menu>li>a {
     display: block;
     padding: 10px 0;
     clear: both;
@@ -99,25 +99,25 @@
     text-align: center;
 }
 
-.b_search .dropdown-menu{
+#shopSearchView .b_search .dropdown-menu{
     min-width: 700px;
     padding-left: 20px;
 }
 
-.b_search .menu-product-item>a:hover {
+#shopSearchView .b_search .menu-product-item>a:hover {
     color: #c27baa;
 }
 
 
 
-.zone-choose {
+#shopSearchView .zone-choose {
     display: inline-block;
     width: 100%;
     padding-top: 10px;
 }
 
 
-.zone-choose .select-btn{
+#shopSearchView .zone-choose .select-btn{
     display: inline-block;
     width: 25%;
     height: 34px;
@@ -125,7 +125,7 @@
 
 }
 
-.zone-choose .input-group{
+#shopSearchView .zone-choose .input-group{
     padding-left: 10px;
     display: inline-block;
     width: 73%;
@@ -133,13 +133,13 @@
 
 }
 
-.input-group input{
+#shopSearchView .input-group input{
     width: 91%;
 
 }
 
 
-.b_search .input-group-btn {
+#shopSearchView .b_search .input-group-btn {
     width: 15%;
     background: #fff;
     border: 1px solid #000000;
@@ -147,21 +147,20 @@
     color: #000000;
 }
 
-.input-group-btn:hover{
+#shopSearchView .input-group-btn:hover{
     background: #000000;
     color: #fff;
     cursor: pointer;
 }
 
-.input-group-btn {
+#shopSearchView .input-group-btn {
     border: 1px solid #000000;
     display: inline-block;
     color: #000000;
 }
 
 
-
-.zone-search-btn {
+#shopSearchView .zone-search-btn {
     display: block;
     padding: 5px 5px 3px 5px;
 }

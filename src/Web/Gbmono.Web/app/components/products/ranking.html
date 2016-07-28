@@ -6,26 +6,25 @@
     </div>
 
     <div class="daily-rank">
+
         <section ng-repeat="product in vm.products track by $index">
             <div class="daily-rank-outer">
                 <div class="rank-img-wrapper">
-                    <a ng-href="#/">
-                        <img class="lazy" style="height:68px; width:130px;"
+                    <a ng-href="#/products/{{ product.productId }}">
+                        <img class="lazy" 
                              ng-src="{{ vm.imgRoot + product.imgUrl}}">
-                        <!--  -->
                     </a>
                 </div>
                 <div class="daily-rank-inner">
                     <p>NO.{{ $index + 1 }}</p>
                     <p>
-                        <a ng-href="">{{ product.brandName }} - {{ product.shortName }}</a>
+                        <a ng-href="#/products/{{ product.productId }}">
+                            {{ product.brandName }} - {{ product.shortName }}
+                        </a>
                     </p>
                 </div>
             </div>
         </section>
 
     </div>
-
 </article>
-
-

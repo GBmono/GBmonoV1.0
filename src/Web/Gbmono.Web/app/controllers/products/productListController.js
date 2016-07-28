@@ -41,7 +41,7 @@
         // retreive category id from route params
         var categoryId = $routeParams.id ? parseInt($routeParams.id) : 0;
         // retreive sub id (category level) from route prams
-        var levelId = $routeParams.subId ? parseInt($routeParams.id) : 1;
+        var levelId = $routeParams.subId ? parseInt($routeParams.subId) : 1;
 
         // view event handlers
         // load more products
@@ -89,7 +89,7 @@
 
             // get the current category model
             getCurrentCategory(categoryId);
-
+            console.log(categoryId, levelId);
             // load brands
             getCategoryBrands(categoryId, levelId);            
         }

@@ -1,33 +1,33 @@
-.router-guide{
+#productView .router-guide{
     list-style: none;
     padding-left: 0;
 }
 
-.router-guide li{
+#productView .router-guide li{
     list-style: none;
     display: inline;
 }
 
-.side-column{
+#productView .side-column{
     float: left;
     width: 18%;
 }
 
 
-.main-column{
+#productView .main-column{
     float: right;
     width: 81%;
 }
 
 
-.item-category {
+#productView .item-category {
     list-style: none;
     margin-top: 0;
     margin-bottom: 0;
     padding-left: 0;
 }
 
-.product-category-list h3 {
+#productView .product-category-list h3 {
     border-bottom: 1px solid #ccc;
     border-top: 1px solid #bbb;
     color: #000000;
@@ -38,33 +38,33 @@
     margin-top: 0;
 }
 
-.item-category li {
+#productView .item-category li {
     background: #fff url(../images/icon_category_arrow.gif) no-repeat 190px center;
 }
 
-.item-category li a{
+#productView .item-category li a{
     padding: 8px 10px 8px 8px;
     display: block;
     font-size: 85%;
 }
 
-.brand-category-title{
+#productView .brand-category-title{
     padding-top: 15px!important;
 }
 
-.brand-category li a:hover,
-.item-category li a:hover{
+#productView .brand-category li a:hover,
+#productView .item-category li a:hover{
     text-decoration: underline;
 }
 
-.brand-category li p,
-.item-category li p{
+#productView .brand-category li p,
+#productView .item-category li p{
     margin-bottom: 0;
     margin-top: 0;
 }
 
 
-.brand-category {
+#productView .brand-category {
     max-height: 500px;
     padding-left: 0;
     overflow-y: scroll;
@@ -74,11 +74,11 @@
     border-left: 1px solid #ccc;
 }
 
-.brand-category li{
+#productView .brand-category li{
     list-style: none;
 }
 
-.brand-category li a {
+#productView .brand-category li a {
     padding: 3px 10px 2px;
     display: block;
 }
@@ -86,7 +86,7 @@
 
 
 
-h2.title.category {
+#productView h2.title.category {
     font-size: 250%;
     text-align: center;
     font-weight: normal;
@@ -94,30 +94,30 @@ h2.title.category {
     padding: 0;
 }
 
-.page-nav-top-outer{
+#productView .page-nav-top-outer{
     margin: 15px 0 40px;
     padding: 10px 0 0;
     border-top: 1px solid #bbb;
     text-align: right;
 }
 
-.pagenumber-area {
+#productView .pagenumber-area {
     clear: both;
     overflow: hidden;
     margin: 0 0 20px;
 }
 
-.page-nav-top-outer a:hover {
+#productView .page-nav-top-outer a:hover {
     text-decoration: underline;
 }
 
 
-.navi {
+#productView .navi {
     padding: 10px 0 20px;
     text-align: center;
 }
 
-.navi strong {
+#productView .navi strong {
     margin: 0 3px 0 0;
     padding: 13px 16px;
     display: inline;
@@ -125,19 +125,19 @@ h2.title.category {
     background: #eeeeee;
 }
 
-.navi a {
+#productView .navi a {
     margin: 0 3px 0 0;
     padding: 13px 16px;
     display: inline;
     background: #FFF;
 }
 
-.navi a:hover{
+#productView .navi a:hover{
     background: #eeeeee;
 }
 
 
-.list-area {
+#productView .list-area {
     position: relative;
     width: 24%;
     margin: 0 -1px -1px 0;
@@ -147,30 +147,35 @@ h2.title.category {
     margin-left: 5px;
 }
 
-.listphoto img{
-    width: 100%;
+#productView .listphoto img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    width: auto;
+    height: 220px;
 }
 
 
-.price_area{
+#productView .price_area{
     margin-bottom: 20px;
 }
 
-.bottom-navi{
+#productView .bottom-navi{
     margin-top: 25px;
     position: relative;
     margin-bottom: 25px;
 }
 
-.menu-button{
+#productView .menu-button{
     position: relative;
 }
 
-.menu-button:hover>.dropdown-menu{
+#productView .menu-button:hover>.dropdown-menu{
     display: block;
 }
 
-.menu-button .dropdown-menu{
+#productView .menu-button .dropdown-menu{
     left: 80%;
     top: 0;
 }

@@ -1,9 +1,9 @@
-.wrapper{
+#loginView .wrapper{
     margin-bottom: 40px;
     margin-top: 40px;
 }
 
-.login_area {
+#loginView .login_area {
     width: 520px;
     padding: 15px;
     border: 1px solid #BBB;
@@ -11,7 +11,7 @@
     overflow: hidden;
 }
 
-.entry_area {
+#loginView .entry_area {
     width: 520px;
     min-height: 208px;
     padding: 15px;
@@ -20,14 +20,14 @@
     overflow: hidden;
 }
 
-.login-title {
+#loginView .login-title {
     margin: 0 0 10px;
     padding: 0 0 10px;
     border-bottom: 1px solid #666;
     font-size: 120%;
 }
 
-input[type="text"], input[type="password"] {
+#loginView input[type="text"],#loginView input[type="password"] {
     height: 30px;
     margin: 0;
     padding: 4px;
@@ -35,27 +35,24 @@ input[type="text"], input[type="password"] {
     border: 1px solid #CCC;
 }
 
-.box300 {
+#loginView .box300 {
     width: 510px;
 }
 
-.entry_area .btn_area, .login_area .btn_area {
+#loginView .entry_area .btn_area,#loginView .login_area .btn_area {
     margin: 0 auto;
 }
 
-.login_area .single_btn, .entry_area .single_btn {
+#loginView .login_area .single_btn,#loginView .entry_area .single_btn {
     margin: 0 auto;
 }
 
-.single_btn, .single_btn li {
+#loginView .single_btn, .single_btn li {
     width: 350px;
 }
 
-/*.btn_enter_color, .btn_area .refusal_btn .btn_back_color {
-    float: right;
-}*/
 
-.btn_enter_color a, .btn_enter_color .login-btn {
+#loginView .btn_enter_color a,#loginView .btn_enter_color .login-btn {
     height: 45px;
     width: 100%;
     border-radius: 3px;
@@ -70,16 +67,16 @@ input[type="text"], input[type="password"] {
     color: #FFFFFF;
 }
 
-.btn_enter_color a:hover,
-.btn_enter_color input:hover {
+#loginView .btn_enter_color a:hover,
+#loginView .btn_enter_color input:hover {
     background:#7A0000;
 }
 
-.contact-us-btn{
+#loginView .contact-us-btn{
     color: #900;
 }
 
-.contact-us-btn:hover{
+#loginView .contact-us-btn:hover{
     color:#7A0000;
     text-decoration: underline;
 }

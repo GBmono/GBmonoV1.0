@@ -1,49 +1,49 @@
-.main-list {
+#articleDetailView .main-list {
     display: inline-block;
     float: left;
     width: 75%;
     max-width: 900px;
 }
 
-.side-bar {
+#articleDetailView .side-bar {
     float: left;
     display: inline-block;
     width: 25%;
     max-width: 300px;
 }
 
-.inner-content{
+#articleDetailView .inner-content{
     width: 95%;
 }
 
-.inner-content .header.title p {
+#articleDetailView .inner-content .header.title p {
     font-size: 18px;
 }
 
-.inner-content .header.title h2{
+#articleDetailView .inner-content .header.title h2{
     font-size: 26px;
     line-height: 38px;
 }
 
-.inner-content .sns{
+#articleDetailView .inner-content .sns{
     display: inline-block;
 }
 
-.inner-content .body{
+#articleDetailView .inner-content .body{
     margin-top: 20px;
 }
 
-.inner-content .body img{
+#articleDetailView .inner-content .body img{
     width: 100%;
 }
 
-.body p {
+#articleDetailView .body p {
     font-size: 18px;
     line-height: 28px;
     color: #666;
 }
 
-hr {
+#articleDetailView hr {
     display: block;
     height: 1px;
     border: 0;
@@ -53,39 +53,39 @@ hr {
 
 
 
-.side-bar .ranking {
+#articleDetailView .side-bar .ranking {
     margin-top: 20px;
 }
 
-.side-bar .daily-rank section {
+#articleDetailView .side-bar .daily-rank section {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid #e5e5e5;
 }
 
 
-.side-bar .daily-rank section:last-of-type {
+#articleDetailView .side-bar .daily-rank section:last-of-type {
     border-bottom: 1px solid #e5e5e5;
 }
 
 
-.daily-rank img {
+#articleDetailView .daily-rank img {
     vertical-align: middle;
     height: 83px;
     max-width: 100%;
 }
 
-.daily-rank-outer{
+#articleDetailView .daily-rank-outer{
     position: relative;
 }
 
-.daily-rank-inner {
+#articleDetailView .daily-rank-inner {
     width: 65%;
     display: inline-block;
     margin-left: 105px;
 }
 
-.rank-img-wrapper {
+#articleDetailView .rank-img-wrapper {
     padding-top: 20px;
     width: 30%;
     display: inline-block;
@@ -96,56 +96,56 @@ hr {
 
 
 
-.initial-title {
+#articleDetailView .initial-title {
     display: inline;
 }
 
-.title-description {
+#articleDetailView .title-description {
     display: inline;
     padding-left: 20px;
 }
 
 
-.shop-item-list .shop-item {
+#articleDetailView .shop-item-list .shop-item {
     padding-right: 38px;
     width: 30%;
     display: inline-block;
     vertical-align: top;
 }
 
-.shop-item-list .shop-item:last-of-type{
+#articleDetailView .shop-item-list .shop-item:last-of-type{
     padding-right: 0;
 }
 
-.shop-item-outer {
+#articleDetailView .shop-item-outer {
     border-top: 1px solid #e5e5e5;
     padding-top: 20px;
 }
 
 
-.shop-item-outer p {
+#articleDetailView .shop-item-outer p {
     letter-spacing: 1px;
 }
 
-.shop-item-outer p>a {
+#articleDetailView .shop-item-outer p>a {
     color: #b2b2b2;
 }
 
-.shop-item-outer img {
+#articleDetailView .shop-item-outer img {
     height: 186px;
     width: 100%;
 }
 
-.news .header{
+#articleDetailView .news .header{
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 
-.ad-recommend{
+#articleDetailView .ad-recommend{
     margin-top: 15px;
 }
 
-.side-bar .ad-recommend img {
+#articleDetailView .side-bar .ad-recommend img {
     max-width: 100%;
 }

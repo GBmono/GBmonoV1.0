@@ -46,23 +46,23 @@ namespace Gbmono.Api.Controllers
         //    });
         //}
 
-        //[Route("Search")]
-        //public async Task<IEnumerable<RetailerShop>> Search([FromBody] RetailerShopSearchCriteria model)
-        //{
-        //    var shops =  _repositoryManager.RetailerShopRepository
-        //                                   .Table
-        //                                   .Where(m => m.RetailerId == model.RetailerId)
-        //                                   .OrderBy(m => m.DisplayName);
+        [Route("Search")]
+        public async Task<IEnumerable<RetailerShop>> Search([FromBody] RetailerShopSearchCriteria model)
+        {
+            var shops = _repositoryManager.RetailerShopRepository
+                                           .Table
+                                           .Where(m => m.RetailerId == model.RetailerId)
+                                           .OrderBy(m => m.DisplayName);
 
-        //    // if retailer is not available
-        //    if (!shops.Any())
-        //    {
-        //        return shops;
-        //    }
+            // if retailer is not available
+            if (!shops.Any())
+            {
+                return shops;
+            }
 
-        //    // search by address or name
-        //    return await shops.Where(m => m.Address.Contains(model.Keyword) || m.Name.Contains(model.Keyword)).ToListAsync();
-        //}
+            // search by address or name
+            return await shops.Where(m => m.Address.Contains(model.Keyword) || m.Name.Contains(model.Keyword)).ToListAsync();
+        }
 
         //[Route("Search")]
         //public async Task<PagedResponse<RetailShopDoc>> Search(PagedRequest<RetailShopSearchRequest> req)

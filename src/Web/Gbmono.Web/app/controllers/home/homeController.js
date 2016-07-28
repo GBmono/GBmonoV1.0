@@ -7,7 +7,6 @@
     ctrl.$inject = ['$filter',
                     'productDataFactory',
                     'articleDataFactory',
-                    'pageDataFactory',
                     'pluginService'];
 
     // create controller
@@ -17,15 +16,19 @@
     function ctrl($filter,
                   productDataFactory,
                   articleDataFactory,
-                  pageDataFactory,
                   pluginService) {
         var vm = this;
         // new products
         vm.products = [];
-        // articles // todo: to be deprecated
-        vm.articles = [];
-        // articles 2
-        vm.articles2 = [];
+        // recomend products
+        vm.recommendProducts = [];
+        // news
+        vm.newsArticles = [];
+        // shop articles
+        vm.shopArticles = [];
+        // product (brand) articles
+        vm.productArticles = [];
+
         // product image root path
         vm.imgRoot = gbmono.img_root_path;
         // article image root path
@@ -39,16 +42,29 @@
             // call jquery initialization
             pluginService.slider();
 
-            // date range, last 14 days
-            var to = $filter('date')(new Date(), 'yyyy-MM-dd')
-            var from = $filter('date')(new Date().setDate(new Date().getDate() - 14), 'yyyy-MM-dd');
+            // get marketing articles
+            articleDataFactory.getNewArticles(1, 6)
+                .success(function (data) {
+                    vm.newsArticles = data;
+                });
+
+            // get shop articles
+            articleDataFactory.getNewArticles(2, 6)
+                .success(function (data) {
+                    vm.shopArticles = data;
+                });
+
+            // get product (brand) articles
+            articleDataFactory.getNewArticles(3, 6)
+                .success(function (data) {
+                    vm.productArticles = data;
+                });
 
             // get new products
             getNewProducts();
 
-            // get latest articles
-            getArticles();
-            getArticlesByDate(from, to);
+            // get recommend products
+            getRecommendProducts();
         }
 
         // get new products
@@ -62,19 +78,15 @@
                 });
         }
 
-        // get new articles
-        function getArticles() {
-            pageDataFactory.getArticles()
+        // get recommend products
+        function getRecommendProducts() {
+            // todo: update the data method
+            productDataFactory.getByCategory(38, 1, 8)
                 .success(function (data) {
-                    vm.articles = data;
-                });
-        }
-
-        // get articles by date
-        function getArticlesByDate(from, to) {
-            articleDataFactory.getByDate(from, to)
-                .success(function (data) {
-                    vm.articles2 = data; console.log(data);
+                    vm.recommendProducts = data;
+                    // init the jquery slider
+                    // after data is retreived
+                    pluginService.snap();
                 });
         }
     }

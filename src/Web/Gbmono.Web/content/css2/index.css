@@ -1,8 +1,8 @@
-.info-list-outer{
+#indexView .info-list-outer{
     margin-top: 40px;
 }
 
-.info-list-outer .main-list {
+#indexView .info-list-outer .main-list {
     display: inline-block;
     float: left;
     width: 75%;
@@ -10,17 +10,17 @@
 }
 
 
-.initial-title {
+#indexView .initial-title {
     display: inline;
 }
 
-.title-description {
+#indexView .title-description {
     display: inline;
     padding-left: 20px;
 }
 
 
-.shop-item-list .shop-item {
+#indexView .shop-item-list .shop-item {
     padding-right: 15px;
     width: 30%;
     display: inline-block;
@@ -28,26 +28,27 @@
 }
 
 
-.shop-item-outer {
+#indexView .shop-item-outer {
     border-top: 1px solid #e5e5e5;
     padding-top: 20px;
 }
 
 
-.shop-item-outer p {
+#indexView .shop-item-outer p {
     letter-spacing: 1px;
 }
 
-.shop-item-outer p>a {
+
+#indexView .shop-item-outer p>a {
     color: #b2b2b2;
 }
 
-.shop-item-outer img {
+#indexView .shop-item-outer img {
     height: 186px;
     width: 100%;
 }
 
-.latest-product .shop-item-outer img {
+#indexView .latest-product .shop-item-outer img {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -55,29 +56,29 @@
     width: auto;
 }
 
-.advert-append img {
+#indexView .advert-append img {
     width: 95%;
     height: auto;
 }
 
-.latest-product .shop-item-list .shop-item {
+#indexView .latest-product .shop-item-list .shop-item {
     padding-right: 14px;
     width: 22%;
     display: inline-block;
     vertical-align: top;
 }
 
-.shop-item-date .new {
+#indexView .shop-item-date .new {
     color: #d50000;
 }
 
-.latest-product .shop-item-list .shop-item:hover img {
+#indexView .latest-product .shop-item-list .shop-item:hover img {
     -webkit-transform: scale(1.1, 1.1);
     -ms-transform: scale(1.1, 1.1);
     transform: scale(1.1, 1.1);
 }
 
-.latest-product .shop-item-list .shop-item img {
+#indexView .latest-product .shop-item-list .shop-item img {
     -webkit-transition: all .2s ease-out;
     -moz-transition: all .2s ease-out;
     transition: all .2s ease-out;
@@ -87,27 +88,27 @@
 
 
 
-.recommend-list .snap-list-wrapper {
+#indexView .recommend-list .snap-list-wrapper {
     background-color: #f2f2f2;
     padding: 20px 10px 20px 10px;
     margin-top: 20px;
     width: 93%;
 }
 
-.recommend-list .snap-list-outer {
+#indexView .recommend-list .snap-list-outer {
     max-width: 208px;
 }
 
-.recommend-list .snap-list-inner {
+#indexView .recommend-list .snap-list-inner {
     margin-right: 10px;
     margin-left: 10px;
 }
 
-.recommend-product{
+#indexView .recommend-product{
     height: 230px;
 }
 
-.recommend-list img {
+#indexView .recommend-list img {
     display: block;
     width: 100%;
     max-width: 208px;
@@ -115,14 +116,14 @@
     margin: 0 auto;
 }
 
-.recommend-list .recommend-product{
+#indexView .recommend-list .recommend-product{
     height: 230px;
 }
 
-.latest-product,
-.news,
-.recommend-list,
-.vendor-topic {
+#indexView .latest-product,
+#indexView .news,
+#indexView .recommend-list,
+#indexView .vendor-topic {
     margin-top: 60px;
     margin-bottom: 20px;
 }
@@ -131,54 +132,54 @@
 
 
 
-.side-bar {
+#indexView .side-bar {
     float: left;
     display: inline-block;
     width: 25%;
     max-width: 300px;
 }
 
-.side-bar .ad-recommend {
+#indexView .side-bar .ad-recommend {
     border-top: 1px solid #e5e5e5;
     padding-top: 20px;
 }
 
-.side-bar .ad-recommend img {
+#indexView .side-bar .ad-recommend img {
     max-width: 100%;
 }
 
-.advert-append img{
+#indexView .advert-append img{
     width: 94%;
     height: auto;
 }
 
-.side-bar .ranking {
+#indexView .side-bar .ranking {
     margin-top: 20px;
 }
 
-.side-bar .daily-rank section {
+#indexView .side-bar .daily-rank section {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid #e5e5e5;
 }
 
-.daily-rank img {
+#indexView .daily-rank img {
     vertical-align: middle;
     height: 83px;
     max-width: 100%;
 }
 
-.daily-rank-outer{
+#indexView .daily-rank-outer{
     position: relative;
 }
 
-.daily-rank-inner {
+#indexView .daily-rank-inner {
     width: 65%;
     display: inline-block;
     margin-left: 105px;
 }
 
-.rank-img-wrapper {
+#indexView .rank-img-wrapper {
     padding-top: 20px;
     width: 30%;
     display: inline-block;
@@ -187,19 +188,19 @@
 }
 
 
-.header{
+#indexView .header{
     width: 94%;
     position: relative;
 }
 
-.list-more{
+#indexView .list-more{
     position: absolute;
     right: 0;
     color: blue;
     cursor: pointer;
 }
 
-.list-more:hover{
+#indexView .list-more:hover{
     text-decoration: underline;
 }
 

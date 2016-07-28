@@ -1,14 +1,14 @@
-.initial-title {
+#recommendView .initial-title {
     display: inline;
 }
 
-.title-description {
+#recommendView .title-description {
     display: inline;
     padding-left: 20px;
 }
 
 
-.shop-item-list .shop-item {
+#recommendView .shop-item-list .shop-item {
     padding-right: 15px;
     width: 30%;
     display: inline-block;
@@ -16,32 +16,26 @@
 }
 
 
-.shop-item-outer {
+#recommendView .shop-item-outer {
     border-top: 1px solid #e5e5e5;
     padding-top: 20px;
 }
 
 
-.shop-item-outer p {
+#recommendView .shop-item-outer p {
     letter-spacing: 1px;
 }
 
-.shop-item-outer p>a {
+#recommendView .shop-item-outer p>a {
     color: #b2b2b2;
 }
 
-.shop-item-outer img {
+#recommendView .shop-item-outer img {
     height: auto;
     width: 100%;
 }
 
-
-
-.header{
+#recommendView .header{
     margin-top: 40px;
     padding-bottom: 20px;
 }
-
-
-
-

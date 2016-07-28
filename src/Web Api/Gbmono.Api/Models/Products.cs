@@ -39,5 +39,8 @@ namespace Gbmono.Api.Models
         public double? Discount { get; set; }
 
         public string ImgUrl { get; set; }
+
+        // date
+        public DateTime Date { get; set; }
     }
 }
