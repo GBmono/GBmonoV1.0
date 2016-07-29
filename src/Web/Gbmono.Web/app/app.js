@@ -106,6 +106,12 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
+                .when('/register', { // login $ registration
+                    templateUrl: gbmono.app_view_path + '/accounts/login.html',
+                    controller: 'loginController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
                 .when('/profile', { // user profile
                     templateUrl: gbmono.app_view_path + '/accounts/profile.html',
                     controller: 'profileController',

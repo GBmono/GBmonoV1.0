@@ -1,0 +1,83 @@
+﻿<div id="loginView" style="padding-top:80px;">
+    <div class="login_area">
+
+        <div class="login-title">
+            <h3>登录</h3>
+            <p>集匠网会员</p>
+        </div>
+        <form name="form1" method="post">
+            <div class="inputbox">
+                <div>
+                    <p>电子邮件</p>
+                    <input type="text" name="userName" class="box300"
+                           ng-model="vm.user.userName"
+                           required>
+                </div>
+
+                <div>
+                    <p>密码</p>
+                    <input type="password" name="password" class="box300"
+                           ng-model="vm.user.password"
+                           required>
+                </div>
+
+                <div class="btn_area clearfix">
+                    <div class="single_btn">
+                        <div class="btn_enter_color">
+                            <input type="button" class="login-btn" value="登录"
+                                   ng-disabled="form1.$invalid || vm.dataLoading"
+                                   ng-click="vm.login()">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <div class="entry_area">
+
+        <div class="login-title">
+            <h3>注册新账号</h3>
+            <p>成为集匠网会员，获取更多行业资源和信息</p>
+            <p>如有问题，请随时<a href="javascript:void(0);" class="contact-us-btn">联系我们</a>, 我们的客服会尽量回复您.</p>
+        </div>
+        <form name="form2" method="post">
+            <div class="inputbox">
+                <div>
+                    <p>电子邮件</p>
+                    <input type="text" name="email" class="box300"
+                           ng-model="vm.registeration.email"
+                           required>
+                </div>
+
+                <div>
+                    <p>密码</p>
+                    <input type="password" name="regPassword" class="box300"
+                           ng-model="vm.registeration.password"
+                           required>
+                </div>
+
+                <div>
+                    <p>确认密码</p>
+                    <input type="password" name="regConfirmPassword" class="box300"
+                           ng-model="vm.registeration.confirmPassword"
+                           required>
+                </div>
+
+                <div class="btn_area clearfix">
+                    <div class="single_btn">
+                        <div class="btn_enter_color">
+                            <input type="button" class="login-btn" value="注册"
+                                   ng-disabled="form2.$invalid || vm.dataLoading"
+                                   ng-click="vm.register()">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        
+
+    </div>
+</div>

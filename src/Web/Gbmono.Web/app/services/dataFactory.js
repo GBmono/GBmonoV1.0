@@ -271,8 +271,10 @@
             getById: getById
         };
 
+        // get all brands
+        // grouped by first alphabet
         function getAll() {
-            return $http.get(gbmono.api_site_prefix.brand_api_url);
+            return $http.get(gbmono.api_site_prefix.brand_api_url + '/GroupByAlphabet');
         }
 
         function getById(id) {

@@ -1,0 +1,49 @@
+﻿<div id="brandView">
+    <ol class="breadcrumb">
+
+        <li>
+            <a ng-href="#/">
+                <span>主页</span>
+            </a>
+        </li>
+
+        <li>
+            <span class="divider">&gt;</span>
+            <a href="">
+                <span class="breadcrumb-last">品牌</span>
+            </a>
+        </li>
+
+    </ol>
+
+    <div class="search-input">
+
+        <input type="text" class="form-control" placeholder="搜索">
+
+        <span class="input-group-btn">
+
+            <div class="zone-search-btn">
+                <span>搜索</span>
+            </div>
+
+        </span>
+
+    </div>
+
+    <ul class="alphabet">
+        <div class="brands-menu-set-list">
+            <div class="menu-set-map active-menu">
+                <ul class="menu-column-subcategory"
+                    ng-repeat="group in vm.groups">
+                    <h1 class="seriffont-reg">{{ group.alphabet }}</h1>
+                    <li ng-repeat="brand in group.brands">
+                        <a class="menu-column-subcategory-link" 
+                           href="">{{ brand.name }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ul>
+</div>
+
+

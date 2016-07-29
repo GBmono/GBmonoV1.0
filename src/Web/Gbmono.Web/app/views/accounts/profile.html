@@ -1,0 +1,100 @@
+﻿<div id="personCenterView">
+    <div class="main-list">
+        <div class="nav">
+            <ul>
+                <li class="selected" chooseitem="product">收藏的商品</li>
+                <li chooseitem="article">收藏的文章</li>
+            </ul>
+        </div>
+        <!-- saved products-->
+        <article class="news-list product selected">
+
+            <div class="header">
+                <h2 class="initial-title"></h2>
+                <p class="title-description"></p>
+            </div>
+
+            <div class="shop-item-list">
+                <section class="shop-item"
+                         ng-repeat="product in vm.products">
+                    <div class="shop-item-outer">
+                        <p class="topic-title-name">{{ product.brandName }}</p>
+                        <div>
+                            <a ng-href="#/products/{{product.productId}}">
+                                <img ng-src="{{ vm.imgRoot + product.imgUrl}}"
+                                     alt="{{ product.shortName }}" />
+                            </a>
+                        </div>
+
+                        <div class="shop-item-inner">
+                            <p>
+                                <a g-href="#/products/{{product.productId}}">
+                                    {{ product.shortName }}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </section>                
+            </div>
+
+        </article>
+
+        <!-- saved articles-->
+        <article class="news-list article">
+
+            <div class="header">
+                <h2 class="initial-title">文章</h2>
+                <p class="title-description">收藏的文章</p>
+            </div>
+
+            <div class="shop-item-list">
+                <section class="shop-item">
+
+                    <div class="shop-item-outer">
+
+                        <p class="topic-title-name">News</p>
+
+                        <div>
+                            <a href="javascript:void(0);">
+                                <img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/Nui.brand2_.jpg" />
+                            </a>
+                        </div>
+
+                        <div class="shop-item-inner">
+
+                            <p>
+                                <a href="javascript:void(0);">宿屋業界に新たなジャンルが。新・サブカルチャー、ゲストハウス。</a>
+                            </p>
+
+                            <p>
+                                <time datetime="2016-06-22T21:15:20+00:00">2016.6.22 Wed</time>
+                            </p>
+
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+        </article>
+
+    </div>
+    <!-- profile info-->
+    <div class="side-bar">
+
+        <div class="person-info">
+
+            <div class="person-info-item">
+                <h3>用户名</h3>
+                <span>{{ vm.name }}</span>
+            </div>
+
+            <div class="person-info-item">
+                <h3>上次登录时间</h3>
+                <span></span>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -178,6 +178,7 @@
     <Compile Include="HttpResults\DataInvalidResult.cs" />
     <Compile Include="HttpResults\InternalServerErrorPlainTextResult.cs" />
     <Compile Include="Models\Articles.cs" />
+    <Compile Include="Models\Brands.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Const.cs" />
     <Compile Include="Models\Products.cs" />
