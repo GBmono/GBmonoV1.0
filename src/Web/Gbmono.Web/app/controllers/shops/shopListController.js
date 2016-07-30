@@ -55,19 +55,11 @@
 
         // get shops
         vm.search = function () {
-            getShops(vm.searchModel.retailerId, vm.searchModel.cityId);
+            if (vm.searchModel.cityId && vm.searchModel.cityId != '') {
+                getShops(vm.searchModel.retailerId, vm.searchModel.cityId);
+            }            
         };
 
-        // show map
-        //vm.showMap = function (addr) {
-        //    // google url
-        //    // var googleUrl = 'https://www.google.com/maps?q=';
-        //    var googleUrl = 'http://ditu.google.cn/maps?q=';
-        //    vm.mapUrl = $sce.trustAsResourceUrl(googleUrl + addr + "&output=embed");
-
-        //    // show modal
-        //    pluginService.modal('#map');
-        //};
 
         // load retailers
         function getRetailers() {
