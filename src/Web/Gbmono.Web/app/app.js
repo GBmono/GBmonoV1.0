@@ -40,21 +40,27 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
+                .when('/newproducts', { // new products page
+                    templateUrl: gbmono.app_view_path + '/products/new.html',
+                    controller: 'productNewController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
                 .when('/categories/:id/products/:subId', { // product list by category
                     templateUrl: gbmono.app_view_path + '/products/list.html',
                     controller: 'productListController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/pin', { // products pin
-                    templateUrl: gbmono.app_view_path + '/products/pin.html',
-                    controller: 'productPinController',
-                    controllerAs: 'vm',
-                    caseInsensitiveMatch: true
-                })
+                //.when('/pin', { // products pin
+                //    templateUrl: gbmono.app_view_path + '/products/pin.html',
+                //    controller: 'productPinController',
+                //    controllerAs: 'vm',
+                //    caseInsensitiveMatch: true
+                //})
                 .when('/topics', { // topics
-                    templateUrl: gbmono.app_view_path + '/products/topic.html',
-                    controller: 'topicController',
+                    templateUrl: gbmono.app_view_path + '/topics/list.html',
+                    controller: 'topicListController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })

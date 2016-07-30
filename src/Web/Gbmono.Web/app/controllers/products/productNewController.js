@@ -1,5 +1,5 @@
 ﻿/*
-    product list controller
+    new products list controller
 */
 (function (module) {
     // inject the controller params
@@ -11,7 +11,7 @@
                     'categoryDataFactory'];
 
     // create controller
-    module.controller('productListController', ctrl);
+    module.controller('productNewController', ctrl);
 
     // controller body
     function ctrl($routeParams,
@@ -26,44 +26,15 @@
         vm.products = [];
         // categories
         vm.categories = [];
-        // category brands
-        vm.categoryBrands = [];
-        // selected category
-        vm.selectedCategory = {};
 
         // product image root path
         vm.imgRoot = gbmono.img_root_path;
         // paging
         vm.paging = { pageIndex: 1, pageSize: 12 };
-        // indicate if data requesting starts
+        // indicate if loading starts
         vm.isLoadingStarts = false;
         // indicate if all data is loaded
         vm.isAllDataLoaded = false;
-
-        // retreive category id from route params
-        var categoryId = $routeParams.id ? parseInt($routeParams.id) : 0;
-        // retreive sub id (category level) from route prams
-        var levelId = $routeParams.subId ? parseInt($routeParams.subId) : 1;
-
-        // view event handlers
-        // load more products
-        vm.loadProducts = function () {
-            //// get more products
-            //// if third category id exists
-            //if (vm.thirdCateId != 0 && !isNaN(vm.thirdCateId)) {
-            //    getProducts(vm.thirdCateId,
-            //                vm.paging.pageIndex, // first page
-            //                vm.paging.pageSize); // page size
-            //}
-            //else {
-            //    // load products by top category or sub category
-            //    getProducts(vm.secondCateId == 0 ? topCategoryId : vm.secondCateId,
-            //                vm.paging.pageIndex, // first page
-            //                vm.paging.pageSize); // page size
-
-            //}
-
-        };
 
         // page init
         init();
@@ -76,15 +47,8 @@
             getCategories();
 
             // load products by category
-            getProducts(categoryId,
-                        vm.paging.pageIndex, // first page
-                        vm.paging.pageSize); // page size
-
-            // get the current category model
-            getCurrentCategory(categoryId);
-
-            // load brands
-            getCategoryBrands(categoryId, levelId);
+            getNewProducts(vm.paging.pageIndex, // first page
+                           vm.paging.pageSize); // page size
 
             // attach scroll event handler
             angular.element(window).unbind('scroll').scroll(function () {
@@ -94,34 +58,34 @@
                 if (top > bottom && !vm.isAllDataLoaded) {
                     // avoild sending multiple requests
                     if (!vm.isLoadingStarts) {
-                        // load more products when scrolling at the bottom
-                        getProducts(categoryId,
-                                    vm.paging.pageIndex, // first page
-                                    vm.paging.pageSize); // page size
-                    }
+                        // load more data with page index and page size
+                        getNewProducts(vm.paging.pageIndex, // first page
+                                       vm.paging.pageSize); // page size
+                    }                                        
                 }
             });
         }
-        
-        // load all categories
-        function getCategories(){
+
+        function getCategories() {
             categoryDataFactory.getAll()
-                .success(function(data){
+                .success(function (data) {
                     vm.categories = data;
                 });
         }
 
         // get products by category
-        function getProducts(categoryId, pageIndex, pageSize) {
-            // data requesting starts
+        function getNewProducts(pageIndex, pageSize) {
+            // loading starts
             vm.isLoadingStarts = true;
+
             // data loading indicator
-            pluginService.showDataLoadingIndicator('#productView', { left: "50%", top: "60px;" });
+            pluginService.showDataLoadingIndicator('#products', { left: "50%", top: "60px;" });
+
             // get product data
-            productDataFactory.getByCategory(categoryId, pageIndex, pageSize)
+            productDataFactory.getNewProducts(pageIndex, pageSize)
                 .success(function (data) {
                     // add products into collection
-                    vm.products = vm.products.concat(data); 
+                    vm.products = vm.products.concat(data);
                     // add page index
                     vm.paging.pageIndex++;
                     // if no more products 
@@ -129,11 +93,12 @@
                         // disable or hide the button
                         vm.isAllDataLoaded = true;
                     }
-                    // close data loading
-                    pluginService.closeDataLoadingIndicator('#productView');
 
-                    // data requesting finishes
+                    // loading finishes
                     vm.isLoadingStarts = false;
+
+                    // close data loading
+                    pluginService.closeDataLoadingIndicator('#products');
                 });
         }
 
@@ -149,7 +114,7 @@
         function getCategoryBrands(categoryId, levelId) {
             categoryDataFactory.getBrands(categoryId, levelId)
                 .success(function (data) {
-                    vm.categoryBrands = data;                    
+                    vm.categoryBrands = data;
                 });
         }
 

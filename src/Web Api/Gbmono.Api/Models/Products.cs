@@ -15,6 +15,10 @@ namespace Gbmono.Api.Models
         public int BrandId { get; set; }
         public string BrandName { get; set; }
 
+        public string ShortBrandName
+        {
+            get { return BrandName.Substring(0, BrandName.Length > 14 ? 14 : BrandName.Length); }
+        }
         // 名称
         public string PrimaryName { get; set; }
 
@@ -29,7 +33,7 @@ namespace Gbmono.Api.Models
         // short name, only display the first 15 charactars
         public string ShortName
         {
-            get { return PrimaryName.Substring(0, PrimaryName.Length > 15 ? 15 : PrimaryName.Length); }
+            get { return PrimaryName.Substring(0, PrimaryName.Length > 14 ? 14 : PrimaryName.Length); }
         }
         
         // 常规价格

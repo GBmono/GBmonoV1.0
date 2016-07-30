@@ -36,11 +36,14 @@ namespace Gbmono.Api.Controllers
             // get start index 
             var startIndex = (pageIndex.Value - 1) * pageSize.Value;
 
+            // todo: get last 7 or 14 days?
+            var from = DateTime.Today.AddDays(-14);
+
             products = await _repositoryManager.ProductRepository
                                                 .Table
                                                 .Include(m => m.Brand) // include brand table
                                                 .Include(m => m.Images)
-                                                .Where(m => (m.ActivationDate <= DateTime.Today &&
+                                                .Where(m => (m.ActivationDate >= from &&
                                                             (m.ExpiryDate >= DateTime.Today || m.ExpiryDate == null)))
                                                 .OrderByDescending(m => m.ActivationDate)
                                                 .Skip(startIndex)

@@ -122,7 +122,7 @@
                 <div class="header">
                     <h2 class="initial-title">集匠推荐</h2>
                     <p class="title-description">根据用户定制推荐产品</p>
-                    <span class="list-more">更多</span>
+                    <span class="list-more title-description">更多</span>
                 </div>
 
                 <div class="snap-list-wrapper">
@@ -157,7 +157,7 @@
                     <section class="shop-item"
                              ng-repeat="product in vm.products">
                         <div class="shop-item-outer">
-                            <p>{{ product.brandName }}</p>
+                            <p>{{ product.shortBrandName }}</p>
                             <div>
                                 <a ng-href="#/products/{{product.productId}}">
                                     <img ng-src="{{ vm.imgRoot + product.imgUrl}}" />

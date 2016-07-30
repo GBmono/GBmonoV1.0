@@ -166,7 +166,6 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RetailersController.cs" />
     <Compile Include="Controllers\RetailerShopsController.cs" />
-    <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Controllers\UserFavoritesController.cs" />
     <Compile Include="ExceptionHandling\GenericExceptionHandler.cs" />
     <Compile Include="ExceptionHandling\GenericExceptionLogger.cs" />

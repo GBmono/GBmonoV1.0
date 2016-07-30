@@ -8,7 +8,7 @@
                 <a ng-href="">药妆产品</a>&nbsp;&gt;&nbsp;
             </li>
             <li>
-                <strong>产品列表</strong>
+                <strong>新品上市</strong>
             </li>
         </ol>
     </div>
@@ -46,28 +46,13 @@
 
                 </ul>
 
-                <h3 class="brand-category-title">品牌</h3>
-                <ul class="brand-category">
-                    <li class="level3" style="font-size:9pt;"
-                        ng-repeat="brand in vm.categoryBrands">
-                        <a href="javascript:void(0);"><input type="checkbox"> {{ brand.displayName }}</a>
-                    </li>
-                </ul>
-
             </div>
         </div>
 
         <div class="main-column">
 
-            <h2 class="title category">{{ vm.selectedCategory.name }}</h2>
-
+            <h2 class="title category">新品上市</h2>
             <div class="page-nav-top-outer">
-
-                <strong>根据价格排序</strong>
-                <a href="javascript:void(0);">根据名称排序</a>
-                <a href="javascript:void(0);">根据销量排序</a>
-                <a href="javascript:void(0);">根据热度排序</a>
-
                 <span class="select_numbers">
                     每页显示:
                     <select name="disp_number" onchange="javascript:void(0);">
@@ -79,7 +64,6 @@
 
 
             </div>
-
             <section class="product-list clearfix">
                 <div class="list-area clearfix"
                      ng-repeat="product in vm.products">
@@ -114,9 +98,9 @@
 
                 </div>
             </section>
-
+            <br /><br />
         </div>
-
+        
     </div>
 </div>
 
