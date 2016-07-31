@@ -73,9 +73,9 @@
 
             <div class="thumbs">
                 <a href="javascript:void(0);"
-                   class="thumb"
+                   ng-class="$index == 0 ? 'thumb active' : 'thumb'"
                    bigimg="{{ vm.imgRoot + img.fileName }}"
-                   ng-repeat="img in vm.productImages">
+                   ng-repeat="img in vm.productImages track by $index">
                     <img ng-src="{{ vm.imgRoot + img.fileName }}">
                 </a>
             </div>

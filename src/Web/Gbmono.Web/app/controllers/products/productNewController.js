@@ -79,7 +79,7 @@
             vm.isLoadingStarts = true;
 
             // data loading indicator
-            pluginService.showDataLoadingIndicator('#products', { left: "50%", top: "60px;" });
+            pluginService.showDataLoadingIndicator('#productView', { left: "50%", top: "60px;" });
 
             // get product data
             productDataFactory.getNewProducts(pageIndex, pageSize)
@@ -98,7 +98,7 @@
                     vm.isLoadingStarts = false;
 
                     // close data loading
-                    pluginService.closeDataLoadingIndicator('#products');
+                    pluginService.closeDataLoadingIndicator('#productView');
                 });
         }
 
