@@ -19,20 +19,22 @@
             <div class="product-category-list">
                 <h3>类别</h3>
                 <ul class="item-category">
-                    <li class="level3" ng-repeat="topCate in vm.categories">
+                    <li class="level1" ng-repeat="topCate in vm.categories">
                         <div class="menu-button">
                             <p>
                                 <a ng-href="#/categories/{{ topCate.categoryId }}/products/1">{{ topCate.name }}</a>
                             </p>
                             <ul class="dropdown-menu">
-                                <li ng-repeat="secondCate in topCate.subCategories">
+                                <li class="level2"
+                                    ng-repeat="secondCate in topCate.subCategories">
                                     <div class="menu-button">
                                         <p>
                                             <a ng-href="#/categories/{{ secondCate.categoryId }}/products/2">{{ secondCate.name }} </a>
                                         </p>
 
                                         <ul class="dropdown-menu">
-                                            <li ng-repeat="thirdCate in secondCate.subCategories">
+                                            <li class="level3"
+                                                ng-repeat="thirdCate in secondCate.subCategories">
                                                 <a ng-href="#/categories/{{ thirdCate.categoryId }}/products/3">{{ thirdCate.name }}</a>
                                             </li>
                                         </ul>
@@ -70,15 +72,15 @@
                     <div class="listphoto">
                         <a ng-href="#/products/{{product.productId}}">
                             <img ng-src="{{ vm.imgRoot + product.imgUrl}}"
-                                 alt="{{ product.shortName }}"
+                                 alt="{{ product.primaryName }}"
                                  class="picture">
                         </a>
                     </div>
 
                     <div class="listrightbloc">
                         <div class="listrightbloc_head">
-                            <div class="listcomment">{{ product.shortBrandName }}</div>
-                            <h3>{{ product.shortName }}</h3>
+                            <div class="listcomment">{{ product.brandName }}</div>
+                            <h3>{{ product.primaryName  }}</h3>
 
                             <div class="price_area">
                                 <div class="pricebox sale_price">
@@ -98,7 +100,11 @@
 
                 </div>
             </section>
-            <br /><br />
+            <!-- loading icon -->
+            <div ng-show="vm.isLoadingStarts" style="margin:15px 0 20px 0">
+                <img style="display: block;margin-left: auto;margin-right: auto;" 
+                     src="content/img/loading.gif">
+            </div>
         </div>
         
     </div>

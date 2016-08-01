@@ -115,8 +115,6 @@
         function getProducts(categoryId, pageIndex, pageSize) {
             // data requesting starts
             vm.isLoadingStarts = true;
-            // data loading indicator
-            pluginService.showDataLoadingIndicator('#productView', { left: "50%", top: "60px;" });
             // get product data
             productDataFactory.getByCategory(categoryId, pageIndex, pageSize)
                 .success(function (data) {
@@ -129,8 +127,6 @@
                         // disable or hide the button
                         vm.isAllDataLoaded = true;
                     }
-                    // close data loading
-                    pluginService.closeDataLoadingIndicator('#productView');
 
                     // data requesting finishes
                     vm.isLoadingStarts = false;

@@ -53,7 +53,7 @@
             // attach scroll event handler
             angular.element(window).unbind('scroll').scroll(function () {
                 var top = angular.element(window).scrollTop();
-                var bottom = angular.element(document).height() - angular.element(window).height() - 50;
+                var bottom = angular.element(document).height() - angular.element(window).height() - 60;
                 // when it still has more data to be loaded
                 if (top > bottom && !vm.isAllDataLoaded) {
                     // avoild sending multiple requests
@@ -78,9 +78,6 @@
             // loading starts
             vm.isLoadingStarts = true;
 
-            // data loading indicator
-            pluginService.showDataLoadingIndicator('#productView', { left: "50%", top: "60px;" });
-
             // get product data
             productDataFactory.getNewProducts(pageIndex, pageSize)
                 .success(function (data) {
@@ -96,9 +93,6 @@
 
                     // loading finishes
                     vm.isLoadingStarts = false;
-
-                    // close data loading
-                    pluginService.closeDataLoadingIndicator('#productView');
                 });
         }
 

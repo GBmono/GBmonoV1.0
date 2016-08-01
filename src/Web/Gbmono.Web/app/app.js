@@ -94,7 +94,7 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/articles', { // articles, news, information
+                .when('/articles/types/:articleTypeId?', { // articles, news, information
                     templateUrl: gbmono.app_view_path + '/articles/list.html',
                     controller: 'articleListController',
                     controllerAs: 'vm',

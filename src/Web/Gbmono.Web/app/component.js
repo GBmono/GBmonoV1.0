@@ -3,13 +3,13 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['categoryDataFactory'];
+    ctrl.$inject = ['categoryDataFactory', 'utilService'];
 
     // create controller
     module.controller('headerController', ctrl);
 
     // controller body
-    function ctrl(categoryDataFactory) {        
+    function ctrl(categoryDataFactory, utilService) {
         var vm = this;
         // product top categories
         // devided into 4 collections map into 4 vertical list elements
@@ -21,7 +21,11 @@
         init();
 
         function init() {
+            // get product top categories
             getProductTopCategories();
+
+            // check if token exists
+            isTokenExisted();
 
             // scroll
             window.addEventListener("scroll", function (event) {
@@ -50,6 +54,18 @@
                 });
         }
 
+        function isTokenExisted() {
+            // check if token exists
+            var token = utilService.getToken();
+            // if no token
+            if (!token || token === '') {
+                vm.isTokenExisted = false;
+            }
+            else {
+                vm.isTokenExisted = true;
+            }
+        }
+
         function fillCategories(startIndex, data) {
             var result = [];
             for (var i = startIndex; i < startIndex + 4; i++) {
@@ -64,7 +80,6 @@
     }
 
 })(angular.module('gbmono'));
-
 
 /*
    ranking product list component controller
@@ -95,45 +110,6 @@
             productDataFactory.getByRanking()
                 .success(function (data) {
                     vm.products = data; 
-                });
-        }
-    }
-
-})(angular.module('gbmono'));
-
-/*
-   recomended product list component controller
-*/
-(function (module) {
-    // inject the controller params
-    ctrl.$inject = ['productDataFactory', 'pluginService'];
-
-    // create controller
-    module.controller('recommendController', ctrl);
-
-    // controller body
-    function ctrl(productDataFactory, pluginService) {
-        var vm = this;
-        // products 
-        vm.products = [];
-        // product image root path
-        vm.imgRoot = gbmono.img_root_path;
-
-        init();
-
-        function init() {
-            // load recommended products
-            getRecommendedProducts();
-        }
-
-        function getRecommendedProducts() {
-            // todo: update the data method
-            productDataFactory.getByCategory(38, 1, 8)
-                .success(function (data) {
-                    vm.products = data;
-                    // init the jquery slider
-                    // after data is retreived
-                    pluginService.snap();
                 });
         }
     }

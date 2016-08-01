@@ -42,7 +42,6 @@
                 .success(function (data) {
                     vm.article = data;
                     vm.htmlBody = $sce.trustAsHtml(data.body);
-
                     // close data loading
                     pluginService.closeDataLoadingIndicator('#articleDetailView');
                 });

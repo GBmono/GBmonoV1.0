@@ -158,8 +158,10 @@
 }
 
 #indexView .side-bar .daily-rank section {
+    margin-bottom: 20px;
     margin-top: 20px;
-    padding-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-top: 1px solid #e5e5e5;
 }
 
@@ -195,8 +197,9 @@
 
 #indexView .list-more{
     position: absolute;
+    font-size: 13px;
+    color: #b2b2b2;
     right: 0;
-    color: blue;
     cursor: pointer;
 }
 

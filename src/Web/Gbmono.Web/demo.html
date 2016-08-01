@@ -30,23 +30,22 @@
     <!-- container -->
     <section class="container">            
         <!-- content, ng view injected-->
-        <div class="wrapper" style="padding-top:15px;">
+        <section class="wrapper" style="padding-top:15px;">
             <div ng-view class="slide"></div>
+        </section>
+        
+        <!-- back to top -->
+        <div id="pageTop" class="dnone"
+                ng-click="vm.backToTop()">
+            <figure class="page-top-outer">
+                <img src="content/img/pagetop.gif" alt="">
+            </figure>
         </div>
-
     </section>
 
     <!-- footer -->
     <div ng-include="'app/components/footer.html'"
             ng-controller="footerController">
-    </div>
-
-    <!-- back to top -->
-    <div id="pageTop" class="dnone"
-            ng-click="vm.backToTop()">
-        <figure class="page-top-outer">
-            <img src="content/img/pagetop.gif" alt="">
-        </figure>
     </div>
 
     <!-- scripts -->

@@ -15,12 +15,6 @@ namespace Gbmono.Api.Models
         public int BrandId { get; set; }
         public string BrandName { get; set; }
 
-        // todo: to be deprecated??
-        public string ShortBrandName
-        {
-            get { return BrandName; }
-        }
-
         // 名称
         public string PrimaryName { get; set; }
 
@@ -31,15 +25,7 @@ namespace Gbmono.Api.Models
         {
             get { return PrimaryName + " " + SecondaryName; }
         }
-
-        // short name, only display the first 15 charactars
-        // todo: to be removed
-        public string ShortName
-        {
-            // get { return PrimaryName.Substring(0, PrimaryName.Length > 14 ? 14 : PrimaryName.Length); }
-            get { return PrimaryName; }
-        }
-        
+      
         // 常规价格
         public double Price { get; set; }
 

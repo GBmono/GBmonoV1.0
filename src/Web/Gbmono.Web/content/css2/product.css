@@ -38,8 +38,12 @@
     margin-top: 0;
 }
 
-#productView .item-category li {
+.product-category-list .item-category li.level1 {
     background: #fff url(../images/icon_category_arrow.gif) no-repeat 190px center;
+}
+
+.product-category-list .item-category li.level2 {
+    background: #fff url(../images/icon_category_arrow.gif) no-repeat 144px center;
 }
 
 #productView .item-category li a{
@@ -138,11 +142,12 @@
 
 
 #productView .list-area {
+    vertical-align: top;
+    display: inline-block;
     position: relative;
     width: 24%;
     margin: 0 -1px -1px 0;
     padding: 1px;
-    float: left;
     border: 1px solid #eee;
     margin-left: 5px;
 }

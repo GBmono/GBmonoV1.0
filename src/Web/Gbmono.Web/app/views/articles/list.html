@@ -3,23 +3,23 @@
 
         <div class="nav">
             <ul>
-                <li class="selected" chooseitem="company">行业</li>
-                <li chooseitem="store">零售店</li>
-                <li chooseitem="product">产品</li>
-                <li chooseitem="other">其它</li>
+                <li><a ng-href="#/articles/types/1">行业</a></li>
+                <li><a ng-href="#/articles/types/2">零售店</a></li>
+                <li><a ng-href="#/articles/types/3">产品</a></li>
+                <li><a ng-href="#/articles/types/4">其它</a></li>
             </ul>
         </div>
 
-        <article class="news-list company selected">
+        <article class="">
 
             <div class="header">
-                <h2 class="initial-title">行业</h2>
+                <h2 class="initial-title">{{ vm.articleTypeName }}</h2>
                 <p class="title-description"></p>
             </div>
 
             <div class="shop-item-list">
                 <section class="shop-item"
-                         ng-repeat="article in vm.marketingArticles">
+                         ng-repeat="article in vm.articles">
                     <div class="shop-item-outer">
                         <p class="topic-title-name">News</p>
 
@@ -48,119 +48,11 @@
 
         </article>
 
-        <article class="news-list store">
-
-            <div class="header">
-                <h2 class="initial-title">零售店</h2>
-                <p class="title-description">用图标来标识？</p>
-            </div>
-
-            <div class="shop-item-list">
-                <section class="shop-item"
-                         ng-repeat="article in vm.shopArticles">
-                    <div class="shop-item-outer">
-                        <p class="topic-title-name">News</p>
-
-                        <div>
-                            <a ng-href="#/articles/{{ article.articleId }}">
-                                <img ng-src="{{ vm.articleImgRoot + article.coverThumbnailUrl }}" />
-                            </a>
-                        </div>
-
-                        <div class="shop-item-inner">
-                            <p>
-                                <a ng-href="#/articles/{{ article.articleId }}">
-                                    {{ article.title }}
-                                </a>
-                            </p>
-
-                            <p>
-                                <time>{{ article.modifiedDate | date: 'yyyy-MM-dd'}}</time>
-                            </p>
-
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-        </article>
-
-        <article class="news-list product">
-
-            <div class="header">
-                <h2 class="initial-title">产品</h2>
-                <p class="title-description">用图标来标识？</p>
-            </div>
-
-            <div class="shop-item-list">
-                <section class="shop-item"
-                         ng-repeat="article in vm.productArticles">
-                    <div class="shop-item-outer">
-                        <p class="topic-title-name">News</p>
-
-                        <div>
-                            <a ng-href="#/articles/{{ article.articleId }}">
-                                <img ng-src="{{ vm.articleImgRoot + article.coverThumbnailUrl }}" />
-                            </a>
-                        </div>
-
-                        <div class="shop-item-inner">
-                            <p>
-                                <a ng-href="#/articles/{{ article.articleId }}">
-                                    {{ article.title }}
-                                </a>
-                            </p>
-
-                            <p>
-                                <time>{{ article.modifiedDate | date: 'yyyy-MM-dd'}}</time>
-                            </p>
-
-                        </div>
-                    </div>
-
-                </section>
-            </div>
-
-        </article>
-
-        <article class="news-list other">
-
-            <div class="header">
-                <h2 class="initial-title">其他</h2>
-                <p class="title-description">用图标来标识？</p>
-            </div>
-
-            <div class="shop-item-list">
-                <section class="shop-item"
-                         ng-repeat="article in vm.others">
-                    <div class="shop-item-outer">
-                        <p class="topic-title-name">News</p>
-
-                        <div>
-                            <a ng-href="#/articles/{{ article.articleId }}">
-                                <img ng-src="{{ vm.articleImgRoot + article.coverThumbnailUrl }}" />
-                            </a>
-                        </div>
-
-                        <div class="shop-item-inner">
-                            <p>
-                                <a ng-href="#/articles/{{ article.articleId }}">
-                                    {{ article.title }}
-                                </a>
-                            </p>
-
-                            <p>
-                                <time>{{ article.modifiedDate | date: 'yyyy-MM-dd'}}</time>
-                            </p>
-
-                        </div>
-                    </div>
-
-                </section>
-            </div>
-
-        </article>
-
+        <!-- loading icon -->
+        <div ng-show="vm.isLoadingStarts" style="margin:15px 0 20px 0">
+            <img style="display: block;margin-left: auto;margin-right: auto;"
+                 src="content/img/loading.gif">
+        </div>
     </div>
 
     <div class="side-bar">
@@ -191,4 +83,3 @@
         </article>
     </div>
 </div>
-

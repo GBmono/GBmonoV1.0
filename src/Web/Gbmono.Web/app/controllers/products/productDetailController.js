@@ -72,8 +72,7 @@
             utilService.scrollToTop();
 
             // load product detailed info when product is provided
-            if (productId !== 0) {
-                // pluginService.showDataLoadingIndicator('#productMain', { left: "60%", top: "60px" });
+            if (productId !== 0) {                
                 // get product by id
                 getProduct(productId, token);
                 // check if product is favorid when user is logged in
@@ -94,27 +93,13 @@
                     // replace the loading img by actual product image
                     // handle no images returned
                     vm.primaryImg = vm.productImages.length > 0 ? vm.productImages[0].fileName : vm.noImage;
-                    // get category menu by top category id
-                    // getCategoryMenu(vm.product.category.parentCategory.parentId);
-
                     // ui effects
                     // init img thumb gallery
                     pluginService.productDetailGallery();
                     // init bootstrap tab
-                    pluginService.tab();
-                    // close data loading
-                    // pluginService.closeDataLoadingIndicator('#productMain');    
+                    pluginService.tab(); 
                 });
         }
-
-        // get category menu
-        // expanded current top category with subitems, and unselected collapsed menuitems
-        //function getCategoryMenu(topCateId) {
-        //    categoryDataFactory.getMenu(topCateId)
-        //        .success(function (data) {
-        //            vm.menu = data;
-        //        });
-        //}
 
         // filter images by image type
         function filterImages(images) {

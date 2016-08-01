@@ -67,6 +67,11 @@
     color: #FFFFFF;
 }
 
+.login-btn:disabled {
+    background: #ddd!important;;
+}
+
+
 #loginView .btn_enter_color a:hover,
 #loginView .btn_enter_color input:hover {
     background:#7A0000;

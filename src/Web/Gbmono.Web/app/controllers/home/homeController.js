@@ -42,29 +42,38 @@
             // call jquery initialization
             pluginService.slider();
 
+            // get new products
+            getNewProducts();
+
+            // get new articles
+            getNewArticles();
+
+            // get recommend products
+            getRecommendProducts();
+        }
+
+        // get new articles
+        function getNewArticles() {
+            // load latest 6 items for each type of article
+            var pageIndex = 1, pageSize = 6;
+
             // get marketing articles
-            articleDataFactory.getNewArticles(1, 6)
+            articleDataFactory.getByType(1, pageIndex, pageSize)
                 .success(function (data) {
                     vm.newsArticles = data;
                 });
 
             // get shop articles
-            articleDataFactory.getNewArticles(2, 6)
+            articleDataFactory.getByType(2, pageIndex, pageSize)
                 .success(function (data) {
                     vm.shopArticles = data;
                 });
 
             // get product (brand) articles
-            articleDataFactory.getNewArticles(3, 6)
+            articleDataFactory.getByType(3, pageIndex, pageSize)
                 .success(function (data) {
                     vm.productArticles = data;
                 });
-
-            // get new products
-            getNewProducts();
-
-            // get recommend products
-            getRecommendProducts();
         }
 
         // get new products

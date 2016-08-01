@@ -5,7 +5,7 @@
             <img class="logo-img" src="content/img/log_128.png">
             <div class="logo-title">
                 <h1>集匠</h1>
-                <p>GBMono.com</p>
+                <p>GBmono.com</p>
             </div>
         </div>
 
@@ -65,7 +65,7 @@
                     </ul>
                 </li>
                 <li class="main-head-title"><a ng-href="#/brands">品牌</a></li>
-                <li class="main-head-title"><a ng-href="#/articles">市场动态</a></li>
+                <li class="main-head-title"><a ng-href="#/articles/types">市场动态</a></li>
                 <li class="main-head-title gb-shop">
                     <a href="">药妆店<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -82,8 +82,17 @@
                         <input type="text" name="searchBtn" id="searchBtn" class="input-text" placeholder="搜索" value="">
                     </span>
                 </li>
-                <li class="main-head-title">
+                <li class="main-head-title"
+                    ng-show="!vm.isTokenExisted">
                     <a ng-href="#/login">登录</a> | <a ng-href="#/register">注册</a>
+                </li>
+                <li class="main-head-title"
+                    ng-show="vm.isTokenExisted">
+                    <a ng-href="#/profile">
+                        <section class="person-wrapper">
+                            <img src="content/img/user.png">
+                        </section>
+                    </a>
                 </li>
             </ul>
         </nav>

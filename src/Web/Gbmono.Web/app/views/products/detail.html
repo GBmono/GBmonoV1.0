@@ -102,18 +102,26 @@
                 </ul>
 
                 <div class="tab-content">
-                    <p class="tab-item-content tab-detail active">
-                        {{ vm.product.description }}
-                    </p>
-                    <p class="tab-item-content tab-instruction">
-                        {{ vm.product.instruction }}
-                    </p>
-                    <p class="tab-item-content tab-shop">
+                    <div class="tab-item-content tab-detail active">
+                        <blockquote>                            
+                            <pre>{{ vm.product.description }}</pre>                            
+                        </blockquote>
+                        
+                    </div>
+                    <div class="tab-item-content tab-instruction">
+                        <blockquote>
+                            <pre>{{ vm.product.instruction }}</pre>
+                        </blockquote>
+                        <!-- list of the insruction images-->
+                        <img ng-repeat="img in vm.instrutionImages" 
+                             ng-src="{{ vm.imgRoot + img.fileName }}" alt="" class="img-responsive">                        
+                    </div>
+                    <div class="tab-item-content tab-shop">
                         <img src="content/img/shop1.jpg" />
-                    </p>
-                    <p class="tab-item-content tab-append">
+                    </div>
+                    <div class="tab-item-content tab-append">
                         追加信息暂无
-                    </p>
+                    </div>                  
                 </div>
             </div>
         </span>
@@ -152,9 +160,9 @@
                             <span class="product-sales-price" title="Sale Price">$37.00</span>
                         </div>
 
-                        <span class="star_box">
+                        <!--<span class="star_box">
                             <span class="star" style="width:40%"></span>
-                        </span>
+                        </span>-->
 
                     </div>
 
@@ -180,9 +188,9 @@
                             <span class="product-sales-price" title="Sale Price">$37.00</span>
                         </div>
 
-                        <span class="star_box">
+                        <!--<span class="star_box">
                             <span class="star" style="width:40%"></span>
-                        </span>
+                        </span>-->
 
                     </div>
 
@@ -224,9 +232,9 @@
                             <span class="product-sales-price" title="Sale Price">$37.00</span>
                         </div>
 
-                        <span class="star_box">
+                        <!--<span class="star_box">
                             <span class="star" style="width:40%"></span>
-                        </span>
+                        </span>-->
 
                     </div>
 
@@ -252,9 +260,9 @@
                             <span class="product-sales-price" title="Sale Price">$37.00</span>
                         </div>
 
-                        <span class="star_box">
+                        <!--<span class="star_box">
                             <span class="star" style="width:40%"></span>
-                        </span>
+                        </span>-->
 
                     </div>
 

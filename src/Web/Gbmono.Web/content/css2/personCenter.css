@@ -95,3 +95,47 @@
 #personCenterView .main-list>article>.header{
     padding-bottom: 10px;
 }
+
+
+
+
+
+#personCenterView .list-area {
+    position: relative;
+    width: 30%;
+    padding: 1px;
+    float: left;
+    margin-left: 5px;
+}
+
+#personCenterView .listphoto img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    width: auto;
+    height: 220px;
+}
+
+
+#personCenterView .price_area{
+    margin-bottom: 20px;
+}
+
+.person-wrapper{
+    position: relative;
+    display: inline;
+    padding: 6px 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.person-wrapper:hover{
+    border: 1px solid #c27baa;
+}
+
+.person-wrapper img{
+    left: 11px;
+    top: 7px;
+    position: absolute;
+}

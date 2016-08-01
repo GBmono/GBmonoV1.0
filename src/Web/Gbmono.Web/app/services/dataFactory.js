@@ -301,8 +301,7 @@
         // return data factory with CRUD calls
         return {
             getById: getById,
-            getNewArticles: getNewArticles,
-            getByDate: getByDate,
+            getByType: getByType,
             getByRanking: getByRanking
         };
 
@@ -310,12 +309,8 @@
             return $http.get(gbmono.api_site_prefix.article_api_url + '/' + id);
         };
 
-        function getNewArticles(typeId, pageSize) {
-            return $http.get(gbmono.api_site_prefix.article_api_url + '/New/' + typeId + '/' + pageSize);
-        }
-
-        function getByDate(from, to) {
-            return $http.get(gbmono.api_site_prefix.article_api_url + '/' + from + '/' + to);
+        function getByType(typeId, pageIndex, pageSize) {            
+            return $http.get(gbmono.api_site_prefix.article_api_url + '/List/' + typeId + '/' + pageIndex + '/' + pageSize);
         }
 
         function getByRanking() {

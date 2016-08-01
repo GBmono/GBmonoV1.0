@@ -135,7 +135,7 @@
                                          ng-src="{{ vm.imgRoot + product.imgUrl}}">
                                 </a>
                                 <a ng-href="#/products/{{product.productId}}">
-                                    {{ product.shortName }}
+                                    {{ product.primaryName }}
                                     <!--<img src="http://www.houyhnhnm.jp/wp-content/uploads/2016/05/bin_logo.gif" alt="BIN">-->
                                 </a>
                             </div>
@@ -157,7 +157,7 @@
                     <section class="shop-item"
                              ng-repeat="product in vm.products">
                         <div class="shop-item-outer">
-                            <p>{{ product.shortBrandName }}</p>
+                            <p>{{ product.brandName }}</p>
                             <div>
                                 <a ng-href="#/products/{{product.productId}}">
                                     <img ng-src="{{ vm.imgRoot + product.imgUrl}}" />
@@ -168,7 +168,7 @@
 
                                 <p>
                                     <a ng-href="#/products/{{product.productId}}">
-                                        {{ product.shortName }}
+                                        {{ product.primaryName }}
                                     </a>
                                 </p>
 

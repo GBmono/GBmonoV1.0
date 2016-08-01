@@ -36,40 +36,23 @@ namespace Gbmono.Api.Controllers
                                                    .SingleOrDefaultAsync(m => m.ArticleId == id);
         }
 
-        // get new articles for each article type with page size
-        [Route("New/{articleTypeId}/{pageSize}")]
-        public async Task<IEnumerable<ArticleSimpleModel>> GetNew(short articleTypeId, int? pageSize = 6)
-        {
-            // marketing article
-            var articles = await _repositoryManager.ArticleRepository
-                                                      .Table
-                                                      .Include(m => m.Images)
-                                                      .Where(m => m.ArticleTypeId == articleTypeId)
-                                                      .OrderByDescending(m => m.ModifiedDate)
-                                                      .Take(pageSize.Value)
-                                                      .ToListAsync();
-
-            return articles.Select(m => m.ToSimpleToModel());
-        }
-
         // get articles by date
-        [Route("{from}/{to}")]
-        public async Task<IEnumerable<ArticleSimpleModel>> GetArticles(DateTime from, DateTime to)
+        [Route("List/{articleTypeId}/{pageIndex:int?}/{pageSize:int?}")]
+        public async Task<IEnumerable<ArticleSimpleModel>> GetByType(short articleTypeId, int? pageIndex = 1, int? pageSize = 12)
         {
-            // todo: limitation on date range?
-            if((to - from).Days > 60)
-            {
-                // todo:
-            }
+            // get start index 
+            var startIndex = (pageIndex.Value - 1) * pageSize.Value;
 
             // load published articles by date
             var articles = await _repositoryManager.ArticleRepository
                                                    .Table
                                                    .Include(m => m.Images)
-                                                   .Where(m => m.ModifiedDate >= from &&
-                                                               m.ModifiedDate < DbFunctions.AddDays(to, 1) &&
+                                                   .Where(m => m.ArticleTypeId == articleTypeId && 
+                                                               m.ModifiedDate < DbFunctions.AddDays(DateTime.Today, 1) &&
                                                                m.IsPublished == true)
                                                    .OrderByDescending(m => m.ModifiedDate)
+                                                   .Skip(startIndex)
+                                                   .Take(pageSize.Value)
                                                    .ToListAsync();
 
             // convert into binding models

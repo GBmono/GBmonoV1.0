@@ -23,6 +23,8 @@ body a {
 }
 
 .container{
+    min-height: 429px;
+    display: block;
     margin: 0 auto;
     max-width: 1200px;
     position: relative;
@@ -52,11 +54,13 @@ body a {
 #menuHeader .logo-title {
     float: left;
     padding-left: 5px;
+    padding-top: 4px;
 }
 
 .logo-title h1{
     margin-top: 5px;
     margin-bottom: 5px;
+    text-align: center;
 }
 
 .logo-title p{
@@ -78,7 +82,7 @@ body a {
     padding-bottom: 15px;
     letter-spacing: 1px;
     padding-left: 20px;
-    display: inline;
+    display: inline-block;
     position: relative;
 }
 
@@ -257,3 +261,40 @@ footer a{
     text-decoration: none;
 }
 
+
+
+
+.breadcrumb{
+    padding-left: 0;
+}
+
+.breadcrumb>li>.divider {
+    padding: 0 8px;
+    color: #9a9a9a;
+}
+
+.breadcrumb li{
+    display: inline;
+}
+
+.breadcrumb a {
+    color: #9a9a9a;
+}
+
+.breadcrumb-last{
+    color: #000000;
+}
+
+
+
+pre {
+    white-space: pre-wrap; /* css-3 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+}
+
+* html pre {
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+    white-space : normal ; /* Internet Explorer 5.5+ */
+}

@@ -14,27 +14,36 @@
                 <p class="title-description"></p>
             </div>
 
-            <div class="shop-item-list">
-                <section class="shop-item"
+            <div class="shop-item-list">                                
+                <section class="product-list clearfix">
+                    <div class="list-area clearfix"
                          ng-repeat="product in vm.products">
-                    <div class="shop-item-outer">
-                        <p class="topic-title-name">{{ product.brandName }}</p>
-                        <div>
+                        <div class="listphoto">
                             <a ng-href="#/products/{{product.productId}}">
-                                <img ng-src="{{ vm.imgRoot + product.imgUrl}}"
-                                     alt="{{ product.shortName }}" />
+                                <img class="picture"
+                                     alt="{{ product.primaryName }}" 
+                                     ng-src="{{ vm.imgRoot + product.imgUrl}}">
                             </a>
                         </div>
 
-                        <div class="shop-item-inner">
-                            <p>
-                                <a g-href="#/products/{{product.productId}}">
-                                    {{ product.shortName }}
-                                </a>
-                            </p>
+                        <div class="listrightbloc">
+                            <div class="listrightbloc_head">
+                                <div class="listcomment">{{ product.brandName }}</div>
+                                <h3>{{ product.primaryName }}</h3>
+                                <div class="price_area">
+                                    <div class="pricebox sale_price">
+                                        <span class="price">
+                                            <span id="price02_default_13666">{{ product.price | currency:"¥"}}</span>
+                                            <span id="price02_dynamic_13666"></span>
+                                            <span class="price_strong"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-                </section>                
+                </section>              
             </div>
 
         </article>

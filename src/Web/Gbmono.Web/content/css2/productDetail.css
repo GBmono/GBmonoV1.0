@@ -88,6 +88,7 @@
 
 #productDetailView .thumb img {
     height: 200px;
+    max-width: 200px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -95,26 +96,7 @@
 }
 
 
-#productDetailView .breadcrumb{
-    padding-left: 0;
-}
 
-#productDetailView .breadcrumb>li>.divider {
-    padding: 0 8px;
-    color: #9a9a9a;
-}
-
-#productDetailView .breadcrumb li{
-    display: inline;
-}
-
-#productDetailView .breadcrumb a {
-    color: #9a9a9a;
-}
-
-#productDetailView .breadcrumb-last{
-    color: #000000;
-}
 
 
 #productDetailView .nav-tabs{
