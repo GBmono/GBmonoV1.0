@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="format-detection" content="telephone=no">
+    <!--禁用手机号码链接(for iPhone)-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <!--自适应设备宽度-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--控制全屏时顶部状态栏的外，默认白色-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--是否允许全屏显，只有在桌面启动时可用-->
+
+    <title>GBmonoApp</title>
+
+    <link rel="shortcut icon" href="./resources/images/favicon.jpg">
+    <link rel="apple-touch-icon" href="./resources/images/favicon.jpg">
+
+
+    <!--项目完成时再压缩-->
+    <link href="./resources/css/indexInit.css" rel="stylesheet" type="text/css">
+
+    <script src="./libs/sea.js" type="text/javascript"></script>
+    <script src="./libs/seajs-preload.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+    <header>
+
+        <section class="menu-top">
+
+            <div class="menu-btn">
+                <i class="iconfont">&#xe602;</i>
+            </div>
+            <h1>GBMono</h1>
+            <div class="search-btn">
+                <i class="iconfont">&#xe601;</i>
+            </div>
+
+        </section>
+
+        <section class="menu-list">
+
+            <ul class="hbox">
+                <li>产品</li>
+                <li>推荐</li>
+                <li>品牌</li>
+                <li>市场动态</li>
+                <li>药妆店</li>
+            </ul>
+
+        </section>
+
+    </header>
+
+    <div class="container">
+
+        <div class="wrapper">
+
+            <div class="main-visual">
+
+                <div id="visualList">
+
+                    <div class="visual-img-item">
+                        <a href="javascript:void(0);">
+                            <img width="100%" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/GONZ_1200_675_.jpg" />
+                        </a>
+                    </div>
+
+                    <div class="visual-img-item">
+                        <a href="javascript:void(0);">
+                            <img width="100%" src="http://www.houyhnhnm.jp/wp-content/uploads/3016/06/SA_1200_675_-1.jpg" />
+                        </a>
+                    </div>
+
+                    <div class="visual-img-item">
+                        <a href="javascript:void(0);">
+                            <img width="100%" src="http://www.houyhnhnm.jp/wp-content/uploads/2016/06/reynspooner_1200.jpg" />
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        // seajs 的简单配置
+        seajs.config({
+            base: "./libs/",
+            alias: {
+                "zepto":            "zepto",
+                "zepto-data":       "data",
+                "zepto-selector":   "selector",
+                "zepto-carousel":   "owl.carousel",
+                "underscore":       "underscore",
+                "backbone":         "backbone"
+
+            },
+
+            map:[
+                ['.js','.js?v=2016080301']
+            ],
+
+            preload: ['zepto','underscore']
+
+        });
+
+        // 加载入口模块
+        seajs.use("./index")
+
+
+    </script>
+
+
+</body>
+</html>
