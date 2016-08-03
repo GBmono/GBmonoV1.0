@@ -10,13 +10,11 @@
         return {
             slider: slider,
             snap: snap,
-            menuSliding: menuSliding,
             tab:tab,
             productDetailGallery: productDetailGallery,
-            notify: notify,
             showDataLoadingIndicator: showDataLoadingIndicator,
-            closeDataLoadingIndicator: closeDataLoadingIndicator,
-            modal: modal
+            closeDataLoadingIndicator: closeDataLoadingIndicator
+            // modal: modal
         };
 
         // silder effect
@@ -56,32 +54,6 @@
             });
         }
 
-        // nav menu sliding effect
-        function menuSliding() {
-            // call $timeout to make sure dom is ready
-            $timeout(function () {
-                $('.dropdown').on('show.bs.dropdown', function (e) {
-
-                    if ($(window).width() > 750) {
-                        $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
-
-                    }
-                    else {
-                        $(this).find('.dropdown-menu').first().stop(true, true).show();
-                    }
-                });
-
-                $('.dropdown').on('hide.bs.dropdown', function (e) {
-                    if ($(window).width() > 750) {
-                        $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
-                    }
-                    else {
-                        $(this).find('.dropdown-menu').first().stop(true, true).hide();
-                    }
-                });
-            });
-        }
-
         // product thumbnail gallery
         function productDetailGallery() {
             $timeout(function () {
@@ -114,70 +86,6 @@
             });                     
         }
 
-        // $.growl notification
-        function notify(response, type) {
-            var msg = '';
-
-            // if type is error
-            // extract the acutal error message from object
-            if (type === 'error') {
-                if (response.data) {
-                    if (response.data.message) {
-                        msg = response.data.message;
-                    } else if (response.data.error_description) {
-                        msg = response.data.error_description;
-                    }
-
-                } else {
-                    // generic error message
-                    msg = 'Unexpected error has occurred. Please contact the administrator.';
-                }
-            }
-
-            $.growl(
-                {
-                    icon: type === 'success' ? 'fa fa-check' : 'fa fa-exclamation-triangle',
-                    title: type === 'success' ? ' Success!  ' : ' Error!  ',
-                    message: msg,
-                    url: ''
-                },
-                {
-                    element: 'body',
-                    type: type === 'error' ? 'danger' : 'success',
-                    allow_dismiss: true,
-                    //position: 'relative',
-                    placement: {
-                        from: 'top',
-                        align: 'center'
-                    },
-                    offset: {
-                        x: 20,
-                        y: 85
-                    },
-                    spacing: 10,
-                    z_index: 1031,
-                    delay: 2500,
-                    timer: 2000,
-                    url_target: '_blank',
-                    mouse_over: false,
-                    animate: {
-                        enter: 'animated fadeIn',
-                        exit: 'animated fadeOut'
-                    },
-                    icon_type: 'class',
-                    template: '<div data-growl="container" class="alert" role="alert">' +
-                                    '<button type="button" class="close" data-growl="dismiss">' +
-                                        '<span aria-hidden="true">&times;</span>' +
-                                        '<span class="sr-only">Close</span>' +
-                                    '</button>' +
-                                    '<span data-growl="icon"></span>&nbsp;&nbsp;' +
-                                    // '<span data-growl="title"></span>' +
-                                    '<span data-growl="message"></span>' +
-                                    '<a href="#" data-growl="url"></a>' +
-                                '</div>'
-                });
-        }
-
         // data loading indicator
         function showDataLoadingIndicator(selector, position) {
             //if (!position) {
@@ -206,8 +114,9 @@
             $(selector).find('.widget-box-overlay').remove();
         }
 
-        function modal(selector) {
-            $(selector).modal();
-        }
+        //function modal(selector) {
+        //    $(selector).modal();
+        //}
+
     }
 })(angular.module('gbmono'));

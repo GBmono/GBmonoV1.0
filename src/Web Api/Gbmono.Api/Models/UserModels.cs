@@ -22,18 +22,11 @@ namespace Gbmono.Api.Models
     }
 
 
-    public class Favorite
+    public class UserSaveModel
     {
-        public int ProductId { get; set; }
+        public short SaveItemType { get; set; }
+
+        public int KeyId { get; set; }
     }
 
-    /// <summary>
-    /// current gbmonu user
-    /// </summary>
-    //public class CurrentUser
-    //{
-    //    public string UserName { get; set; }
-    //    public string DisplayName { get; set; }
-    //    public string Email { get; set; }
-    //}
 }

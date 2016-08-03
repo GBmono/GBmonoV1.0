@@ -81,7 +81,14 @@
     color: #900;
 }
 
+
 #loginView .contact-us-btn:hover{
     color:#7A0000;
     text-decoration: underline;
+}
+
+
+.error-msg{
+    text-align: center;
+    color:#7A0000;
 }

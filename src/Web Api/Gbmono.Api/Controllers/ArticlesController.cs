@@ -30,6 +30,9 @@ namespace Gbmono.Api.Controllers
         // get article by id
         public async Task<Article> GetById(int id)
         {
+            // save user article visit
+            await Task.Run(() => CreateUserVisit(id));
+
             return await _repositoryManager.ArticleRepository
                                                    .Table
                                                    .Include(m => m.Images)
@@ -75,6 +78,39 @@ namespace Gbmono.Api.Controllers
 
             // convert into binding models
             return articles.Select(m => m.ToSimpleToModel());
+        }
+
+        private void CreateUserVisit(int articleId)
+        {
+            // get user name if user is authenticated
+            var userName = User.Identity.IsAuthenticated ? 
+                           User.Identity.Name : 
+                           Const.UnAuthorizedUserId;
+
+            var newUserVisit = new UserVisit
+            {
+                UserId = userName,
+                VisitTypeId = (short)UserVisitType.ArticleView,
+                KeyId = articleId,
+                Created = DateTime.Now
+            };
+
+            try
+            {
+                // create
+                _repositoryManager.UserVisitRepository.Create(newUserVisit);
+                _repositoryManager.UserVisitRepository.Save();
+
+            }
+            catch(Exception exp)
+            {
+                // get base excetpion
+                var baseException = exp.GetBaseException();
+
+                // logging
+                Utils.Logger.log.Error("RequestUri:" + Request.RequestUri + " Error:" + baseException.Message + " /n Stack Trace:" + baseException.StackTrace);
+            }
+
         }
     }
 }

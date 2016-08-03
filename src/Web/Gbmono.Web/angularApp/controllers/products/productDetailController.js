@@ -78,7 +78,7 @@
                 getProduct(productId, token);
                 // check if product is favorid when user is logged in
                 if (token && token !== '') {
-                    isFavoritedProduct(token, productId);
+                    // isFavoritedProduct(token, productId);
                 }
             }
         }
@@ -95,7 +95,7 @@
                     // handle no images returned
                     vm.primaryImg = vm.productImages.length > 0 ? vm.productImages[0].fileName : vm.noImage;
                     // get category menu by top category id
-                    getCategoryMenu(vm.product.category.parentCategory.parentId);
+                    // getCategoryMenu(vm.product.category.parentCategory.parentId);
 
                     // ui effects
                     // init img thumb gallery
@@ -109,12 +109,12 @@
 
         // get category menu
         // expanded current top category with subitems, and unselected collapsed menuitems
-        function getCategoryMenu(topCateId) {
-            categoryDataFactory.getMenu(topCateId)
-                .success(function (data) {
-                    vm.menu = data;
-                });
-        }
+        //function getCategoryMenu(topCateId) {
+        //    categoryDataFactory.getMenu(topCateId)
+        //        .success(function (data) {
+        //            vm.menu = data;
+        //        });
+        //}
 
         // filter images by image type
         function filterImages(images) {
@@ -138,17 +138,17 @@
         }
 
         // check if product is favorited
-        function isFavoritedProduct(userToken, productId) {
-            userFavoriteDataFactory.isFavoriteProduct(userToken, productId)
-                .success(function (status) {
-                    if (status) {
-                        vm.isFavorited = true;
-                    }
-                })
-                .error(function (error) {
-                    // ignore the 401 error
-                });
-        }
+        //function isFavoritedProduct(userToken, productId) {
+        //    userFavoriteDataFactory.isFavoriteProduct(userToken, productId)
+        //        .success(function (status) {
+        //            if (status) {
+        //                vm.isFavorited = true;
+        //            }
+        //        })
+        //        .error(function (error) {
+        //            // ignore the 401 error
+        //        });
+        //}
 
         // add favorite
         function addFavorite(token, favorite) {

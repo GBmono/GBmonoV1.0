@@ -136,9 +136,16 @@
     width: 100%;
 }
 
+#articleDetailView .news{
+    margin-top: 10px;
+}
+
 #articleDetailView .news .header{
-    margin-top: 20px;
-    margin-bottom: 20px;
+    clear: both;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    top: 10px;
+    border-top: 1px solid #e5e5e5;
 }
 
 

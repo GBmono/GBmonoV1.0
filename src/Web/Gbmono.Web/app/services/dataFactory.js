@@ -211,36 +211,44 @@
 
         // return data factory with CRUD calls
         return {
-            getFavoriteProducts: getFavoriteProducts,
-            isFavoriteProduct: isFavoriteProduct,
-            add: add,
+            getSavedArticles: getSavedArticles,
+            getSavedProducts: getSavedProducts,
+            isSaved: isSaved,
+            save: save,
             remove:remove
         };
 
-        function getFavoriteProducts(token, pageIndex, pageSize) {
+        function getSavedArticles(token, pageIndex, pageSize) {
+            // it required authenticated token to access this method 
+            // add token to authorization header
+            attachToken(token);
+            return $http.get(gbmono.api_site_prefix.userfavorite_api_url + '/Articles/' + pageIndex + '/' + pageSize);
+        }
+
+        function getSavedProducts(token, pageIndex, pageSize) {
             // it required authenticated token to access this method 
             // add token to authorization header
             attachToken(token);
             return $http.get(gbmono.api_site_prefix.userfavorite_api_url + '/Products/' + pageIndex + '/' + pageSize);
         }
 
-        function isFavoriteProduct(token, productId) {
+        function isSaved(model) {
             attachToken(token);
-            return $http.get(gbmono.api_site_prefix.userfavorite_api_url + '/IsFavorited/' + productId);
+            return $http.post(gbmono.api_site_prefix.userfavorite_api_url + '/IsSaved', model);
         }
 
-        function add(token, favorite) {
+        function save(token, model) {
             // it required authenticated token to access this method 
             // add token to authorization header
             attachToken(token); 
-            return $http.post(gbmono.api_site_prefix.userfavorite_api_url, favorite);
+            return $http.post(gbmono.api_site_prefix.userfavorite_api_url, model);
         }
 
-        function remove(token, id) {
+        function remove(token, typeId, keyId) {
             // it required authenticated token to access this method 
             // add token to authorization header
             attachToken(token);
-            return $http.delete(gbmono.api_site_prefix.userfavorite_api_url + '/' + id);
+            return $http.delete(gbmono.api_site_prefix.userfavorite_api_url + '/' + typeId + '/' + keyId);
         }
 
         // private method

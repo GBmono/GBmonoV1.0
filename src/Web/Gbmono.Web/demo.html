@@ -30,7 +30,7 @@
     <!-- container -->
     <section class="container">            
         <!-- content, ng view injected-->
-        <section class="wrapper" style="padding-top:15px;">
+        <section class="wrapper clearfix" style="padding-top:15px;">
             <div ng-view class="slide"></div>
         </section>
         
@@ -44,7 +44,7 @@
     </section>
 
     <!-- footer -->
-    <div ng-include="'app/components/footer.html'"
+    <div ng-include="'app/components/footer.html'" style="margin-top:10px;"
             ng-controller="footerController">
     </div>
 

@@ -22,10 +22,8 @@ namespace Gbmono.EF.DataContext
             modelBuilder.Configurations.Add(new CategoryMap());            
             modelBuilder.Configurations.Add(new ProductMap());
             modelBuilder.Configurations.Add(new ProductImageMap());
-            modelBuilder.Configurations.Add(new ProductEventMap());
             modelBuilder.Configurations.Add(new TagMap());
             modelBuilder.Configurations.Add(new ProductTagMap());
-            modelBuilder.Configurations.Add(new UserFavoriteMap());
 
             modelBuilder.Configurations.Add(new ArticleMap());
             modelBuilder.Configurations.Add(new ArticleTagMap());
@@ -41,8 +39,10 @@ namespace Gbmono.EF.DataContext
             modelBuilder.Configurations.Add(new StateMap());
             modelBuilder.Configurations.Add(new CityMap());
 
-            // modelBuilder.Configurations.Add(new NArticleMap());
-            // modelBuilder.Configurations.Add(new NArticleImageMap());
+            modelBuilder.Configurations.Add(new UserProductMap());
+            modelBuilder.Configurations.Add(new UserArticleMap());
+            modelBuilder.Configurations.Add(new UserVisitMap());
+
             base.OnModelCreating(modelBuilder);
         }
     }

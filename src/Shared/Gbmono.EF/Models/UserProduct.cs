@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Gbmono.EF.Models
 {
-    public class UserFavorite
+    public class UserProduct
     {
-        public int UserFavoriteId { get; set; }
+        public int UserProductId {get;set;}
 
         public string UserId { get; set; }
 

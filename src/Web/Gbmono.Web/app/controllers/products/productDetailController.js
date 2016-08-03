@@ -69,7 +69,7 @@
 
         function init() {
             // move into the top of the screen to focus on the product detail area
-            utilService.scrollToTop();
+            // utilService.scrollToTop();
 
             // load product detailed info when product is provided
             if (productId !== 0) {                

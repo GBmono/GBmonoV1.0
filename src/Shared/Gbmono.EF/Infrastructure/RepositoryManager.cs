@@ -39,9 +39,7 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<Tag> _tagRepository;
         private IRepository<Product> _productRepository;
         private IRepository<ProductImage> _productImageRepository;
-        private IRepository<ProductEvent> _productEventRepository;
         private IRepository<ProductTag> _productTagRepository;
-        private IRepository<UserFavorite> _userFavoriteRepository;
 
         private IRepository<Brand> _brandRepository;
         private IRepository<BrandCollection> _brandCollectionRepository;
@@ -54,9 +52,10 @@ namespace Gbmono.EF.Infrastructure
         private IRepository<RetailerShop> _retailerShopRepository;
         private IRepository<City> _cityRepository;
         private IRepository<State> _stateRepository;
-        
-        //private IRepository<NArticle> _nArticleRepository;
-        //private IRepository<NArticleImage> _nArticleImageRepository;
+
+        private IRepository<UserProduct> _userProductRepository;
+        private IRepository<UserArticle> _userArticleRepository;
+        private IRepository<UserVisit> _userVisitRepository;
 
         // public accessors
         #region category & product
@@ -68,7 +67,6 @@ namespace Gbmono.EF.Infrastructure
         {
             get { return _brandCollectionRepository ?? (_brandCollectionRepository = new Repository<BrandCollection>(Context)); }
         }
-
 
         public IRepository<Tag> TagRepository
         {
@@ -85,21 +83,11 @@ namespace Gbmono.EF.Infrastructure
             get { return _productImageRepository ?? (_productImageRepository = new Repository<ProductImage>(Context)); }
         }
 
-        public IRepository<ProductEvent> ProductEventRepository
-        {
-            get { return _productEventRepository ?? (_productEventRepository = new Repository<ProductEvent>(Context)); }
-        }
-
         public IRepository<ProductTag> ProductTagRepository
         {
             get { return _productTagRepository ?? (_productTagRepository = new Repository<ProductTag>(Context)); }
         }
 
-        public IRepository<UserFavorite> UserFavoriteRepository
-        {
-            get { return _userFavoriteRepository ?? (_userFavoriteRepository = new Repository<UserFavorite>(Context)); }
-
-        }
         #endregion
 
         #region brands
@@ -153,16 +141,21 @@ namespace Gbmono.EF.Infrastructure
 
         #endregion
 
-        #region Article
-        //public IRepository<NArticle> NArticleRepository
-        //{
-        //    get { return _nArticleRepository ?? (_nArticleRepository = new Repository<NArticle>(Context)); }
-        //}
+        #region users
+        public IRepository<UserProduct> UserProductRepository
+        {
+            get { return _userProductRepository ?? (_userProductRepository = new Repository<UserProduct>(Context)); }
+        }
 
-        //public IRepository<NArticleImage> NArticleImageRepository
-        //{
-        //    get { return _nArticleImageRepository ?? (_nArticleImageRepository = new Repository<NArticleImage>(Context)); }
-        //}
+        public IRepository<UserArticle> UserArticleRepository
+        {
+            get { return _userArticleRepository ?? (_userArticleRepository = new Repository<UserArticle>(Context)); }
+        }
+
+        public IRepository<UserVisit> UserVisitRepository
+        {
+            get { return _userVisitRepository ?? (_userVisitRepository = new Repository<UserVisit>(Context)); }
+        }
         #endregion
     }
 }

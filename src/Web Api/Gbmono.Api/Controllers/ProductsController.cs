@@ -155,7 +155,7 @@ namespace Gbmono.Api.Controllers
             // todo: check if the request is from browser or mobile app?
 
             // record product view event
-            await Task.Run(() => CreateProductEvent(id, (short)ProductEventType.View));
+            await Task.Run(() => CreateUserVisit(id, (short)UserVisitType.ProductView));
 
 
 
@@ -182,7 +182,7 @@ namespace Gbmono.Api.Controllers
                                            .FirstOrDefaultAsync(m => m.BarCode == code);
 
             // record barcode scan event
-            await Task.Run(() => CreateProductEvent(product.ProductId, (short)ProductEventType.Scan));
+            await Task.Run(() => CreateUserVisit(product.ProductId, (short)UserVisitType.ProductScan));
 
             // return detailed product
             return product;
@@ -201,24 +201,24 @@ namespace Gbmono.Api.Controllers
         /// </summary>
         /// <param name="produtId"></param>
         /// <param name="eventTypeId"></param>
-        private void CreateProductEvent(int produtId, short eventTypeId)
+        private void CreateUserVisit(int produtId, short visitTypeId)
         {
             // get user name if user is authenticated
             var userName = User.Identity.IsAuthenticated ? User.Identity.Name : Const.UnAuthorizedUserId;
 
-            var newProductEvent = new ProductEvent
+            var newUserVisit = new UserVisit
             {
-                ProductId = produtId,
-                EventTypeId = eventTypeId,
-                UserName = userName,
+                UserId = userName,
+                VisitTypeId = visitTypeId,
+                KeyId = produtId,
                 Created = DateTime.Now
             };
 
             try
             {
                 // create
-                _repositoryManager.ProductEventRepository.Create(newProductEvent);
-                _repositoryManager.ProductEventRepository.Save();
+                _repositoryManager.UserVisitRepository.Create(newUserVisit);
+                _repositoryManager.UserVisitRepository.Save();
 
             }
             catch(Exception exp)

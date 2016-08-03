@@ -23,7 +23,6 @@ body a {
 }
 
 .container{
-    min-height: 429px;
     display: block;
     margin: 0 auto;
     max-width: 1200px;
@@ -215,7 +214,7 @@ header.min-header {
     position: fixed;
     z-index: 999;
     cursor: pointer;
-    top: 64px;
+    top: 82px;
     right: 10px;
     width: 40px;
     height: 40px;
@@ -297,4 +296,34 @@ pre {
 * html pre {
     word-wrap: break-word; /* Internet Explorer 5.5+ */
     white-space : normal ; /* Internet Explorer 5.5+ */
+}
+
+
+.collection-button {
+    margin-right: 0;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    width: 178px;
+    height: 38px;
+    line-height: 38px;
+    background-color: #FFFFFF;
+    border: 1px solid #000;
+    color: #000;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.collection-button label{
+    cursor: pointer;
+}
+
+
+.collection-button:hover {
+    background-color: #ffeded;
+}
+
+.user-helper-zone{
+    height: 38px;
 }

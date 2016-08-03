@@ -41,7 +41,7 @@
         };
 
         function init() {
-
+            
         }
 
         function login(userName, password) {
