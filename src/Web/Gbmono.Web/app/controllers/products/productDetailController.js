@@ -77,7 +77,7 @@
                 getProduct(productId, token);
                 // check if product is favorid when user is logged in
                 if (token && token !== '') {
-                    isFavoritedProduct(token, productId);
+                    // isFavoritedProduct(token, productId);
                 }
             }
         }
