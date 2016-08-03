@@ -1,0 +1,64 @@
+@font-face {font-family: 'iconfont';
+    src: url('../iconfont/iconfont.eot'); /* IE9*/
+    src: url('../iconfont/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../iconfont/iconfont.woff') format('woff'), /* chrome、firefox */
+    url('../iconfont/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('../iconfont/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+.hbox{
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+}
+
+
+
+header {
+    position: absolute;
+    top:0;
+    width: 100%;
+
+}
+
+header .menu-top{
+    display: -webkit-box;
+    border-bottom: 1px solid #e5e5e5;
+    height: 45px;
+}
+
+
+header h1 {
+    display: -webkit-box;
+    -webkit-box-flex: 8;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    font-size: 26px;
+}
+
+header .search-btn,
+header .menu-btn{
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+}
+
+/*
+header:before{
+    content: '\e601';
+    padding: 20px;
+
+}
+
+header:after{
+    content: '\e602';
+}*/
