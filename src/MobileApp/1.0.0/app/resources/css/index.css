@@ -14,3 +14,59 @@
 .container{
     margin-top: 93px;
 }
+
+.wrapper{
+    overflow-y: scroll;
+}
+
+.product-header .header,
+.topic-header .header{
+    text-align: center;
+    padding: 0 0 10px 0;
+}
+
+.product-header .header h1,
+.topic-header .header h1{
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.product-header .header p,
+.topic-header .header p{
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.product-list li:first-of-type,
+.topic-list li:first-of-type{
+    border-top: 1px solid #e5e5e5;
+}
+
+.product-list li,
+.topic-list li{
+    padding: 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.product-list li h3,
+.topic-list li h3{
+    color: #b2b2b2;
+}
+
+.product-list li p,
+.topic-list li p{
+    margin-top: 10px;
+}
+
+.product-list li img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    width: auto;
+    height: 186px;
+}
+
+.ad-1{
+    padding: 30px 10px 20px 10px;
+}

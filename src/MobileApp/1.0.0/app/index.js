@@ -5,6 +5,7 @@ define(function (require,modules,exports) {
     require("zepto-selector");
     require("zepto-data");
     require("zepto-carousel");
+    require("gbmono");
 
     /*轮播图样式*/
     var mainVisualCollection = $("#visualList");
@@ -18,6 +19,8 @@ define(function (require,modules,exports) {
         lazyLoad:true,
         pagination:true
     });
+
+    $(".wrapper").height($.height() - 92);
 
 
 });
