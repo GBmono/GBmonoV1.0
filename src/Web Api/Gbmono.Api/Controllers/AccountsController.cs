@@ -13,6 +13,7 @@ using Gbmono.EF.Infrastructure;
 using Gbmono.EF.Models;
 using Gbmono.Api.Models;
 using Gbmono.Api.Security.Identities;
+using Gbmono.Api.HttpResults;
 
 namespace Gbmono.Api.Controllers
 {
@@ -32,18 +33,33 @@ namespace Gbmono.Api.Controllers
             get { return _userManager ?? Request.GetOwinContext().GetUserManager<GbmonoUserManager>(); }
         }
 
+        [Route("Current")]
+        public async Task<GbmonoUser> GetUser()
+        {
+            // return current authorized user
+            return await UserManager.FindByNameAsync(User.Identity.Name);
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [Route("Register")]
         public async Task<IHttpActionResult> Create([FromBody]UserBindingModel model)
         {
+            // check if user name already exists
+            var existedUser = UserManager.FindByName(model.UserName);
+
+            if(existedUser != null)
+            {
+                return new DataInvalidResult(string.Format("{0} 已经存在.", model.UserName), Request);
+            }
+
             var displayName = model.UserName.Split('@')[0];
             // we use email as username in gbmoni user db 
             var user = new GbmonoUser() { UserName = model.UserName, Email = model.Email, CreateTime = DateTime.Now, DisplayName = displayName };
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                return new DataInvalidResult("注册失败.", Request);
             }
             return Ok();
         }

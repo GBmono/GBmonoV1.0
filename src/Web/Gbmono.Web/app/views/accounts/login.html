@@ -32,6 +32,10 @@
                 </div>
 
             </div>
+            <div class="error-msg" ng-show="vm.isLoginFailed">
+                <p>{{ vm.loginError}}</p>
+            </div>
+
         </form>
     </div>
 
@@ -76,8 +80,10 @@
                 </div>
 
             </div>
+            <div class="error-msg" ng-show="vm.isRegisterFailed">
+                <p>{{ vm.registerError}}</p>
+            </div>
         </form>
         
-
     </div>
 </div>

@@ -18,6 +18,11 @@
         vm.registeration = {};
         // loading 
         vm.dataLoading = false;
+        // error message
+        vm.isLoginFailed = false;
+        vm.loginError = '';
+        vm.isRegisterFailed = false;
+        vm.registerError = '';
 
         init(); // page init 
 
@@ -31,7 +36,10 @@
         vm.register = function () {
             // check password validation
             if (vm.registeration.password != vm.registeration.confirmPassword) {
-                alert('密码不一致!');
+                // set flag
+                vm.isRegisterFailed = true;
+                // show error
+                vm.registerError = '密码不一致.';
                 return;
             }
             // we use email as default user name in gbmono
@@ -45,19 +53,26 @@
         }
 
         function login(userName, password) {
+            // reset flag
+            vm.isLoginFailed = false;
+
+            // authenticate user name and password
             accountDataFactory.login(userName, password)
                 .then(function successCallback(response) {
                     // save the bearer token into local storage                    
                     utilService.saveToken(response.data.access_token);
                     // save user name
-                    utilService.saveUserName(response.data.userName); 
+                    utilService.saveUserName(response.data.userName);
                     // direct into profile page
                     // todo: check return url??
                     $location.path('/profile');
                 },
                 function errorCallback(response) {
+                    // set flag to true
+                    vm.isLoginFailed = true;
                     // show up error
-                    alert('User name or password is incorrect.');
+                    vm.loginError = extractErrorMessage(response);
+                    // alert('User name or password is incorrect.');
                     // pluginService.notify(response, 'error');
                     // set data loading to false
                     vm.dataLoading = false;
@@ -65,17 +80,41 @@
         }
 
         function register(user) {
+            // reset flag
+            vm.isRegisterFailed = false;
+
+            // register new user
             accountDataFactory.register(user)
                 .then(function successCallback(response) {
                     // auto sign-in
                     login(user.email, user.password);
                 }, function errorCallback(response) {
-                    // show up error
-                    // pluginService.notify(response, 'error');
-                    alert('Failed  to register.');
+                    // set flag
+                    vm.isRegisterFailed = true;
+                    // show error
+                    vm.registerError = response.data;
+
                     // set data loading to false
                     vm.dataLoading = false;
                 });
+        }
+
+        // extract error message from response
+        function extractErrorMessage(response) {
+            var msg = '';
+            if (response.data) {
+                if (response.data.message) {
+                    msg = response.data.message;
+                } else if (response.data.error_description) {
+                    msg = response.data.error_description;
+                }
+
+            } else {
+                // generic error message
+                msg = 'Unexpected error has occurred. Please contact the administrator.';
+            }
+
+            return msg;
         }
     }
 })(angular.module('gbmono'));

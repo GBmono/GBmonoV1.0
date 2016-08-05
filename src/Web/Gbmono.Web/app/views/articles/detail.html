@@ -18,19 +18,24 @@
         <div class="inner-content">
 
             <div class="header title">
-                <p><span>{{ vm.article.modifiedDate | date: 'yyyy-MM-dd'}}</span></p>
+                <p>
+                    <span>{{ vm.article.modifiedDate | date: 'yyyy-MM-dd'}}</span>
+                    &nbsp;&nbsp;
+                    <span>
+                        <a style="color:grey;" href="" ng-click=""><img src="content/img/star.png" />加入我的收藏</a>
+                    </span>
+                </p>
                 <h2>{{ vm.article.title }}</h2>
             </div>
             <!-- social netword-->
             <div class="sns">
-
                 <!-- JiaThis Button BEGIN -->
                 <div class="jiathis_style_32x32">
-                    <a class="jiathis_button_qzone"></a>
-                    <a class="jiathis_button_tsina"></a>
-                    <a class="jiathis_button_tqq"></a>
+                    <!--<a class="jiathis_button_qzone"></a>-->
                     <a class="jiathis_button_weixin"></a>
-                    <a class="jiathis_button_renren"></a>
+                    <a class="jiathis_button_tsina"></a>
+                    <!--<a class="jiathis_button_tqq"></a>-->                    
+                    <!--<a class="jiathis_button_renren"></a>-->
                     <a href="http://www.jiathis.com/share?uid=2013366" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
                     <a class="jiathis_counter_style"></a>
                 </div>

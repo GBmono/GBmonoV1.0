@@ -13,8 +13,7 @@
         // return data factory with CRUD calls
         return {
             register: register,
-            login: login,
-            getUser: getUser
+            login: login
         }
 
         // register user
@@ -35,13 +34,6 @@
             });
         }
 
-        // get current user
-        function getUser(token) {
-            // attch bearer token into http authorization header
-            $http.defaults.headers.common.Authorization = 'Bearer ' + token;
-            return $http.get(gbmono.api_site_prefix.account_api_url + '/Current');
-        }
-
     }
 })(angular.module('gbmono'));
 
@@ -60,32 +52,39 @@
         // return data factory with CRUD calls
         return {
             getAll: getAll,
-            getById:getById,
+            getMenu: getMenu,
             getTopCates: getTopCates,
+            getThirdCates:getThirdCates,
             getBrands: getBrands
         }
 
         // update version number when json file is updated
         // so data factory would download new json file from server instead of loading cached files
-        // var version = '1.0';
+        var version = '1.0';
 
         // read cached data from json file
         function getAll() {
-            // return $http.get('/gbmono/angularApp/data/category.json?v=' + version);
-            return $http.get(gbmono.api_site_prefix.category_api_url);
-        }
-
-        function getById(id) {
-            return $http.get(gbmono.api_site_prefix.category_api_url + '/' + id);
+            return $http.get('/gbmono/angularApp/data/category.json?v=' + version);
+            // return $http.get(gbmono.api_site_prefix.category_api_url);
         }
 
         function getTopCates() {
-            // return $http.get('/gbmono/angularApp/data/category_top.json?v=' + version);
-            return $http.get(gbmono.api_site_prefix.category_api_url + '/Top');
+            return $http.get('/gbmono/angularApp/data/category_top.json?v=' + version);
+            // return $http.get(gbmono.api_site_prefix.category_api_url + '/Top');
         }
-        
-        function getBrands(id, levelId) {
-            return $http.get(gbmono.api_site_prefix.category_api_url + '/' + id + '/Brands/' + levelId);
+
+        function getMenu (id) {
+            return $http.get(gbmono.api_site_prefix.category_api_url + '/Menu/' + id);
+        }
+
+
+
+        function getThirdCates(id) {
+            return $http.get(gbmono.api_site_prefix.category_api_url + '/Third/' + id);
+        }
+
+        function getBrands(id) {
+            return $http.get(gbmono.api_site_prefix.category_api_url + '/' + id + '/Brands');
         }
     }
 
@@ -219,44 +218,36 @@
 
         // return data factory with CRUD calls
         return {
-            getSavedArticles: getSavedArticles,
-            getSavedProducts: getSavedProducts,
-            isSaved: isSaved,
-            save: save,
+            getFavoriteProducts: getFavoriteProducts,
+            isFavoriteProduct: isFavoriteProduct,
+            add: add,
             remove:remove
         };
 
-        function getSavedArticles(token, pageIndex, pageSize) {
-            // it required authenticated token to access this method 
-            // add token to authorization header
-            attachToken(token);
-            return $http.get(gbmono.api_site_prefix.userfavorite_api_url + '/Articles/' + pageIndex + '/' + pageSize);
-        }
-
-        function getSavedProducts(token, pageIndex, pageSize) {
+        function getFavoriteProducts(token, pageIndex, pageSize) {
             // it required authenticated token to access this method 
             // add token to authorization header
             attachToken(token);
             return $http.get(gbmono.api_site_prefix.userfavorite_api_url + '/Products/' + pageIndex + '/' + pageSize);
         }
 
-        function isSaved(model) {
+        function isFavoriteProduct(token, productId) {
             attachToken(token);
-            return $http.post(gbmono.api_site_prefix.userfavorite_api_url + '/IsSaved', model);
+            return $http.get(gbmono.api_site_prefix.userfavorite_api_url + '/IsFavorited/' + productId);
         }
 
-        function save(token, model) {
+        function add(token, favorite) {
             // it required authenticated token to access this method 
             // add token to authorization header
             attachToken(token); 
-            return $http.post(gbmono.api_site_prefix.userfavorite_api_url, model);
+            return $http.post(gbmono.api_site_prefix.userfavorite_api_url, favorite);
         }
 
-        function remove(token, typeId, keyId) {
+        function remove(token, id) {
             // it required authenticated token to access this method 
             // add token to authorization header
             attachToken(token);
-            return $http.delete(gbmono.api_site_prefix.userfavorite_api_url + '/' + typeId + '/' + keyId);
+            return $http.delete(gbmono.api_site_prefix.userfavorite_api_url + '/' + id);
         }
 
         // private method
@@ -287,51 +278,14 @@
             getById: getById
         };
 
-        // get all brands
-        // grouped by first alphabet
         function getAll() {
-            return $http.get(gbmono.api_site_prefix.brand_api_url + '/GroupByAlphabet');
+            return $http.get(gbmono.api_site_prefix.brand_api_url);
         }
 
         function getById(id) {
             return $http.get(gbmono.api_site_prefix.brand_api_url + '/' + id);
         }
 
-    }
-
-})(angular.module('gbmono'));
-
-/*
-    article data factory
-*/
-(function (module) {
-    // inject params
-    factory.$inject = ['$http'];
-
-    // create instance
-    module.factory('articleDataFactory', factory);
-
-    // factory implement
-    function factory($http) {
-
-        // return data factory with CRUD calls
-        return {
-            getById: getById,
-            getByType: getByType,
-            getByRanking: getByRanking
-        };
-
-        function getById(id) {
-            return $http.get(gbmono.api_site_prefix.article_api_url + '/' + id);
-        };
-
-        function getByType(typeId, pageIndex, pageSize) {            
-            return $http.get(gbmono.api_site_prefix.article_api_url + '/List/' + typeId + '/' + pageIndex + '/' + pageSize);
-        }
-
-        function getByRanking() {
-            return $http.get(gbmono.api_site_prefix.article_api_url + '/Ranking');
-        }
     }
 
 })(angular.module('gbmono'));

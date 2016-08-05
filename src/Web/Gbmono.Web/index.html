@@ -1,58 +1,59 @@
 ﻿<!DOCTYPE html>
 <html id="ng-app" ng-app="gbmono">
 <head>
-    <title>GBmono</title>
+    <title>集匠网</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- css -->
-    <!-- google fonts is unstable in china, chose 360 mirror instead -->
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Merriweather:400,400italic' rel='stylesheet' type='text/css'>
-    <!--<link href='http://fonts.useso.com/css?family=Montserrat:400,700|Merriweather:400,400italic' rel='stylesheet'>-->
-    <!-- Bootstrap and Font Awesome css -->
-    <link href="content/css/font-awesome.css" rel="stylesheet">
-    <link href="content/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Theme stylesheet -->
-    <link href="content/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
-
-    <!-- gbnomo stylesheet - for your changes -->
-    <link href="content/css/gbmono.css" rel="stylesheet" />
-
-    <!-- Responsivity for older IE -->
-    <script src="scripts/respond.min.js"></script>
+    <link href="content/css/articleDetailInit.css" rel="stylesheet" />
+    <link href="content/css/brandInit.css" rel="stylesheet" />
+    <link href="content/css/indexInit.css" rel="stylesheet" />
+    <link href="content/css/loginInit.css" rel="stylesheet" />
+    <link href="content/css/marketPromotionInit.css" rel="stylesheet" />
+    <link href="content/css/personCenterInit.css" rel="stylesheet" />
+    <link href="content/css/productDetailInit.css" rel="stylesheet" />
+    <link href="content/css/productInit.css" rel="stylesheet" />
+    <link href="content/css/recommendInit.css" rel="stylesheet" />
+    <link href="content/css/shopSearchInit.css" rel="stylesheet" />
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.png">
-    <!-- owl carousel css -->
-
-    <link href="content/css/owl.carousel.css" rel="stylesheet">
-    <link href="content/css/owl.theme.css" rel="stylesheet" />
 </head>
-<body ng-controller="layoutController">
- 
+<body ng-controller="masterController as vm"> 
+    <!-- header -->
     <!-- included header -->
-    <div ng-include="'angularApp/shared/header.html'"
-         ng-controller="headerController as vm">
+    <div ng-include="'app/components/header.html'"
+            ng-controller="headerController as vm">
     </div>
 
-    <!-- angular view container -->
-    <div ng-view class="slide"></div>
+    <!-- container -->
+    <section class="container">            
+        <!-- content, ng view injected-->
+        <section class="wrapper clearfix" style="padding-top:15px;">
+            <div ng-view class="slide"></div>
+        </section>
+        
+        <!-- back to top -->
+        <div id="pageTop" class="dnone"
+                ng-click="vm.backToTop()">
+            <figure class="page-top-outer">
+                <img src="content/img/pagetop.gif" alt="">
+            </figure>
+        </div>
+    </section>
 
-    <!-- included footer -->
-    <div ng-include="'angularApp/shared/footer.html'"
-         ng-controller="footerController as vm">
+    <!-- footer -->
+    <div ng-include="'app/components/footer.html'" style="margin-top:10px;"
+            ng-controller="footerController">
     </div>
 
     <!-- scripts -->
     <script src="scripts/jquery-1.11.0.min.js"></script>
-    <script src="scripts/bootstrap.min.js"></script>
-    <script src="scripts/jquery.cookie.js"></script>
-    <script src="scripts/front.js"></script>
-    <!-- jquery plugins -->  
-    <script src="scripts/owl.carousel.min.js"></script>
-    <script src="scripts/bootstrap-growl.min.js"></script>
+
+    <!-- jquery plugins -->
+    <script src="scripts/owl.carousel.js"></script>
+    <!--<script src="scripts/bootstrap-growl.min.js"></script>-->
     <!-- angularJs -->
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-route.min.js"></script>
@@ -60,28 +61,48 @@
     <script src="scripts/angular-local-storage.js"></script>
 
     <!-- app module -->
-    <script src="angularApp/consts.js"></script>
-    <script src="angularApp/app.js"></script>
+    <script src="app/consts.js"></script>
+    <script src="app/app.js"></script>
 
     <!-- services -->
-    <script src="angularApp/services/pageDataFactory.js"></script>
-    <script src="angularApp/services/dataFactory.js"></script>
-    <script src="angularApp/services/jqueryPluginService.js"></script>
-    <script src="angularApp/services/utilService.js"></script>
+    <script src="app/services/jqueryPluginService.js"></script>
+    <script src="app/services/dataFactory.js"></script>
+    <script src="app/services/utilService.js"></script>
 
     <!-- layout (master) page controller-->
-    <script src="angularApp/layout.js"></script>    
-    <script src="angularApp/controllers/home/homeController.js"></script>
-    <script src="angularApp/controllers/categories/categoryListController.js"></script>
-    <script src="angularApp/controllers/products/productListController.js"></script>
-    <script src="angularApp/controllers/products/productDetailController.js"></script>
-    <script src="angularApp/controllers/products/productPinController.js"></script>
-    <script src="angularApp/controllers/products/productRankingController.js"></script>
-    <script src="angularApp/controllers/products/topicController.js"></script>
-    <script src="angularApp/controllers/accounts/accountController.js"></script>
-    <script src="angularApp/controllers/accounts/profileController.js"></script>
-    <script src="angularApp/controllers/articles/articleIndexController.js"></script>
-    <script src="angularApp/controllers/brands/brandController.js"></script>   
-    <script src="angularApp/controllers/retailers/retailShopController.js"></script>  
+    <script src="app/master.js"></script>
+    <script src="app/component.js"></script>
+    <script src="app/controllers/home/homeController.js"></script>
+    <script src="app/controllers/products/productListController.js"></script> 
+    <script src="app/controllers/products/productDetailController.js"></script>
+    <script src="app/controllers/products/productNewController.js"></script>
+    <script src="app/controllers/articles/articleListController.js"></script>  
+    <script src="app/controllers/articles/articleDetailController.js"></script> 
+    <script src="app/controllers/shops/shopListController.js"></script>     
+    <script src="app/controllers/shops/shopSearchController.js"></script>
+    <script src="app/controllers/brands/brandController.js"></script> 
+    <script src="app/controllers/accounts/accountController.js"></script>
+    <script src="app/controllers/accounts/profileController.js"></script>
+    <script src="app/controllers/topics/topicListController.js"></script>
+    <style scoped>
+        .widget-box-overlay {
+            position: absolute;
+            top: -1px;
+            bottom: -1px;
+            right: -1px;
+            left: -1px;
+            z-index: 99;
+            text-align: center;
+            min-height: 100%;
+            background-color: #ffffff;
+            opacity: 0.4;
+        }
+
+            .widget-box-overlay > .loading-icon {
+                position: absolute;
+                margin: auto;
+                text-align: center;
+            }
+    </style>
 </body>
 </html>

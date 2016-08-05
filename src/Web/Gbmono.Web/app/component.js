@@ -82,6 +82,22 @@
 })(angular.module('gbmono'));
 
 /*
+   footer component controller
+*/
+(function (module) {
+    // inject the controller params
+    ctrl.$inject = [];
+
+    // create controller
+    module.controller('footerController', ctrl);
+
+    // controller body
+    function ctrl() {
+
+    }
+})(angular.module('gbmono'));
+
+/*
    ranking product list component controller
 */
 (function (module) {
@@ -105,11 +121,11 @@
             // load products bu ranking
             getRankingProducts();
         }
-    
+
         function getRankingProducts() {
             productDataFactory.getByRanking()
                 .success(function (data) {
-                    vm.products = data; 
+                    vm.products = data;
                 });
         }
     }
@@ -117,17 +133,58 @@
 })(angular.module('gbmono'));
 
 /*
-   footer component controller
+   profile component controller
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = [];
+    ctrl.$inject = ['$location',
+                    'utilService',
+                    'accountDataFactory'];
 
     // create controller
-    module.controller('footerController', ctrl);
+    module.controller('profileComponentController', ctrl);
 
     // controller body
-    function ctrl() {
+    function ctrl($location, utilService, accountDataFactory) {
+        var vm = this;
+        // current user
+        vm.user = {};
+        // get the token from local storage
+        var token = utilService.getToken();
 
+        init();
+
+        // view event handler
+        vm.logout = function () {
+            // clear token
+            utilService.clearToken();
+            // redirect into login page or home page??
+            $location.path('/login');
+        };
+
+        function init() {
+            // if no token
+            if (!token || token === '') {
+                return;
+            }
+
+            getUser(token);
+        }
+
+        // get the user by token
+        function getUser(token) {
+            // get the user by token
+            accountDataFactory.getUser(token)
+                .success(function (data) {
+                    vm.user = data;
+                    console.log(data);
+                })
+                .error(function (error) {
+                    // todo:
+                    console.log('Failed to get the user.');
+                    console.log(error);
+                });
+        }
+        
     }
 })(angular.module('gbmono'));

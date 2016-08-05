@@ -23,8 +23,6 @@
         // user saved products
         vm.products = [];
 
-        // user name
-        vm.name = '';
         // product image root path
         vm.imgRoot = gbmono.img_root_path;
         // paging
@@ -38,14 +36,6 @@
         // get token from local storage
         var token = utilService.getToken();
         
-        // view event handler
-        vm.logout = function () {
-            // clear token
-            utilService.clearToken();
-            // redirect into login page or home page??
-            $location.path('/login');
-        };
-
         init(); // page init 
 
         function init() {
@@ -54,9 +44,6 @@
                 // redirect into login page
                 $location.path('/login');
             }
-
-            // get current user name
-            vm.name = utilService.getUserName();
            
             // get user saved products
             getSavedProducts(token, vm.paging.pageIndex, vm.paging.pageSize);

@@ -55,25 +55,8 @@
     </div>
     <!-- profile info-->
     <div class="side-bar">
-
-        <div class="person-info">
-
-            <div class="person-info-item">
-                <h3>用户名</h3>
-                <span>{{ vm.name }}</span>
-            </div>
-
-            <div class="person-info-item">
-                <h3>修改个人信息</h3>
-                <span></span>
-            </div>
-
-            <div class="person-info-item">
-                <h3>上次登录时间</h3>
-                <span></span>
-            </div>
-
+        <div ng-include="'app/components/accounts/profile.html'"
+             ng-controller="profileComponentController as vm">
         </div>
-
     </div>
 </div>
