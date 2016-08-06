@@ -21,8 +21,11 @@
                 <p>
                     <span>{{ vm.article.modifiedDate | date: 'yyyy-MM-dd'}}</span>
                     &nbsp;&nbsp;
-                    <span>
-                        <a style="color:grey;" href="" ng-click=""><img src="content/img/star.png" />加入我的收藏</a>
+                    <span ng-show="!vm.isSaved">
+                        <a style="color:grey;" href="" ng-click="vm.saveArticle()"><img src="content/img/star.png" /> 加入我的收藏</a>
+                    </span>
+                    <span ng-show="vm.isSaved">
+                        <a style="color:grey;" href="" ng-click="vm.removeArticle()"><img src="content/img/star_saved.png" /> 取消收藏</a>
                     </span>
                 </p>
                 <h2>{{ vm.article.title }}</h2>
@@ -50,6 +53,17 @@
             <div class="body">
                 <!-- artile html body-->
                 <div data-ng-bind-html="vm.htmlBody"></div>
+            </div>
+
+            <div class="header title">
+                <p>
+                    <span ng-show="!vm.isSaved">
+                        <a style="color:grey;" href="" ng-click="vm.saveArticle()"><img src="content/img/star.png" /> 加入我的收藏</a>
+                    </span>
+                    <span ng-show="vm.isSaved">
+                        <a style="color:grey;" href="" ng-click="vm.removeArticle()"><img src="content/img/star_saved.png" /> 取消收藏</a>
+                    </span>
+                </p>
             </div>
 
             <hr>

@@ -21,7 +21,7 @@
         // user favorite products
         vm.products = [];
         // user name
-        vm.name = '';
+        // vm.name = '';
         // product image root path
         vm.imgRoot = gbmono.img_root_path;
         // paging
@@ -32,28 +32,22 @@
         // get token from local storage
         var token = utilService.getToken();
         
-        // view event handler
-        vm.logout = function () {
-            // clear token
-            utilService.clearToken();
-            // redirect into login page or home page??
-            $location.path('/login');
-        };
-
         init(); // page init 
 
         function init() {
+            console.log('test');
             // if no token
-            if (!token || token === '') {
+            if (!token || token === '') {                
                 // redirect into login page
                 $location.path('/login');
             }
-            // get current user name
-            vm.name = utilService.getUserName();
+            //// get current user name
+            //vm.name = utilService.getUserName();
             // get user favorites
             getFavoriteProducts(token, vm.paging.pageIndex, vm.paging.pageSize);
         }
 
+        // get saved products
         function getFavoriteProducts(userToken, pageIndex, pageSize) {
             // loading icon
             pluginService.showDataLoadingIndicator('#products', { left: "50%", top: "80px;" });
@@ -74,7 +68,7 @@
                     // close data loading
                     pluginService.closeDataLoadingIndicator('#products');
 
-                }, function errorCallback(response) {
+                }, function errorCallback(response) {                    
                     // if user is not authorized
                     if (response.status === 401) {
                         // direct into login page
@@ -83,6 +77,5 @@
                     }
                 });
         }
-
     }
 })(angular.module('gbmono'));

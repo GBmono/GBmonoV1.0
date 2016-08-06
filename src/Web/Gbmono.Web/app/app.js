@@ -118,12 +118,18 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/profile', { // user profile
+                .when('/profile', { // user profile (default page, saved products)
                     templateUrl: gbmono.app_view_path + '/accounts/profile.html',
                     controller: 'profileController',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
-                })               
+                })
+                .when('/profile/articles', { // user profile (saved articles)
+                    templateUrl: gbmono.app_view_path + '/accounts/profileArticles.html',
+                    controller: 'profileArticleController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
                 .otherwise({
                     templateUrl: gbmono.app_view_path + '/home/home.html',
                     controller: 'homeController',

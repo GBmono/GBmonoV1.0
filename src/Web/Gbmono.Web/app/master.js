@@ -30,7 +30,7 @@
         // calc the min height of the content area
         function calcHeight() {            
             var windowHeight = $(window).height();
-            $(".container").css("min-height", windowHeight - 254);
+            $(".container").css("min-height", windowHeight - 160);
         }
     }
 })(angular.module('gbmono'));

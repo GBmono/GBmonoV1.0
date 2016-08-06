@@ -2,24 +2,29 @@
  global variables & consts
 */
 (function (gbmono) {
-    /* web api dimain */
-    gbmono.domain = 'http://localhost/gbmonoapi';
-    /* web api root name */
-    gbmono.web_api_app_name = gbmono.domain + '/api';
+    // server name
+    var server = 'http://localhost';
+    // web api application name
+    var apiAppName = 'gbmonoapi';
+    // image server name
+    var imgServer = 'http://localhost';
+    var imgAppName = 'images';
+
+    /* web api */
+    gbmono.web_api_app_name = server + '/' + apiAppName + '/api';
     
     /* web page view root path */
     gbmono.app_view_path = '/gbmono/app/views';
 
     /* gbmono product images url */
-    gbmono.img_root_path = 'http://localhost/images/products/';
+    gbmono.img_root_path = imgServer + '/' + imgAppName + '/products/';
     /* gbmono article images url */
-    gbmono.img_article_root_path = 'http://localhost/images/articles/';
+    gbmono.img_article_root_path = imgServer + '/' + imgAppName +  '/articles/';
     /* gbmono brand images url */
-    gbmono.img_brand_root_path = 'http://localhost/images/brands/';
+    gbmono.img_brand_root_path = imgServer + '/' + imgAppName +  '/brands/';
 
-    /* web api controller route prefix */
-    /* bearer token entry point*/
-    gbmono.api_token_url = gbmono.domain + '/token'; // bearer token end point
+    /* web api bearer token entry point*/
+    gbmono.api_token_url = server + '/' + apiAppName + '/token'; // bearer token end point
 
     // web api url routes
     gbmono.api_site_prefix = {

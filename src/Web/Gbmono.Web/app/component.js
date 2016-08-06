@@ -3,13 +3,13 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['categoryDataFactory', 'utilService'];
+    ctrl.$inject = ['categoryDataFactory', 'utilService', 'pluginService'];
 
     // create controller
     module.controller('headerController', ctrl);
 
     // controller body
-    function ctrl(categoryDataFactory, utilService) {
+    function ctrl(categoryDataFactory, utilService, pluginService) {
         var vm = this;
         // product top categories
         // devided into 4 collections map into 4 vertical list elements
@@ -59,10 +59,12 @@
             var token = utilService.getToken();
             // if no token
             if (!token || token === '') {
-                vm.isTokenExisted = false;
+                // show login
+                pluginService.showLogin();
             }
             else {
-                vm.isTokenExisted = true;
+                // show profile
+                pluginService.showProfile();
             }
         }
 
@@ -139,16 +141,21 @@
     // inject the controller params
     ctrl.$inject = ['$location',
                     'utilService',
+                    'pluginService',
                     'accountDataFactory'];
 
     // create controller
     module.controller('profileComponentController', ctrl);
 
     // controller body
-    function ctrl($location, utilService, accountDataFactory) {
+    function ctrl($location,
+                  utilService,
+                  pluginService,
+                  accountDataFactory) {
         var vm = this;
         // current user
         vm.user = {};
+
         // get the token from local storage
         var token = utilService.getToken();
 
@@ -158,13 +165,17 @@
         vm.logout = function () {
             // clear token
             utilService.clearToken();
-            // redirect into login page or home page??
+            // show login section on the header
+            pluginService.showLogin();
+            // redirect to home page
             $location.path('/login');
         };
 
         function init() {
             // if no token
             if (!token || token === '') {
+                // redirect to home page
+                $location.path('/login');
                 return;
             }
 
@@ -177,7 +188,6 @@
             accountDataFactory.getUser(token)
                 .success(function (data) {
                     vm.user = data;
-                    console.log(data);
                 })
                 .error(function (error) {
                     // todo:

@@ -38,7 +38,7 @@
         
         init(); // page init 
 
-        function init() {
+        function init() {            
             // if no token
             if (!token || token === '') {
                 // redirect into login page
@@ -81,12 +81,14 @@
                     if (response.data.length < vm.paging.pageSize) {
                         // disable or hide the button
                         vm.isAllDataLoaded = true;
+                        console.log('finished');
                     }
                    
                     // data requesting starts
                     vm.isLoadingStarts = false;
 
                 }, function errorCallback(response) {
+                    console.log(response);
                     // if user is not authorized
                     if (response.status === 401) {
                         // direct into login page
@@ -159,7 +161,7 @@
             vm.name = utilService.getUserName();
 
             // get user saved products
-            getSavedProducts(token, vm.paging.pageIndex, vm.paging.pageSize);
+            getSavedArticles(token, vm.paging.pageIndex, vm.paging.pageSize);
 
             // attach scroll event handler
             angular.element(window).unbind('scroll').scroll(function () {
@@ -170,7 +172,7 @@
                     // avoild sending multiple requests
                     if (!vm.isLoadingStarts) {
                         // load more products when scrolling at the bottom
-                        getSavedProducts(token,
+                        getSavedArticles(token,
                                     vm.paging.pageIndex, // first page
                                     vm.paging.pageSize); // page size
                     }
@@ -180,6 +182,9 @@
 
         // get saved articles
         function getSavedArticles(userToken, pageIndex, pageSize) {
+            // data requesting starts
+            vm.isLoadingStarts = true;
+
             // call service
             userFavoriteDataFactory.getSavedArticles(userToken, pageIndex, pageSize)
                 .then(function successCallback(response) {
@@ -190,9 +195,10 @@
                     // if no more products 
                     if (response.data.length < vm.paging.pageSize) {
                         // disable or hide the button
-                        vm.isAllArticleLoaded = true;
+                        vm.isAllDataLoaded = true;
                     }
 
+                    vm.isLoadingStarts = false;
 
                 }, function errorCallback(response) {
                     // if user is not authorized

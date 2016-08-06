@@ -40,6 +40,8 @@
         vm.imgRoot = gbmono.img_root_path;
         // if product is favorited
         vm.isFavorited = false;
+        // visited products
+        vm.visitedProducts = [];
         // loading image
         // this staging loading img would be replaced by actual product img once the data is loaded
         vm.primaryImg = 'loading_2.gif';
@@ -49,37 +51,48 @@
         var productId = $routeParams.id ? parseInt($routeParams.id) : 0;
         // get token from local storage
         var token = utilService.getToken();
+        // user favorite model
+        var userFavorite = { saveItemType: 1, keyId: productId }; // product: save item type id = 1
 
         // page init
         init();
+
         // event handlers
-        vm.toggleFavorite = function () {
-            if (vm.isFavorited) {
-                // remove
-                removeFavorite(token, productId);
-            }
-            else {
-                // add 
-                var favorite = { productId: productId };
-                // add into user favorite
-                addFavorite(token, favorite);
+        // save product into user favorites
+        vm.saveProduct = function () {
+            // user is not authenticated if toke doesn't exist
+            if (!token || token == '') {
+                // redirect into login page with return url
+                utilService.redirectToLoginPage('products', productId);                
             }
 
+            // save
+            addFavorite(token, userFavorite);
+        };
+
+        // remove product from user favorites
+        vm.removeProduct = function () {
+            // remove
+            removeFavorite(token, userFavorite);
         };
 
         function init() {
             // move into the top of the screen to focus on the product detail area
             // utilService.scrollToTop();
 
-            // load product detailed info when product is provided
-            if (productId !== 0) {                
-                // get product by id
-                getProduct(productId, token);
-                // check if product is favorid when user is logged in
-                if (token && token !== '') {
-                    // isFavoritedProduct(token, productId);
-                }
+            // when product id is invalid
+            if (productId == 0) {
+                // todo:
             }
+
+            // get product by id
+            getProduct(productId, token);
+            
+            // if product is favorited
+            isFavoritedProduct(token, userFavorite);
+
+            // get visited products
+            getVisitedProducts();
         }
 
         // get product details by id
@@ -97,7 +110,9 @@
                     // init img thumb gallery
                     pluginService.productDetailGallery();
                     // init bootstrap tab
-                    pluginService.tab(); 
+                    pluginService.tab();
+                    // save into visted product
+                    saveVisitedProduct(vm.product);
                 });
         }
 
@@ -123,11 +138,20 @@
         }
 
         // check if product is favorited
-        function isFavoritedProduct(userToken, productId) {
-            userFavoriteDataFactory.isFavoriteProduct(userToken, productId)
+        function isFavoritedProduct(token, model) {
+            // user is not authenticated if toke doesn't exist
+            if (!token || token == '') {
+                vm.isFavorited = false;
+                return;
+            }
+
+            userFavoriteDataFactory.isSaved(token, model)
                 .success(function (status) {
                     if (status) {
                         vm.isFavorited = true;
+                    }
+                    else {
+                        vm.isFavorited = false;
                     }
                 })
                 .error(function (error) {
@@ -137,7 +161,7 @@
 
         // add favorite
         function addFavorite(token, favorite) {
-            userFavoriteDataFactory.add(token, favorite)
+            userFavoriteDataFactory.save(token, favorite)
                 .then(function successCallback(response) {
                     vm.isFavorited = true;
                     
@@ -145,27 +169,45 @@
                     // if user is not authencited
                     if (response.status === 401) {
                         // direct into login page
-                        // todo: returnUrl
-                        $location.path('/login');
+                        // redirect into login page with return url
+                        utilService.redirectToLoginPage('products', productId);
                     }
                 });
         }
 
         // remove favorite
-        function removeFavorite(token, productId) {
-            userFavoriteDataFactory.remove(token, productId)
+        function removeFavorite(token, model) {
+            userFavoriteDataFactory.remove(token, model.saveItemType, model.keyId)
                 .then(function successCallback(response) {
                     vm.isFavorited = false;
 
                 }, function errorCallback(response) {
                     // if user is not authencited
                     if (response.status === 401) {
-                        // direct into login page
-                        // todo: returnUrl
-                        $location.path('/login');
+                        // redirect into login page with return url
+                        utilService.redirectToLoginPage('products', productId);
                     }
                 });
         }
+        
+        // get visited products
+        function getVisitedProducts() {
+            // todo: exclude the current product??
+            vm.visitedProducts = utilService.getVisitedProducts();
+        }
 
+        // save current product into visited products
+        function saveVisitedProduct(product) {
+            var newVisitedProduct = {
+                productId: product.productId,
+                productName: product.primaryName,
+                brandName: product.brand.name,
+                imgUrl: vm.imgRoot + vm.primaryImg,
+                price: product.price
+            };
+
+            // save into list
+            utilService.saveVisitProduct(newVisitedProduct);
+        }
     }
 })(angular.module('gbmono'));

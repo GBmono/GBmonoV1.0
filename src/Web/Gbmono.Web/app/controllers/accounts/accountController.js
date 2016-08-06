@@ -3,13 +3,19 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['$location', 'pluginService', 'utilService', 'accountDataFactory'];
+    ctrl.$inject = ['$location',
+                    'pluginService',
+                    'utilService',
+                    'accountDataFactory'];
 
     // create controller
     module.controller('loginController', ctrl);
 
     // controller body
-    function ctrl($location, pluginService, utilService, accountDataFactory) {
+    function ctrl($location,
+                  pluginService,
+                  utilService,
+                  accountDataFactory) {
         //  use vm to represent the binding scope. This gets rid of the $scope variable from most of controllers
         var vm = this;
         // login model
@@ -52,7 +58,7 @@
             
         }
 
-        function login(userName, password) {
+        function login(userName, password) {            
             // reset flag
             vm.isLoginFailed = false;
 
@@ -61,21 +67,22 @@
                 .then(function successCallback(response) {
                     // save the bearer token into local storage                    
                     utilService.saveToken(response.data.access_token);
+                    // show profile on the header
+                    pluginService.showProfile();
                     // save user name
                     utilService.saveUserName(response.data.userName);
-                    // direct into profile page
-                    // todo: check return url??
-                    $location.path('/profile');
+                    // redirect to previouse page or profile page
+                    utilService.redirectBack(); 
                 },
                 function errorCallback(response) {
                     // set flag to true
                     vm.isLoginFailed = true;
                     // show up error
                     vm.loginError = extractErrorMessage(response);
-                    // alert('User name or password is incorrect.');
-                    // pluginService.notify(response, 'error');
                     // set data loading to false
                     vm.dataLoading = false;
+                    // show login on the header
+                    pluginService.showLogin();
                 });
         }
 
@@ -98,6 +105,7 @@
                     vm.dataLoading = false;
                 });
         }
+
 
         // extract error message from response
         function extractErrorMessage(response) {

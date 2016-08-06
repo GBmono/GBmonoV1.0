@@ -42,7 +42,15 @@
 
             <p>{{ vm.product.secondaryName }} </p>
 
-            <p class="price-sale">市场参考价： {{ vm.product.price | currency:"¥"}}</p>
+            <p class="price-sale">
+                市场参考价： {{ vm.product.price | currency:"¥"}}
+                <span ng-show="!vm.isFavorited" style="float:right;">
+                    <a href="" ng-click="vm.saveProduct()"><img src="content/img/star.png" />加入我的收藏</a>
+                </span>
+                <span ng-show="vm.isFavorited" style="float:right;">
+                    <a  href="" ng-click="vm.removeProduct()"><img src="content/img/star_saved.png" />取消收藏</a>
+                </span>    
+            </p>
 
             <p>
                 <span class="product-number">功能(用途): {{ vm.product.category.name}} </span>
@@ -55,6 +63,7 @@
             <p>
                 <span class="product-number">容量: {{ vm.product.capacity }} </span>
             </p>
+            <!-- user favorites-->
 
             <!--<p>
                 <span class="star_box">
@@ -200,36 +209,36 @@
 
         </span>
         <span class="recent-view">
-
             <h2 class="heading-line">
                 浏览过的产品
             </h2>
 
-
             <div class="recommend-list-wrapper">
-
                 <section>
-
-                    <div class="product-tile">
-
+                    <div class="product-tile"
+                         ng-repeat="product in vm.visitedProducts">
+                        <!-- product iamge, url with id -->
                         <div class="product-image">
-                            <a href="javascript:void(0);">
-                                <img src="http://demandware.edgesuite.net/aark_prd/on/demandware.static/-/Sites-mecca-online-catalog/default/dwd5751ff3/product/kit/th/i-013671-blender-sphere-1-150.jpg">
+                            <a ng-href="#/products/{{ product.productId }}">
+                                <img ng-src="{{ product.imgUrl }}">
                             </a>
                         </div>
-
+                        
                         <div>
-                            <a class="brand-name" href="javascript:void(0);">
-                                Bobbi Brown
+                            <!-- brand name -->
+                            <a class="brand-name" ng-href="#/products/{{ product.productId }}">
+                                {{ product.brandName }}
                             </a>
-
-                            <a class="name-link" href="javascript:void(0);">
-                                Ultra Fine Eyeliner Brush
+                            <!-- product name-->
+                            <a class="name-link" ng-href="#/products/{{ product.productId }}">
+                                {{ product.productName }}
                             </a>
                         </div>
-
+                        <!-- prive -->
                         <div class="product-pricing">
-                            <span class="product-sales-price" title="Sale Price">$37.00</span>
+                            <span class="product-sales-price" title="Sale Price">
+                                {{ product.price | currency:"¥"}}
+                            </span>
                         </div>
 
                         <!--<span class="star_box">
@@ -237,35 +246,6 @@
                         </span>-->
 
                     </div>
-
-                    <div class="product-tile">
-
-                        <div class="product-image">
-                            <a href="javascript:void(0);">
-                                <img src="http://demandware.edgesuite.net/aark_prd/on/demandware.static/-/Sites-mecca-online-catalog/default/dw6d43886c/product/bobbi/th/i-012540-ultra-fine-eyeliner-brush-1-150.jpg">
-                            </a>
-                        </div>
-
-                        <div>
-                            <a class="brand-name" href="javascript:void(0);">
-                                Bobbi Brown
-                            </a>
-
-                            <a class="name-link" href="javascript:void(0);">
-                                Ultra Fine Eyeliner Brush
-                            </a>
-                        </div>
-
-                        <div class="product-pricing">
-                            <span class="product-sales-price" title="Sale Price">$37.00</span>
-                        </div>
-
-                        <!--<span class="star_box">
-                            <span class="star" style="width:40%"></span>
-                        </span>-->
-
-                    </div>
-
                 </section>
 
             </div>

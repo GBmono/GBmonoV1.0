@@ -240,7 +240,7 @@
             return $http.get(gbmono.api_site_prefix.userfavorite_api_url + '/Products/' + pageIndex + '/' + pageSize);
         }
 
-        function isSaved(model) {
+        function isSaved(token, model) {
             attachToken(token);
             return $http.post(gbmono.api_site_prefix.userfavorite_api_url + '/IsSaved', model);
         }
@@ -248,7 +248,7 @@
         function save(token, model) {
             // it required authenticated token to access this method 
             // add token to authorization header
-            attachToken(token); 
+            attachToken(token);
             return $http.post(gbmono.api_site_prefix.userfavorite_api_url, model);
         }
 

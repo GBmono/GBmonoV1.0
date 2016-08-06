@@ -137,6 +137,8 @@ namespace Gbmono.Api.Controllers
                               
         }
 
+        // save user favorite
+        // product: type id = 1, article: type id = 2
         [HttpPost]
         public async Task<IHttpActionResult> Create([FromBody] UserSaveModel model)
         {

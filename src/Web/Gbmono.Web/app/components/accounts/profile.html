@@ -13,4 +13,9 @@
         <h3>注册时间</h3>
         <span>{{ vm.user.createTime | date: 'yyyy-MM-dd hh:mm'}}</span>
     </div>
+    <br />
+    <div class="person-info-item">
+        <a href="" style="color:gray;"
+           ng-click="vm.logout()">退出登录</a>
+    </div>
 </div>
