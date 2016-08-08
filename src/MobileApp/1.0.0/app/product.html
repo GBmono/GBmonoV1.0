@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="format-detection" content="telephone=no">
+    <!--禁用手机号码链接(for iPhone)-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <!--自适应设备宽度-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--控制全屏时顶部状态栏的外，默认白色-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--是否允许全屏显，只有在桌面启动时可用-->
+
+    <title>GBmonoApp</title>
+
+    <link rel="shortcut icon" href="./resources/images/favicon.jpg">
+    <link rel="apple-touch-icon" href="./resources/images/favicon.jpg">
+
+
+    <!--项目完成时再压缩-->
+    <link href="./resources/css/productInit.css" rel="stylesheet" type="text/css">
+
+    <script src="./libs/sea.js" type="text/javascript"></script>
+    <script src="./libs/seajs-preload.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+    <header>
+
+        <section class="menu-top">
+
+            <h1>GBmono</h1>
+            <div class="search-btn">
+                <i class="iconfont">&#xe601;</i>
+            </div>
+
+        </section>
+
+        <section class="menu-list">
+
+            <ul class="hbox">
+                <li>产品</li>
+                <li>推荐</li>
+                <li>品牌</li>
+                <li>市场动态</li>
+                <li>药妆店</li>
+            </ul>
+
+        </section>
+
+        <section class="search-wrapper dnone">
+            <input class="search-content" placeholder="关键字" type="text" >
+            <input class="search-confirm-btn" type="submit"  value="搜索">
+        </section>
+
+    </header>
+
+    <div class="container">
+
+        <div class="wrapper">
+
+
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="hbox">
+            <div class="menu-bottom-item">
+                <div>
+                    <p class="menu-bottom-name">扫一扫</p>
+                    <p>QR Code</p>
+                </div>
+            </div>
+            <div class="menu-bottom-item">
+                <div>
+                    <p class="menu-bottom-name">个人中心</p>
+                    <p>Person Center</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+
+        // seajs 的简单配置
+        seajs.config({
+            base: "./libs/",
+            alias: {
+                "zepto":            "zepto",
+                "zepto-data":       "data",
+                "zepto-selector":   "selector",
+                "underscore":       "underscore",
+                "backbone":         "backbone",
+                "gbmono":           "gbmono"
+
+            },
+
+            map:[
+                ['.js','.js?v=2016080301']
+            ],
+
+            preload: ['zepto','underscore']
+
+        });
+
+        // 加载入口模块
+        seajs.use("./product")
+
+
+    </script>
+
+
+</body>
+</html>

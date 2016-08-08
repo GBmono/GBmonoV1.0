@@ -1,23 +1,4 @@
-.menu-list{
-    display: -webkit-box;
-    height: 45px;
-    border-bottom: 1px solid #e5e5e5;
-}
 
-.menu-list > ul > li{
-    display: -webkit-box;
-    -webkit-box-flex: 1;
-    -webkit-box-align: center;
-    -webkit-box-pack: center;
-}
-
-.container{
-    margin-top: 93px;
-}
-
-.wrapper{
-    overflow-y: scroll;
-}
 
 .ranking-header .header,
 .product-header .header,
@@ -100,3 +81,21 @@
     padding: 0 10px;
     color: #b2b2b2;
 }
+
+
+
+
+
+
+
+
+
+
+
+.scan-wrapper p{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
