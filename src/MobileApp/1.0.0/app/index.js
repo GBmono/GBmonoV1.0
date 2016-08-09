@@ -5,6 +5,7 @@ define(function (require,modules,exports) {
     require("zepto-selector");
     require("zepto-data");
     require("zepto-carousel");
+    require("zepto-touch");
     require("gbmono");
 
     /*轮播图样式*/
@@ -32,6 +33,18 @@ define(function (require,modules,exports) {
              $(".menu-list").removeClass("dnone");
              $(".search-wrapper").addClass("dnone");
          }
+    });
+
+    $(".menu-list-link li").on("tap",function (e) {
+
+        const currentBtn = $(e.currentTarget);
+        const itemType = currentBtn.data("itemtype");
+        switch (itemType){
+            case "product":
+                location.href="./product.html";
+                break;
+        }
+
     });
 
 });

@@ -4,12 +4,13 @@
 define(function (require,modules,exports) {
     require("zepto-selector");
     require("zepto-data");
+    require("zepto-touch");
     require("gbmono");
 
     $(".wrapper").height($.height() - 92 - 65);
 
 
-    $(".search-btn").on("click",function () {
+    $(".search-btn").on("tap",function () {
         if($(".search-wrapper").hasClass("dnone")){
             $(".menu-list").addClass("dnone");
             $(".search-wrapper").removeClass("dnone");
@@ -18,6 +19,16 @@ define(function (require,modules,exports) {
             $(".menu-list").removeClass("dnone");
             $(".search-wrapper").addClass("dnone");
         }
+    });
+
+    $(".slide-list li").on("tap",function (e) {
+        const currentBtn = $(e.currentTarget);
+        const dropDownList = $(".slide-list-second",currentBtn);
+
+        if(dropDownList.is(':visible'))
+            dropDownList.hide();
+        else
+            dropDownList.show();
     });
 
 });
