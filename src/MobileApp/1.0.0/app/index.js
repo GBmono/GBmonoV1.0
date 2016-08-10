@@ -21,7 +21,7 @@ define(function (require,modules,exports) {
         pagination:true
     });
 
-    $(".wrapper").height($.height() - 92 - 65);
+    $(".wrapper").height($.height() - 92 - 55);
 
 
     $(".search-btn").on("click",function () {
@@ -46,5 +46,15 @@ define(function (require,modules,exports) {
         }
 
     });
+
+    $("#helper").on("tap",function (e) {
+        const currentEle = $(e.target);
+        if(currentEle.hasClass("scan-qrcode-btn")){
+            return;
+        }
+        const currentView = $(e.currentTarget);
+        currentView.off("tap").remove()
+    });
+
 
 });

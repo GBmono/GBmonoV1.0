@@ -7,7 +7,7 @@ define(function (require,modules,exports) {
     require("zepto-touch");
     require("gbmono");
 
-    $(".wrapper").height($.height() - 92 - 65);
+    $(".wrapper").height($.height() - 92 - 55);
 
 
     $(".search-btn").on("tap",function () {
@@ -22,13 +22,18 @@ define(function (require,modules,exports) {
     });
 
     $(".slide-list li").on("tap",function (e) {
-        const currentBtn = $(e.currentTarget);
-        const dropDownList = $(".slide-list-second",currentBtn);
+        const currentEle = $(e.target);
 
-        if(dropDownList.is(':visible'))
-            dropDownList.hide();
+        const dropDownList = currentEle.siblings();
+
+        if(dropDownList.hasClass("dnone"))
+            dropDownList.removeClass("dnone");
         else
-            dropDownList.show();
+            dropDownList.addClass("dnone");
+
+        return false;
+
+
     });
 
 });

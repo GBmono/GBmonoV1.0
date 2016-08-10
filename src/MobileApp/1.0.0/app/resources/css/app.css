@@ -88,8 +88,10 @@ header:after{
     margin-top: 93px;
 }
 
+
 .wrapper{
     overflow-y: scroll;
+    -webkit-overflow-scrolling : touch
 }
 
 
