@@ -1,0 +1,59 @@
+.helper{
+    width:100%;
+    height:100%;
+    position:absolute;
+    z-index:1000;
+    top:0;
+    left:0;
+    background:#e7e7e7;
+    -webkit-transition:opacity 0.5s linear;
+    opacity:1;
+    display:block;
+}
+
+.helper .wrapperHelper{
+    width:100%;
+    height:100%;
+    position:relative;
+    z-index:1;
+    overflow:hidden;
+    display: block;
+}
+
+.helper .wrapperHelper .scrollerHelper{
+    width:100%;
+    height:100%;
+    padding:0;
+    overflow:hidden;
+}
+
+.helper .wrapperHelper .scrollerHelper ul {
+    list-style:none;
+    display:block;
+    width:100%;
+    height:100%;
+    padding:0;
+    margin:0;
+}
+
+.helper .wrapperHelper .scrollerHelper ul li{
+    display:block;
+    height:100%;
+    float:left;
+}
+
+.helper .wrapperHelper .scrollerHelper ul li img{
+    width:100%;
+    height:100%;
+}
+
+
+.scan-qrcode-btn {
+    position: absolute;
+    padding: 10px;
+    border: 1px solid #fff;
+    top: 75%;
+    left: 27%;
+    font-size: 20px;
+    color: #fff;
+}
