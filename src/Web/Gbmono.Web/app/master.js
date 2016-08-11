@@ -48,6 +48,21 @@
             
             // check if token exists
             isTokenExisted();
+
+            // header effect
+            window.addEventListener("scroll", function (event) {
+                const pageTopEl = $("#pageTop");
+                const headerDomEl = $("#menuHeader");
+                var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+                if (scrollTop > 0) {
+                    pageTopEl.show();
+                    headerDomEl.addClass("min-header");
+                }
+                else {
+                    headerDomEl.removeClass("min-header");
+                    pageTopEl.hide();
+                }
+            });
         }
 
         // get product top categories
