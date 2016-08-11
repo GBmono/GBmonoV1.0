@@ -5,6 +5,7 @@ define(function (require,modules,exports) {
     require("zepto-selector");
     require("zepto-data");
     require("zepto-carousel");
+    require("zepto-touch");
     require("gbmono");
 
     /*轮播图样式*/
@@ -20,7 +21,40 @@ define(function (require,modules,exports) {
         pagination:true
     });
 
-    $(".wrapper").height($.height() - 92);
+    $(".wrapper").height($.height() - 92 - 55);
+
+
+    $(".search-btn").on("click",function () {
+         if($(".search-wrapper").hasClass("dnone")){
+             $(".menu-list").addClass("dnone");
+             $(".search-wrapper").removeClass("dnone");
+         }
+         else {
+             $(".menu-list").removeClass("dnone");
+             $(".search-wrapper").addClass("dnone");
+         }
+    });
+
+    $(".menu-list-link li").on("tap",function (e) {
+
+        const currentBtn = $(e.currentTarget);
+        const itemType = currentBtn.data("itemtype");
+        switch (itemType){
+            case "product":
+                location.href="./product.html";
+                break;
+        }
+
+    });
+
+    $("#helper").on("tap",function (e) {
+        const currentEle = $(e.target);
+        if(currentEle.hasClass("scan-qrcode-btn")){
+            return;
+        }
+        const currentView = $(e.currentTarget);
+        currentView.off("tap").remove()
+    });
 
 
 });
