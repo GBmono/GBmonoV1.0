@@ -1,105 +1,4 @@
 ﻿/*
-   header component controller
-*/
-(function (module) {
-    // inject the controller params
-    ctrl.$inject = ['categoryDataFactory', 'utilService', 'pluginService'];
-
-    // create controller
-    module.controller('headerController', ctrl);
-
-    // controller body
-    function ctrl(categoryDataFactory, utilService, pluginService) {
-        var vm = this;
-        // product top categories
-        // devided into 4 collections map into 4 vertical list elements
-        vm.topCatesCol1 = [];
-        vm.topCatesCol2 = [];
-        vm.topCatesCol3 = [];
-        vm.topCatesCol4 = [];
-
-        init();
-
-        function init() {
-            // get product top categories
-            getProductTopCategories();
-
-            // check if token exists
-            isTokenExisted();
-
-            // scroll
-            window.addEventListener("scroll", function (event) {
-                const pageTopEl = $("#pageTop");
-                const headerDomEl = $("#menuHeader");
-                var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-                if (scrollTop > 0) {
-                    pageTopEl.show();
-                    headerDomEl.addClass("min-header");
-                }
-                else {
-                    headerDomEl.removeClass("min-header");
-                    pageTopEl.hide();
-                }
-            });
-        }
-
-        function getProductTopCategories() {
-            categoryDataFactory.getTopCates()
-                .success(function (data) {
-                    vm.topCatesCol1 = fillCategories(0, data);
-                    vm.topCatesCol2 = fillCategories(4, data);
-                    vm.topCatesCol3 = fillCategories(8, data);
-                    vm.topCatesCol4 = fillCategories(12, data);
-                    //console.log(vm.topCatesCol1);
-                });
-        }
-
-        function isTokenExisted() {
-            // check if token exists
-            var token = utilService.getToken();
-            // if no token
-            if (!token || token === '') {
-                // show login
-                pluginService.showLogin();
-            }
-            else {
-                // show profile
-                pluginService.showProfile();
-            }
-        }
-
-        function fillCategories(startIndex, data) {
-            var result = [];
-            for (var i = startIndex; i < startIndex + 4; i++) {
-                if (i > data.length) {
-                    break;
-                }
-                result.push(data[i]);
-            }
-
-            return result;
-        }
-    }
-
-})(angular.module('gbmono'));
-
-/*
-   footer component controller
-*/
-(function (module) {
-    // inject the controller params
-    ctrl.$inject = [];
-
-    // create controller
-    module.controller('footerController', ctrl);
-
-    // controller body
-    function ctrl() {
-
-    }
-})(angular.module('gbmono'));
-
-/*
    ranking product list component controller
 */
 (function (module) {
@@ -139,7 +38,8 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['$location',
+    ctrl.$inject = ['$scope',
+                    '$location',
                     'utilService',
                     'pluginService',
                     'accountDataFactory'];
@@ -148,7 +48,8 @@
     module.controller('profileComponentController', ctrl);
 
     // controller body
-    function ctrl($location,
+    function ctrl($scope,
+                  $location,
                   utilService,
                   pluginService,
                   accountDataFactory) {
@@ -166,7 +67,9 @@
             // clear token
             utilService.clearToken();
             // show login section on the header
-            pluginService.showLogin();
+            // access variable in parent controller (master controller with notation 'masterViewModel')
+            $scope.masterViewModel.isAuthenticated = false;
+
             // redirect to home page
             $location.path('/login');
         };

@@ -20,12 +20,109 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.png">
 </head>
-<body ng-controller="masterController as vm"> 
+<body ng-controller="masterController as masterViewModel"> 
     <!-- header -->
-    <!-- included header -->
-    <div ng-include="'app/components/header.html'"
-            ng-controller="headerController as vm">
-    </div>
+    <header id="menuHeader" class="clearfix">
+        <div class="outer">
+            <div class="logo">
+                <img class="logo-img" src="content/img/log_128.png">
+                <div class="logo-title">
+                    <h1>集匠</h1>
+                    <p>GBmono.com</p>
+                </div>
+            </div>
+
+            <nav>
+                <ul>
+                    <li class="main-head-title"><a ng-href="#/">主页</a></li>
+                    <li class="main-head-title gb-products">
+                        <a href="">产品<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+
+                            <li class="dropdown-menu-wrapper">
+                                <ul class="dropdown-menu-column">
+                                    <li class="menu-product-item" ng-repeat="cate in masterViewModel.topCatesCol1">
+                                        <a ng-href="#/categories/{{ cate.categoryId }}/products/1">{{ cate.name }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown-menu-wrapper">
+                                <ul class="dropdown-menu-column">
+                                    <li class="menu-product-item" ng-repeat="cate in masterViewModel.topCatesCol2">
+                                        <a ng-href="#/categories/{{ cate.categoryId }}/products/1">{{ cate.name }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown-menu-wrapper">
+                                <ul class="dropdown-menu-column">
+                                    <li class="menu-product-item" ng-repeat="cate in masterViewModel.topCatesCol3">
+                                        <a ng-href="#/categories/{{ cate.categoryId }}/products/1">{{ cate.name }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown-menu-wrapper">
+                                <ul class="dropdown-menu-column">
+                                    <li class="menu-product-item" ng-repeat="cate in masterViewModel.topCatesCol4">
+                                        <a ng-href="#/categories/{{ cate.categoryId }}/products/1">{{ cate.name }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="main-head-title gb-recommend">
+                        <a href="">集匠推荐<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a ng-href="#/newproducts">新品上市</a>
+                            </li>
+                            <li>
+                                <a href="">人气商品</a>
+                            </li>
+                            <li>
+                                <a ng-href="#/topics">集匠特辑</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="main-head-title"><a ng-href="#/brands">品牌</a></li>
+                    <li class="main-head-title"><a ng-href="#/articles/types">市场动态</a></li>
+                    <li class="main-head-title gb-shop">
+                        <a href="">药妆店<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a ng-href="#/shops">店铺浏览</a>
+                            </li>
+                            <li>
+                                <a ng-href="#/shops/search">店铺查找</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="main-head-title gb-search">
+                        <span class="search">
+                            <input type="text" name="searchBtn" id="searchBtn" class="input-text" placeholder="搜索" value="">
+                        </span>
+                    </li>
+                    <li class="main-head-title"
+                        ng-show="!masterViewModel.isAuthenticated">
+                        <a ng-href="#/login">登录</a> | <a ng-href="#/register">注册</a>
+                    </li>
+                    <li class="main-head-title"
+                        ng-show="masterViewModel.isAuthenticated">
+                        <a ng-href="#/profile">
+                            <section class="person-wrapper">
+                                <img src="content/img/user.png">
+                            </section>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+
+    </header>
 
     <!-- container -->
     <section class="container">            
@@ -44,9 +141,34 @@
     </section>
 
     <!-- footer -->
-    <div ng-include="'app/components/footer.html'" style="margin-top:10px;"
-            ng-controller="footerController">
-    </div>
+    <footer id="footer">
+        <div class="footer-container-outer">
+            <div class="footer-container-inner">
+                <div class="nav">
+                    <ul>
+                        <li><a ng-href="/#">主页</a></li>
+                        <li><a ng-href="/#">产品</a></li>
+                        <li><a ng-href="/#">集匠推荐</a></li>
+                        <li><a ng-href="/#">药妆店</a></li>
+                        <li><a ng-href="/#">市场动态</a></li>
+                        <li><a ng-href="/#">手机端下载</a></li>
+                    </ul>
+                </div>
+
+                <div class="subnav">
+                    <ul>
+                        <li><a ng-href="/#">联系我们</a></li>
+                        <li><a ng-href="/#">广告合作</a></li>
+                        <li><a ng-href="/#">条款</a></li>
+                        <li><a ng-href="/#">常见问题</a></li>
+                        <li><a ng-href="/#">关于我们</a></li>
+                    </ul>
+                </div>
+
+                <p class="copyright">Copyright © 2016 GBmono Inc. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- scripts -->
     <script src="scripts/jquery-1.11.0.min.js"></script>

@@ -24,7 +24,7 @@
             redirectToLoginPage: redirectToLoginPage,
             redirectBack: redirectBack,
             saveVisitProduct: saveVisitProduct,
-            getVisitedProducts: getVisitedProducts
+            getVisitedProducts: getVisitedProducts            
         };
         
         // return user token stored in local storage or cookie (if local storage is not supported)

@@ -13,9 +13,7 @@
             tab:tab,
             productDetailGallery: productDetailGallery,
             showDataLoadingIndicator: showDataLoadingIndicator,
-            closeDataLoadingIndicator: closeDataLoadingIndicator,
-            showLogin: showLogin,
-            showProfile: showProfile
+            closeDataLoadingIndicator: closeDataLoadingIndicator
             // modal: modal
         };
 
@@ -116,20 +114,5 @@
             $(selector).find('.widget-box-overlay').remove();
         }
 
-        // show login 
-        function showLogin() {
-            $timeout(function () {
-                $('#login_section').show();
-                $('#profile_section').hide();
-            });
-        }
-
-        // show profile
-        function showProfile() {
-            $timeout(function () {
-                $('#login_section').hide();
-                $('#profile_section').show();
-            });
-        }
     }
 })(angular.module('gbmono'));

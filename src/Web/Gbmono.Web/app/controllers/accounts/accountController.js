@@ -3,7 +3,8 @@
 */
 (function (module) {
     // inject the controller params
-    ctrl.$inject = ['$location',
+    ctrl.$inject = ['$scope',
+                    '$location',
                     'pluginService',
                     'utilService',
                     'accountDataFactory'];
@@ -12,7 +13,8 @@
     module.controller('loginController', ctrl);
 
     // controller body
-    function ctrl($location,
+    function ctrl($scope,
+                  $location,
                   pluginService,
                   utilService,
                   accountDataFactory) {
@@ -55,20 +57,25 @@
         };
 
         function init() {
-            
+            // reset the status of isauthenticated when user is redirected into this page
+            // access variable in parent controller (master controller with notation 'masterViewModel')
+            $scope.masterViewModel.isAuthenticated = false;
         }
 
+        // login
         function login(userName, password) {            
             // reset flag
             vm.isLoginFailed = false;
-
+            
             // authenticate user name and password
             accountDataFactory.login(userName, password)
                 .then(function successCallback(response) {
                     // save the bearer token into local storage                    
                     utilService.saveToken(response.data.access_token);
                     // show profile on the header
-                    pluginService.showProfile();
+                    // access variable in parent controller (master controller with notation 'masterViewModel')
+                    $scope.masterViewModel.isAuthenticated = true;
+
                     // save user name
                     utilService.saveUserName(response.data.userName);
                     // redirect to previouse page or profile page
@@ -81,11 +88,13 @@
                     vm.loginError = extractErrorMessage(response);
                     // set data loading to false
                     vm.dataLoading = false;
-                    // show login on the header
-                    pluginService.showLogin();
+                    // access variable in parent controller (master controller with notation 'masterViewModel')
+                    $scope.masterViewModel.isAuthenticated = false;
+                    
                 });
         }
 
+        // register
         function register(user) {
             // reset flag
             vm.isRegisterFailed = false;
@@ -105,7 +114,6 @@
                     vm.dataLoading = false;
                 });
         }
-
 
         // extract error message from response
         function extractErrorMessage(response) {
