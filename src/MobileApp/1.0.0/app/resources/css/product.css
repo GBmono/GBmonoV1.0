@@ -1,10 +1,17 @@
 .slide-list>li{
-
     background: #fff;
     color: #000;
-    font-size: 18px;
-
+    font-weight: bold;
     border-bottom: 1px solid #e5e5e5;
+}
+
+.slide-list-second li{
+    font-size: 15px;
+    font-weight:normal;
+}
+
+.slide-list-third li{
+    font-size: 14px;
 }
 
 
@@ -31,7 +38,6 @@
 .slide-list-second-name{
     background: #FFFFFF;
     color: #000;
-    font-size: 17px;
     padding: 10px 0 11px 20px;
     position: relative;
     border-bottom: 1px solid #e5e5e5;
@@ -40,7 +46,6 @@
 .slide-list-third-name{
     background: #FFFFFF;
     color: #000;
-    font-size: 17px;
     padding: 10px 0 11px 36px;
     position: relative;
     border-bottom: 1px solid #e5e5e5;

@@ -34,6 +34,7 @@ header .menu-top{
     display: -webkit-box;
     border-bottom: 1px solid #e5e5e5;
     height: 45px;
+    background: #312965;
 }
 
 
@@ -43,6 +44,9 @@ header h1 {
     -webkit-box-align: center;
     -webkit-box-pack: center;
     font-size: 26px;
+
+    color: #fff;
+    letter-spacing: 10px;
 }
 
 header .search-btn,

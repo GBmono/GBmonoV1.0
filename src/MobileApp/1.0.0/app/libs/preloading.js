@@ -10,7 +10,13 @@ preLoad +=
                 '<ul>' +
                     '<li>' +
                         '<img src="./resources/images/GBmonoLogo.jpg" />' +
-                        '<p class="scan-qrcode-btn">点击扫描QR码</p>'+
+                        '<p class="gbmono-startup-logo">集匠</p>'+
+                        '<p class="enter-btm">进入</p>'+
+                        '<p class="scan-qrcode-btn">扫一扫</p>'+
+                        '<div class="person-center-btn">' +
+                            '<p>个人主页</p>' +
+                            '<p>Person Center</p>' +
+                        '</div>'+
                     '</li>' +
                 '</ul>' +
             '</div>' +

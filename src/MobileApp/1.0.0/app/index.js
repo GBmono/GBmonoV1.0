@@ -57,4 +57,14 @@ define(function (require,modules,exports) {
     });
 
 
+
+    $("#helper .enter-btm").on("tap",function () {
+        $("#helper").trigger("tap");
+    });
+
+    /*setTimeout(function () {
+     $("#helper").trigger("tap");
+     },3000);*/
+
+
 });
