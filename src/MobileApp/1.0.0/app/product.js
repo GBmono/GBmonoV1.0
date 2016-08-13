@@ -36,4 +36,8 @@ define(function (require,modules,exports) {
 
     });
 
+    $(".ranking-list li").on("tap",function () {
+        location.href = "./productDetail.html";
+    });
+
 });
