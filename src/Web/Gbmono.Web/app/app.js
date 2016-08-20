@@ -28,9 +28,9 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
-                .when('/categories', { // all categories page
-                    templateUrl: gbmono.app_view_path + '/categories/list.html',
-                    controller: 'categoryListController',
+                .when('/allproducts', { // todo: all products page
+                    templateUrl: gbmono.app_view_path + '/products/all.html',
+                    controller: '',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
@@ -64,6 +64,12 @@
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
+                .when('/alltopics', { // tood: all topics
+                    templateUrl: gbmono.app_view_path + '/topics/all.html',
+                    controller: '',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
                 .when('/ranking', { // ranking
                     templateUrl: gbmono.app_view_path + '/products/ranking.html',
                     controller: 'productRankingController',
@@ -79,6 +85,12 @@
                 .when('/brands/:brandId', { // brand list page
                     templateUrl: gbmono.app_view_path + '/brands/detail.html',
                     controller: 'brandDetailController',
+                    controllerAs: 'vm',
+                    caseInsensitiveMatch: true
+                })
+                .when('/retailers', { // todo: retailers
+                    templateUrl: gbmono.app_view_path + '/shops/retailers.html',
+                    controller: '',
                     controllerAs: 'vm',
                     caseInsensitiveMatch: true
                 })
