@@ -236,3 +236,8 @@
 #productDetailView .tab-item-content.active{
     display: block;
 }
+
+#productDetailView .product-image img{
+    max-width: 50%;
+    height: 150px;
+}
