@@ -36,14 +36,15 @@
         </span>
         <span class="detail-content">
             <div class="product-name-outer">
-                <h2 class="product-name-left">{{ vm.product.primaryName }}</h2>
-                <strong class="product-name-right">{{ vm.product.brand.name }}マスク</strong>
+                <h2 class="product-name-left">{{ vm.product.primaryName }}</h2>                
+                <!--<strong class="product-name-right">{{ vm.product.brand.name }}マスク</strong>-->
             </div>
-
+            
+            <p>{{ vm.product.brand.name }}</p>
             <p>{{ vm.product.secondaryName }} </p>
 
             <p class="price-sale">
-                市场参考价： {{ vm.product.price | currency:"¥"}}
+                品牌商指导价： {{ vm.product.price | currency:"¥"}}
                 <span ng-show="!vm.isFavorited" style="float:right;">
                     <a href="" ng-click="vm.saveProduct()"><img src="content/img/star.png" />加入我的收藏</a>
                 </span>
