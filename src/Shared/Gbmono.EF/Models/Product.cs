@@ -29,7 +29,10 @@ namespace Gbmono.EF.Models
         // public int CountryId { get; set; }
         // public Country Country { get; set; }
 
-        // 名称 (系列名称)
+        //系列名
+        public string BrandCollectionName { set; get; }
+
+        // 名称
         public string PrimaryName { get; set; }
 
         // 补充名称

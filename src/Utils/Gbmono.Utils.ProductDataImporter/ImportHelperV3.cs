@@ -32,7 +32,7 @@ namespace Gbmono.Utils.ProductDataImporter
                 string version = string.Empty;
                 WorkbookPart wbPart = document.WorkbookPart;
                 List<Sheet> sheets = wbPart.Workbook.Descendants<Sheet>().ToList();
-                var sheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault(c => c.Name == "一括商品登録シート");
+                var sheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault(c => c.Name == ConfigurationSettings.AppSettings["sheetName"]);
                 if (sheet == null)
                 {
                     sheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault();
@@ -69,16 +69,16 @@ namespace Gbmono.Utils.ProductDataImporter
             var successedCount = 0;
             while (true)
             {
-                // 大分类CD
+                // 大分CD
                 var categoryCodeLevel1 = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("B", index)).RemoveEmptyOrWrapCharacters().ToDBC();
                 if (categoryCodeLevel1 == "")
                 {
                     break;
                 }
-                // 陈列标准CD
+                // 棚割CD
                 var categoryCodeLevel2 = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("C", index)).RemoveEmptyOrWrapCharacters().ToDBC();
 
-                // 中品类CD
+                // 中分CD
                 var categoryCodeLevel3 = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("D", index)).RemoveEmptyOrWrapCharacters().ToDBC();
                 if (categoryCodeLevel3.Length > 2)
                 {
@@ -87,38 +87,66 @@ namespace Gbmono.Utils.ProductDataImporter
                 }
                 Logger.Log(LogLevel.Info, string.Format("Retreiving category by category code: {0}{1}{2}", categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3));
 
+                //取引先CD
+                var tradeCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("E", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+
                 //商品CD
-                var productCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("E", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                //var productCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("E", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+
+                //催事CD
+                var promotionCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("F", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                if (promotionCode == "")
+                {
+                    promotionCode = null;
+                }
+                //クーポンCD
+                var cuponCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("G", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                if (cuponCode == "")
+                {
+                    cuponCode = null;
+                }
+                //Topic CD
+                var topicCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("H", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+                if (topicCode == "")
+                {
+                    topicCode = null;
+                }
+                //中分類ランキングCD ?
+                var nKnow = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("I", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+
+                //二维码
+                var barCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("J", index)).RemoveEmptyOrWrapCharacters().ToDBC();
+
 
                 //get category id
-                var categoryId = GetCategoryId(categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3, productCode);
+                var categoryId = GetCategoryId(categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3, barCode);
                 if (categoryId == null)
                 {
                     Logger.Log(LogLevel.Error, "Can not find matched category.");
                     return null;
                 }
-                //促销CD
-                var promotionCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("G", index)).RemoveEmptyOrWrapCharacters().ToDBC();
-                //优惠CD
-                var cuponCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("H", index)).RemoveEmptyOrWrapCharacters().ToDBC();
-                //Topic CD
-                var topicCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("I", index)).RemoveEmptyOrWrapCharacters().ToDBC();
-                //中分類ランキングCD ?
-                var nKnow = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("J", index)).RemoveEmptyOrWrapCharacters().ToDBC();
-                //二维码
-                var barCode = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("K", index)).RemoveEmptyOrWrapCharacters().ToDBC();
-                //品牌
-                var brandName = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("L", index)).RemoveEmptyOrWrapCharacters();
+
+                //品牌 メーカー名
+                var brandName = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("K", index)).RemoveEmptyOrWrapCharacters();
                 var brandId = GetBrandId(brandName);
+
+                //系列 ブランド名
+                var brandCollectionName = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("L", index)).RemoveEmptyOrWrapCharacters();
+                //var brandCollectionId = GetBrandId(brandName);
+
                 //商品名1
                 var primaryName = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("M", index)).RemoveEmptyOrWrapCharacters();
                 //商品名2
                 var secondaryName = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("N", index)).RemoveEmptyOrWrapCharacters();
+                if (secondaryName == "")
+                {
+                    secondaryName = null;
+                }
                 //特征
                 var flavor = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("O", index)).RemoveEmptyOrWrapCharacters();
                 //容量
                 var weight = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("P", index)).RemoveEmptyOrWrapCharacters().ToDBC();
-                //价格
+                //价格 希望小売価格
                 var priceText = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("Q", index)).RemoveEmptyOrWrapCharacters().ToDBC();
                 // convert
                 double price;
@@ -151,6 +179,8 @@ namespace Gbmono.Utils.ProductDataImporter
                 var 製造中止日 = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("AQ", index)).RemoveEmptyOrWrapCharacters().ToDBC();
                 DateTime 製造中止日Date = 製造中止日.From1900();
 
+                //入数
+                var amount = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("AR", index)).RemoveEmptyOrWrapCharacters().ToDBC();
 
                 //W
                 var wData = GetCellPathValue(wbPart, wsPart, Util.IndexAppend("AS", index)).RemoveEmptyOrWrapCharacters().ToDBC();
@@ -188,8 +218,9 @@ namespace Gbmono.Utils.ProductDataImporter
                 var newProduct = new Product
                 {
                     //Todo
-                    CategoryId = 1,
+                    CategoryId = (int)categoryId,
                     BrandId = brandId,
+                    BrandCollectionName = brandCollectionName,
                     PrimaryName = primaryName,
                     SecondaryName = secondaryName,
                     BarCode = barCode,
@@ -198,7 +229,7 @@ namespace Gbmono.Utils.ProductDataImporter
                     Width = wValue,
                     Depth = hValue,
                     Height = dValue,
-                    ProductCode = productCode,
+                    //ProductCode = productCode,
                     PromotionCode = promotionCode,
                     CuponCode = cuponCode,
                     TopicCode = topicCode,
@@ -299,81 +330,131 @@ namespace Gbmono.Utils.ProductDataImporter
 
         static void BrandCollectionCheck(Product product)
         {
-            if (!secondaryNameBlankList.Contains(product.SecondaryName))
+            //if (!secondaryNameBlankList.Contains(product.SecondaryName))    
+            //{
+            var brandCollection =
+                _repositoryManager.BrandCollectionRepository.Table.FirstOrDefault(
+                    m => m.BrandId == product.BrandId && m.Name == product.BrandCollectionName);
+            if (brandCollection == null)
             {
-                var brandCollection =
-                    _repositoryManager.BrandCollectionRepository.Table.FirstOrDefault(
-                        m => m.BrandId == product.BrandId && m.Name == product.PrimaryName);
-                if (brandCollection == null)
+                brandCollection = new BrandCollection()
                 {
-                    brandCollection = new BrandCollection()
-                    {
-                        BrandId = product.BrandId,
-                        DisplayName = product.PrimaryName,
-                        Name = product.PrimaryName
-                    };
+                    BrandId = product.BrandId,
+                    DisplayName = product.BrandCollectionName,
+                    Name = product.BrandCollectionName
+                };
 
-                    _repositoryManager.BrandCollectionRepository.Create(brandCollection);
-                    _repositoryManager.BrandCollectionRepository.Save();
-                }
-
-
-                product.BrandCollectionId = brandCollection.BrandCollectionId;
-                _repositoryManager.ProductRepository.Save();
-
+                _repositoryManager.BrandCollectionRepository.Create(brandCollection);
+                _repositoryManager.BrandCollectionRepository.Save();
             }
+
+
+            product.BrandCollectionId = brandCollection.BrandCollectionId;
+            _repositoryManager.ProductRepository.Save();
+
+            //}
         }
 
-        static void ImportImage(WorksheetPart wsPart, int productId, string categoryCodeLevel1, string categoryCodeLevel2, string categoryCodeLevel3)
+        public static void ImportImage(string folderPath)
         {
-            var imageFileFolder = GetImageFolderByCategory(categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3);
-            var imageCatePath = $@"{categoryCodeLevel1}/{categoryCodeLevel2}/{categoryCodeLevel3}";
-            int imageIndex = 1;
-            var success = 0;
-            var fail = 0;
-            foreach (ImagePart i in wsPart.DrawingsPart.ImageParts)
+            var imageFolder = new DirectoryInfo(folderPath);
+            var images = imageFolder.GetFiles();
+
+            if (images.Any())
             {
-                try
+                foreach (var img in images)
                 {
-                    using (Stream stream = i.GetStream())
+                    var imageName = img.Name;
+                    var imageExtension = Path.GetExtension(imageName);
+
+                    var barcode = imageName.Substring(0, 13);
+                    var product = _repositoryManager.ProductRepository.Table.FirstOrDefault(m => m.BarCode == barcode);
+                    if (product != null)
                     {
-                        long length = stream.Length;
-                        byte[] byteStream = new byte[length];
-                        stream.Read(byteStream, 0, (int)length);
+                        var imageFileFolder = GetImageFolderByBarcode(barcode);
+                        var imageCatePath = $@"{barcode}";
 
-                        var imageValidated = ImageHelper.ValidateImageQualityByPixel(stream);
-                        if (imageValidated)
+                        var productId = product.ProductId;
+                        var imageIndex = imageName.Substring(13, 2);
+                        string filename = string.Format(@"{0}_{1}{2}", productId, imageIndex, imageExtension);
+                        string filePath = string.Format(@"{0}/{1}", imageFileFolder, filename);
+
+                        FileStream fileStream = new FileStream(img.FullName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                        // 读取文件的 byte[]   
+                        byte[] bytes = new byte[fileStream.Length];
+                        fileStream.Read(bytes, 0, bytes.Length);
+                        fileStream.Close();
+                        File.WriteAllBytes(filePath, bytes);
+                        //Todo ProductImageTypeId is temp
+                        var newProductImage = new ProductImage()
                         {
+                            ProductId = productId,
+                            //FileName = filePath,
+                            FileName = $@"{imageCatePath}/{filename}",
+                            ProductImageTypeId = 1
+                        };
+                        _repositoryManager.ProductImageRepository.Create(newProductImage);
+                        _repositoryManager.ProductImageRepository.Save();
 
-                            var imageExtension = Path.GetExtension(i.Uri.ToString());
-                            string filename = string.Format(@"{0}_{1}{2}", productId, imageIndex, imageExtension);
-                            string filePath = string.Format(@"{0}/{1}", imageFileFolder, filename);
-
-                            File.WriteAllBytes(filePath, byteStream);
-                            //Todo ProductImageTypeId is temp
-                            var newProductImage = new ProductImage()
-                            {
-                                ProductId = productId,
-                                //FileName = filePath,
-                                FileName = $@"{imageCatePath}/{filename}",
-                                ProductImageTypeId = 1
-                            };
-                            _repositoryManager.ProductImageRepository.Create(newProductImage);
-                            _repositoryManager.ProductImageRepository.Save();
-                        }
-                        else
-                        {
-                            Console.WriteLine("Pass Image:productId:" + productId);
-                        }
                     }
+                    else
+                    {
+                        //Todo error
+                    }
+
+
                 }
-                catch (Exception ex)
-                {
-                    Logger.Log(LogLevel.Error, string.Format("Save Image Error:productId {0},ex:", productId));
-                    fail++;
-                }
-                imageIndex++;
             }
+
+
+            //var imageFileFolder = GetImageFolderByCategory(categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3);
+            //var imageCatePath = $@"{categoryCodeLevel1}/{categoryCodeLevel2}/{categoryCodeLevel3}";
+            //int imageIndex = 1;
+            //var success = 0;
+            //var fail = 0;
+            //foreach (ImagePart i in wsPart.DrawingsPart.ImageParts)
+            //{
+            //    try
+            //    {
+            //        using (Stream stream = i.GetStream())
+            //        {
+            //            long length = stream.Length;
+            //            byte[] byteStream = new byte[length];
+            //            stream.Read(byteStream, 0, (int)length);
+
+            //            var imageValidated = ImageHelper.ValidateImageQualityByPixel(stream);
+            //            if (imageValidated)
+            //            {
+
+            //                var imageExtension = Path.GetExtension(i.Uri.ToString());
+            //                string filename = string.Format(@"{0}_{1}{2}", productId, imageIndex, imageExtension);
+            //                string filePath = string.Format(@"{0}/{1}", imageFileFolder, filename);
+
+            //                File.WriteAllBytes(filePath, byteStream);
+            //                //Todo ProductImageTypeId is temp
+            //                var newProductImage = new ProductImage()
+            //                {
+            //                    ProductId = productId,
+            //                    //FileName = filePath,
+            //                    FileName = $@"{imageCatePath}/{filename}",
+            //                    ProductImageTypeId = 1
+            //                };
+            //                _repositoryManager.ProductImageRepository.Create(newProductImage);
+            //                _repositoryManager.ProductImageRepository.Save();
+            //            }
+            //            else
+            //            {
+            //                Console.WriteLine("Pass Image:productId:" + productId);
+            //            }
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Logger.Log(LogLevel.Error, string.Format("Save Image Error:productId {0},ex:", productId));
+            //        fail++;
+            //    }
+            //    imageIndex++;
+            //}
         }
 
         private static string GetImageFolderByCategory(string categoryCodeLevel1, string categoryCodeLevel2,
@@ -383,6 +464,15 @@ namespace Gbmono.Utils.ProductDataImporter
 
             var finalPath = FileHelper.CreateDirectory(imageFileFolder, categoryCodeLevel1, categoryCodeLevel2,
                 categoryCodeLevel3);
+
+            return finalPath;
+        }
+
+        private static string GetImageFolderByBarcode(string barcode)
+        {
+            var imageFileFolder = ConfigurationManager.AppSettings["imageFolder"];
+
+            var finalPath = FileHelper.CreateDirectoryProductImage(imageFileFolder, barcode);
 
             return finalPath;
         }

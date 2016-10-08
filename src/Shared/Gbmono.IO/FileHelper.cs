@@ -91,6 +91,16 @@ namespace Gbmono.IO
             return level3Folder;
         }
 
+        public static string CreateDirectoryProductImage(string root,string barcode)
+        {
+            var imageFileFolder = root;
 
+            var folder = $@"{imageFileFolder}/{barcode}";
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+
+        
+            return folder;
+        }
     }
 }
