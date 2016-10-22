@@ -55,51 +55,16 @@ namespace Gbmono.Search.IndexBuilder.Builder
                 var docList = new List<ProductDoc>();
                 foreach (var product in productList)
                 {
-                    //var doc = new ProductDoc
-                    //{
-                    //    ProductId = product.ProductId,
-                    //    Categories = GetParentCategories(product.CategoryId),
-                    //    BrandId = product.BrandId,
-                    //    //BrandCollectionId = product.BrandCollectionId.HasValue ? product.BrandCollectionId.Value : 0,
-                    //    BrandCollectionId=product.BrandCollectionId,
-                    //    ProductCode = product.ProductCode,
-                    //    Barcode = product.BarCode,
-                    //    Name = product.SecondaryName,
-                    //    PromotionCode = product.PromotionCode,
-                    //    CuponCode = product.CuponCode,
-                    //    TopicCode = product.TopicCode,
-                    //    RankingCode = product.RankingCode,
-                    //    Capacity = product.Capacity,
-                    //    Weight = product.Weight,
-                    //    Flavor = product.Flavor,
-                    //    //Width = product.Width.HasValue ? product.Width.Value : 0,
-                    //    //Height = product.Height.HasValue ? product.Height.Value:0,
-                    //    //Depth=product.Depth.HasValue?product.Depth.Value:0,
-                    //    Width=product.Width,
-                    //    Height=product.Height,
-                    //    Depth=product.Depth,
-                    //    Price=product.Price,
-                    //    Spring=product.Spring,
-                    //    Summer=product.Summer,
-                    //    Autumn=product.Autumn,
-                    //    Winter=product.Winter,
-                    //    Discount=product.Discount,
-                    //    Description=product.Description,
-                    //    Instruction=product.Instruction,
-                    //    ExtraInformation=product.ExtraInformation,
-                    //    UpdatedDate=product.UpdatedDate,
-                    //    ActivationDate=product.ActivationDate,
-                    //    ExpiryDate=product.ExpiryDate,
-                    //    Tags=string.Join(" ",product.Tags.Select(s=>s.TagId).ToList())
-                    //};
                     var doc = new ProductDoc();
                     doc.ProductId = product.ProductId;
                     doc.Categories = GetParentCategories(product.CategoryId);
                     doc.BrandId = product.BrandId;
+                    doc.BrandName = product.Brand.Name;
                     doc.BrandCollectionId = product.BrandCollectionId;
+                    doc.BrandCollectionName = product.BrandCollectionName;
                     doc.ProductCode = product.ProductCode;
                     doc.Barcode = product.BarCode;
-                    doc.Name = product.SecondaryName;
+                    doc.Name = product.PrimaryName;
                     doc.PromotionCode = product.PromotionCode;
                     doc.CuponCode = product.CuponCode;
                     doc.TopicCode = product.TopicCode;
@@ -142,21 +107,22 @@ namespace Gbmono.Search.IndexBuilder.Builder
                     }
                     docList.Add(doc);
                 }
-
-                //tasks.Add(Task.Run(() =>
-                //{
-                    try
+                if (docList.Count() > 0)
+                {
+                    tasks.Add(Task.Run(() =>
                     {
-                        Client.IndexDocuments(docList);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                        Console.WriteLine("#################### entry key to continue ###################");
-                        Console.ReadLine();
-                    }
-                //}));
-
+                        try
+                        {
+                            Client.IndexDocuments(docList);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                            Console.WriteLine("#################### entry key to continue ###################");
+                            Console.ReadLine();
+                        }
+                    }));
+                }
                 if (tasks.Count > 3)
                 {
                     Task.WaitAny(tasks.ToArray());
@@ -171,6 +137,16 @@ namespace Gbmono.Search.IndexBuilder.Builder
                 startIndex += chunkSize;
                 Console.WriteLine("{0} product indexed", startIndex);
             }
+            if (tasks.Count > 0)
+            {
+                Task.WaitAny(tasks.ToArray());
+                var toRemove = tasks.Where(m => m.IsCompleted).ToArray();
+                foreach (var t in toRemove)
+                {
+                    tasks.Remove(t);
+                }
+                Console.WriteLine("#");
+            }
         }
 
         private int GetMaxProductShipId()
@@ -180,7 +156,7 @@ namespace Gbmono.Search.IndexBuilder.Builder
 
         private List<Product> GetChunkProduct(int index, int size)
         {
-            return _repositoryManager.ProductRepository.Table.Include(m=>m.Images).Where(m => m.ProductId >= index && m.ProductId < index + size).ToList();
+            return _repositoryManager.ProductRepository.Table.Include(m=>m.Images).Include(m=>m.Brand).Where(m => m.ProductId >= index && m.ProductId < index + size).ToList();
         }
 
         private List<int> GetProductTags(int productId)

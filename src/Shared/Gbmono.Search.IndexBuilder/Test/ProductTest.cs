@@ -21,8 +21,8 @@ namespace Gbmono.Search.IndexBuilder.Test
         {
             var request = new PagedRequest<ProductSearchRequest>
             {
-                Data = new ProductSearchRequest { Keyword = "美容" },
-                PageNumber = 2,
+                Data = new ProductSearchRequest { Keyword = "淡雅" },
+                PageNumber = 1,
                 PageSize = 10
             };
             var result = helper.SearchByKeyword(request);
