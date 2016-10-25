@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Gbmono.Search.ViewModel.Requests
 {
-    public class ProductSearchRequest : SearchKeyword
+    public class ProductTagSearchRequest : SearchKeyword
     {
+
     }
 }

@@ -66,10 +66,12 @@
   <ItemGroup>
     <Compile Include="Builder\BrandBuilder.cs" />
     <Compile Include="Builder\ProductBuilder.cs" />
+    <Compile Include="Builder\ProductTagBuilder.cs" />
     <Compile Include="Builder\RetailerShopsBuilder.cs" />
     <Compile Include="ProductCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test\ProductTagTest.cs" />
     <Compile Include="Test\ProductTest.cs" />
     <Compile Include="Test\RetailShopTest.cs" />
   </ItemGroup>

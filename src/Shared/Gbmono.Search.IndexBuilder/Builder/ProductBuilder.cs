@@ -41,7 +41,7 @@ namespace Gbmono.Search.IndexBuilder.Builder
 
         public void Build()
         {
-            var maxProductId = GetMaxProductShipId();
+            var maxProductId = GetMaxProductId();
 
             Console.WriteLine("Start indexing about {0} product", maxProductId);
 
@@ -149,7 +149,7 @@ namespace Gbmono.Search.IndexBuilder.Builder
             }
         }
 
-        private int GetMaxProductShipId()
+        private int GetMaxProductId()
         {
             return _repositoryManager.ProductRepository.Table.Max(m => m.ProductId);
         }

@@ -14,7 +14,7 @@ namespace Gbmono.Search.IndexManager.SearchHelper
 {
     public class ProductHelper
     {
-        private NestClient<ProductDoc> CLient
+        private NestClient<ProductDoc> Client
         {
             get
             {
@@ -25,7 +25,7 @@ namespace Gbmono.Search.IndexManager.SearchHelper
         public ProductDoc GetProductById(int productId)
         {
             var query = new QueryBuilder().AndTerm("productId", productId).Build();
-            var resp = CLient.SearchResponse(query);
+            var resp = Client.SearchResponse(query);
             return resp.Documents.First();
         }
 
@@ -37,9 +37,9 @@ namespace Gbmono.Search.IndexManager.SearchHelper
                 .OrMultiMatch(matchFields, request.Data.Keyword)
                 .Build();
             var categoryAgg = new AggregationContainerDescriptor<ProductDoc>().Terms("agg_category", f => f.Field("categories"));
-            var result = CLient.SetPageNum(request.PageNumber).SetPageSize(request.PageSize).SearchResponse(query, filter, a => categoryAgg);
+            var result = Client.SetPageNum(request.PageNumber).SetPageSize(request.PageSize).SearchResponse(query, filter, a => categoryAgg);
 
-            return CLient.WrapResult(result);
+            return Client.WrapResult(result);
         }
     }
 }
