@@ -245,7 +245,7 @@ namespace Gbmono.Search.IndexManager.Builders
             {
                 return this;
             }
-
+            
             var mq = new MatchQuery() { Field = fieldName, Query = fieldValue.ToString() };
 
             if (_context == null)
@@ -330,11 +330,63 @@ namespace Gbmono.Search.IndexManager.Builders
         public QueryBuilder AndMultiMatch<T>(string[] fieldNames, T fieldValue)
         {
             return AddMultiMatch(fieldNames, fieldValue, true);
-        }
+        }        
 
         public QueryBuilder OrMultiMatch<T>(string[] fieldNames, T fieldValue)
         {
             return AddMultiMatch(fieldNames, fieldValue, false);
+        }
+
+        private QueryBuilder AddPrefixMatch<T>(string fieldName, T fieldValue, bool andOp, bool not = false)
+        {
+            if (string.IsNullOrWhiteSpace(fieldName) || fieldValue == null)
+            {
+                return this;
+            }
+
+            var mq = new PrefixQuery() //{ Field = fieldName,  Query = fieldValue.ToString() };
+            {
+                Field = fieldName,
+                Value = fieldValue.ToString()
+            };
+            if (_context == null)
+            {
+                _context = new Context() { mainQuery = new QueryContainer(mq) };
+                if (not)
+                {
+                    _context.mainQuery = !_context.mainQuery;
+                }
+            }
+            else
+            {
+                if (andOp)
+                {
+                    _opList.Add(new AndOp()
+                    {
+                        Query = not ? !new QueryContainer(mq) : new QueryContainer(mq)
+                    });
+
+                }
+                else
+                {
+                    _opList.Add(new OrOp()
+                    {
+                        Query = not ? !new QueryContainer(mq) : new QueryContainer(mq)
+                    });
+                }
+            }
+
+            return this;
+        }
+
+        public QueryBuilder AndPrefixMatch<T>(string fieldName, T fieldValue)
+        {
+            return AddPrefixMatch(fieldName, fieldValue, true);
+        }
+
+        public QueryBuilder OrPrefixMatch<T>(string fieldName, T fieldValue)
+        {
+            return AddPrefixMatch(fieldName, fieldValue, false);
         }
 
         public QueryBuilder Not()

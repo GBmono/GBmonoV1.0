@@ -42,6 +42,7 @@ namespace Gbmono.Search.IndexBuilder
             //product tag test
             var test = new ProductTagTest();
             test.GetProductTagByKeyword();
+            test.GetPrefixProductTagByKeyword();
         }
     }
 }

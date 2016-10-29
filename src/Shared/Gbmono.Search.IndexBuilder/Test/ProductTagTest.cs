@@ -21,11 +21,22 @@ namespace Gbmono.Search.IndexBuilder.Test
         {
             var request = new PagedRequest<ProductTagSearchRequest>
             {
-                Data = new ProductTagSearchRequest { Keyword = "眼精 疲労" },
+                Data = new ProductTagSearchRequest { Keyword = "肉体疲労 疲労" },
                 PageNumber = 1,
                 PageSize = 10
             };
             var result = helper.SearchByKeyword(request);
+        }
+
+        public void GetPrefixProductTagByKeyword()
+        {
+            var request = new PagedRequest<ProductTagSearchRequest>
+            {
+                Data = new ProductTagSearchRequest { Keyword = "肉" },
+                PageNumber = 1,
+                PageSize = 10
+            };
+            var result = helper.SearchByPrefixKeyword(request);
         }
     }
 }

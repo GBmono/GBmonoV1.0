@@ -57,6 +57,7 @@ namespace Gbmono.Search.IndexBuilder.Builder
                     var doc = new ProductTagDoc();
                     doc.Id = tag.TagId;
                     doc.Name = tag.Name;
+                    doc.Name_NA = doc.Name;
                     doc.TagTypeId = tag.TagTypeId;
                     docList.Add(doc);
                 }
