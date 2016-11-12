@@ -21,6 +21,8 @@ namespace Gbmono.Search.IndexManager.Documents
         public string BrandCollectionName { get; set; }
         [String(Analyzer ="ik_max_word",SearchAnalyzer ="ik_max_word")]
         public string Name { get; set; }
+        [String(Index = FieldIndexOption.NotAnalyzed)]
+        public string Name_NA { get; set; }
         public string PromotionCode { get; set; }
         public string CuponCode { get; set; }
         public string TopicCode { get; set; }

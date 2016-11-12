@@ -41,5 +41,15 @@ namespace Gbmono.Search.IndexManager.SearchHelper
 
             return Client.WrapResult(result);
         }
+
+        public PagedResponse<ProductDoc> SearchByPrefixKeyword(PagedRequest<ProductSearchRequest> request)
+        {
+            QueryContainer filter = null;
+            var query = new QueryBuilder()
+                .AndPrefixMatch("name_NA", request.Data.Keyword).Build();
+            var result = Client.SetPageNum(request.PageNumber).SetPageSize(request.PageSize).SearchResponse(query, filter);
+
+            return Client.WrapResult(result);
+        }
     }
 }

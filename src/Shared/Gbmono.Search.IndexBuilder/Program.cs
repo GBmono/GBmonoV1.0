@@ -23,26 +23,27 @@ namespace Gbmono.Search.IndexBuilder
             //test.GetRetailShopByCity();
             //test.GetRetailShopByKeyword();
 
-            //////product builder
-            //var builder = new ProductBuilder();
-            //builder.DeleteIndex();
-            //builder.CreateIndexMapping();
-            //builder.Build();
-
-            ////product test
-            //var test = new ProductTest();
-            //test.GetProductByKeyword();
-
-            //product tag builder
-            var builder = new ProductTagBuilder();
+            //product builder
+            var builder = new ProductBuilder();
             builder.DeleteIndex();
             builder.CreateIndexMapping();
             builder.Build();
 
+            //product test
+            var test = new ProductTest();
+            //test.GetProductByKeyword();
+            test.GetProductByPrefixKeyword();
+
+            ////product tag builder
+            //var builder = new ProductTagBuilder();
+            //builder.DeleteIndex();
+            //builder.CreateIndexMapping();
+            //builder.Build();
+
             //product tag test
-            var test = new ProductTagTest();
-            test.GetProductTagByKeyword();
-            test.GetPrefixProductTagByKeyword();
+            //var test = new ProductTagTest();
+            //test.GetProductTagByKeyword();
+            //test.GetPrefixProductTagByKeyword();
         }
     }
 }

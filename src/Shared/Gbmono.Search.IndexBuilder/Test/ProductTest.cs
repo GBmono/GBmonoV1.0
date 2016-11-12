@@ -27,5 +27,16 @@ namespace Gbmono.Search.IndexBuilder.Test
             };
             var result = helper.SearchByKeyword(request);
         }
+
+        public void GetProductByPrefixKeyword()
+        {
+            var request = new PagedRequest<ProductSearchRequest>
+            {
+                Data = new ProductSearchRequest { Keyword = "MAMA" },
+                PageNumber = 1,
+                PageSize = 10
+            };
+            var result = helper.SearchByKeyword(request);
+        }
     }
 }
