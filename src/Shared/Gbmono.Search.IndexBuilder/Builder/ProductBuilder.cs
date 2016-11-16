@@ -57,7 +57,22 @@ namespace Gbmono.Search.IndexBuilder.Builder
                 {
                     var doc = new ProductDoc();
                     doc.ProductId = product.ProductId;
-                    doc.Categories = GetParentCategories(product.CategoryId);
+                    var categories = GetParentCategories(product.CategoryId);
+                    for (int i = 0; i < categories.Count(); i++)
+                    {                        
+                        switch (i)
+                        {
+                            case 1:
+                                doc.CategoryLevel1 = categories[i];
+                                break;
+                            case 2:
+                                doc.CategoryLevel2 = categories[i];
+                                break;
+                            default:
+                                doc.CategoryLevel3 = categories[i];
+                                break;
+                        }
+                    }
                     doc.BrandId = product.BrandId;
                     doc.BrandName = product.Brand.Name;
                     doc.BrandCollectionId = product.BrandCollectionId;
@@ -66,6 +81,7 @@ namespace Gbmono.Search.IndexBuilder.Builder
                     doc.Barcode = product.BarCode;
                     doc.Name = product.PrimaryName;
                     doc.Name_NA = doc.Name_NA;
+                    doc.AlternativeName = product.SecondaryName;
                     doc.PromotionCode = product.PromotionCode;
                     doc.CuponCode = product.CuponCode;
                     doc.TopicCode = product.TopicCode;
@@ -89,7 +105,8 @@ namespace Gbmono.Search.IndexBuilder.Builder
                     doc.UpdatedDate = product.UpdatedDate;
                     doc.ActivationDate = product.ActivationDate;
                     doc.ExpiryDate = product.ExpiryDate;
-                    doc.Tags = string.Join(" ", GetProductTags(product.ProductId));
+                    //doc.Tags = string.Join(" ", GetProductTags(product.ProductId));
+                    doc.Tags = GetProductTags(product.ProductId);
                     if (product.Images != null && product.Images.Count > 0)
                     {
                         doc.Images = new List<ProductImageDoc>();
@@ -160,29 +177,32 @@ namespace Gbmono.Search.IndexBuilder.Builder
             return _repositoryManager.ProductRepository.Table.Include(m=>m.Images).Include(m=>m.Brand).Where(m => m.ProductId >= index && m.ProductId < index + size).ToList();
         }
 
-        private List<int> GetProductTags(int productId)
+        private List<string> GetProductTags(int productId)
         {
-            return _repositoryManager.ProductTagRepository.Table.Where(m => m.ProductId == productId).Select(s=>s.TagId).ToList();
+            return _repositoryManager.ProductTagRepository.Table.Include(t => t.Tag).Where(m => m.ProductId == productId).Select(m => m.Tag.Name).ToList();
         }
 
-        private string GetParentCategories(int categoryId)
+        private List<string> GetParentCategories(int categoryId)
         {
-            var categoryList = new List<int> { categoryId };
+            var categoryList = new List<string>();
             
             var category = _repositoryManager.CategoryRepository.Table.FirstOrDefault(m => m.CategoryId == categoryId);
-
+            categoryList.Add(category.Name);
             // get level 2 parent category
             if (category.ParentId != null)
             {                
                 var parentCategory = _repositoryManager.CategoryRepository.Table.FirstOrDefault(m => m.CategoryId == category.ParentId);
-                categoryList.Add(parentCategory.CategoryId);
+                categoryList.Add(parentCategory.Name);
                 // get level 1 parent category
                 if (parentCategory.ParentId != null)
                 {
-                    categoryList.Add(parentCategory.ParentId.Value);
+                    var rootCategory = _repositoryManager.CategoryRepository.Table.FirstOrDefault(m => m.CategoryId == parentCategory.ParentId);
+                    categoryList.Add(rootCategory.Name);
                 }
             }
-            return string.Join(" ", categoryList);
+            //return string.Join(" ", categoryList);
+            categoryList.Reverse();
+            return categoryList;
         }
     }
 }

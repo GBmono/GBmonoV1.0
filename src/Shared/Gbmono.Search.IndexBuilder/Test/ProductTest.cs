@@ -21,9 +21,9 @@ namespace Gbmono.Search.IndexBuilder.Test
         {
             var request = new PagedRequest<ProductSearchRequest>
             {
-                Data = new ProductSearchRequest { Keyword = "淡雅" },
+                Data = new ProductSearchRequest { Keyword = "肤质 祛痘", BrandName = new List<string> { "露适她株式会社","B by E corporation" }, CategoryName = new List<string> { "洁面", "基础化妆品" } },//, CategoryName = "基础化妆类", FilterCategoryLevel = 2
                 PageNumber = 1,
-                PageSize = 10
+                PageSize = 10,
             };
             var result = helper.SearchByKeyword(request);
         }
@@ -36,7 +36,7 @@ namespace Gbmono.Search.IndexBuilder.Test
                 PageNumber = 1,
                 PageSize = 10
             };
-            var result = helper.SearchByKeyword(request);
+            var result = helper.SearchByPrefixKeyword(request);
         }
     }
 }
