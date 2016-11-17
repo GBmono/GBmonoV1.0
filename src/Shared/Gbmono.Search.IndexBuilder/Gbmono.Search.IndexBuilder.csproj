@@ -68,6 +68,7 @@
     <Compile Include="Builder\ProductBuilder.cs" />
     <Compile Include="Builder\ProductTagBuilder.cs" />
     <Compile Include="Builder\RetailerShopsBuilder.cs" />
+    <Compile Include="Builder\SearchHistoryBuilder.cs" />
     <Compile Include="ProductCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

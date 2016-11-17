@@ -80,7 +80,7 @@ namespace Gbmono.Search.IndexBuilder.Builder
                     doc.ProductCode = product.ProductCode;
                     doc.Barcode = product.BarCode;
                     doc.Name = product.PrimaryName;
-                    doc.Name_NA = doc.Name_NA;
+                    doc.Name_NA = doc.Name;
                     doc.AlternativeName = product.SecondaryName;
                     doc.PromotionCode = product.PromotionCode;
                     doc.CuponCode = product.CuponCode;

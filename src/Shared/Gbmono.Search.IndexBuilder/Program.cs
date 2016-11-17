@@ -1,5 +1,6 @@
 ﻿using Gbmono.Search.IndexBuilder.Builder;
 using Gbmono.Search.IndexBuilder.Test;
+using Gbmono.Search.IndexManager.SearchHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,15 @@ namespace Gbmono.Search.IndexBuilder
     {
         static void Main(string[] args)
         {
+            //search history builder
+            //var builder = new SearchHistoryBuilder();
+            //builder.DeleteIndex();
+            //builder.CreateIndexMapping();
+
+            //search history test
+            var test = new SearchHistoryHelper();
+            test.SearchByPrefixKeyword("祛");
+
             //retail shop builder
             //var builder = new RetailerShopsBuilder();
             //builder.CreateIndexMapping();
@@ -30,9 +40,9 @@ namespace Gbmono.Search.IndexBuilder
             //builder.Build();
 
             //product test
-            var test = new ProductTest();
-            test.GetProductByKeyword();
-            test.GetProductByPrefixKeyword();
+            //var test = new ProductTest();
+            //test.GetProductByKeyword();
+            //test.GetProductByPrefixKeyword();
 
             ////product tag builder
             //var builder = new ProductTagBuilder();

@@ -1,5 +1,6 @@
 ﻿using Gbmono.Api.Extensions;
 using Gbmono.Api.Models;
+using Gbmono.Search.IndexManager.IndexHelper;
 using Gbmono.Search.IndexManager.SearchHelper;
 using Gbmono.Search.ViewModel;
 using Gbmono.Search.ViewModel.Requests;
@@ -17,9 +18,10 @@ namespace Gbmono.Api.Controllers
     public class SearchController : ApiController
     {
         private ProductHelper _productHelper;
+        private SearchHistoryHelper _searchHistoryHelper;
         
         [HttpPost]
-        public async Task<ProductSearchResponse> ProductSearch([FromBody] PagedRequest<ProductSearchRequest> request)
+        public async Task<ProductSearchResponse> ProductSearch(PagedRequest<ProductSearchRequest> request)
         {
             return await Task.Run(() =>
             {
@@ -49,8 +51,30 @@ namespace Gbmono.Api.Controllers
                 {
                     result.Products.Add(product.ToSimpleModel());
                 }
+                var userName = User.Identity.IsAuthenticated ? User.Identity.Name : Const.UnAuthorizedUserId;
+                Task.Run(async () =>
+                {
+                    var helper = new SearchHistoryIndexHelper();
+                    await helper.IndexDoc(new Search.IndexManager.Documents.SearchHistoryDoc
+                    {
+                        Keyword = request.Data.Keyword,
+                        UserName = userName,
+                        SearchType = Search.IndexManager.Documents.SearchType.product
+                    });
+                });
                 
                 return result;
+            });
+        }
+
+        [HttpGet]
+        [Route("ProductPrefix/{keyword}")]
+        public async Task<IList<string>> ProductPrefix(string keyword)
+        {
+            return await Task.Run(() =>
+            {
+                _searchHistoryHelper = new SearchHistoryHelper();
+                return _searchHistoryHelper.SearchByPrefixKeyword(keyword);
             });
         }
     }

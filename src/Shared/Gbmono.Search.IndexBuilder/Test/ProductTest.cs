@@ -30,11 +30,9 @@ namespace Gbmono.Search.IndexBuilder.Test
 
         public void GetProductByPrefixKeyword()
         {
-            var request = new PagedRequest<ProductSearchRequest>
+            var request = new ProductSearchRequest
             {
-                Data = new ProductSearchRequest { Keyword = "MAMA" },
-                PageNumber = 1,
-                PageSize = 10
+                Keyword = "MAMA"
             };
             var result = helper.SearchByPrefixKeyword(request);
         }

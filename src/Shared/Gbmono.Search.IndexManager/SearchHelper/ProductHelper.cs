@@ -79,12 +79,16 @@ namespace Gbmono.Search.IndexManager.SearchHelper
             return Client.WrapResult(result);
         }
 
-        public PagedResponse<ProductDoc> SearchByPrefixKeyword(PagedRequest<ProductSearchRequest> request)
+        public PagedResponse<ProductDoc> SearchByPrefixKeyword(ProductSearchRequest request)
         {
             QueryContainer filter = null;
             var query = new QueryBuilder()
-                .AndPrefixMatch("name_NA", request.Data.Keyword).Build();
-            var result = Client.SetPageNum(request.PageNumber).SetPageSize(request.PageSize).SearchResponse(query, filter);
+                .AndPrefixMatch("name_NA", request.Keyword)
+                .Build();
+            var categoryAgg = new AggregationContainerDescriptor<ProductDoc>()
+                .Terms("agg_name", f => f.Field("name_NA").Size(5));
+
+            var result = Client.SetPageNum(1).SetPageSize(0).SearchResponse(query, filter, a => categoryAgg);
 
             return Client.WrapResult(result);
         }
