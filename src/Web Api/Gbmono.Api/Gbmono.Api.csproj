@@ -151,7 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -166,6 +168,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RetailersController.cs" />
     <Compile Include="Controllers\RetailerShopsController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserFavoritesController.cs" />
     <Compile Include="ExceptionHandling\GenericExceptionHandler.cs" />
     <Compile Include="ExceptionHandling\GenericExceptionLogger.cs" />
@@ -181,6 +184,7 @@
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Const.cs" />
     <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\ProductSearchModel.cs" />
     <Compile Include="Models\Search.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,6 +217,14 @@
     <ProjectReference Include="..\..\Shared\Gbmono.EF\Gbmono.EF.csproj">
       <Project>{25e50af1-7433-42ee-a5fa-ed1f1ac8466a}</Project>
       <Name>Gbmono.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Gbmono.Search.IndexManager\Gbmono.Search.IndexManager.csproj">
+      <Project>{ccfab03b-77de-4da4-9e58-88f6d6ed7313}</Project>
+      <Name>Gbmono.Search.IndexManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Gbmono.Search.ViewModel\Gbmono.Search.ViewModel.csproj">
+      <Project>{a5de2c79-abda-445b-86ee-f49aa788aee2}</Project>
+      <Name>Gbmono.Search.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

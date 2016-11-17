@@ -12,14 +12,13 @@ using Gbmono.EF.Infrastructure;
 using Gbmono.Api.Models;
 using Gbmono.Api.Extensions;
 
-
 namespace Gbmono.Api.Controllers
 {
     [RoutePrefix("api/Products")]
     public class ProductsController : ApiController
     {
         private readonly RepositoryManager _repositoryManager;
-        // private readonly ProductHelper _productHelper;
+        //private ProductHelper _productHelper;
         // ctor
         public ProductsController()
         {
@@ -136,13 +135,13 @@ namespace Gbmono.Api.Controllers
         public async Task<IEnumerable<ProductSimpleModel>> GetByRanking()
         {
             // todo: get products by ranking (views or scans)
-            var products =  await _repositoryManager.ProductRepository
+            var products = await _repositoryManager.ProductRepository
                                                     .Table
                                                     .Include(m => m.Brand) // include brand table
                                                     .Include(m => m.Images)
                                                     .Where(m => (m.ActivationDate <= DateTime.Today &&
                                                                 (m.ExpiryDate >= DateTime.Today || m.ExpiryDate == null)))
-                                                    .OrderByDescending(m => m.CreatedDate)                                                
+                                                    .OrderByDescending(m => m.CreatedDate)
                                                     .Take(12)
                                                     .ToListAsync();
             // convert into simple product model
@@ -165,7 +164,7 @@ namespace Gbmono.Api.Controllers
                                            .Include(m => m.Brand)
                                            .Include(m => m.Images)
                                            .Include(m => m.Category.ParentCategory.ParentCategory)
-                                           .Include(m=>m.Tags)
+                                           .Include(m => m.Tags)
                                            .SingleOrDefaultAsync(m => m.ProductId == id);
         }
 
@@ -188,12 +187,32 @@ namespace Gbmono.Api.Controllers
             return product;
         }
 
-        //[Route("Search")]
-        //public async Task<PagedResponse<ProductDoc>> Search(PagedRequest<ProductSearchRequest> req)
+        //[HttpGet]
+        //[Route("Search/{keyword}/{type:int}/{pageIndex:int?}/{pageSize:int?}")]
+        //public async Task<SearchModel> Search(string keyword, int type, int? pageIndex, int? pageSize)
         //{
         //    return await Task.Run(() =>
         //    {
-        //        return _productHelper.SearchByKeyword(req);
+        //        var result = new SearchModel();
+        //        switch (type)
+        //        {
+        //            case 1:
+        //                var productRequest = new PagedRequest<ProductSearchRequest>
+        //                {
+        //                    Data = new ProductSearchRequest { Keyword = keyword },
+        //                    PageNumber = pageIndex.HasValue && pageIndex.Value < 0 ? 10 : pageIndex.Value,
+        //                    PageSize = pageSize.HasValue && pageSize.Value < 0 ? 10 : pageSize.Value
+        //                };
+        //                _productHelper = new ProductHelper();
+        //                var products = _productHelper.SearchByKeyword(productRequest);
+        //                var activeScoreCount = products.Score.Count(m => m >= 0.5);
+        //                for (int i = 0; i < activeScoreCount; i++)
+        //                {
+        //                    result.products.Add(products.Data.ToList()[i].ToSearchModel());
+        //                }
+        //                break;
+        //        }
+        //        return result;
         //    });
         //}
         /// <summary>
@@ -221,7 +240,7 @@ namespace Gbmono.Api.Controllers
                 _repositoryManager.UserVisitRepository.Save();
 
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 // get base excetpion
                 var baseException = exp.GetBaseException();

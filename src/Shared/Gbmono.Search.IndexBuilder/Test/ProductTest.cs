@@ -21,11 +21,20 @@ namespace Gbmono.Search.IndexBuilder.Test
         {
             var request = new PagedRequest<ProductSearchRequest>
             {
-                Data = new ProductSearchRequest { Keyword = "美容" },
-                PageNumber = 2,
-                PageSize = 10
+                Data = new ProductSearchRequest { Keyword = "肤质 祛痘", BrandName = new List<string> { "露适她株式会社","B by E corporation" }, CategoryName = new List<string> { "洁面", "基础化妆品" } },//, CategoryName = "基础化妆类", FilterCategoryLevel = 2
+                PageNumber = 1,
+                PageSize = 10,
             };
             var result = helper.SearchByKeyword(request);
+        }
+
+        public void GetProductByPrefixKeyword()
+        {
+            var request = new ProductSearchRequest
+            {
+                Keyword = "MAMA"
+            };
+            var result = helper.SearchByPrefixKeyword(request);
         }
     }
 }

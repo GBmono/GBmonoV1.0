@@ -12,13 +12,27 @@ namespace Gbmono.Search.IndexManager.Documents
     public class ProductDoc
     {
         public int ProductId { get; set; }
-        public string Categories { get; set; }
+        //public string Categories { get; set; }
+        //[String(Index = FieldIndexOption.NotAnalyzed)]
+        //public List<string> Categories { get; set; }
+        [String(Index = FieldIndexOption.NotAnalyzed)]
+        public string CategoryLevel1 { get; set; }
+        [String(Index = FieldIndexOption.NotAnalyzed)]
+        public string CategoryLevel2 { get; set; }
+        [String(Index = FieldIndexOption.NotAnalyzed)]
+        public string CategoryLevel3 { get; set; }
         public int BrandId { get; set; }
+        [String(Index = FieldIndexOption.NotAnalyzed)]
+        public string BrandName { get; set; }
         public string ProductCode { get; set; }
         public string Barcode { get; set; }
         public int? BrandCollectionId { get; set; }
+        public string BrandCollectionName { get; set; }
         [String(Analyzer ="ik_max_word",SearchAnalyzer ="ik_max_word")]
         public string Name { get; set; }
+        [String(Index = FieldIndexOption.NotAnalyzed)]
+        public string Name_NA { get; set; }
+        public string AlternativeName { get; set; }
         public string PromotionCode { get; set; }
         public string CuponCode { get; set; }
         public string TopicCode { get; set; }
@@ -44,8 +58,9 @@ namespace Gbmono.Search.IndexManager.Documents
         public DateTime UpdatedDate { get; set; }
         public DateTime ActivationDate { get; set; }
         public DateTime? ExpiryDate { get; set; }
-        public string Tags { get; set; }
-        public List<ProductImageDoc> Images { get; set; }
+        [String(Index = FieldIndexOption.NotAnalyzed)]
+        public List<string> Tags { get; set; }
+        public List<ProductImageDoc> Images { get; set; }        
     }
 
     public class ProductImageDoc

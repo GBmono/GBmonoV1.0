@@ -14,7 +14,7 @@ namespace Gbmono.Search.IndexManager.SearchHelper
 {
     public class ProductHelper
     {
-        private NestClient<ProductDoc> CLient
+        private NestClient<ProductDoc> Client
         {
             get
             {
@@ -25,21 +25,72 @@ namespace Gbmono.Search.IndexManager.SearchHelper
         public ProductDoc GetProductById(int productId)
         {
             var query = new QueryBuilder().AndTerm("productId", productId).Build();
-            var resp = CLient.SearchResponse(query);
+            var resp = Client.SearchResponse(query);
             return resp.Documents.First();
         }
 
         public PagedResponse<ProductDoc> SearchByKeyword(PagedRequest<ProductSearchRequest> request)
         {
-            QueryContainer filter = null;
-            var matchFields = new string[] { "name^4", "description^2", "instruction" };
+            //QueryContainer filter = null;
+            var matchFields = new string[] { "name^20", "description^5", "instruction" };
+            //var categoryLevelMatch = request.Data.FilterCategoryLevel.HasValue ? request.Data.FilterCategoryLevel == 1 ? "categoryLevel1" : request.Data.FilterCategoryLevel == 2 ? "categoryLevel2" : "categoryLevel3" : "categoryLevel3";
+            var categoryLevelMatch = "categoryLevel3";
             var query = new QueryBuilder()
-                .OrMultiMatch(matchFields, request.Data.Keyword)
+                .AndMultiMatch(matchFields, request.Data.Keyword)
                 .Build();
-            var categoryAgg = new AggregationContainerDescriptor<ProductDoc>().Terms("agg_category", f => f.Field("categories"));
-            var result = CLient.SetPageNum(request.PageNumber).SetPageSize(request.PageSize).SearchResponse(query, filter, a => categoryAgg);
 
-            return CLient.WrapResult(result);
+            var filterBuilder = new QueryBuilder()
+                .AndMatch(categoryLevelMatch, request.Data.CategoryName);
+            foreach (var bname in request.Data.BrandName)
+            {
+                filterBuilder = filterBuilder.OrMatch("brandName", bname);
+            }
+            foreach (var t in request.Data.Tag)
+            {
+                filterBuilder = filterBuilder.OrMatch("tags", t);
+            }
+            var filter = filterBuilder.Build();
+            //var query = new QueryBuilder()
+            //    .OrMultiMatch(matchFields, request.Data.Keyword)
+            //    //.AndMatch("brandName", request.Data.BrandName)
+            //    .AndMatch(categoryLevelMatch, request.Data.CategoryName)
+            //    .Build();
+            
+            var categoryAgg = new AggregationContainerDescriptor<ProductDoc>()
+                .Terms("agg_brand", f => f.Field("brandName"))
+                .Terms("agg_category_level_3", f => f.Field("categoryLevel3"))
+                .Terms("agg_tag",f=>f.Field("tags"));
+            
+            //switch (request.Data.FilterCategoryLevel)
+            //{                
+            //    case 1:
+            //        categoryAgg.Terms("agg_category_level_1", f => f.Field("categoryLevel1"));
+            //        break;
+            //    case 2:
+            //        categoryAgg.Terms("agg_category_level_2", f => f.Field("categoryLevel2"));
+            //        break;
+            //    default:
+            //    case 3:
+            //        categoryAgg.Terms("agg_category_level_3", f => f.Field("categoryLevel3"));
+            //        break;
+            //}
+                
+            var result = Client.SetPageNum(request.PageNumber).SetPageSize(request.PageSize).SearchResponse(query, filter, a => categoryAgg);
+            return Client.WrapResult(result);
+        }
+
+        public PagedResponse<ProductDoc> SearchByPrefixKeyword(ProductSearchRequest request)
+        {
+            QueryContainer filter = null;
+            var query = new QueryBuilder()
+                .AndPrefixMatch("name_NA", request.Keyword)
+                .Build();
+            var categoryAgg = new AggregationContainerDescriptor<ProductDoc>()
+                .Terms("agg_name", f => f.Field("name_NA").Size(5));
+
+            var result = Client.SetPageNum(1).SetPageSize(0).SearchResponse(query, filter, a => categoryAgg);
+
+            return Client.WrapResult(result);
         }
     }
 }

@@ -57,14 +57,19 @@
     <Compile Include="Builders\QueryBuilder.cs" />
     <Compile Include="Documents\BrandDoc.cs" />
     <Compile Include="Documents\ProductDoc.cs" />
+    <Compile Include="Documents\ProductTagDoc.cs" />
     <Compile Include="Documents\RetailShopDoc.cs" />
+    <Compile Include="Documents\SearchHistoryDoc.cs" />
     <Compile Include="ElasticClientProxy.cs" />
     <Compile Include="EsRequestException.cs" />
+    <Compile Include="IndexHelper\SearchHistoryIndexHelper.cs" />
     <Compile Include="Models\RouteGeneric.cs" />
     <Compile Include="NestClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchHelper\ProductHelper.cs" />
+    <Compile Include="SearchHelper\ProductTagHelper.cs" />
     <Compile Include="SearchHelper\RetailShopHelper.cs" />
+    <Compile Include="SearchHelper\SearchHistoryHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gbmono.Search.Utils\Gbmono.Search.Utils.csproj">
