@@ -29,10 +29,12 @@ namespace Gbmono.Utils.ProductDataImporter
 
         // working directory
         //static readonly string WorkingDirectory = Path.GetFullPath(@"..\..") + "\\files\\";
-        private static readonly string WorkingDirectory = ConfigurationSettings.AppSettings["sourceFilesFolder"];
+        //private static readonly string WorkingDirectory = ConfigurationSettings.AppSettings["sourceFilesFolder"];
+
 
         static void Main(string[] args)
         {
+            string WorkingDirectory = ConfigurationSettings.AppSettings["sourceFilesFolder"];
             //ImageHelper.RemoveWrongImage(_repositoryManager);
 
             // load all excel files from the folder
@@ -64,7 +66,7 @@ namespace Gbmono.Utils.ProductDataImporter
 
             }
 
-            ImportHelperV3.ImportImage(WorkingDirectory+"\\images");
+            ImportHelperV3.ImportImage(WorkingDirectory + "\\images");
 
         }
 

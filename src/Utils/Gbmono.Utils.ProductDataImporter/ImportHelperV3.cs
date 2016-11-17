@@ -22,6 +22,7 @@ namespace Gbmono.Utils.ProductDataImporter
         static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         static readonly RepositoryManager _repositoryManager = new RepositoryManager();
 
+        private static List<string> allowLocalName = new List<string>() { "r", "t" };
         private static List<string> secondaryNameBlankList = new List<string>() { "-", "" };
 
         private static readonly string WorkingDirectory = ConfigurationSettings.AppSettings["sourceFilesFolder"];
@@ -294,17 +295,43 @@ namespace Gbmono.Utils.ProductDataImporter
                           GetPartsOfType<SharedStringTablePart>().FirstOrDefault();
                         if (stringTable != null)
                         {
-                            var fieldFirstChild = stringTable.SharedStringTable.
-                                ElementAt(int.Parse(value)).FirstChild;
-                            if (fieldFirstChild != null)
+                            //var allNoAttributesValue = stringTable.SharedStringTable.
+                            //    ElementAt(int.Parse(value)).Where(m => m.HasAttributes == false).Select(m => m.InnerText).Aggregate((m1, m2) => m1 + m2);
+                            //value = allNoAttributesValue;
+
+                            //var a = stringTable.SharedStringTable.
+                            //        ElementAt(int.Parse(value));
+                            //var node = stringTable.SharedStringTable.
+                            //    ElementAt(int.Parse(value)).First();
+
+                            //var nodeA = stringTable.SharedStringTable.
+                            //    ElementAt(int.Parse(value));
+
+                            var allAllLocalNameNode = stringTable.SharedStringTable.
+                                ElementAt(int.Parse(value)).Where(m => allowLocalName.Contains(m.LocalName)).ToList();
+                            if (allAllLocalNameNode.Any())
                             {
-                                value = fieldFirstChild.InnerText;
+                                value= allAllLocalNameNode.Select(m => m.InnerText).Aggregate((m1, m2) => m1 + m2);
                             }
                             else
                             {
-                                value = stringTable.SharedStringTable.
-                                  ElementAt(int.Parse(value)).InnerText;
+                                value = stringTable.SharedStringTable.ElementAt(int.Parse(value)).InnerText;
                             }
+                         
+                            //var a = System.Text.RegularExpressions.Regex.Replace(fieldFirstChild.OuterXml, "<[^>]*>", "");
+
+                            //!!Old first field
+                            //var fieldFirstChild = stringTable.SharedStringTable.
+                            //    ElementAt(int.Parse(value)).FirstChild;
+                            //if (fieldFirstChild != null)
+                            //{
+                            //    value = fieldFirstChild.InnerText;
+                            //}
+                            //else
+                            //{
+                            //    value = stringTable.SharedStringTable.
+                            //      ElementAt(int.Parse(value)).InnerText;
+                            //}
                         }
                         break;
 
