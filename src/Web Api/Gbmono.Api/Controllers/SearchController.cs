@@ -28,25 +28,28 @@ namespace Gbmono.Api.Controllers
                 _productHelper = new ProductHelper();
                 var searchResult = _productHelper.SearchByKeyword(request);
                 var result = new ProductSearchResponse();
-                foreach (var agg in searchResult.Aggregation.Aggregations)
+                if (request.Data.NeedAggregation)
                 {
-                    foreach (KeyedBucket item in ((BucketAggregate)agg.Value).Items)
+                    foreach (var agg in searchResult.Aggregation.Aggregations)
                     {
-                        switch (agg.Key)
+                        foreach (KeyedBucket item in ((BucketAggregate)agg.Value).Items)
                         {
-                            case "agg_brand":
-                                result.BrandList.Add(item.Key);
-                                break;
-                            case "agg_category_level_3":
-                                result.CategoryList.Add(item.Key);
-                                break;
-                            case "agg_tag":
-                                result.TagList.Add(item.Key);
-                                break;
+                            switch (agg.Key)
+                            {
+                                case "agg_brand":
+                                    result.BrandList.Add(item.Key);
+                                    break;
+                                case "agg_category_level_3":
+                                    result.CategoryList.Add(item.Key);
+                                    break;
+                                case "agg_tag":
+                                    result.TagList.Add(item.Key);
+                                    break;
+                            }
                         }
                     }
-                    
                 }
+                
                 foreach (var product in searchResult.Data)
                 {
                     result.Products.Add(product.ToSimpleModel());

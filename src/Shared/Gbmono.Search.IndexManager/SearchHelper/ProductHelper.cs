@@ -39,8 +39,12 @@ namespace Gbmono.Search.IndexManager.SearchHelper
                 .AndMultiMatch(matchFields, request.Data.Keyword)
                 .Build();
 
-            var filterBuilder = new QueryBuilder()
-                .AndMatch(categoryLevelMatch, request.Data.CategoryName);
+            var filterBuilder = new QueryBuilder();
+            foreach (var c in request.Data.CategoryName)
+            {
+                filterBuilder = filterBuilder.OrMatch(categoryLevelMatch, request.Data.CategoryName);
+            }
+                
             foreach (var bname in request.Data.BrandName)
             {
                 filterBuilder = filterBuilder.OrMatch("brandName", bname);
@@ -55,11 +59,14 @@ namespace Gbmono.Search.IndexManager.SearchHelper
             //    //.AndMatch("brandName", request.Data.BrandName)
             //    .AndMatch(categoryLevelMatch, request.Data.CategoryName)
             //    .Build();
-            
-            var categoryAgg = new AggregationContainerDescriptor<ProductDoc>()
+            AggregationContainerDescriptor<ProductDoc> categoryAgg = null;
+            if (request.Data.NeedAggregation)
+            {
+                categoryAgg = new AggregationContainerDescriptor<ProductDoc>()
                 .Terms("agg_brand", f => f.Field("brandName"))
                 .Terms("agg_category_level_3", f => f.Field("categoryLevel3"))
-                .Terms("agg_tag",f=>f.Field("tags"));
+                .Terms("agg_tag", f => f.Field("tags"));
+            }            
             
             //switch (request.Data.FilterCategoryLevel)
             //{                
