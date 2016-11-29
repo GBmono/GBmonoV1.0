@@ -19,6 +19,8 @@ namespace Gbmono.Utils.ProductDataImporter
 {
     public class ImportHelperV3
     {
+        static int[] imageNameAllowLengh = new int[] { 10, 15 };
+
         static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         static readonly RepositoryManager _repositoryManager = new RepositoryManager();
 
@@ -367,7 +369,14 @@ namespace Gbmono.Utils.ProductDataImporter
                     var imageName = img.Name;
                     var imageExtension = Path.GetExtension(imageName);
 
-                    var barcode = imageName.Substring(0, 13);
+                    var imageNameWithoutExtension = Path.GetFileNameWithoutExtension(imageName);
+
+                    if (!imageNameAllowLengh.Contains(imageNameWithoutExtension.Length))
+                    {
+                        return;
+                    }
+
+                    var barcode = imageNameWithoutExtension.Substring(0, imageNameWithoutExtension.Length - 2);
                     var product = _repositoryManager.ProductRepository.Table.FirstOrDefault(m => m.BarCode == barcode);
                     if (product != null)
                     {
@@ -375,26 +384,35 @@ namespace Gbmono.Utils.ProductDataImporter
                         var imageCatePath = $@"{barcode}";
 
                         var productId = product.ProductId;
-                        var imageIndex = imageName.Substring(13, 2);
+                        var imageIndex = imageName.Substring(imageNameWithoutExtension.Length, 2);
+
                         string filename = string.Format(@"{0}_{1}{2}", productId, imageIndex, imageExtension);
                         string filePath = string.Format(@"{0}/{1}", imageFileFolder, filename);
 
-                        FileStream fileStream = new FileStream(img.FullName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                        // 读取文件的 byte[]   
-                        byte[] bytes = new byte[fileStream.Length];
-                        fileStream.Read(bytes, 0, bytes.Length);
-                        fileStream.Close();
-                        File.WriteAllBytes(filePath, bytes);
-                        //Todo ProductImageTypeId is temp
-                        var newProductImage = new ProductImage()
+                        var storeFileName = $@"{imageCatePath}/{filename}";
+                        if (!_repositoryManager.ProductImageRepository.Table.Any(m => m.ProductId == product.ProductId && m.FileName == storeFileName))
                         {
-                            ProductId = productId,
-                            //FileName = filePath,
-                            FileName = $@"{imageCatePath}/{filename}",
-                            ProductImageTypeId = 1
-                        };
-                        _repositoryManager.ProductImageRepository.Create(newProductImage);
-                        _repositoryManager.ProductImageRepository.Save();
+                            FileStream fileStream = new FileStream(img.FullName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                            // 读取文件的 byte[]   
+                            byte[] bytes = new byte[fileStream.Length];
+                            fileStream.Read(bytes, 0, bytes.Length);
+                            fileStream.Close();
+                            File.WriteAllBytes(filePath, bytes);
+                            //Todo ProductImageTypeId is temp
+                            var newProductImage = new ProductImage()
+                            {
+                                ProductId = productId,
+                                //FileName = filePath,
+                                FileName = storeFileName,
+                                ProductImageTypeId = 1
+                            };
+                            _repositoryManager.ProductImageRepository.Create(newProductImage);
+                            _repositoryManager.ProductImageRepository.Save();
+                        }
+                        else
+                        {
+                            Console.WriteLine("ProductId:" + productId + "'s Image:" + storeFileName + "Existed!");
+                        }
 
                     }
                     else
