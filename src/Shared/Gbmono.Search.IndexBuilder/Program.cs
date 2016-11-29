@@ -14,13 +14,13 @@ namespace Gbmono.Search.IndexBuilder
         static void Main(string[] args)
         {
             //search history builder
-            //var builder = new SearchHistoryBuilder();
-            //builder.DeleteIndex();
-            //builder.CreateIndexMapping();
+            var shbuilder = new SearchHistoryBuilder();
+            shbuilder.DeleteIndex();
+            shbuilder.CreateIndexMapping();
 
-            //search history test
-            var test = new SearchHistoryHelper();
-            test.SearchByPrefixKeyword("祛");
+            ////search history test
+            //var test = new SearchHistoryHelper();
+            //test.SearchByPrefixKeyword("祛");
 
             //retail shop builder
             //var builder = new RetailerShopsBuilder();
@@ -34,10 +34,10 @@ namespace Gbmono.Search.IndexBuilder
             //test.GetRetailShopByKeyword();
 
             //product builder
-            //var builder = new ProductBuilder();
-            //builder.DeleteIndex();
-            //builder.CreateIndexMapping();
-            //builder.Build();
+            var builder = new ProductBuilder();
+            builder.DeleteIndex();
+            builder.CreateIndexMapping();
+            builder.Build();
 
             //product test
             //var test = new ProductTest();

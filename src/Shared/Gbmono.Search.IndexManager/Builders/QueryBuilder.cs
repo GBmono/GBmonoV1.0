@@ -405,7 +405,8 @@ namespace Gbmono.Search.IndexManager.Builders
             {
                 op.ParseQuery(_context);
             }
-
+            if (_context == null)
+                return null;
             return _context.mainQuery;
         }
 
