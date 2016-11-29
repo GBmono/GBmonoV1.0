@@ -258,8 +258,17 @@ namespace Gbmono.Utils.ProductDataImporter
                     continue;
                 }
 
-                _repositoryManager.ProductRepository.Create(newProduct);
-                _repositoryManager.ProductRepository.Save();
+                try
+                {
+                    _repositoryManager.ProductRepository.Create(newProduct);
+                    _repositoryManager.ProductRepository.Save();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.GetBaseException().Message);
+                    throw;
+                }
+              
 
                 //BrandCollectionCheck
                 BrandCollectionCheck(newProduct);
