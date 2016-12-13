@@ -409,7 +409,7 @@ namespace Gbmono.Utils.ProductDataImporter
 
                     if (!imageNameAllowLengh.Contains(imageNameWithoutExtension.Length))
                     {
-                        return;
+                        continue;
                     }
 
                     var barcode = imageNameWithoutExtension.Substring(0, imageNameWithoutExtension.Length - 2);
@@ -420,9 +420,9 @@ namespace Gbmono.Utils.ProductDataImporter
                         var imageCatePath = $@"{barcode}";
 
                         var productId = product.ProductId;
-                        var imageIndex = imageName.Substring(imageNameWithoutExtension.Length, 2);
+                        var imageIndex = imageNameWithoutExtension.Substring(imageNameWithoutExtension.Length-2, 2);
 
-                        string filename = string.Format(@"{0}_{1}{2}", productId, imageIndex, imageExtension);
+                        string filename = string.Format(@"{0}{1}", imageIndex, imageExtension);
                         string filePath = string.Format(@"{0}/{1}", imageFileFolder, filename);
 
                         var storeFileName = $@"{imageCatePath}/{filename}";
