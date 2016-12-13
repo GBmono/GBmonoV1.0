@@ -270,7 +270,7 @@ namespace Gbmono.Utils.ProductDataImporter
                     Console.WriteLine(ex.GetBaseException().Message);
                     throw;
                 }
-              
+
 
                 //BrandCollectionCheck
                 BrandCollectionCheck(newProduct);
@@ -322,13 +322,13 @@ namespace Gbmono.Utils.ProductDataImporter
                                 ElementAt(int.Parse(value)).Where(m => allowLocalName.Contains(m.LocalName)).ToList();
                             if (allAllLocalNameNode.Any())
                             {
-                                value= allAllLocalNameNode.Select(m => m.InnerText).Aggregate((m1, m2) => m1 + m2);
+                                value = allAllLocalNameNode.Select(m => m.InnerText).Aggregate((m1, m2) => m1 + m2);
                             }
                             else
                             {
                                 value = stringTable.SharedStringTable.ElementAt(int.Parse(value)).InnerText;
                             }
-                         
+
                             //var a = System.Text.RegularExpressions.Regex.Replace(fieldFirstChild.OuterXml, "<[^>]*>", "");
 
                             //!!Old first field
@@ -370,27 +370,30 @@ namespace Gbmono.Utils.ProductDataImporter
         {
             //if (!secondaryNameBlankList.Contains(product.SecondaryName))    
             //{
-            var brandCollection =
-                _repositoryManager.BrandCollectionRepository.Table.FirstOrDefault(
-                    m => m.BrandId == product.BrandId && m.Name == product.BrandCollectionName);
-            if (brandCollection == null)
+            if (product.BrandCollection != null)
             {
-                brandCollection = new BrandCollection()
+                var brandCollection =
+                    _repositoryManager.BrandCollectionRepository.Table.FirstOrDefault(
+                        m => m.BrandId == product.BrandId && m.Name == product.BrandCollectionName);
+                if (brandCollection == null)
                 {
-                    BrandId = product.BrandId,
-                    DisplayName = product.BrandCollectionName,
-                    Name = product.BrandCollectionName
-                };
+                    brandCollection = new BrandCollection()
+                    {
+                        BrandId = product.BrandId,
+                        DisplayName = product.BrandCollectionName,
+                        Name = product.BrandCollectionName
+                    };
 
-                _repositoryManager.BrandCollectionRepository.Create(brandCollection);
-                _repositoryManager.BrandCollectionRepository.Save();
+                    _repositoryManager.BrandCollectionRepository.Create(brandCollection);
+                    _repositoryManager.BrandCollectionRepository.Save();
+                }
+
+
+                product.BrandCollectionId = brandCollection.BrandCollectionId;
+                _repositoryManager.ProductRepository.Save();
+
+                //}
             }
-
-
-            product.BrandCollectionId = brandCollection.BrandCollectionId;
-            _repositoryManager.ProductRepository.Save();
-
-            //}
         }
 
         public static void ImportImage(string folderPath)
@@ -420,7 +423,7 @@ namespace Gbmono.Utils.ProductDataImporter
                         var imageCatePath = $@"{barcode}";
 
                         var productId = product.ProductId;
-                        var imageIndex = imageNameWithoutExtension.Substring(imageNameWithoutExtension.Length-2, 2);
+                        var imageIndex = imageNameWithoutExtension.Substring(imageNameWithoutExtension.Length - 2, 2);
 
                         string filename = string.Format(@"{0}{1}", imageIndex, imageExtension);
                         string filePath = string.Format(@"{0}/{1}", imageFileFolder, filename);

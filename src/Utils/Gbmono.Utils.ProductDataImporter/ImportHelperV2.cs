@@ -22,6 +22,7 @@ namespace Gbmono.Utils.ProductDataImporter
         static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         static readonly RepositoryManager _repositoryManager = new RepositoryManager();
 
+        private static List<string> allowLocalName = new List<string>() { "r", "t" };
         private static List<string> secondaryNameBlankList = new List<string>() { "-", "" };
 
         private static readonly string WorkingDirectory = ConfigurationSettings.AppSettings["sourceFilesFolder"];
@@ -86,8 +87,7 @@ namespace Gbmono.Utils.ProductDataImporter
                     {
                         // failed to import
                         // move file into error folder
-                        FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\error", file.Name));
-                        return;
+                        //FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\error", file.Name));
                     }
                 }
             };
@@ -174,7 +174,9 @@ namespace Gbmono.Utils.ProductDataImporter
             //var productCode = GetCellPathValue(wbPart, wsPart, "AJ11").RemoveEmptyOrWrapCharacters().ToDBC();
             string productCode = null;
             //系列 ブランド名
-            var brandCollectionName = GetCellPathValue(wbPart, wsPart, "N6").RemoveEmptyOrWrapCharacters();
+            string brandCollectionName = GetCellPathValue(wbPart, wsPart, "N6").RemoveEmptyOrWrapCharacters();
+            if (brandCollectionName == "")
+                brandCollectionName = null;
             //促销CD
             var promotionCode = GetCellPathValue(wbPart, wsPart, "P14").RemoveEmptyOrWrapCharacters().ToDBC();
             //优惠CD
@@ -225,6 +227,7 @@ namespace Gbmono.Utils.ProductDataImporter
                 PrimaryName = primaryName,
                 SecondaryName = secondaryName,
                 BarCode = barCode,
+                BrandCollectionName = brandCollectionName,
                 Flavor = flavor,
                 Weight = weight,
                 Width = wValue,
@@ -297,17 +300,43 @@ namespace Gbmono.Utils.ProductDataImporter
                           GetPartsOfType<SharedStringTablePart>().FirstOrDefault();
                         if (stringTable != null)
                         {
-                            var fieldFirstChild = stringTable.SharedStringTable.
-                                ElementAt(int.Parse(value)).FirstChild;
-                            if (fieldFirstChild != null)
+                            //var allNoAttributesValue = stringTable.SharedStringTable.
+                            //    ElementAt(int.Parse(value)).Where(m => m.HasAttributes == false).Select(m => m.InnerText).Aggregate((m1, m2) => m1 + m2);
+                            //value = allNoAttributesValue;
+
+                            //var a = stringTable.SharedStringTable.
+                            //        ElementAt(int.Parse(value));
+                            //var node = stringTable.SharedStringTable.
+                            //    ElementAt(int.Parse(value)).First();
+
+                            //var nodeA = stringTable.SharedStringTable.
+                            //    ElementAt(int.Parse(value));
+
+                            var allAllLocalNameNode = stringTable.SharedStringTable.
+                                ElementAt(int.Parse(value)).Where(m => allowLocalName.Contains(m.LocalName)).ToList();
+                            if (allAllLocalNameNode.Any())
                             {
-                                value = fieldFirstChild.InnerText;
+                                value = allAllLocalNameNode.Select(m => m.InnerText).Aggregate((m1, m2) => m1 + m2);
                             }
                             else
                             {
-                                value = stringTable.SharedStringTable.
-                                  ElementAt(int.Parse(value)).InnerText;
+                                value = stringTable.SharedStringTable.ElementAt(int.Parse(value)).InnerText;
                             }
+
+                            //var a = System.Text.RegularExpressions.Regex.Replace(fieldFirstChild.OuterXml, "<[^>]*>", "");
+
+                            //!!Old first field
+                            //var fieldFirstChild = stringTable.SharedStringTable.
+                            //    ElementAt(int.Parse(value)).FirstChild;
+                            //if (fieldFirstChild != null)
+                            //{
+                            //    value = fieldFirstChild.InnerText;
+                            //}
+                            //else
+                            //{
+                            //    value = stringTable.SharedStringTable.
+                            //      ElementAt(int.Parse(value)).InnerText;
+                            //}
                         }
                         break;
 
@@ -335,26 +364,28 @@ namespace Gbmono.Utils.ProductDataImporter
         {
             //if (!secondaryNameBlankList.Contains(product.SecondaryName))    
             //{
-            var brandCollection =
-                _repositoryManager.BrandCollectionRepository.Table.FirstOrDefault(
-                    m => m.BrandId == product.BrandId && m.Name == product.BrandCollectionName);
-            if (brandCollection == null)
+            if (product.BrandCollection != null)
             {
-                brandCollection = new BrandCollection()
+                var brandCollection =
+                    _repositoryManager.BrandCollectionRepository.Table.FirstOrDefault(
+                        m => m.BrandId == product.BrandId && m.Name == product.BrandCollectionName);
+                if (brandCollection == null)
                 {
-                    BrandId = product.BrandId,
-                    DisplayName = product.BrandCollectionName,
-                    Name = product.BrandCollectionName
-                };
+                    brandCollection = new BrandCollection()
+                    {
+                        BrandId = product.BrandId,
+                        DisplayName = product.BrandCollectionName,
+                        Name = product.BrandCollectionName
+                    };
 
-                _repositoryManager.BrandCollectionRepository.Create(brandCollection);
-                _repositoryManager.BrandCollectionRepository.Save();
+                    _repositoryManager.BrandCollectionRepository.Create(brandCollection);
+                    _repositoryManager.BrandCollectionRepository.Save();
+                }
+
+
+                product.BrandCollectionId = brandCollection.BrandCollectionId;
+                _repositoryManager.ProductRepository.Save();
             }
-
-
-            product.BrandCollectionId = brandCollection.BrandCollectionId;
-            _repositoryManager.ProductRepository.Save();
-
             //}
         }
 

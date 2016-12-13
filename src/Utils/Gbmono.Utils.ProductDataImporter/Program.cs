@@ -67,7 +67,7 @@ namespace Gbmono.Utils.ProductDataImporter
 
             }
 
-            ImportHelperV3.ImportImage(WorkingDirectory + "\\images");
+            //ImportHelperV3.ImportImage(WorkingDirectory + "\\images");
 
         }
 
