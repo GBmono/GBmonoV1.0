@@ -268,7 +268,7 @@ namespace Gbmono.Utils.ProductDataImporter
 
 
             //ImportImage
-            ImportImage(wsPart, newProduct.ProductId, categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3);
+            ImportImage(wsPart, newProduct.ProductId, newProduct.BarCode, categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3);
 
 
             return newProduct.ProductId;
@@ -389,56 +389,62 @@ namespace Gbmono.Utils.ProductDataImporter
             //}
         }
 
-        static void ImportImage(WorksheetPart wsPart, int productId, string categoryCodeLevel1, string categoryCodeLevel2, string categoryCodeLevel3)
+        static void ImportImage(WorksheetPart wsPart, int productId, string barcode, string categoryCodeLevel1, string categoryCodeLevel2, string categoryCodeLevel3)
         {
-            var imageFileFolder = GetImageFolderByCategory(categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3);
-            var imageCatePath = $@"{categoryCodeLevel1}/{categoryCodeLevel2}/{categoryCodeLevel3}";
-            int imageIndex = 1;
+            //var imageFileFolder = GetImageFolderByCategory(categoryCodeLevel1, categoryCodeLevel2, categoryCodeLevel3);
+            //var imageCatePath = $@"{categoryCodeLevel1}/{categoryCodeLevel2}/{categoryCodeLevel3}";
+
+            var imageFileFolder = GetImageFolderByBarcode(barcode);
+            var imageCatePath = $@"{barcode}";
+
+            string imageIndex = "01";
             var success = 0;
             var fail = 0;
-            foreach (ImagePart i in wsPart.DrawingsPart.ImageParts)
+            //foreach (ImagePart i in wsPart.DrawingsPart.ImageParts)
+            //{
+            var i = wsPart.DrawingsPart.ImageParts.First();
+            try
             {
-                try
+                using (Stream stream = i.GetStream())
                 {
-                    using (Stream stream = i.GetStream())
+                    long length = stream.Length;
+                    byte[] byteStream = new byte[length];
+                    stream.Read(byteStream, 0, (int)length);
+
+                    var imageValidated = ImageHelper.ValidateImageQualityByPixel(stream);
+                    if (imageValidated)
                     {
-                        long length = stream.Length;
-                        byte[] byteStream = new byte[length];
-                        stream.Read(byteStream, 0, (int)length);
 
-                        var imageValidated = ImageHelper.ValidateImageQualityByPixel(stream);
-                        if (imageValidated)
+                        var imageExtension = Path.GetExtension(i.Uri.ToString());
+
+                        string filename = string.Format(@"{0}{1}", imageIndex, imageExtension);
+                        string filePath = string.Format(@"{0}/{1}", imageFileFolder, filename);
+
+                        File.WriteAllBytes(filePath, byteStream);
+                        //Todo ProductImageTypeId is temp
+                        var newProductImage = new ProductImage()
                         {
-
-                            var imageExtension = Path.GetExtension(i.Uri.ToString());
-                            string filename = string.Format(@"{0}_{1}{2}", productId, imageIndex, imageExtension);
-                            string filePath = string.Format(@"{0}/{1}", imageFileFolder, filename);
-
-                            File.WriteAllBytes(filePath, byteStream);
-                            //Todo ProductImageTypeId is temp
-                            var newProductImage = new ProductImage()
-                            {
-                                ProductId = productId,
-                                //FileName = filePath,
-                                FileName = $@"{imageCatePath}/{filename}",
-                                ProductImageTypeId = 1
-                            };
-                            _repositoryManager.ProductImageRepository.Create(newProductImage);
-                            _repositoryManager.ProductImageRepository.Save();
-                        }
-                        else
-                        {
-                            Console.WriteLine("Pass Image:productId:" + productId);
-                        }
+                            ProductId = productId,
+                            //FileName = filePath,
+                            FileName = $@"{imageCatePath}/{filename}",
+                            ProductImageTypeId = 1
+                        };
+                        _repositoryManager.ProductImageRepository.Create(newProductImage);
+                        _repositoryManager.ProductImageRepository.Save();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Pass Image:productId:" + productId);
                     }
                 }
-                catch (Exception ex)
-                {
-                    Logger.Log(LogLevel.Error, string.Format("Save Image Error:productId {0},ex:", productId));
-                    fail++;
-                }
-                imageIndex++;
             }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, string.Format("Save Image Error:productId {0},ex:", productId));
+                fail++;
+            }
+            //imageIndex++;
+            //}
         }
 
         private static string GetImageFolderByCategory(string categoryCodeLevel1, string categoryCodeLevel2,
@@ -452,6 +458,14 @@ namespace Gbmono.Utils.ProductDataImporter
             return finalPath;
         }
 
+        private static string GetImageFolderByBarcode(string barcode)
+        {
+            var imageFileFolder = ConfigurationManager.AppSettings["imageFolder"];
+
+            var finalPath = FileHelper.CreateDirectoryProductImage(imageFileFolder, barcode);
+
+            return finalPath;
+        }
 
         static int GetBrandId(string brandName)
         {

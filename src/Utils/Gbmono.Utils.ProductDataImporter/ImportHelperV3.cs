@@ -399,7 +399,20 @@ namespace Gbmono.Utils.ProductDataImporter
         public static void ImportImage(string folderPath)
         {
             var imageFolder = new DirectoryInfo(folderPath);
+
+            #region imageFiles
             var images = imageFolder.GetFiles();
+            #endregion
+
+            #region imageFolder
+            //var images = new List<FileInfo>();
+            //var dics = imageFolder.GetDirectories();
+            //foreach (var dic in dics)
+            //{
+            //    var fies = dic.GetFiles();
+            //    images.AddRange(fies.ToList());
+            //}
+            #endregion
 
             if (images.Any())
             {
@@ -408,7 +421,7 @@ namespace Gbmono.Utils.ProductDataImporter
                     var imageName = img.Name;
                     var imageExtension = Path.GetExtension(imageName);
 
-                    var imageNameWithoutExtension = Path.GetFileNameWithoutExtension(imageName);
+                    var imageNameWithoutExtension = Path.GetFileNameWithoutExtension(imageName).Replace("-", "");
 
                     if (!imageNameAllowLengh.Contains(imageNameWithoutExtension.Length))
                     {
@@ -429,7 +442,7 @@ namespace Gbmono.Utils.ProductDataImporter
                         string filePath = string.Format(@"{0}/{1}", imageFileFolder, filename);
 
                         var storeFileName = $@"{imageCatePath}/{filename}";
-                        if (!_repositoryManager.ProductImageRepository.Table.Any(m => m.ProductId == product.ProductId && m.FileName == storeFileName))
+                        if (!_repositoryManager.ProductImageRepository.Table.ToList().Any(m => m.ProductId == product.ProductId && Path.GetFileNameWithoutExtension(m.FileName) == Path.GetFileNameWithoutExtension(storeFileName)))
                         {
                             FileStream fileStream = new FileStream(img.FullName, FileMode.Open, FileAccess.Read, FileShare.Read);
                             // 读取文件的 byte[]   
