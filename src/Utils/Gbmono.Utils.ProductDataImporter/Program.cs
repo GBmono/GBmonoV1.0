@@ -46,7 +46,8 @@ namespace Gbmono.Utils.ProductDataImporter
                 try
                 {
                     // load
-                    ImportHelperV3.Load(file);
+                    //ImportHelperV3.Load(file);
+                    ImportHelperV2.Load(file);
 
                     // move file into success folder when it finishes
                     FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\success", file.Name));

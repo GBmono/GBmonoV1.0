@@ -32,33 +32,64 @@ namespace Gbmono.Utils.ProductDataImporter
                 string version = string.Empty;
                 WorkbookPart wbPart = document.WorkbookPart;
                 List<Sheet> sheets = wbPart.Workbook.Descendants<Sheet>().ToList();
-                var sheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault(c => c.Name == ConfigurationManager.AppSettings["sheetName"]);
-                if (sheet == null)
+
+                #region single sheet
+                //var sheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault(c => c.Name == ConfigurationManager.AppSettings["sheetName"]);
+                //if (sheet == null)
+                //{
+                //    sheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault();
+                //}
+
+                //if (sheet == null)
+                //{
+                //    Logger.Log(LogLevel.Error, "Can not find sheet.");
+
+                //    // move the file into error folder
+                //    FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\error", file.Name));
+
+                //    return;
+                //}
+                //WorksheetPart wsPart = (WorksheetPart)wbPart.GetPartById(sheet.Id);
+
+                //// import product data and return new product id
+                //var newProductId = Import(wbPart, wsPart, file);
+                //if (newProductId == null)
+                //{
+                //    // failed to import
+                //    // move file into error folder
+                //    FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\error", file.Name));
+                //    return;
+                //}
+                #endregion
+
+                var sheetsToRun = wbPart.Workbook.Descendants<Sheet>().Where(m => Regex.IsMatch(m.Name, @"[0-9]{3}$"));
+                foreach (var sheet in sheetsToRun)
                 {
-                    sheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault();
+                    //if (sheet == null)
+                    //{
+                    //    sheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault();
+                    //}
+                    if (sheet == null)
+                    {
+                        Logger.Log(LogLevel.Error, "Can not find sheet.");
+
+                        // move the file into error folder
+                        FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\error", file.Name));
+
+                        return;
+                    }
+                    WorksheetPart wsPart = (WorksheetPart)wbPart.GetPartById(sheet.Id);
+
+                    // import product data and return new product id
+                    var newProductId = Import(wbPart, wsPart, file);
+                    if (newProductId == null)
+                    {
+                        // failed to import
+                        // move file into error folder
+                        FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\error", file.Name));
+                        return;
+                    }
                 }
-
-                if (sheet == null)
-                {
-                    Logger.Log(LogLevel.Error, "Can not find sheet.");
-
-                    // move the file into error folder
-                    FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\error", file.Name));
-
-                    return;
-                }
-                WorksheetPart wsPart = (WorksheetPart)wbPart.GetPartById(sheet.Id);
-
-                // import product data and return new product id
-                var newProductId = Import(wbPart, wsPart, file);
-                if (newProductId == null)
-                {
-                    // failed to import
-                    // move file into error folder
-                    FileHelper.MoveFile(file.FullName, Path.Combine(WorkingDirectory + "\\error", file.Name));
-                    return;
-                }
-
             };
         }
 
@@ -107,7 +138,7 @@ namespace Gbmono.Utils.ProductDataImporter
             }
 
             //价格
-            var priceText = GetCellPathValue(wbPart, wsPart, "AP6").RemoveEmptyOrWrapCharacters().ToDBC();
+            var priceText = GetCellPathValue(wbPart, wsPart, "AO11").RemoveEmptyOrWrapCharacters().ToDBC();
             // convert
             double price;
             if (!double.TryParse(Regex.Replace(priceText, @"[^0-9.]", string.Empty), out price))
@@ -126,17 +157,24 @@ namespace Gbmono.Utils.ProductDataImporter
             DateTime expiryDate = expiryDateText.From1900();
 
             //商品名1
-            var primaryName = GetCellPathValue(wbPart, wsPart, "N6").RemoveEmptyOrWrapCharacters();
+            var primaryName = GetCellPathValue(wbPart, wsPart, "T6").RemoveEmptyOrWrapCharacters();
             //商品名2
-            var secondaryName = GetCellPathValue(wbPart, wsPart, "X6").RemoveEmptyOrWrapCharacters();
-            //二维码
+            string secondaryName = GetCellPathValue(wbPart, wsPart, "AC6").RemoveEmptyOrWrapCharacters();
+            if (secondaryName == "")
+            {
+                secondaryName = null;
+            }
+            //条形码
             var barCode = GetCellPathValue(wbPart, wsPart, "B6").RemoveEmptyOrWrapCharacters().ToDBC();
             //特征
-            var flavor = GetCellPathValue(wbPart, wsPart, "AH6").RemoveEmptyOrWrapCharacters();
+            var flavor = GetCellPathValue(wbPart, wsPart, "AL6").RemoveEmptyOrWrapCharacters();
             //容量
-            var weight = GetCellPathValue(wbPart, wsPart, "AL6").RemoveEmptyOrWrapCharacters().ToDBC();
+            var weight = GetCellPathValue(wbPart, wsPart, "AP6").RemoveEmptyOrWrapCharacters().ToDBC();
             //商品CD
-            var productCode = GetCellPathValue(wbPart, wsPart, "AJ11").RemoveEmptyOrWrapCharacters().ToDBC();
+            //var productCode = GetCellPathValue(wbPart, wsPart, "AJ11").RemoveEmptyOrWrapCharacters().ToDBC();
+            string productCode = null;
+            //系列 ブランド名
+            var brandCollectionName = GetCellPathValue(wbPart, wsPart, "N6").RemoveEmptyOrWrapCharacters();
             //促销CD
             var promotionCode = GetCellPathValue(wbPart, wsPart, "P14").RemoveEmptyOrWrapCharacters().ToDBC();
             //优惠CD
@@ -295,30 +333,29 @@ namespace Gbmono.Utils.ProductDataImporter
 
         static void BrandCollectionCheck(Product product)
         {
-            if (!secondaryNameBlankList.Contains(product.SecondaryName))
+            //if (!secondaryNameBlankList.Contains(product.SecondaryName))    
+            //{
+            var brandCollection =
+                _repositoryManager.BrandCollectionRepository.Table.FirstOrDefault(
+                    m => m.BrandId == product.BrandId && m.Name == product.BrandCollectionName);
+            if (brandCollection == null)
             {
-                var brandCollection =
-                    _repositoryManager.BrandCollectionRepository.Table.FirstOrDefault(
-                        m => m.BrandId == product.BrandId && m.Name == product.PrimaryName);
-                if (brandCollection == null)
+                brandCollection = new BrandCollection()
                 {
-                    brandCollection = new BrandCollection()
-                    {
-                        BrandId = product.BrandId,
-                        DisplayName = product.PrimaryName,
-                        Name = product.PrimaryName
-                    };
+                    BrandId = product.BrandId,
+                    DisplayName = product.BrandCollectionName,
+                    Name = product.BrandCollectionName
+                };
 
-                    _repositoryManager.BrandCollectionRepository.Create(brandCollection);
-                    _repositoryManager.BrandCollectionRepository.Save();
-                }
-
-
-                var productInstance = _repositoryManager.ProductRepository.Get(product.ProductId);
-                productInstance.BrandCollectionId = brandCollection.BrandCollectionId;
-                _repositoryManager.ProductRepository.Save();
-
+                _repositoryManager.BrandCollectionRepository.Create(brandCollection);
+                _repositoryManager.BrandCollectionRepository.Save();
             }
+
+
+            product.BrandCollectionId = brandCollection.BrandCollectionId;
+            _repositoryManager.ProductRepository.Save();
+
+            //}
         }
 
         static void ImportImage(WorksheetPart wsPart, int productId, string categoryCodeLevel1, string categoryCodeLevel2, string categoryCodeLevel3)
